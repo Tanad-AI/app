@@ -11,12 +11,16 @@
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
     "@react-pdf/renderer": "^3.4.0",
+    "awesome-react-stepper": "^1.1.1",
     "detect-element-overflow": "^1.4.2",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.302.0",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-form-stepper": "^2.0.3",
+    "react-step-wizard": "^5.3.11",
+    "react-use-wizard": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",
