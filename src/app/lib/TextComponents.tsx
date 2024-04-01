@@ -7,7 +7,7 @@ interface TextProps {
 
 export const Header = ({ children, className }: TextProps) => {
   return (
-    <h1 className={`text-4xl font-bold capitalize lg:text-3xl ${className}`}>
+    <h1 className={`text-4xl font-bold capitalize  ${className}`}>
       {children}
     </h1>
   );
@@ -15,7 +15,7 @@ export const Header = ({ children, className }: TextProps) => {
 
 export const SectionHeader = ({ children }: TextProps) => {
   return (
-    <h2 className="balanced text-center text-2xl font-semibold capitalize lg:text-start lg:text-2xl">
+    <h2 className="balanced text-center text-2xl font-bold capitalize ">
       {children}
     </h2>
   );
@@ -26,14 +26,7 @@ export const SubHeader = ({ children, className }: TextProps) => {
 };
 
 export const Text = ({ children, className }: TextProps) => {
-  return (
-    <p className={`text-base font-normal lg:text-sm ${className}`}>
-      {children}
-    </p>
-  );
-};
-export const NormalText = ({ children, className }: TextProps) => {
-  return <p className={`text-sm font-normal ${className}`}>{children}</p>;
+  return <p className={`text-base font-medium  ${className}`}>{children}</p>;
 };
 
 export const Paragraph = ({ children, className }: TextProps) => {

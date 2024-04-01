@@ -1,5 +1,5 @@
 export declare type StepperProps = {
-  children: React.ReactElement | React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[] | React.ReactNode;
   showProgressBar?: boolean;
   defaultActiveStep?: number;
   backBtn?: React.ReactNode;

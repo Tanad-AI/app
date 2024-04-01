@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./stepper.css";
 import { StepperProps } from "../types/stepper.types";
 import { Text } from "../lib/TextComponents";
+import { Check } from "lucide-react";
 
 const Stepper = (props: StepperProps) => {
   const {
@@ -16,17 +17,18 @@ const Stepper = (props: StepperProps) => {
     onSubmit = () => {},
     btnPos = "space-between",
     barWidth = "",
-    strokeColor = "#cdd3d8",
-    fillStroke = "#ea580c",
+    strokeColor = "#FDEFE7",
+    fillStroke = "#3a4047",
     stroke = 2,
-    activeColor = "#ea580c",
-    activeProgressBorder = "2px solid #ea580c",
+    activeColor = "#3A4047",
+    activeProgressBorder = "2px solid #f3f4f5",
     progressBarClassName = "",
     contentBoxClassName = "",
     allowClickControl = true,
   } = props;
 
   const [active, setActive] = useState<number>(0);
+  const [completed, setCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     if (
@@ -51,9 +53,11 @@ const Stepper = (props: StepperProps) => {
         if (element.classList.length > 1) {
           element.style.background = activeColor;
           element.style.border = activeProgressBorder;
+          element.style.color = "#fff";
         } else {
-          element.style.background = "#fff";
-          element.style.border = "2px solid #3A4047";
+          element.style.background = "#FDEFE7";
+          element.style.border = "2px solid #ea580c";
+          element.style.color = "#ea580c";
         }
       });
     }
@@ -126,7 +130,7 @@ const Stepper = (props: StepperProps) => {
             >
               <div
                 className={"percent"}
-                style={{ borderBottom: `${stroke}px solid ${fillStroke}` }}
+                style={{ borderBottom: `3px solid ${fillStroke}` }}
               ></div>
             </div>
             <div className={"steps"}>
@@ -134,13 +138,11 @@ const Stepper = (props: StepperProps) => {
                 return (
                   <div
                     key={ind}
-                    className={
-                      "size-8 rounded-full text-white border-2  text-center flex items-center justify-center"
-                    }
+                    className={"step"}
                     id={`input_${ind}`}
                     onClick={() => progressClick(ind)}
                   >
-                    <Text>{ind}</Text>
+                    <p className="font-bold">{ind + 1}</p>
                   </div>
                 );
               })}

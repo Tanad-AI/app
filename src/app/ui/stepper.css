@@ -18,11 +18,14 @@
   z-index: 9;
 }
 .stepperDiv .step {
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 1s;
+  transition: background 400ms ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .stepperDiv .step.selected {
   border: 2px solid #ea580c;
@@ -36,7 +39,7 @@
   width: 100%;
   height: 50%;
   z-index: 3;
-  transition: background 1s;
+  transition: background 400ms ease-out;
 }
 .stepperDiv .percent {
   position: absolute;
@@ -46,7 +49,7 @@
   transition: width 1s;
 }
 .stepperDiv .defaultBtn {
-  background-color: #ea580c;
+  /* background-color: #ea580c; */
   color: #f3f4f5;
   cursor: pointer;
   outline: 0;
