@@ -7,8 +7,8 @@ import {
   SubHeader,
   Text,
 } from "../lib/TextComponents";
-import { Card, Input } from "@nextui-org/react";
-import { File, ScrollText } from "lucide-react";
+import { Button, Card, Input } from "@nextui-org/react";
+import { File, ScrollText, UploadCloud } from "lucide-react";
 import StepperWrapper from "../ui/StepperWrapper";
 
 const page = () => {
@@ -26,7 +26,18 @@ const page = () => {
           <QuestionsDetails />
         </div>
         <div className="w-full mt-3 flex flex-col items-center gap-3">
-          <div className="size-48 border-1 border-orange-600 bg-orange-600/10 border-dotted"></div>
+          <Card className="size-64 __box flex flex-col justify-around items-center">
+            <section className="bg-orange-600/20 rounded-full mx-auto flex items-center justify-between size-12">
+              <UploadCloud className="stroke-orange-600 mx-auto" />
+            </section>
+            <section className="flex flex-col items-center">
+              <SubHeader>Drag and Drop</SubHeader>
+              <Paragraph>Or</Paragraph>
+              <Button className="bg-orange-600 text-white" variant="shadow">
+                Browse Files
+              </Button>
+            </section>
+          </Card>
         </div>
       </StepperWrapper>
     </section>
