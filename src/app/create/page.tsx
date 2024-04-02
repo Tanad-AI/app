@@ -26,6 +26,10 @@ const page = () => {
           <QuestionsDetails />
         </div>
         <div className="w-full mt-3 flex flex-col items-center gap-3">
+          <SectionHeader>
+            Please upload your screenshots here, make sure you follow the
+            instructions for best results
+          </SectionHeader>
           <Card className="size-64 __box flex flex-col justify-around items-center">
             <section className="bg-orange-600/20 rounded-full mx-auto flex items-center justify-between size-12">
               <UploadCloud className="stroke-orange-600 mx-auto" />
@@ -181,19 +185,51 @@ function EnterIntatuteDetails({}) {
           Again this information will be displayed in the document header
         </Paragraph>
       </div>
-      <div className="grid grid-rows-2 w-full grid-flow-col gap-4">
-        {Inputs.map((input) => {
-          return (
-            <Input
-              key={input.label}
-              label={input.label}
-              placeholder={input.placeholder}
-              type={input.type}
-              variant="bordered"
-              labelPlacement="outside"
-            />
-          );
-        })}
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+        <section className="grid grid-rows-2 grid-flow-col gap-4">
+          {Inputs.slice(0, 4).map((input) => {
+            return (
+              <Input
+                key={input.label}
+                label={input.label}
+                placeholder={input.placeholder}
+                type={input.type}
+                variant="bordered"
+                labelPlacement="outside"
+              />
+            );
+          })}
+        </section>
+        <section className="h-full  ">
+          {Inputs.slice(4, 5).map((input) => {
+            return (
+              <>
+                <p className="text-sm mb-1">{input.label}</p>
+                <Card
+                  className="__box flex h-full lg:h-[84%] items-center  flex-row justify-around"
+                  key={input.label}
+                >
+                  <section className="flex flex-col items-center">
+                    <span className="bg-orange-600/20 rounded-full flex flex-col items-center justify-between size-12">
+                      <UploadCloud className="stroke-orange-600 my-auto" />
+                    </span>
+                    <Text>Drag and Drop</Text>
+                  </section>
+                  <section className="flex flex-col items-center">
+                    <Paragraph>Or</Paragraph>
+                    <Button
+                      size="sm"
+                      className="bg-orange-600 text-white"
+                      variant="shadow"
+                    >
+                      Browse Files
+                    </Button>
+                  </section>
+                </Card>
+              </>
+            );
+          })}
+        </section>
       </div>
     </>
   );
@@ -221,6 +257,14 @@ function QuestionsDetails({}) {
       label: "Complete the blank",
       placeholder: "0",
     },
+    {
+      label: "define",
+      placeholder: "0",
+    },
+    {
+      label: "count",
+      placeholder: "0",
+    },
   ];
   return (
     <>
@@ -228,6 +272,7 @@ function QuestionsDetails({}) {
         Please provide some information about the question
       </SectionHeader>
       <Paragraph>Based on this info the AI will write the document</Paragraph>
+
       <div className="grid grid-rows-2 w-full grid-flow-col gap-4">
         {Inputs.map((input) => {
           return (
