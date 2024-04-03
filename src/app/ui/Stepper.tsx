@@ -28,7 +28,6 @@ const Stepper = (props: StepperProps) => {
   } = props;
 
   const [active, setActive] = useState<number>(0);
-  const [completed, setCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     if (
@@ -184,11 +183,11 @@ const Stepper = (props: StepperProps) => {
           )}
           {active < (children as React.ReactElement[]).length ? (
             continueBtn ? (
-              <span onClick={() => nextStep()}>{continueBtn}</span>
+              <div onClick={() => nextStep()}>{continueBtn}</div>
             ) : (
-              <button className={"defaultBtn"} onClick={() => nextStep()}>
+              <div className={"defaultBtn"} onClick={() => nextStep()}>
                 Continue
-              </button>
+              </div>
             )
           ) : submitBtn ? (
             <span onClick={() => onSubmit(active)}>{submitBtn}</span>

@@ -13,7 +13,7 @@ import StepperWrapper from "../ui/StepperWrapper";
 
 const page = () => {
   return (
-    <section className="w-full md:w-[60%] mx-auto">
+    <section className="w-full md:w-[60%]   mx-auto">
       <StepperWrapper>
         <StepOne />
         <div className="w-full mt-3 flex flex-col items-center gap-3">

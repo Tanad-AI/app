@@ -17,3 +17,7 @@
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='22' ry='22' stroke='%23EA580CFF' stroke-width='1' stroke-dasharray='6' stroke-dashoffset='33' stroke-linecap='square'/%3e%3c/svg%3e");
   border-radius: 22px;
 }
+
+.__fill-height {
+  height: calc(100svh - 56px - 6rem);
+}
