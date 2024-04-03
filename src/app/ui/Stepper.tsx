@@ -3,6 +3,7 @@ import "./stepper.css";
 import { StepperProps } from "../types/stepper.types";
 import { Text } from "../lib/TextComponents";
 import { Check } from "lucide-react";
+import { Button } from "@nextui-org/react";
 
 const Stepper = (props: StepperProps) => {
   const {
@@ -185,16 +186,26 @@ const Stepper = (props: StepperProps) => {
             continueBtn ? (
               <div onClick={() => nextStep()}>{continueBtn}</div>
             ) : (
-              <div className={"defaultBtn"} onClick={() => nextStep()}>
-                Continue
-              </div>
+              <Button
+                className="bg-orange-600 text-white"
+                size="sm"
+                variant="shadow"
+                onClick={() => nextStep()}
+              >
+                next
+              </Button>
             )
           ) : submitBtn ? (
             <span onClick={() => onSubmit(active)}>{submitBtn}</span>
           ) : (
-            <button className={"defaultBtn"} onClick={() => onSubmit(active)}>
+            <Button
+              className="bg-orange-600 text-white"
+              size="sm"
+              variant="shadow"
+              onClick={() => onSubmit(active)}
+            >
               Submit
-            </button>
+            </Button>
           )}
         </div>
       </div>

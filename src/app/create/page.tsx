@@ -13,26 +13,29 @@ import StepperWrapper from "../ui/StepperWrapper";
 
 const page = () => {
   return (
-    <section className="w-full md:w-[60%]   mx-auto">
+    <section className="mx-auto w-full  md:w-[60%]">
+      <br />
       <StepperWrapper>
-        <StepOne />
-        <div className="w-full mt-3 flex flex-col items-center gap-3">
+        <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
+          <StepOne />
+        </div>
+        <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <QuizDetailsStep />
         </div>
-        <div className="w-full mt-3 flex flex-col items-center gap-3">
+        <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <EnterIntatuteDetails />
         </div>
-        <div className="w-full mt-3 flex flex-col items-center gap-3">
+        <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <QuestionsDetails />
         </div>
-        <div className="w-full mt-3 flex flex-col items-center gap-3">
+        <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <SectionHeader>
             Please upload your screenshots here, make sure you follow the
             instructions for best results
           </SectionHeader>
-          <Card className="size-64 __box flex flex-col justify-around items-center">
-            <section className="bg-orange-600/20 rounded-full mx-auto flex items-center justify-between size-12">
-              <UploadCloud className="stroke-orange-600 mx-auto" />
+          <Card className="__box flex size-64 flex-col items-center justify-around">
+            <section className="mx-auto flex size-12 items-center justify-between rounded-full bg-orange-600/20">
+              <UploadCloud className="mx-auto stroke-orange-600" />
             </section>
             <section className="flex flex-col items-center">
               <SubHeader>Drag and Drop</SubHeader>
@@ -52,16 +55,22 @@ export default page;
 
 function StepOne({}) {
   return (
-    <div className="w-full mt-3 flex flex-col items-center gap-3">
-      <SectionHeader>Choose the type of document</SectionHeader>
-      <section className="flex gap-6">
+    <div className="flex  w-full flex-col items-center gap-3">
+      <section className="mb-4 text-center">
+        <SectionHeader>Choose the type of document</SectionHeader>
+        <Paragraph>
+          This is going to be the type of document the AI will generate
+        </Paragraph>
+      </section>
+      <section className="flex w-full flex-row  items-center justify-center gap-6">
         <Card
           isHoverable
+          isPressable
           isBlurred
-          className="border-[1px] cursor-pointer border-orange-600 size-36 bg-orange-600/5 dark:bg-orange-600/5 flex justify-around"
+          className="flex size-32 cursor-pointer  justify-around border-[1px] border-orange-600 bg-orange-600/5 md:size-36 dark:bg-orange-600/5"
         >
-          <div className="bg-orange-600/20 rounded-full mx-auto flex items-center justify-between size-12">
-            <File className="stroke-orange-600 mx-auto" />
+          <div className="mx-auto flex size-12 items-center justify-between rounded-full bg-orange-600/20">
+            <File className="mx-auto stroke-orange-600" />
           </div>
           <div className="mx-auto">
             <SubHeader>Quiz</SubHeader>
@@ -69,11 +78,12 @@ function StepOne({}) {
         </Card>
         <Card
           isHoverable
+          isPressable
           isBlurred
-          className="border-[1px] cursor-pointer border-orange-600 size-36 bg-orange-600/5 dark:bg-orange-600/5 flex justify-around"
+          className="flex size-32 cursor-pointer justify-around border-[1px] border-orange-600 bg-orange-600/5 md:size-36 dark:bg-orange-600/5"
         >
-          <div className="bg-orange-600/20 rounded-full mx-auto flex items-center justify-between size-12">
-            <ScrollText className="stroke-orange-600 mx-auto" />
+          <div className="mx-auto flex size-12 items-center justify-between rounded-full bg-orange-600/20">
+            <ScrollText className="mx-auto stroke-orange-600" />
           </div>
           <div className="mx-auto">
             <SubHeader>Worksheet</SubHeader>
@@ -121,17 +131,17 @@ function QuizDetailsStep({}) {
   ];
   return (
     <div>
-      <section className="mb-4">
+      <section className="mb-8 text-center">
         <SectionHeader>
           Please provide some details about the quiz
+          <Paragraph>
+            this information will be display in the quiz hidder
+          </Paragraph>
         </SectionHeader>
-        <Paragraph>
-          this information will be display in the quiz hidder
-        </Paragraph>
       </section>
 
-      <section className="flex gap-4 capitalize justify-between w-full">
-        <div className="grid grid-rows-3 w-full grid-flow-col gap-4">
+      <section className="flex w-full justify-between gap-4 capitalize">
+        <div className="grid w-full grid-flow-col  grid-rows-4  gap-6 md:grid-rows-3 md:gap-4">
           {Inputs.map((input) => {
             return (
               <Input
@@ -179,14 +189,14 @@ function EnterIntatuteDetails({}) {
   ];
   return (
     <>
-      <div>
+      <section className="mb-8 text-center">
         <SectionHeader>Enter the school/college details</SectionHeader>
         <Paragraph>
           Again this information will be displayed in the document header
         </Paragraph>
-      </div>
-      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-        <section className="grid grid-rows-2 grid-flow-col gap-4">
+      </section>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <section className="grid grid-flow-col grid-rows-2 gap-4">
           {Inputs.slice(0, 4).map((input) => {
             return (
               <Input
@@ -204,14 +214,14 @@ function EnterIntatuteDetails({}) {
           {Inputs.slice(4, 5).map((input) => {
             return (
               <>
-                <p className="text-sm mb-1">{input.label}</p>
+                <p className="mb-1 text-sm">{input.label}</p>
                 <Card
-                  className="__box flex h-full lg:h-[84%] items-center  flex-row justify-around"
+                  className="__box flex h-full flex-row items-center  justify-around lg:h-[84%]"
                   key={input.label}
                 >
                   <section className="flex flex-col items-center">
-                    <span className="bg-orange-600/20 rounded-full flex flex-col items-center justify-between size-12">
-                      <UploadCloud className="stroke-orange-600 my-auto" />
+                    <span className="flex size-12 flex-col items-center justify-between rounded-full bg-orange-600/20">
+                      <UploadCloud className="my-auto stroke-orange-600" />
                     </span>
                     <Text>Drag and Drop</Text>
                   </section>
@@ -268,12 +278,14 @@ function QuestionsDetails({}) {
   ];
   return (
     <>
-      <SectionHeader>
-        Please provide some information about the question
-      </SectionHeader>
-      <Paragraph>Based on this info the AI will write the document</Paragraph>
+      <section className="mb-8 text-center">
+        <SectionHeader>
+          Please provide some information about the question
+        </SectionHeader>
+        <Paragraph>Based on this info the AI will write the document</Paragraph>
+      </section>
 
-      <div className="grid grid-rows-2 w-full grid-flow-col gap-4">
+      <div className="grid w-full grid-flow-col grid-rows-2 gap-4">
         {Inputs.map((input) => {
           return (
             <Input

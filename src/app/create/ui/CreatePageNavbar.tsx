@@ -1,5 +1,5 @@
 "use client";
-import { Paragraph, Text } from "@/app/lib/TextComponents";
+import { Paragraph, Text, TinyText } from "@/app/lib/TextComponents";
 import { TanadLogo } from "@/assets";
 import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";
@@ -7,14 +7,10 @@ import { Globe } from "lucide-react";
 
 function CreatePageNavbar() {
   return (
-    <nav className="w-full flex justify-between items-start">
-      <section className="flex gap-2 items-center">
-        <TanadLogo className="scale-85" />
-        <div className="h-12 w-[1px] bg-slate-400" />
-        <div>
-          <Text>Tanad AI</Text>
-          <Paragraph>AI document generator</Paragraph>
-        </div>
+    <nav className="w-full flex justify-between items-center">
+      <section className="flex gap-1 items-center">
+        <TanadLogo />
+        <TinyText>Tanad AI</TinyText>
       </section>
       <Select
         placeholder="Select an language"
