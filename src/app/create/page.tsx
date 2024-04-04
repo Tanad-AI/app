@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Upload from "rc-upload";
 import {
   Paragraph,
@@ -10,8 +11,22 @@ import {
 import { Button, Card, Input } from "@nextui-org/react";
 import { File, ScrollText, UploadCloud } from "lucide-react";
 import StepperWrapper from "../ui/StepperWrapper";
+import { QuizDetailsFormTypes } from "./lib/formsTypes";
 
 const page = () => {
+  const [quizDetailsFormData, setQuizDetailsFormData] =
+    useState<QuizDetailsFormTypes>({
+      subject: "",
+      termSemester: "",
+      class: "",
+      numberOfmarks: null,
+      dayOfTheExam: "",
+      dateOfTheExam: "",
+      durationInHours: null,
+      type: "",
+    });
+
+  console.log(quizDetailsFormData);
   return (
     <section className="mx-auto w-full md:w-[60%] md:translate-y-[-56px]">
       <br />
@@ -20,7 +35,7 @@ const page = () => {
           <StepOne />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
-          <QuizDetailsStep />
+          <QuizDetailsStep setQuizDetailsFormData={setQuizDetailsFormData} />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <EnterIntatuteDetails />
@@ -94,41 +109,71 @@ function StepOne({}) {
   );
 }
 
-function QuizDetailsStep({}) {
+function QuizDetailsStep({ setQuizDetailsFormData }: any) {
   const Inputs = [
     {
       label: "subject",
       placeholder: "history",
+      name: "subject",
+      type: "text",
+      required: true,
     },
     {
       label: "Term / Semester",
       placeholder: "Second",
+      name: "termSemester",
+      type: "text",
+      required: true,
     },
     {
       label: "Class",
       placeholder: "12 grade",
-    },
-    {
-      label: "Number of Marks",
-      placeholder: "20",
-    },
-    {
-      label: "Day of the exam",
-      placeholder: "Monday",
-    },
-    {
-      label: "Date of the exam",
-      placeholder: "12-4-2023",
-    },
-    {
-      label: "Duration",
-      placeholder: "2 hours",
+      name: "class",
+      type: "text",
+      required: true,
     },
     {
       label: "Type",
       placeholder: "Final",
+      name: "type",
+      type: "text",
+      required: true,
+    },
+    {
+      label: "Number of Marks",
+      placeholder: "20",
+      name: "numberOfmarks",
+      type: "number",
+      required: false,
+    },
+    {
+      label: "Day of the exam",
+      placeholder: "Monday",
+      name: "dayOfTheExam",
+      type: "text",
+      required: false,
+    },
+    {
+      label: "Date of the exam",
+      placeholder: "12-4-2023",
+      name: "dateOfTheExam",
+      type: "text",
+      required: false,
+    },
+    {
+      label: "Duration in hours",
+      placeholder: "2 hours",
+      name: "durationInHours",
+      type: "number",
+      required: false,
     },
   ];
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuizDetailsFormData((prev: QuizDetailsFormTypes) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  }
   return (
     <div>
       <section className="mb-8 text-center">
@@ -141,19 +186,26 @@ function QuizDetailsStep({}) {
       </section>
 
       <section className="flex w-full justify-between gap-4 capitalize">
-        <div className="grid w-full grid-flow-col  grid-rows-4  gap-6 md:grid-rows-3 md:gap-4">
+        <form className="grid w-full grid-flow-col  grid-rows-4  gap-6 md:grid-rows-3 md:gap-4">
           {Inputs.map((input) => {
             return (
-              <Input
-                variant="bordered"
-                labelPlacement="outside"
-                label={input.label}
-                placeholder={input.placeholder}
-                key={input.label}
-              />
+              <>
+                <Input
+                  isRequired={input.required}
+                  variant={"bordered"}
+                  labelPlacement="outside"
+                  label={input.label}
+                  placeholder={input.placeholder}
+                  key={input.label}
+                  name={input.name}
+                  onChange={(e) => handleChange(e)}
+                  type={input.type}
+                  className="required:border-red-500"
+                />
+              </>
             );
           })}
-        </div>
+        </form>
       </section>
     </div>
   );
