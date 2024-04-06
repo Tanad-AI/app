@@ -6,7 +6,7 @@ export default function CreateLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="mx-auto  max-w-7xl px-8 lg:px-20 py-3">
+    <section className="mx-auto  max-w-7xl px-8 pt-3 lg:px-20">
       <CreatePageNavbar />
       {children}
     </section>

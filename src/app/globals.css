@@ -19,5 +19,5 @@
 }
 
 .__fill-height {
-  height: calc(100svh - 40px - 5.5rem);
+  height: calc(100svh - 5rem);
 }

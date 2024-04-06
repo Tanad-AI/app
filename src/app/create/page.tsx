@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useCallback, useRef, useState } from "react";
 import Upload from "rc-upload";
 import {
   Paragraph,
@@ -8,25 +8,43 @@ import {
   SubHeader,
   Text,
 } from "../lib/TextComponents";
-import { Button, Card, Input } from "@nextui-org/react";
+import { Button, Card, Input, Spacer } from "@nextui-org/react";
 import { File, ScrollText, UploadCloud } from "lucide-react";
 import StepperWrapper from "../ui/StepperWrapper";
-import { QuizDetailsFormTypes } from "./lib/formsTypes";
+import {
+  InstatuteDetailsFromType,
+  questionsDetailsFormTypes,
+  QuizDetailsFormTypes,
+} from "./lib/formsTypes";
+import { useDropzone } from "react-dropzone";
+import { useQuizHeaderStore } from "../lib/store/QuizState";
 
 const page = () => {
-  const [quizDetailsFormData, setQuizDetailsFormData] =
-    useState<QuizDetailsFormTypes>({
-      subject: "",
-      termSemester: "",
-      class: "",
-      numberOfmarks: null,
-      dayOfTheExam: "",
-      dateOfTheExam: "",
-      durationInHours: null,
-      type: "",
+  const [instatuteDetails, setInstatuteDetails] =
+    useState<InstatuteDetailsFromType>({
+      instatuteName: "",
+      countryDepartmentName: "",
+      stateDepartmentName: "",
+      teacherName: "",
+      logo: [],
     });
-
-  console.log(quizDetailsFormData);
+  const [questionsDetails, setQuestionsDetails] =
+    useState<questionsDetailsFormTypes>({
+      numberOfQuestions: null,
+      questionsLanguage: "",
+      MCQs: null,
+      trueOrFalse: null,
+      fillInTheBlank: null,
+      defineThefollowing: null,
+      writeShortAnswer: null,
+    });
+  const updateQuizHeaderData = useQuizHeaderStore(
+    (state: any) => state.handleInputsChange,
+  );
+  const formData = useQuizHeaderStore(
+    (state: any) => state.QuizFormHeaderDetails,
+  );
+  console.log(formData);
   return (
     <section className="mx-auto w-full md:w-[60%] md:translate-y-[-56px]">
       <br />
@@ -35,13 +53,22 @@ const page = () => {
           <StepOne />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
-          <QuizDetailsStep setQuizDetailsFormData={setQuizDetailsFormData} />
+          <QuizDetailsStep
+            formData={formData}
+            updateQuizHeaderData={updateQuizHeaderData}
+          />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
-          <EnterIntatuteDetails />
+          <EnterInstatuteDetails
+            instatuteDetails={instatuteDetails}
+            setInstatuteDetails={setInstatuteDetails}
+          />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
-          <QuestionsDetails />
+          <QuestionsDetails
+            questionsDetails={questionsDetails}
+            setQuestionsDetails={setQuestionsDetails}
+          />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <SectionHeader>
@@ -109,7 +136,7 @@ function StepOne({}) {
   );
 }
 
-function QuizDetailsStep({ setQuizDetailsFormData }: any) {
+function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
   const Inputs = [
     {
       label: "subject",
@@ -142,7 +169,7 @@ function QuizDetailsStep({ setQuizDetailsFormData }: any) {
     {
       label: "Number of Marks",
       placeholder: "20",
-      name: "numberOfmarks",
+      name: "numberOfMarks",
       type: "number",
       required: false,
     },
@@ -168,12 +195,7 @@ function QuizDetailsStep({ setQuizDetailsFormData }: any) {
       required: false,
     },
   ];
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setQuizDetailsFormData((prev: QuizDetailsFormTypes) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  }
+
   return (
     <div>
       <section className="mb-8 text-center">
@@ -189,20 +211,18 @@ function QuizDetailsStep({ setQuizDetailsFormData }: any) {
         <form className="grid w-full grid-flow-col  grid-rows-4  gap-6 md:grid-rows-3 md:gap-4">
           {Inputs.map((input) => {
             return (
-              <>
-                <Input
-                  isRequired={input.required}
-                  variant={"bordered"}
-                  labelPlacement="outside"
-                  label={input.label}
-                  placeholder={input.placeholder}
-                  key={input.label}
-                  name={input.name}
-                  onChange={(e) => handleChange(e)}
-                  type={input.type}
-                  className="required:border-red-500"
-                />
-              </>
+              <Input
+                isRequired={input.required}
+                variant="bordered"
+                labelPlacement="outside"
+                label={input.label}
+                placeholder={input.placeholder}
+                key={input.label}
+                name={input.name}
+                onChange={(e) => updateQuizHeaderData(e)}
+                type={input.type}
+                value={formData[input.name]}
+              />
             );
           })}
         </form>
@@ -211,34 +231,56 @@ function QuizDetailsStep({ setQuizDetailsFormData }: any) {
   );
 }
 
-function EnterIntatuteDetails({}) {
+function EnterInstatuteDetails({ instatuteDetails, setInstatuteDetails }: any) {
   const Inputs = [
     {
       label: "School/College Name",
       placeholder: "Harvard",
       type: "text",
+      name: "instatuteName",
     },
     {
-      label: "Term / Semester",
-      placeholder: "Second",
+      label: "State Deparment Name",
+      placeholder: "New yor",
       type: "text",
+      name: "stateDepartmentName",
     },
     {
-      label: "Class",
+      label: "Ministry / Department name",
       placeholder: "12 grade",
       type: "text",
+      name: "countryDepartmentName",
     },
     {
-      label: "Number of Marks",
+      label: "Teacher's Name",
       placeholder: "20",
       type: "text",
+      name: "teacherName",
     },
     {
       label: "Logo",
       placeholder: "School logo",
       type: "file",
+      name: "logo",
     },
   ];
+  const fileInputRef = useRef<any>();
+  const [logoFileData, setLogoFileData] = useState<any>([]);
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInstatuteDetails((prev: InstatuteDetailsFromType) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  }
+  const onDrop = useCallback((acceptedFiles: any) => {
+    setLogoFileData(acceptedFiles);
+    setInstatuteDetails((prev: InstatuteDetailsFromType) => ({
+      ...prev,
+
+      logo: acceptedFiles,
+    }));
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <>
       <section className="mb-8 text-center">
@@ -247,7 +289,7 @@ function EnterIntatuteDetails({}) {
           Again this information will be displayed in the document header
         </Paragraph>
       </section>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 ">
         <section className="grid grid-flow-col grid-rows-2 gap-4">
           {Inputs.slice(0, 4).map((input) => {
             return (
@@ -258,6 +300,9 @@ function EnterIntatuteDetails({}) {
                 type={input.type}
                 variant="bordered"
                 labelPlacement="outside"
+                value={instatuteDetails[input.name]}
+                onChange={(e) => handleChange(e)}
+                name={input.name}
               />
             );
           })}
@@ -266,16 +311,32 @@ function EnterIntatuteDetails({}) {
           {Inputs.slice(4, 5).map((input) => {
             return (
               <>
-                <p className="mb-1 text-sm">{input.label}</p>
-                <Card
-                  className="__box flex h-full flex-row items-center  justify-around lg:h-[84%]"
-                  key={input.label}
+                <p className="mb-2 text-sm">{input.label}</p>
+                <div
+                  className="__box  flex h-full flex-row items-center justify-around"
+                  onClick={() => fileInputRef.current.click()}
+                  {...getRootProps()}
                 >
+                  <input
+                    hidden
+                    key={input.label}
+                    className="file-input"
+                    type={input.type}
+                    accept="image/*"
+                    {...getInputProps()}
+                    ref={fileInputRef}
+                  />
                   <section className="flex flex-col items-center">
                     <span className="flex size-12 flex-col items-center justify-between rounded-full bg-orange-600/20">
                       <UploadCloud className="my-auto stroke-orange-600" />
                     </span>
-                    <Text>Drag and Drop</Text>
+                    {logoFileData.length !== 0 ? (
+                      logoFileData[0].name
+                    ) : isDragActive ? (
+                      <Text>Drop the files here ...</Text>
+                    ) : (
+                      <Text>Drag and Drop</Text>
+                    )}
                   </section>
                   <section className="flex flex-col items-center">
                     <Paragraph>Or</Paragraph>
@@ -283,11 +344,12 @@ function EnterIntatuteDetails({}) {
                       size="sm"
                       className="bg-orange-600 text-white"
                       variant="shadow"
+                      onPress={() => fileInputRef.current.click()}
                     >
                       Browse Files
                     </Button>
                   </section>
-                </Card>
+                </div>
               </>
             );
           })}
@@ -297,37 +359,57 @@ function EnterIntatuteDetails({}) {
   );
 }
 
-function QuestionsDetails({}) {
+function QuestionsDetails({ questionsDetails, setQuestionsDetails }: any) {
   const Inputs = [
     {
       label: "Number of question",
       placeholder: "0",
+      type: "number",
+      name: "numberOfQuestions",
     },
     {
       label: "Questions Language",
       placeholder: "English",
+      type: "Text",
+      name: "questionsLanguage",
     },
     {
       label: "MSQs",
       placeholder: "0",
+      type: "number",
+      name: "MCQs",
     },
     {
       label: "True or false",
       placeholder: "0",
+      type: "number",
+      name: "trueOrFalse",
     },
     {
-      label: "Complete the blank",
+      label: "fill in the blank",
       placeholder: "0",
+      type: "number",
+      name: "fillInTheBlank",
     },
     {
       label: "define",
       placeholder: "0",
+      type: "number",
+      name: "defineThefollowing",
     },
     {
       label: "count",
       placeholder: "0",
+      type: "number",
+      name: "writeShortAnswer",
     },
   ];
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuestionsDetails((prev: InstatuteDetailsFromType) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  }
   return (
     <>
       <section className="mb-8 text-center">
@@ -337,19 +419,49 @@ function QuestionsDetails({}) {
         <Paragraph>Based on this info the AI will write the document</Paragraph>
       </section>
 
-      <div className="grid w-full grid-flow-col grid-rows-2 gap-4">
-        {Inputs.map((input) => {
-          return (
-            <Input
-              key={input.label}
-              label={input.label}
-              placeholder={input.placeholder}
-              variant="bordered"
-              labelPlacement="outside"
-            />
-          );
-        })}
-      </div>
+      <section className="w-full ">
+        <SubHeader>Question Detailes</SubHeader>
+        <Spacer y={1} />
+
+        <div className="grid grid-cols-2 gap-4">
+          {Inputs.slice(0, 2).map((input) => {
+            return (
+              <Input
+                key={input.label}
+                label={input.label}
+                placeholder={input.placeholder}
+                name={input.name}
+                variant="bordered"
+                labelPlacement="outside"
+                type={input.type}
+                onChange={(e) => handleChange(e)}
+                value={questionsDetails[input.name]}
+              />
+            );
+          })}
+        </div>
+        <Spacer y={4} />
+        <SubHeader>Question Detailes</SubHeader>
+        <Spacer y={1} />
+
+        <div className="grid grid-cols-2 grid-rows-2 gap-4">
+          {Inputs.slice(3, Inputs.length).map((input) => {
+            return (
+              <Input
+                key={input.label}
+                labelPlacement="outside"
+                label={input.label}
+                name={input.name}
+                placeholder={input.placeholder}
+                variant="bordered"
+                type={input.type}
+                onChange={(e) => handleChange(e)}
+                value={questionsDetails[input.name]}
+              />
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }
