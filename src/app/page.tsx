@@ -1,5 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, use } from "react";
+import { useQuizHeaderStore } from "./lib/store/QuizState";
+import {
+  QuizDetailsFormTypes,
+  QuizHeaderFormDataType,
+} from "./create/lib/formsTypes";
 
 const Questions = [
   {
@@ -148,22 +154,27 @@ const Questions = [
     الإجابة: "بالتفاوت بين القيم المقاسة والقيم الحقيقية",
   },
 ];
+
 export default function Home() {
   const [showableQuestions, setShowableQuestions] = useState([{ Questions }]);
+  const { QuizFormHeaderDetails } = useQuizHeaderStore();
 
   const ref = useRef(null);
   const pageHeight = useRef(null);
 
+  console.log(QuizFormHeaderDetails);
+
   return (
     <>
       <main className="bg-gray-400  p-5" dir="">
-        <div className="w-[210mm] h-[297mm] py-5 mx-auto bg-white border-2 border-grey-500">
+        {QuizFormHeaderDetails.class}
+        <div className="border-grey-500 mx-auto h-[297mm] w-[210mm] border-2 bg-white py-5">
           <article
             ref={pageHeight}
-            className="size-[90%] mx-auto  border-black"
+            className="mx-auto size-[90%]  border-black"
             dir="rtl"
           >
-            <section className="wrapper  flex flex-col h-full">
+            <section className="wrapper  flex h-full flex-col">
               <ExamHeader />
               <SectionQuestion questionText={"أختر الإجابة الصحيحة"} />
               <div ref={ref} className="flex flex-col gap-2">
@@ -205,18 +216,55 @@ export default function Home() {
           </article>
         </div>
         <div className="h-4 w-full bg-red-500"></div>
-        <div className="w-[210mm] h-[297mm] py-5 mx-auto bg-white border-2 border-grey-500" />
+        <div className="border-grey-500 mx-auto h-[297mm] w-[210mm] border-2 bg-white py-5" />
       </main>
     </>
   );
 
-  function ExamHeader({}) {
+  function ExamHeader() {
     return (
-      <div className="flex justify-between w-full">
-        <h1>رياضيات 3 - 2</h1>
-        <p>
-          اسم الطالب............................................................
-        </p>
+      <div className="grid  grid-rows-3 ">
+        <section className="grid w-[710px] auto-cols-fr grid-cols-4  ">
+          <div className=" ">
+            <div className="__table-border">المملكة العربية السعودية</div>
+            <div className="__table-border">
+              {QuizFormHeaderDetails.stateDepartmentName}
+            </div>
+            <div className="__table-border">
+              {QuizFormHeaderDetails.countryDepartmentName}
+            </div>
+            <div className="__table-border">
+              {QuizFormHeaderDetails.instatuteName}
+            </div>
+          </div>
+
+          <div className="__table-border ">
+            <div className="__table-border size-12 bg-slate-500"></div>
+          </div>
+
+          <div className="grid  grid-cols-2">
+            <div className=" ">
+              <div className="__table-border">اليوم:</div>
+              <div className="__table-border">التاريخ</div>
+              <div className="__table-border">الزمن</div>
+              <div className="__table-border">عدد الصفحات</div>
+            </div>
+            <div className="border-l-[1px] border-black ">
+              <div className="__table-border ">
+                {QuizFormHeaderDetails.dateOfTheExam}
+              </div>
+              <div className="__table-border">
+                {QuizFormHeaderDetails.dateOfTheExam}
+              </div>
+              <div className="__table-border">
+                {QuizFormHeaderDetails.durationInHours}
+              </div>
+              <div className="__table-border">2</div>
+            </div>
+          </div>
+        </section>
+        <section>2</section>
+        <section>3</section>
       </div>
     );
   }
@@ -236,7 +284,7 @@ const Table = ({
   questionsObject: any;
 }) => {
   return (
-    <table className="border-[1px]   border-black w-full text-right">
+    <table className="w-full   border-[1px] border-black text-right">
       {children}
     </table>
   );
@@ -255,14 +303,14 @@ function Question({
   return (
     <>
       <th
-        className="border-[1px] w-[4%] text-center border-black"
+        className="w-[4%] border-[1px] border-black text-center"
         scope="col"
         rowSpan={2}
       >
         {questionNumber}
       </th>
       <th
-        className="border-[1px] px-2 border-black h-8"
+        className="h-8 border-[1px] border-black px-2"
         scope="col"
         colSpan={8}
       >
@@ -277,7 +325,7 @@ function MCQsChoice({ idx, choiceText }: { idx: number; choiceText: string }) {
   return (
     <>
       <th className="border-[1px] border-black px-2">{letters[idx]}</th>
-      <th className="border-[1px] px-2 border-black w-1/4" scope="col">
+      <th className="w-1/4 border-[1px] border-black px-2" scope="col">
         {choiceText}
       </th>
     </>

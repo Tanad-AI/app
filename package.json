@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@prisma/client": "^5.8.1",
     "@react-pdf/renderer": "^3.4.0",
     "awesome-react-stepper": "^1.1.1",
     "detect-element-overflow": "^1.4.2",
@@ -35,6 +36,7 @@
     "postcss": "^8",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "prisma": "^5.8.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

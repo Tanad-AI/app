@@ -3,10 +3,11 @@ import { create } from "zustand";
 
 type HeaderStore = {
   QuizFormHeaderDetails: QuizHeaderFormDataType;
-  handleInputsChange: () => void;
+  handleInputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const useQuizHeaderStore = create((set) => ({
+export const useQuizHeaderStore = create<HeaderStore>((set) => ({
+  //initial state
   QuizFormHeaderDetails: {
     subject: "",
     termSemester: "",
@@ -24,6 +25,7 @@ export const useQuizHeaderStore = create((set) => ({
   },
   handleInputsChange: (event: { target: { name: any; value: any } }) => {
     const { name, value } = event.target;
+    // set function
     set((state: HeaderStore) => ({
       ...state,
       QuizFormHeaderDetails: {

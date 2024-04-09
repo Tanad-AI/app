@@ -21,3 +21,10 @@
 .__fill-height {
   height: calc(100svh - 5rem);
 }
+
+.__table-border {
+  border-width: 1px 1px 1px 0;
+  border-color: black;
+  /* border: 1px solid black; */
+  padding-inline: 6px;
+}

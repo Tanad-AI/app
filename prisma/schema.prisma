@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+// schema.prisma
+
+// Define the data model for users
+model User {
+  id         String      @id @default(uuid())
+  username   String      @unique
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  // Define a relation to the exams created by the user
+  exams      Exam[]
+  // Define a relation to the worksheets created by the user
+  worksheets Worksheet[]
+}
+
+// Define the data model for exams
+model Exam {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  header_id   Int
+  header      Header     @relation(fields: [headerId], references: [id])
+  headerId    String
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  creator     User       @relation(fields: [creatorId], references: [id])
+  creatorId   String
+}
+
+// Define the data model for worksheets
+model Worksheet {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  header      Header     @relation(fields: [headerId], references: [id])
+  headerId    String
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  creator     User       @relation(fields: [creatorId], references: [id])
+  creatorId   String
+}
+
+// Define the header model which contains general information about the document
+model Header {
+  id         String             @id @default(uuid())
+  exam       Exam[]
+  worksheet  Worksheet[]
+  attributes Header_atrribute[]
+}
+
+model Header_atrribute {
+  id          String            @id @default(uuid())
+  name        String            @unique
+  type        HEADER_INPUT_TYPE
+  header      Header[]
+  label       String
+  required    Boolean
+  placeholder String
+}
+
+enum HEADER_INPUT_TYPE {
+  TEXT
+  NUMBER
+  FILE
+}
+
+// Define the model for questions
+model Question {
+  id            String     @id @default(uuid())
+  content       String
+  options       String[] // If the question has multiple choice options
+  correctOption Int? // Index of the correct option if it's a multiple choice question
+  exam          Exam?      @relation(fields: [examId], references: [id])
+  examId        String?
+  worksheet     Worksheet? @relation(fields: [worksheetId], references: [id])
+  worksheetId   String?
+}

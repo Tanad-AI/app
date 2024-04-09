@@ -18,6 +18,7 @@ import {
 } from "./lib/formsTypes";
 import { useDropzone } from "react-dropzone";
 import { useQuizHeaderStore } from "../lib/store/QuizState";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [instatuteDetails, setInstatuteDetails] =
@@ -39,12 +40,13 @@ const page = () => {
       writeShortAnswer: null,
     });
   const updateQuizHeaderData = useQuizHeaderStore(
-    (state: any) => state.handleInputsChange,
+    (state) => state.handleInputsChange,
   );
-  const formData = useQuizHeaderStore(
-    (state: any) => state.QuizFormHeaderDetails,
-  );
-  console.log(formData);
+
+  const formData = useQuizHeaderStore((state) => state.QuizFormHeaderDetails);
+  const { QuizFormHeaderDetails } = useQuizHeaderStore();
+  const route = useRouter();
+
   return (
     <section className="mx-auto w-full md:w-[60%] md:translate-y-[-56px]">
       <br />
@@ -62,6 +64,8 @@ const page = () => {
           <EnterInstatuteDetails
             instatuteDetails={instatuteDetails}
             setInstatuteDetails={setInstatuteDetails}
+            formData={formData}
+            updateQuizHeaderData={updateQuizHeaderData}
           />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
@@ -70,6 +74,8 @@ const page = () => {
             setQuestionsDetails={setQuestionsDetails}
           />
         </div>
+        <Button onClick={() => route.push("/")}>redirect</Button>
+
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <SectionHeader>
             Please upload your screenshots here, make sure you follow the
@@ -231,7 +237,12 @@ function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
   );
 }
 
-function EnterInstatuteDetails({ instatuteDetails, setInstatuteDetails }: any) {
+function EnterInstatuteDetails({
+  formData,
+  updateQuizHeaderData,
+  instatuteDetails,
+  setInstatuteDetails,
+}: any) {
   const Inputs = [
     {
       label: "School/College Name",
@@ -274,9 +285,9 @@ function EnterInstatuteDetails({ instatuteDetails, setInstatuteDetails }: any) {
   }
   const onDrop = useCallback((acceptedFiles: any) => {
     setLogoFileData(acceptedFiles);
+    // updateQuizHeaderData();
     setInstatuteDetails((prev: InstatuteDetailsFromType) => ({
       ...prev,
-
       logo: acceptedFiles,
     }));
   }, []);
@@ -300,8 +311,8 @@ function EnterInstatuteDetails({ instatuteDetails, setInstatuteDetails }: any) {
                 type={input.type}
                 variant="bordered"
                 labelPlacement="outside"
-                value={instatuteDetails[input.name]}
-                onChange={(e) => handleChange(e)}
+                value={formData[input.name]}
+                onChange={(e) => updateQuizHeaderData(e)}
                 name={input.name}
               />
             );
