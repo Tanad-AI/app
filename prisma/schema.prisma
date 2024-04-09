@@ -32,9 +32,8 @@ model Exam {
   id          String     @id @default(uuid())
   title       String
   description String?
-  header_id   Int
-  header      Header     @relation(fields: [headerId], references: [id])
-  headerId    String
+  header_id   String
+  header      Header     @relation(fields: [header_id], references: [id])
   questions   Question[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
@@ -59,25 +58,31 @@ model Worksheet {
 // Define the header model which contains general information about the document
 model Header {
   id         String             @id @default(uuid())
+  name       String
   exam       Exam[]
   worksheet  Worksheet[]
   attributes Header_atrribute[]
 }
 
 model Header_atrribute {
-  id          String            @id @default(uuid())
-  name        String            @unique
-  type        HEADER_INPUT_TYPE
-  header      Header[]
+  id        String            @id @default(uuid())
+  name      String
+  type      HEADER_INPUT_TYPE
+  header    Header            @relation(fields: [header_id], references: [id])
+  header_id String
+
   label       String
   required    Boolean
   placeholder String
+  value       String? // Field that can store a string
+  intValue    Int? // Field that can store an integer
+  jsonValue   Json? // Field that can store JSON data 
 }
 
 enum HEADER_INPUT_TYPE {
-  TEXT
-  NUMBER
-  FILE
+  text
+  number
+  file
 }
 
 // Define the model for questions
