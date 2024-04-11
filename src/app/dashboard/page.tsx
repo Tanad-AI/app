@@ -5,7 +5,7 @@ import A4page from "./ui/A4page";
 
 const page = () => {
   return (
-    <div className="w-full h-[100svh] flex gap-6 px-12 py-6 bg-slate-200">
+    <div className="flex h-[100svh] w-full gap-6 bg-rose-200 px-6 py-6">
       <Sidebar />
       <Control />
       <A4page />
