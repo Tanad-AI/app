@@ -162,13 +162,11 @@ export default function Home() {
   const ref = useRef(null);
   const pageHeight = useRef(null);
 
-  console.log(QuizFormHeaderDetails);
-
   return (
     <>
-      <main className="bg-gray-400  p-5" dir="">
+      <main className="">
         {QuizFormHeaderDetails.class}
-        <div className="border-grey-500 mx-auto h-[297mm] w-[210mm] border-2 bg-white py-5">
+        <div className="border-grey-500 mx-auto h-[469.69px] min-w-[332.05px] scale-50 border-2 bg-white py-5">
           <article
             ref={pageHeight}
             className="mx-auto size-[90%]  border-black"

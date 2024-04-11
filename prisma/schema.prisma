@@ -71,12 +71,12 @@ model Header_atrribute {
   header    Header            @relation(fields: [header_id], references: [id])
   header_id String
 
-  label       String
-  required    Boolean
-  placeholder String
-  value       String? // Field that can store a string
-  intValue    Int? // Field that can store an integer
-  jsonValue   Json? // Field that can store JSON data 
+  label        String
+  required     Boolean
+  placeholder  String
+  text_value   String? // Field that can store a inpnut text value
+  number_value Int? // Field that can store an inpnut number value
+  file_value   Json? // Field that can store JSON inpnut file value 
 }
 
 enum HEADER_INPUT_TYPE {

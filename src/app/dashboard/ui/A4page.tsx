@@ -1,8 +1,11 @@
 import React from "react";
+import Home from "../../page";
 
 const A4page = () => {
   return (
-    <div className="hidden lg:flex min-w-[332.05px] h-[469.69px]  bg-white"></div>
+    <div className="hidden h-[469.69px] min-w-[332.05px] bg-white  lg:flex">
+      <div className="max-h-full max-w-full"></div>
+    </div>
   );
 };
 

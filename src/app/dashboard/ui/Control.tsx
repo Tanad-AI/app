@@ -7,15 +7,15 @@ import React from "react";
 const Control = () => {
   return (
     <>
-      <Card className="w-full p-8">
-        <div className="flex gap-1 items-center cursor-pointer">
+      <Card className="w-1/2 p-8">
+        <div className="flex cursor-pointer items-center gap-1">
           <Text>example exam</Text>
           <Pencil size={12} />
         </div>
         <br />
         <Accordion variant="splitted">
           <AccordionItem key="1" aria-label="Accordion 1" title="Exam Header">
-            <section className="flex flex-col overflow-y-scroll  gap-4">
+            <section className="flex flex-col gap-4  overflow-y-scroll">
               <div className="flex  gap-4">
                 <Input type="text" label="Subject" placeholder="Math" />
                 <Input type="text" label="class" placeholder="Fouth grade" />
