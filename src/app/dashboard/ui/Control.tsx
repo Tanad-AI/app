@@ -15,7 +15,7 @@ const InstatuteData = [
     label: "School/College Name",
     placeholder: "Harvard",
     type: "text",
-    name: "instatuteName",
+    name: "كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟",
   },
   {
     label: "State Deparment Name",
@@ -73,7 +73,7 @@ export default Control;
 type ControlAccordionType = {
   value: String;
   label: String;
-  i: ReactNode;
+  i: any;
 };
 
 function ControlAccordion({ value, label, i }: ControlAccordionType) {
@@ -97,7 +97,9 @@ function ControlAccordion({ value, label, i }: ControlAccordionType) {
         title={value}
         startContent={
           <Card className="size-full rounded-md bg-secondary">
-            <TinyText className="my-auto font-bold">{i + 1}</TinyText>
+            <TinyText className="my-auto font-bold">
+              {i ? parseInt(i + 1) : ""}
+            </TinyText>
           </Card>
         }
       >
