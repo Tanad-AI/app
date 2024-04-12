@@ -8,12 +8,15 @@ import A4page from "./ui/A4page";
 const page = () => {
   const [activeControl, setActiveControl] = useState<number>(0);
   return (
-    <div className="flex h-[100svh] w-full gap-6 bg-rose-200 px-6 py-6">
+    <div className="flex w-full gap-6 ">
       <Sidebar
         activeControl={activeControl}
         setActiveControl={setActiveControl}
       />
-      <Control />
+      <Control
+        activeControl={activeControl}
+        setActiveControl={setActiveControl}
+      />
       <A4page />
     </div>
   );

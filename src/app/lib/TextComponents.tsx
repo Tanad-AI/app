@@ -37,5 +37,5 @@ export const Paragraph = ({ children, className }: TextProps) => {
   );
 };
 export const TinyText = ({ children, className }: TextProps) => {
-  return <p className={`text-sm font-normal ${className}`}>{children}</p>;
+  return <p className={`text-sm  ${className}`}>{children}</p>;
 };

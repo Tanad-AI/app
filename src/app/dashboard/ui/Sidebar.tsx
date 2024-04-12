@@ -32,15 +32,19 @@ function sidebar({ activeControl, setActiveControl }: any) {
               </div>
             }
           >
-            <SectionHeader>content</SectionHeader>
+            <SubHeader>content</SubHeader>
             <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
-              {controlsButtons.map((button) => (
+              {controlsButtons.map((button, i) => (
                 <Button
                   size="lg"
                   key={button}
+                  onClick={() => setActiveControl(i)}
                   variant="shadow"
-                  className="w-full border-[1px] border-black/10 bg-transparent"
+                  className={`w-full border-[1px] border-black/15 bg-transparent shadow-md ${
+                    activeControl === i &&
+                    "bg-primary/15 font-bold text-primary "
+                  }`}
                 >
                   <Text>{button}</Text>
                 </Button>

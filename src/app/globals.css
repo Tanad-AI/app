@@ -28,3 +28,8 @@
   /* border: 1px solid black; */
   padding-inline: 6px;
 }
+.__accordion-btn,
+button {
+  padding-block: 0.5rem !important;
+  box-shadow: none;
+}
