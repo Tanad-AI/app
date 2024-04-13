@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
-import { SectionHeader, SubHeader, Text } from "@/app/lib/TextComponents";
+import { SubHeader } from "@/app/lib/TextComponents";
 import { ClipboardEditIcon, FileEditIcon } from "lucide-react";
 
 function sidebar({ activeControl, setActiveControl }: any) {
