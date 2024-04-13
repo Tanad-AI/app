@@ -32,4 +32,5 @@
 button {
   padding-block: 0.5rem !important;
   box-shadow: none;
+  background-color: transparent;
 }

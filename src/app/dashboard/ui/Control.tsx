@@ -1,15 +1,17 @@
 "use client";
+import {
+  QuizDetailsFormTypes,
+  QuizHeaderFormDataType,
+} from "@/app/create/lib/formsTypes";
 import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
 import {
   Paragraph,
   SectionHeader,
-  SubHeader,
   Text,
   TinyText,
 } from "@/app/lib/TextComponents";
 import { Accordion, AccordionItem, Card, Input } from "@nextui-org/react";
-import { Pencil } from "lucide-react";
-import React, { ReactNode, useRef } from "react";
+import React, { useRef, useState } from "react";
 const InstatuteData = [
   {
     label: "School/College Name",
@@ -43,8 +45,66 @@ const InstatuteData = [
   },
 ];
 
+const DocumentDetails = [
+  {
+    label: "subject",
+    placeholder: "history",
+    name: "subject",
+    type: "text",
+    required: true,
+  },
+  {
+    label: "Term / Semester",
+    placeholder: "Second",
+    name: "termSemester",
+    type: "text",
+    required: true,
+  },
+  {
+    label: "Class",
+    placeholder: "12 grade",
+    name: "class",
+    type: "text",
+    required: true,
+  },
+  {
+    label: "Type",
+    placeholder: "Final",
+    name: "type",
+    type: "text",
+    required: true,
+  },
+  {
+    label: "Number of Marks",
+    placeholder: "20",
+    name: "numberOfMarks",
+    type: "number",
+    required: false,
+  },
+  {
+    label: "Day of the exam",
+    placeholder: "Monday",
+    name: "dayOfTheExam",
+    type: "text",
+    required: false,
+  },
+  {
+    label: "Date of the exam",
+    placeholder: "12-4-2023",
+    name: "dateOfTheExam",
+    type: "text",
+    required: false,
+  },
+  {
+    label: "Duration in hours",
+    placeholder: "2 hours",
+    name: "durationInHours",
+    type: "number",
+    required: false,
+  },
+];
+
 const Control = ({ activeControl, setActiveControl }: any) => {
-  const { QuizFormHeaderDetails, handleInputsChange } = useQuizHeaderStore();
   return (
     <>
       <div className="w-1/2 overflow-y-scroll">
@@ -57,7 +117,15 @@ const Control = ({ activeControl, setActiveControl }: any) => {
           {InstatuteData.map((instatute, i) => (
             <ControlAccordion
               key={instatute.name}
-              value={instatute.name}
+              name={instatute.name}
+              label={instatute.label}
+              i={i}
+            />
+          ))}
+          {DocumentDetails.map((instatute, i) => (
+            <ControlAccordion
+              key={instatute.name}
+              name={instatute.name}
               label={instatute.label}
               i={i}
             />
@@ -71,35 +139,41 @@ const Control = ({ activeControl, setActiveControl }: any) => {
 export default Control;
 
 type ControlAccordionType = {
-  value: String;
   label: String;
-  i: any;
+  name: String;
+
+  i: number;
 };
 
-function ControlAccordion({ value, label, i }: ControlAccordionType) {
+function ControlAccordion({ label, i, name }: ControlAccordionType) {
+  const [inputData, setInputData] = useState<String>();
   const inputRef = useRef<HTMLInputElement>(null);
   function focusOnInput() {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }
+
+  function handleInputsChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputData(e.target.value);
+  }
+
   return (
-    <Accordion variant="splitted" className="__accordion-btn">
+    <Accordion variant="splitted" className="__accordion-btn ">
       <AccordionItem
         key="1"
         aria-label="Accordion 1"
         onPress={focusOnInput}
+        className="shadow-none"
         classNames={{
-          base: "rounded-none",
+          base: "rounded-none ",
           startContent: "h-10 w-10",
           title: "text-sm font-medium",
         }}
-        title={value}
+        title={inputData ? inputData : label}
         startContent={
           <Card className="size-full rounded-md bg-secondary">
-            <TinyText className="my-auto font-bold">
-              {i ? parseInt(i + 1) : ""}
-            </TinyText>
+            <TinyText className="my-auto font-bold">{i + 1}</TinyText>
           </Card>
         }
       >
@@ -108,7 +182,8 @@ function ControlAccordion({ value, label, i }: ControlAccordionType) {
             label={label}
             labelPlacement="outside"
             ref={inputRef}
-            value={value as string}
+            onChange={(e) => handleInputsChange(e)}
+            value={inputData as string}
           ></Input>
         </section>
       </AccordionItem>

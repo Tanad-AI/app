@@ -44,7 +44,6 @@ const page = () => {
   );
 
   const formData = useQuizHeaderStore((state) => state.QuizFormHeaderDetails);
-  const { QuizFormHeaderDetails } = useQuizHeaderStore();
   const route = useRouter();
 
   return (
@@ -225,8 +224,8 @@ function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
                 placeholder={input.placeholder}
                 key={input.label}
                 name={input.name}
-                onChange={(e) => updateQuizHeaderData(e)}
                 type={input.type}
+                onChange={(e) => updateQuizHeaderData(e)}
                 value={formData[input.name]}
               />
             );

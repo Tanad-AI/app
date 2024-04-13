@@ -26,7 +26,7 @@ export const SubHeader = ({ children, className }: TextProps) => {
 };
 
 export const Text = ({ children, className }: TextProps) => {
-  return <p className={`text-base font-medium  ${className}`}>{children}</p>;
+  return <p className={`text-sm font-medium  ${className}`}>{children}</p>;
 };
 
 export const Paragraph = ({ children, className }: TextProps) => {
@@ -37,5 +37,5 @@ export const Paragraph = ({ children, className }: TextProps) => {
   );
 };
 export const TinyText = ({ children, className }: TextProps) => {
-  return <p className={`text-sm  ${className}`}>{children}</p>;
+  return <p className={`text-xs  ${className}`}>{children}</p>;
 };
