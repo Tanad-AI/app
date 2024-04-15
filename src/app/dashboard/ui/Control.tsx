@@ -1,5 +1,6 @@
 "use client";
 
+import { QuizHeaderFormDataType } from "@/app/create/lib/formsTypes";
 import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
 import {
   Paragraph,
@@ -184,10 +185,12 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
           title: "text-sm font-medium",
         }}
         title={
-          QuizFormHeaderDetails[name] ? (
+          QuizFormHeaderDetails[name as keyof QuizHeaderFormDataType] ? (
             <>
               <TinyText>{label}</TinyText>
-              <div>{QuizFormHeaderDetails[name]}</div>
+              <div>
+                {QuizFormHeaderDetails[name as keyof QuizHeaderFormDataType]}
+              </div>
             </>
           ) : (
             label

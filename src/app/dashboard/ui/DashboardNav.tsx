@@ -1,3 +1,4 @@
+"use client";
 import { TinyText } from "@/app/lib/TextComponents";
 import { TanadLogo } from "@/assets";
 import { Avatar, Button } from "@nextui-org/react";
