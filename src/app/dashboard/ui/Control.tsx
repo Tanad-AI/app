@@ -168,10 +168,6 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
     }
   }
 
-  // function handleInputsChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   setInputData(e.target.value);
-  // }
-
   return (
     <Accordion variant="splitted" className="__accordion-btn ">
       <AccordionItem
