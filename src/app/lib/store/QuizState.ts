@@ -12,6 +12,7 @@ export const useQuizHeaderStore = create<HeaderStore>((set) => ({
     subject: "",
     termSemester: "",
     class: "",
+    country: "",
     numberOfMarks: null,
     dayOfTheExam: "",
     dateOfTheExam: "",

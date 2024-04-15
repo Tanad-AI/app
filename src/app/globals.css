@@ -34,3 +34,16 @@ button {
   box-shadow: none;
   background-color: transparent;
 }
+
+.__scaled-element {
+  transform-origin: top right;
+  transform: scale(0.5);
+}
+td {
+  width: 33.33%;
+  border: 1px solid black;
+  padding: 2px;
+}
+.__a4-page > * {
+  font-size: 18px;
+}

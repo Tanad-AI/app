@@ -28,6 +28,7 @@ export interface questionsDetailsFormTypes {
 }
 
 export interface QuizHeaderFormDataType {
+  country: string;
   subject: string;
   termSemester: string;
   class: string;

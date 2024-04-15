@@ -1,8 +1,5 @@
 "use client";
-import {
-  QuizDetailsFormTypes,
-  QuizHeaderFormDataType,
-} from "@/app/create/lib/formsTypes";
+
 import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
 import {
   Paragraph,
@@ -10,18 +7,30 @@ import {
   Text,
   TinyText,
 } from "@/app/lib/TextComponents";
-import { Accordion, AccordionItem, Card, Input } from "@nextui-org/react";
+import {
+  Accordion,
+  AccordionItem,
+  Card,
+  Input,
+  Spacer,
+} from "@nextui-org/react";
 import React, { useRef, useState } from "react";
 const InstatuteData = [
   {
     label: "School/College Name",
     placeholder: "Harvard",
     type: "text",
-    name: "كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟ كيف يمكن حساب السرعة المتوسطة؟",
+    name: "instatuteName",
+  },
+  {
+    label: "Country",
+    placeholder: "Harvard",
+    type: "text",
+    name: "country",
   },
   {
     label: "State Deparment Name",
-    placeholder: "New yor",
+    placeholder: "New york",
     type: "text",
     name: "stateDepartmentName",
   },
@@ -112,7 +121,8 @@ const Control = ({ activeControl, setActiveControl }: any) => {
           <SectionHeader>Header</SectionHeader>
           <Paragraph>3 sections</Paragraph>
         </div>
-        <section className="flex flex-col gap-2">
+        <Spacer y={3} />
+        <section className="flex flex-col ">
           <Text>Instatute information</Text>
           {InstatuteData.map((instatute, i) => (
             <ControlAccordion
@@ -122,6 +132,8 @@ const Control = ({ activeControl, setActiveControl }: any) => {
               i={i}
             />
           ))}
+          <Spacer y={2} />
+          <Text>Document details</Text>
           {DocumentDetails.map((instatute, i) => (
             <ControlAccordion
               key={instatute.name}
@@ -140,12 +152,13 @@ export default Control;
 
 type ControlAccordionType = {
   label: String;
-  name: String;
-
+  name: any;
   i: number;
 };
 
 function ControlAccordion({ label, i, name }: ControlAccordionType) {
+  const { QuizFormHeaderDetails, handleInputsChange } = useQuizHeaderStore();
+
   const [inputData, setInputData] = useState<String>();
   const inputRef = useRef<HTMLInputElement>(null);
   function focusOnInput() {
@@ -154,9 +167,9 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
     }
   }
 
-  function handleInputsChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputData(e.target.value);
-  }
+  // function handleInputsChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   setInputData(e.target.value);
+  // }
 
   return (
     <Accordion variant="splitted" className="__accordion-btn ">
@@ -170,7 +183,16 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
           startContent: "h-10 w-10",
           title: "text-sm font-medium",
         }}
-        title={inputData ? inputData : label}
+        title={
+          QuizFormHeaderDetails[name] ? (
+            <>
+              <TinyText>{label}</TinyText>
+              <div>{QuizFormHeaderDetails[name]}</div>
+            </>
+          ) : (
+            label
+          )
+        }
         startContent={
           <Card className="size-full rounded-md bg-secondary">
             <TinyText className="my-auto font-bold">{i + 1}</TinyText>
@@ -182,6 +204,7 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
             label={label}
             labelPlacement="outside"
             ref={inputRef}
+            name={name}
             onChange={(e) => handleInputsChange(e)}
             value={inputData as string}
           ></Input>

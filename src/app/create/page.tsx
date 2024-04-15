@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { ChangeEvent, useCallback, useRef, useState } from "react";
-import Upload from "rc-upload";
+import React, { useCallback, useRef, useState } from "react";
 import {
   Paragraph,
   SectionHeader,
@@ -14,7 +13,6 @@ import StepperWrapper from "../ui/StepperWrapper";
 import {
   InstatuteDetailsFromType,
   questionsDetailsFormTypes,
-  QuizDetailsFormTypes,
 } from "./lib/formsTypes";
 import { useDropzone } from "react-dropzone";
 import { useQuizHeaderStore } from "../lib/store/QuizState";
@@ -73,7 +71,7 @@ const page = () => {
             setQuestionsDetails={setQuestionsDetails}
           />
         </div>
-        <Button onClick={() => route.push("/")}>redirect</Button>
+        <Button onClick={() => route.push("/dashboard")}>redirect</Button>
 
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <SectionHeader>
