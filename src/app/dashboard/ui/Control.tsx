@@ -169,14 +169,14 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
   }
 
   return (
-    <Accordion variant="splitted" className="__accordion-btn ">
+    <Accordion variant="splitted" className="__accordion-btn">
       <AccordionItem
         key="1"
         aria-label="Accordion 1"
         onPress={focusOnInput}
         className="shadow-none"
         classNames={{
-          base: "rounded-none ",
+          base: "rounded-none",
           startContent: "h-10 w-10",
           title: "text-sm font-medium",
         }}

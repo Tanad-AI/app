@@ -1,3 +1,4 @@
+import { AbstractPattern } from "@/assets/";
 import DashboardNav from "./ui/DashboardNav";
 
 export default function DashboardLayout({
@@ -6,9 +7,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex max-h-[100svh] w-full flex-col gap-3 bg-gradient-to-b from-[#FAEEDF] to-[#FCF5EA]  px-6 py-3">
-      <DashboardNav />
-      {children}
+    <section className="dashboard relative z-0 flex max-h-[100svh] w-full flex-col gap-3 overflow-hidden  bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]  px-6 py-3">
+      <div className="-z-10">
+        <DashboardNav />
+        {children}
+      </div>
+      <AbstractPattern className="absolute -top-14 left-0 -z-20  h-screen w-screen opacity-65 mix-blend-darken" />
     </section>
   );
 }

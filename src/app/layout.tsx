@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const darkereGrotesque = DM_Sans({
+const darkereGrotesque = Schibsted_Grotesk({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
