@@ -174,10 +174,9 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
         key="1"
         aria-label="Accordion 1"
         onPress={focusOnInput}
-        className="shadow-none"
+        className="__shadow-none"
         classNames={{
-          base: "rounded-none",
-          startContent: "h-10 w-10",
+          startContent: "h-10 w-10 shadow-none",
           title: "text-sm font-medium",
         }}
         title={
@@ -194,7 +193,7 @@ function ControlAccordion({ label, i, name }: ControlAccordionType) {
         }
         startContent={
           <Card className="size-full rounded-md bg-secondary">
-            <TinyText className="my-auto font-bold">{i + 1}</TinyText>
+            <Text className="my-auto font-bold">{i + 1}</Text>
           </Card>
         }
       >
