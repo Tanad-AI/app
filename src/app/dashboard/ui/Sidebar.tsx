@@ -2,31 +2,25 @@
 
 import React from "react";
 import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
-import { SubHeader } from "@/app/lib/TextComponents";
+import { SubHeader, TinyText } from "@/app/lib/TextComponents";
 import { ClipboardEditIcon, FileEditIcon } from "lucide-react";
 
 function sidebar({ activeControl, setActiveControl }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
     <>
-      <Card className="h-fit w-[28%] px-6 py-3 shadow-md">
+      <Card radius="sm" className="h-fit w-[28%]  px-6 py-3 shadow-sm">
         <Tabs
           color="primary"
+          size="sm"
+          radius="sm"
           classNames={{
-            tabList: "w-full  shadow-lg p-0",
+            tabList: "w-full shadow-lg p-0",
+            cursor: "rounded-none p-0",
           }}
         >
-          <Tab
-            key="content"
-            className="flex flex-col items-start "
-            title={
-              <div className="flex items-center justify-center space-x-2">
-                <ClipboardEditIcon size={16} />
-                <div>Content</div>
-              </div>
-            }
-          >
-            <SubHeader>content</SubHeader>
+          <Tab key="content" className="flex flex-col" title="Content">
+            <SubHeader>Content</SubHeader>
             <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
               {controlsButtons.map((button, i) => (
@@ -48,15 +42,10 @@ function sidebar({ activeControl, setActiveControl }: any) {
           </Tab>
           <Tab
             key="Customize"
-            className="flex flex-col items-start "
-            title={
-              <div className="flex w-full  items-center justify-center space-x-2">
-                <FileEditIcon size={16} />
-                <div>Customize</div>
-              </div>
-            }
+            className="flex flex-col rounded-none"
+            title="Customize"
           >
-            customize
+            Customize
           </Tab>
         </Tabs>
       </Card>
