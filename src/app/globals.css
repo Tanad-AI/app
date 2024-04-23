@@ -7,6 +7,14 @@
   margin: 5mm;
 }
 
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 .x {
   page-break-after: always;
   break-after: page;

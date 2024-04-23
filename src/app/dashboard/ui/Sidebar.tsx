@@ -2,14 +2,16 @@
 
 import React from "react";
 import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
-import { SubHeader, TinyText } from "@/app/lib/TextComponents";
-import { ClipboardEditIcon, FileEditIcon } from "lucide-react";
+import { SubHeader } from "@/app/lib/TextComponents";
 
 function sidebar({ activeControl, setActiveControl }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
     <>
-      <Card radius="sm" className="h-fit w-[28%]  px-6 py-3 shadow-sm">
+      <Card
+        radius="sm"
+        className="hidden h-fit min-w-[260px] px-6 py-3  shadow-sm md:flex lg:w-[28%]"
+      >
         <Tabs
           color="primary"
           size="sm"

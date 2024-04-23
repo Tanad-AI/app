@@ -8,7 +8,7 @@ const A4page = () => {
   const { QuizFormHeaderDetails } = useQuizHeaderStore();
 
   return (
-    <div className="hidden w-[600px] flex-col  items-end overflow-y-scroll md:flex">
+    <div className="hidden w-[520px] flex-col  items-end overflow-y-scroll lg:flex">
       <div className="__scaled-element __a4-page min-h-[297mm] min-w-[210mm]  bg-white px-8 py-12">
         <table className="w-full" dir="rtl">
           <tr>
