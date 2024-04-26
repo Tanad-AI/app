@@ -6,6 +6,7 @@ import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
 import {
   Paragraph,
   SectionHeader,
+  SubHeader,
   Text,
   TinyText,
 } from "@/app/lib/TextComponents";
@@ -22,6 +23,8 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Textarea,
+  Checkbox,
 } from "@nextui-org/react";
 import { PlusIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
@@ -257,31 +260,134 @@ function QuestionsComponent() {
     {
       name: "MCQs",
       title: "MCQs ",
-      questions: [{}],
+      questions: [
+        {
+          questionText: "first question",
+          answer: "",
+          choices: [
+            {
+              choiceText: "first Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "second Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "third Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "Fourth Choice",
+              isTrue: true,
+            },
+          ],
+        },
+        {
+          questionText: "second question",
+          answer: "",
+          choices: [
+            {
+              choiceText: "first Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "second Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "third Choice",
+              isTrue: false,
+            },
+            {
+              choiceText: "Fourth Choice",
+              isTrue: true,
+            },
+          ],
+        },
+      ],
     },
     {
       name: "True or false",
       title: "True or false ",
-      questions: [{}],
+      questions: [
+        {
+          questionText: "first question",
+          answer: "",
+          choices: false,
+        },
+        {
+          questionText: "second question",
+          answer: "",
+          choices: false,
+        },
+      ],
     },
     {
       name: "Fill in the blank",
       title: "Fill in the blank ",
-      questions: [{}],
+      questions: [
+        {
+          questionText: "first question",
+          answer: "",
+          choices: false,
+        },
+        {
+          questionText: "second question",
+          answer: "",
+          choices: false,
+        },
+      ],
     },
   ];
-
+  type choiceType = {
+    choiceText: string;
+    isTrue: boolean;
+  };
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       <section className="flex cursor-pointer items-baseline gap-1">
         <SectionHeader>Questions</SectionHeader>
         <Paragraph>3 sections</Paragraph>
       </section>
-      <section>
+      <section className="flex flex-col gap-4">
         {QuestionsSections.map((section, i) => (
-          <CustomAccordion index={i + 1} title={section.title}>
-            alsjkfd
-          </CustomAccordion>
+          <div>
+            <div className="flex items-baseline gap-2">
+              <SubHeader>{section.title}</SubHeader>
+              <Paragraph>3 questions</Paragraph>
+            </div>
+            {section.questions.map((question, i) => (
+              <CustomAccordion index={i + 1} title={question.questionText}>
+                <div className="flex flex-col gap-4">
+                  <section>
+                    <Textarea
+                      variant="bordered"
+                      placeholder="Enter your Question"
+                      classNames={{
+                        input: "resize-y min-h-32",
+                      }}
+                    />
+                  </section>
+                  <section className="flex flex-col gap-4">
+                    {question.choices &&
+                      question.choices.map((choice: choiceType) => (
+                        <div className="flex flex-col gap-1">
+                          <Input
+                            variant="bordered"
+                            labelPlacement="outside"
+                            label={choice.choiceText}
+                            placeholder="enter your choice..."
+                          ></Input>
+
+                          <Checkbox>set as true</Checkbox>
+                        </div>
+                      ))}
+                  </section>
+                </div>
+              </CustomAccordion>
+            ))}
+          </div>
         ))}
       </section>
       <section className="flex w-full justify-center">
