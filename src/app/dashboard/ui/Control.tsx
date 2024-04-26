@@ -12,14 +12,20 @@ import {
 import {
   Accordion,
   AccordionItem,
-  Button,
   Card,
   Input,
   Spacer,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
 } from "@nextui-org/react";
 import { PlusIcon } from "lucide-react";
-import { Content } from "next/font/google";
 import React, { useRef, useState } from "react";
+import CustomAccordion from "@/app/ui/CustomAccordion";
 
 const headerInfo = [
   {
@@ -246,17 +252,76 @@ function HeaderComponent() {
 }
 
 function QuestionsComponent() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <div className="flex flex-col gap-4">
       <section className="flex cursor-pointer items-baseline gap-1">
         <SectionHeader>Questions</SectionHeader>
         <Paragraph>3 sections</Paragraph>
       </section>
-      <section></section>
+      <section>
+        <CustomAccordion index={1} title="MCQs Questions">
+          alsjkfd
+        </CustomAccordion>
+      </section>
       <section className="flex w-full justify-center">
-        <Button color="primary" size="sm">
+        <Button onPress={onOpen} color="primary" size="sm">
           <PlusIcon size={16} /> Add Questions
         </Button>
+
+        <Modal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          isDismissable={false}
+          isKeyboardDismissDisabled={true}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  Add Questions
+                </ModalHeader>
+                <ModalBody>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
+                      labelPlacement="outside"
+                      variant="bordered"
+                      label="MSQs questions"
+                      placeholder="0"
+                      min={0}
+                      type="number"
+                    ></Input>
+                    <Input
+                      labelPlacement="outside"
+                      variant="bordered"
+                      label="True or false questions"
+                      placeholder="0"
+                      min={0}
+                      type="number"
+                    ></Input>
+                    <Input
+                      labelPlacement="outside"
+                      variant="bordered"
+                      label="Fill in the black questions"
+                      placeholder="0"
+                      min={0}
+                      type="number"
+                    ></Input>
+                  </div>
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={onClose}>
+                    Close
+                  </Button>
+                  <Button color="primary" onPress={onClose}>
+                    Action
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </section>
     </div>
   );
