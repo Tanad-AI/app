@@ -314,12 +314,12 @@ function QuestionsComponent() {
         {
           questionText: "first question",
           answer: "",
-          choices: false,
+          choices: [],
         },
         {
           questionText: "second question",
           answer: "",
-          choices: false,
+          choices: [],
         },
       ],
     },
@@ -330,12 +330,12 @@ function QuestionsComponent() {
         {
           questionText: "first question",
           answer: "",
-          choices: false,
+          choices: [],
         },
         {
           questionText: "second question",
           answer: "",
-          choices: false,
+          choices: [],
         },
       ],
     },
