@@ -253,6 +253,23 @@ function HeaderComponent() {
 
 function QuestionsComponent() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const QuestionsSections = [
+    {
+      name: "MCQs",
+      title: "MCQs ",
+      questions: [{}],
+    },
+    {
+      name: "True or false",
+      title: "True or false ",
+      questions: [{}],
+    },
+    {
+      name: "Fill in the blank",
+      title: "Fill in the blank ",
+      questions: [{}],
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-4">
@@ -261,9 +278,11 @@ function QuestionsComponent() {
         <Paragraph>3 sections</Paragraph>
       </section>
       <section>
-        <CustomAccordion index={1} title="MCQs Questions">
-          alsjkfd
-        </CustomAccordion>
+        {QuestionsSections.map((section, i) => (
+          <CustomAccordion index={i + 1} title={section.title}>
+            alsjkfd
+          </CustomAccordion>
+        ))}
       </section>
       <section className="flex w-full justify-center">
         <Button onPress={onOpen} color="primary" size="sm">
