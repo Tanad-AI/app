@@ -1,15 +1,71 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React from "react";
+import { useState } from "react";
 import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
+import MCQsQuestion from "@/app/ui/MCQsQuestion";
+
+const Questions = [
+  {
+    questionText: "ما هي الخاصية التي تصف درجة الاتقان في القياس؟",
+    choices: ["الدقة", "التحكم", "السرعة", "الموثوقية"],
+    page: 0,
+    الإجابة: "الدقة",
+  },
+  {
+    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
+    choices: [
+      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
+      "زاوية النتيجة المحصلة ",
+    ],
+    page: 0,
+    الإجابة: "زاوية النتيجة المحصلة",
+  },
+  {
+    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
+    choices: [
+      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
+      "زاوية النتيجة المحصلة ",
+    ],
+    page: 0,
+    الإجابة: "زاوية النتيجة المحصلة",
+  },
+  {
+    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
+    choices: [
+      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
+      "زاوية النتيجة المحصلة ",
+    ],
+    page: 0,
+    الإجابة: "زاوية النتيجة المحصلة",
+  },
+  {
+    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
+    choices: [
+      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
+      "زاوية النتيجة المحصلة ",
+    ],
+    page: 0,
+    الإجابة: "زاوية النتيجة المحصلة",
+  },
+  {
+    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
+    choices: [
+      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
+      "زاوية النتيجة المحصلة ",
+    ],
+    page: 0,
+    الإجابة: "زاوية النتيجة المحصلة",
+  },
+];
 
 const A4page = () => {
   const { QuizFormHeaderDetails } = useQuizHeaderStore();
+  const [MCQsQuestions, setMCQsQuestions] = useState([]);
 
   return (
     <div className="hidden w-[520px] flex-col  items-end overflow-y-scroll lg:flex">
-      <div className="__scaled-element __a4-page min-h-[297mm] min-w-[210mm]  bg-white px-8 py-12">
+      <div className="__scaled-element __a4-page flex min-h-[297mm]  min-w-[210mm] flex-col gap-8 bg-white px-8 py-12">
         <table className="w-full" dir="rtl">
           <tr>
             <td>{QuizFormHeaderDetails.country}</td>
@@ -58,6 +114,14 @@ const A4page = () => {
             </td>
           </tr>
         </table>
+        {Questions.map((question, i) => (
+          <MCQsQuestion
+            key={question.questionText}
+            index={i + 1}
+            Choices={question.choices}
+            questionText={question.questionText}
+          ></MCQsQuestion>
+        ))}
       </div>
       <div className="__scaled-element mt-[-500px] min-h-[297mm] min-w-[210mm] border-2 border-black bg-white p-2 "></div>
     </div>

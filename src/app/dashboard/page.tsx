@@ -6,16 +6,16 @@ import Control from "./ui/Control";
 import A4page from "./ui/A4page";
 
 const page = () => {
-  const [activeControl, setActiveControl] = useState<number>(0);
+  const [activeControlView, setActiveControlView] = useState<number>(0);
   return (
     <div className=" flex h-[100svh] w-full gap-6 overflow-y-hidden ">
       <Sidebar
-        activeControl={activeControl}
-        setActiveControl={setActiveControl}
+        activeControlView={activeControlView}
+        setActiveControlView={setActiveControlView}
       />
       <Control
-        activeControl={activeControl}
-        setActiveControl={setActiveControl}
+        activeControlView={activeControlView}
+        setActiveControlView={setActiveControlView}
       />
       <A4page />
     </div>

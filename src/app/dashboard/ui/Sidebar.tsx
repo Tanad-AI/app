@@ -4,7 +4,7 @@ import React from "react";
 import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
 import { SubHeader } from "@/app/lib/TextComponents";
 
-function sidebar({ activeControl, setActiveControl }: any) {
+function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
     <>
@@ -30,10 +30,10 @@ function sidebar({ activeControl, setActiveControl }: any) {
                   size="md"
                   key={button}
                   radius="sm"
-                  onClick={() => setActiveControl(i)}
+                  onClick={() => setActiveControlView(i)}
                   variant="shadow"
                   className={`w-full border-[1.5px] border-black/10 bg-transparent capitalize shadow-md ${
-                    activeControl === i &&
+                    activeControlView === i &&
                     "bg-primary/15 font-semibold text-primary "
                   }`}
                 >
