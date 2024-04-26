@@ -142,7 +142,7 @@ const currentView = [<HeaderComponent />, <QuestionsComponent />];
 const Control = ({ activeControlView, setActiveControlView }: any) => {
   return (
     <>
-      <div className="w-full overflow-y-scroll lg:w-1/2">
+      <div className="w-full overflow-y-scroll pb-32 lg:w-1/2">
         {currentView[activeControlView]}
       </div>
     </>
