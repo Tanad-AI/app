@@ -1,13 +1,17 @@
 import React from "react";
+import { Inter } from "next/font/google";
 
 interface TextProps {
   children: React.ReactNode;
   className?: string;
 }
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 export const Header = ({ children, className }: TextProps) => {
   return (
-    <h1 className={`text-4xl font-bold capitalize  ${className}`}>
+    <h1 className={`text-6xl font-bold capitalize  ${className}`}>
       {children}
     </h1>
   );
@@ -15,9 +19,7 @@ export const Header = ({ children, className }: TextProps) => {
 
 export const SectionHeader = ({ children }: TextProps) => {
   return (
-    <h2 className="balanced text-center text-2xl font-bold capitalize ">
-      {children}
-    </h2>
+    <h2 className="balanced  text-2xl font-bold capitalize ">{children}</h2>
   );
 };
 
@@ -26,16 +28,24 @@ export const SubHeader = ({ children, className }: TextProps) => {
 };
 
 export const Text = ({ children, className }: TextProps) => {
-  return <p className={`text-sm font-medium  ${className}`}>{children}</p>;
+  return (
+    <p className={`text-sm font-medium  ${className} ${inter.className}`}>
+      {children}
+    </p>
+  );
 };
 
 export const Paragraph = ({ children, className }: TextProps) => {
   return (
-    <p className={`text-sm font-normal text-foreground/70 ${className}`}>
+    <p
+      className={`text-sm font-medium  text-foreground/70 ${className} ${inter.className}`}
+    >
       {children}
     </p>
   );
 };
 export const TinyText = ({ children, className }: TextProps) => {
-  return <p className={`text-xs  ${className}`}>{children}</p>;
+  return (
+    <p className={`text-xs  ${className} ${inter.className}`}>{children}</p>
+  );
 };

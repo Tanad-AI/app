@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Schibsted_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const darkereGrotesque = Schibsted_Grotesk({
+const darkereGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
