@@ -254,92 +254,124 @@ function HeaderComponent() {
   );
 }
 
+const x = [
+  {
+    name: "MCQs",
+    title: "MCQs ",
+    questions: [
+      {
+        questionText: "first question",
+        answer: "",
+        choices: [
+          {
+            choiceText: "first Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "second Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "third Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "Fourth Choice",
+            isTrue: true,
+          },
+        ],
+      },
+      {
+        questionText: "second question",
+        answer: "",
+        choices: [
+          {
+            choiceText: "first Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "second Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "third Choice",
+            isTrue: false,
+          },
+          {
+            choiceText: "Fourth Choice",
+            isTrue: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "True or false",
+    title: "True or false ",
+    questions: [
+      {
+        questionText: "first question",
+        answer: "",
+        choices: [],
+      },
+      {
+        questionText: "second question",
+        answer: "",
+        choices: [],
+      },
+    ],
+  },
+  {
+    name: "Fill in the blank",
+    title: "Fill in the blank ",
+    questions: [
+      {
+        questionText: "first question",
+        answer: "",
+        choices: [],
+      },
+      {
+        questionText: "second question",
+        answer: "",
+        choices: [],
+      },
+    ],
+  },
+];
+
+const MCQs = {
+  name: "MCQs",
+  title: "MCQs ",
+  questions: [
+    {
+      questionText: "first question",
+      answer: "",
+      choices: [
+        {
+          choiceText: "first Choice",
+          isTrue: false,
+        },
+        {
+          choiceText: "second Choice",
+          isTrue: false,
+        },
+        {
+          choiceText: "third Choice",
+          isTrue: false,
+        },
+        {
+          choiceText: "Fourth Choice",
+          isTrue: true,
+        },
+      ],
+    },
+  ],
+};
+
 function QuestionsComponent() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const QuestionsSections = [
-    {
-      name: "MCQs",
-      title: "MCQs ",
-      questions: [
-        {
-          questionText: "first question",
-          answer: "",
-          choices: [
-            {
-              choiceText: "first Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "second Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "third Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "Fourth Choice",
-              isTrue: true,
-            },
-          ],
-        },
-        {
-          questionText: "second question",
-          answer: "",
-          choices: [
-            {
-              choiceText: "first Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "second Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "third Choice",
-              isTrue: false,
-            },
-            {
-              choiceText: "Fourth Choice",
-              isTrue: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "True or false",
-      title: "True or false ",
-      questions: [
-        {
-          questionText: "first question",
-          answer: "",
-          choices: [],
-        },
-        {
-          questionText: "second question",
-          answer: "",
-          choices: [],
-        },
-      ],
-    },
-    {
-      name: "Fill in the blank",
-      title: "Fill in the blank ",
-      questions: [
-        {
-          questionText: "first question",
-          answer: "",
-          choices: [],
-        },
-        {
-          questionText: "second question",
-          answer: "",
-          choices: [],
-        },
-      ],
-    },
-  ];
+  const [questionsSections, setQuestionsSection] = useState([]);
+
   type choiceType = {
     choiceText: string;
     isTrue: boolean;
@@ -351,44 +383,45 @@ function QuestionsComponent() {
         <Paragraph>3 sections</Paragraph>
       </section>
       <section className="flex flex-col gap-4">
-        {QuestionsSections.map((section, i) => (
-          <div>
-            <div className="flex items-baseline gap-2">
-              <SubHeader>{section.title}</SubHeader>
-              <Paragraph>3 questions</Paragraph>
-            </div>
-            {section.questions.map((question, i) => (
-              <CustomAccordion index={i + 1} title={question.questionText}>
-                <div className="flex flex-col gap-4">
-                  <section>
-                    <Textarea
-                      variant="bordered"
-                      placeholder="Enter your Question"
-                      classNames={{
-                        input: "resize-y min-h-32",
-                      }}
-                    />
-                  </section>
-                  <section className="flex flex-col gap-4">
-                    {question.choices &&
-                      question.choices.map((choice: choiceType) => (
-                        <div className="flex flex-col gap-1">
-                          <Input
-                            variant="bordered"
-                            labelPlacement="outside"
-                            label={choice.choiceText}
-                            placeholder="enter your choice..."
-                          ></Input>
+        {questionsSections &&
+          x.map((section, i) => (
+            <div>
+              <div className="flex items-baseline gap-2">
+                <SubHeader>{section.title}</SubHeader>
+                <Paragraph>3 questions</Paragraph>
+              </div>
+              {section.questions.map((question, i) => (
+                <CustomAccordion index={i + 1} title={question.questionText}>
+                  <div className="flex flex-col gap-4">
+                    <section>
+                      <Textarea
+                        variant="bordered"
+                        placeholder="Enter your Question"
+                        classNames={{
+                          input: "resize-y min-h-32",
+                        }}
+                      />
+                    </section>
+                    <section className="flex flex-col gap-4">
+                      {question.choices &&
+                        question.choices.map((choice: choiceType) => (
+                          <div className="flex flex-col gap-1">
+                            <Input
+                              variant="bordered"
+                              labelPlacement="outside"
+                              label={choice.choiceText}
+                              placeholder="enter your choice..."
+                            ></Input>
 
-                          <Checkbox>set as true</Checkbox>
-                        </div>
-                      ))}
-                  </section>
-                </div>
-              </CustomAccordion>
-            ))}
-          </div>
-        ))}
+                            <Checkbox>set as true</Checkbox>
+                          </div>
+                        ))}
+                    </section>
+                  </div>
+                </CustomAccordion>
+              ))}
+            </div>
+          ))}
       </section>
       <section className="flex w-full justify-center">
         <Button onPress={onOpen} color="primary" size="sm">
@@ -439,7 +472,13 @@ function QuestionsComponent() {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={onClose}>
+                  <Button
+                    color="primary"
+                    onPress={onClose}
+                    // onClick={() =>
+                    //   setQuestionsSection([...questionsSections, MCQs])
+                    // }
+                  >
                     Action
                   </Button>
                 </ModalFooter>
