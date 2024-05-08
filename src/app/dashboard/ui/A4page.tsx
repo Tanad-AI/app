@@ -70,11 +70,11 @@ const A4page = () => {
           <tr>
             <td>{QuizFormHeaderDetails.country}</td>
             <td className="text-center" rowSpan={4}>
-              {/* <img
+              <img
                 className="h-28 object-cover"
                 src="https://i.pinimg.com/736x/bb/2b/83/bb2b83a2e68070fd296630ba541fa478.jpg"
                 alt="kasjf"
-              /> */}
+              />
             </td>
             <td>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</td>
           </tr>

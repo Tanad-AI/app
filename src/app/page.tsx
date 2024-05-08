@@ -1,5 +1,5 @@
 "use client";
-import { TanadLogo } from "@/assets";
+import { TanadLogo, EightStar } from "@/assets";
 import React from "react";
 import {
   Header,
@@ -37,8 +37,8 @@ function page() {
             </Link>
           </div>
         </nav>
-        <section className="flex h-full flex-col justify-center ">
-          <div className="flex w-1/2 flex-col gap-6">
+        <section className="flex h-[87%]  items-center justify-between  ">
+          <div id="left-section" className="flex w-1/2 flex-col gap-6">
             <div className="flex flex-col space-y-2">
               <Header>
                 The best way to write your
@@ -53,14 +53,14 @@ function page() {
             </div>
             <div className="flex gap-2">
               <Link href="/dashboard">
-                <Button radius="sm" color="primary">
+                <Button radius="sm" variant="shadow" color="primary">
                   Try now! for free
                 </Button>
               </Link>
             </div>
           </div>
-          <div>
-            <div></div>
+          <div id="right-section">
+            <HeroImage />
           </div>
         </section>
       </section>
@@ -89,3 +89,24 @@ function page() {
 }
 
 export default page;
+
+function HeroImage() {
+  return (
+    <div className="scale-90">
+      <div
+        id="big-card"
+        className="relative h-96  w-80 rounded-[2.2rem] border-[1.5px] border-black bg-white/70"
+      >
+        <EightStar className="absolute -left-[52px] -top-[25px] fill-[#D4CBF4]" />
+        <div
+          id="card"
+          className="absolute -right-[62px] top-[150px] h-80 w-56 rounded-[2.2rem] border-[1.5px] border-black bg-white"
+        ></div>
+        <div
+          id="card"
+          className="absolute -right-[38px] top-[42px] z-10 h-96 w-80 rounded-[2.2rem] border-[1.5px] border-black bg-white"
+        ></div>
+      </div>
+    </div>
+  );
+}

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const darkereGrotesque = Bricolage_Grotesque({
+const darkereGrotesque = Source_Serif_4({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
