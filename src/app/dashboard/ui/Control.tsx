@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-key */
 "use client";
-import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
-import { Paragraph, SectionHeader, Text } from "@/app/lib/TextComponents";
+import { useQuizStore } from "@/app/store/QuizState";
+import {
+  Paragraph,
+  SectionHeader,
+  Text,
+  TinyText,
+} from "@/app/lib/TextComponents";
 import {
   Accordion,
   AccordionItem,
@@ -125,7 +130,7 @@ const currentView = [<HeaderComponent />, <QuestionsComponent />];
 const Control = ({ activeControlView, setActiveControlView }: any) => {
   return (
     <>
-      <div className="w-full overflow-y-scroll pb-32 lg:w-1/2">
+      <div className="w-full overflow-y-scroll  pb-10 lg:w-1/2">
         {currentView[activeControlView]}
       </div>
     </>
@@ -150,7 +155,7 @@ type PropsType = {
   i: number;
 };
 function ControlAccordion({ label, name, content, i }: PropsType) {
-  const { QuizFormHeaderDetails, handleInputsChange } = useQuizHeaderStore();
+  const { QuizFormHeaderDetails, handleInputsChange } = useQuizStore();
 
   const [inputData, setInputData] = useState<String>();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -201,11 +206,11 @@ function HeaderComponent() {
   return (
     <>
       <div className="flex cursor-pointer items-baseline gap-1">
-        <SectionHeader>Header</SectionHeader>
-        <Paragraph>3 sections</Paragraph>
+        <Text>Header</Text>
+        <TinyText>3 sections</TinyText>
       </div>
-      <Spacer y={3} />
-      <section className="flex flex-col">
+      <Spacer y={2} />
+      <Card radius="sm" className="flex min-h-full flex-col pb-8">
         {headerInfo.map((item, i) => {
           return (
             <div key={i}>
@@ -218,7 +223,7 @@ function HeaderComponent() {
             </div>
           );
         })}
-      </section>
+      </Card>
     </>
   );
 }

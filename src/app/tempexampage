@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React, { useState, useEffect, useRef, use } from "react";
-import { useQuizHeaderStore } from "./lib/store/QuizState";
+import { useQuizStore } from "./lib/store/QuizState";
 import {
   QuizDetailsFormTypes,
   QuizHeaderFormDataType,
@@ -157,7 +157,7 @@ const Questions = [
 
 export default function Home() {
   const [showableQuestions, setShowableQuestions] = useState([{ Questions }]);
-  const { QuizFormHeaderDetails } = useQuizHeaderStore();
+  const { QuizFormHeaderDetails } = useQuizStore();
 
   const ref = useRef(null);
   const pageHeight = useRef(null);

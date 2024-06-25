@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
-import { useQuizHeaderStore } from "@/app/lib/store/QuizState";
+import { Key, useState } from "react";
+import { useQuizStore } from "@/app/store/QuizState";
 import MCQsQuestion from "@/app/ui/MCQsQuestion";
 
 const Questions = [
@@ -60,7 +60,7 @@ const Questions = [
 ];
 
 const A4page = () => {
-  const { QuizFormHeaderDetails } = useQuizHeaderStore();
+  const { QuizFormHeaderDetails, questionsSections } = useQuizStore();
   const [MCQsQuestions, setMCQsQuestions] = useState([]);
 
   return (
@@ -114,14 +114,16 @@ const A4page = () => {
             </td>
           </tr>
         </table>
-        {Questions.map((question, i) => (
-          <MCQsQuestion
-            key={question.questionText}
-            index={i + 1}
-            Choices={question.choices}
-            questionText={question.questionText}
-          ></MCQsQuestion>
-        ))}
+        {questionsSections[0].questions.map((question: any, i: number) => {
+          return (
+            <MCQsQuestion
+              key={i}
+              index={i + 1}
+              Choices={question.choices}
+              questionText={question.questionText}
+            ></MCQsQuestion>
+          );
+        })}
       </div>
       <div className="__scaled-element mt-[-500px] min-h-[297mm] min-w-[210mm] border-2 border-black bg-white p-2 "></div>
     </div>

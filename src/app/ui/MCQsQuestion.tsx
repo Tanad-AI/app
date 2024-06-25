@@ -3,7 +3,7 @@ import React from "react";
 type MCQsQuestionType = {
   index: number;
   questionText: string;
-  Choices: string[];
+  Choices: ChoiceType[];
 };
 
 const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
@@ -30,7 +30,7 @@ const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
         </>
         <tr>
           {Choices.map((choice, i) => (
-            <Choice key={choice} choiceText={choice} index={i} />
+            <Choice key={i} choiceText={choice.choiceText} index={i} />
           ))}
         </tr>
       </table>
@@ -39,11 +39,12 @@ const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
 };
 type ChoiceType = {
   index: number;
-  choiceText: string;
+  choiceText?: string | null;
 };
 
 function Choice({ index, choiceText }: ChoiceType) {
   const letters = ["أ", "ب", "ج", "د"];
+  console.log(choiceText);
 
   return (
     <>

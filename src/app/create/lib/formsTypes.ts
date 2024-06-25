@@ -43,3 +43,20 @@ export interface QuizHeaderFormDataType {
   teacherName: string;
   logo: any;
 }
+
+type choiceType = {
+  choiceText: string;
+  isTrue: boolean;
+};
+type QuestionType = {
+  questionText: string;
+  answer: string;
+  placeholder: string;
+  choices: choiceType[];
+};
+export type QuestionsDataType = {
+  name: string;
+  title: string;
+  added: boolean;
+  questions: QuestionType[];
+};

@@ -15,7 +15,7 @@ import {
   questionsDetailsFormTypes,
 } from "./lib/formsTypes";
 import { useDropzone } from "react-dropzone";
-import { useQuizHeaderStore } from "../lib/store/QuizState";
+import { useQuizStore } from "../store/QuizState";
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -37,11 +37,11 @@ const page = () => {
       defineThefollowing: null,
       writeShortAnswer: null,
     });
-  const updateQuizHeaderData = useQuizHeaderStore(
+  const updateQuizHeaderData = useQuizStore(
     (state) => state.handleInputsChange,
   );
 
-  const formData = useQuizHeaderStore((state) => state.QuizFormHeaderDetails);
+  const formData = useQuizStore((state) => state.QuizFormHeaderDetails);
   const route = useRouter();
 
   return (

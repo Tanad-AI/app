@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {
   Button,
+  Card,
   Checkbox,
   Input,
   Modal,
@@ -11,13 +13,21 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import { Paragraph, SectionHeader, SubHeader } from "../lib/TextComponents";
+import {
+  Paragraph,
+  SectionHeader,
+  SubHeader,
+  Text,
+  TinyText,
+} from "../lib/TextComponents";
 import CustomAccordion from "./CustomAccordion";
 import { PlusIcon } from "lucide-react";
+import { useQuizStore } from "../store/QuizState";
+
 const msqsQuestion: QuestionType = {
-  questionText: "",
+  questionText: "Click to enter a question",
   answer: "",
-  label: "Enter a question",
+  placeholder: "Enter a question",
   choices: [
     {
       choiceText: "first Choice",
@@ -37,27 +47,12 @@ const msqsQuestion: QuestionType = {
     },
   ],
 };
-const otherQuestions: QuestionType = {
-  questionText: "first question",
+const otherQuestion: QuestionType = {
+  questionText: "Click to enter a question",
   answer: "",
-  label: "",
+  placeholder: "",
   choices: [],
 };
-const initialSectionsData = [
-  { name: "MCQs", title: "MCQs", added: false, questions: [] },
-  {
-    name: "trueOrFalse",
-    title: "True or false",
-    added: false,
-    questions: [],
-  },
-  {
-    name: "FillInTheBlank",
-    title: "Fill in the blank",
-    added: false,
-    questions: [],
-  },
-];
 
 type choiceType = {
   choiceText: string;
@@ -66,7 +61,7 @@ type choiceType = {
 type QuestionType = {
   questionText: string;
   answer: string;
-  label: string;
+  placeholder: string;
   choices: choiceType[];
 };
 type SectionsData = {
@@ -77,181 +72,199 @@ type SectionsData = {
 };
 
 function QuestionsComponent() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [questionsSections, setQuestionsSection] =
-    useState<SectionsData[]>(initialSectionsData);
-  const [numberOfQuestions, setNumberOfQuenstions] = useState({
-    MCQs: "",
-    trueOrFalse: "",
-    FillInTheBlank: "",
-  });
+  const {
+    questionsSections,
+    numberOfQuestions,
+    setNumberOfQuestions,
+    addQuestions,
+    setQuestionsText,
+    setChoicesText,
+  } = useQuizStore();
+  const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
 
-  // Update the questions array of the first object
+  const handleQuestionsInputChange = (e: {
+    target: { name: any; value: any };
+  }) => {
+    const { name, value } = e.target;
+    setNumberOfQuestions({ [name]: value });
+  };
 
-  function handleAddingQuestions() {
-    setQuestionsSection((prev) => {
-      const updatedPrev = [...prev];
-      for (let i = 0; i < +numberOfQuestions.MCQs; i++) {
-        updatedPrev[0].questions = [...updatedPrev[0].questions, msqsQuestion];
-      }
-      for (let i = 0; i < +numberOfQuestions.trueOrFalse; i++) {
-        updatedPrev[1].questions = [
-          ...updatedPrev[1].questions,
-          otherQuestions,
-        ];
-      }
-      for (let i = 0; i < +numberOfQuestions.FillInTheBlank; i++) {
-        updatedPrev[2].questions = [
-          ...updatedPrev[2].questions,
-          otherQuestions,
-        ];
-      }
-      return updatedPrev;
-    });
-    setNumberOfQuenstions({ FillInTheBlank: "", MCQs: "", trueOrFalse: "" });
+  const handleAddingQuestions = () => {
+    const mcqsQuestion = msqsQuestion;
+    const otherQuestions = otherQuestion;
+    setIsThereQuestions(true);
+    addQuestions(mcqsQuestion, otherQuestions);
+  };
+
+  function handleQuestionTextareaChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    sectionIndex: number,
+    questionIndex: number,
+  ) {
+    setQuestionsText(sectionIndex, questionIndex, e.target.value);
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       <section className="flex cursor-pointer items-baseline gap-1">
-        <SectionHeader>Questions</SectionHeader>
+        <Text>Questions</Text>
       </section>
-      <section className="flex flex-col gap-4">
+      <Card
+        radius="sm"
+        className={`flex min-h-full flex-col pb-8 pt-4 ${
+          !isThereQuestions && "hidden"
+        }`}
+      >
         {questionsSections &&
-          questionsSections.map((section, i) => (
-            <div key={i}>
+          questionsSections.map((section: any, index: number) => (
+            <div key={index}>
               {section.questions.length === 0 ? (
                 <></>
               ) : (
-                <div className="flex items-baseline gap-2">
-                  <SubHeader>{section.title}</SubHeader>
-                  <Paragraph>{section.questions.length} questions</Paragraph>
+                <div className="flex items-baseline gap-2 px-4">
+                  <Text>{section.title}</Text>
+                  <TinyText>{section.questions.length} questions</TinyText>
                 </div>
               )}
-
               {section.questions &&
-                section.questions.map((question, i) => (
-                  <CustomAccordion
-                    key={i}
-                    index={i + 1}
-                    title={question.questionText}
-                  >
-                    <div className="flex flex-col gap-4">
-                      <section>
-                        <Textarea
-                          variant="bordered"
-                          placeholder="Enter your Question"
-                          classNames={{
-                            input: "resize-y min-h-32",
-                          }}
-                        />
-                      </section>
-                      <section className="flex flex-col gap-4">
-                        {question.choices &&
-                          question.choices.map((choice: choiceType, i) => (
-                            <div key={i} className="flex flex-col gap-1">
-                              <Input
-                                variant="bordered"
-                                labelPlacement="outside"
-                                label={choice.choiceText}
-                                placeholder="enter your choice..."
-                              ></Input>
+                section.questions.map((question: any, i: number) => {
+                  return (
+                    <CustomAccordion
+                      key={i}
+                      index={i + 1}
+                      title={question.questionText}
+                    >
+                      <div className="flex flex-col gap-4">
+                        <section>
+                          <Textarea
+                            variant="bordered"
+                            placeholder="Enter your Question"
+                            value={question.questionText}
+                            onChange={(e) =>
+                              handleQuestionTextareaChange(e, index, i)
+                            }
+                            classNames={{
+                              input: "resize-y min-h-32",
+                            }}
+                          />
+                        </section>
+                        <section className="flex flex-col gap-4">
+                          {question.choices &&
+                            question.choices.map(
+                              (choice: choiceType, idx: number) => (
+                                <div key={idx} className="flex flex-col gap-1">
+                                  <Input
+                                    variant="bordered"
+                                    labelPlacement="outside"
+                                    label={`Choice ${idx + 1}`}
+                                    placeholder="Add choice..."
+                                    onChange={(e) =>
+                                      setChoicesText(e, index, i, idx)
+                                    }
+                                  ></Input>
 
-                              <Checkbox>set as true</Checkbox>
-                            </div>
-                          ))}
-                      </section>
-                    </div>
-                  </CustomAccordion>
-                ))}
+                                  <Checkbox>set as true</Checkbox>
+                                </div>
+                              ),
+                            )}
+                        </section>
+                      </div>
+                    </CustomAccordion>
+                  );
+                })}
             </div>
           ))}
-      </section>
+      </Card>
       <section className="flex w-full justify-center">
-        <Button onPress={onOpen} color="primary" size="sm">
-          <PlusIcon size={16} /> Add Questions
-        </Button>
-
-        <Modal
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          isDismissable={false}
-          isKeyboardDismissDisabled={true}
-        >
-          <ModalContent>
-            {(onClose) => (
-              <>
-                <ModalHeader className="flex flex-col gap-1">
-                  Add Questions
-                </ModalHeader>
-                <ModalBody>
-                  <div className="grid grid-cols-2 gap-3">
-                    <Input
-                      labelPlacement="outside"
-                      variant="bordered"
-                      label="MSQs questions"
-                      placeholder="0"
-                      value={numberOfQuestions.MCQs}
-                      onChange={(e) =>
-                        setNumberOfQuenstions({
-                          ...numberOfQuestions,
-                          MCQs: e.target.value,
-                        })
-                      }
-                      min={0}
-                      type="number"
-                    ></Input>
-                    <Input
-                      labelPlacement="outside"
-                      variant="bordered"
-                      label="True or false questions"
-                      placeholder="0"
-                      value={numberOfQuestions.FillInTheBlank}
-                      onChange={(e) =>
-                        setNumberOfQuenstions({
-                          ...numberOfQuestions,
-                          FillInTheBlank: e.target.value,
-                        })
-                      }
-                      min={0}
-                      type="number"
-                    ></Input>
-                    <Input
-                      labelPlacement="outside"
-                      variant="bordered"
-                      label="Fill in the black questions"
-                      placeholder="0"
-                      value={numberOfQuestions.trueOrFalse}
-                      onChange={(e) =>
-                        setNumberOfQuenstions({
-                          ...numberOfQuestions,
-                          trueOrFalse: e.target.value,
-                        })
-                      }
-                      min={0}
-                      type="number"
-                    ></Input>
-                  </div>
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button
-                    color="primary"
-                    onPress={onClose}
-                    onClick={() => handleAddingQuestions()}
-                  >
-                    Add
-                  </Button>
-                </ModalFooter>
-              </>
-            )}
-          </ModalContent>
-        </Modal>
+        <QuestionsModal
+          numberOfQuestions={numberOfQuestions}
+          handleAddingQuestions={handleAddingQuestions}
+          handleQuestionsInputChange={handleQuestionsInputChange}
+        />
       </section>
     </div>
   );
 }
 
 export default QuestionsComponent;
+
+function QuestionsModal({
+  numberOfQuestions,
+  handleAddingQuestions,
+  handleQuestionsInputChange,
+}: any) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen} color="primary" size="sm">
+        <PlusIcon size={16} /> Add Questions
+      </Button>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+        isKeyboardDismissDisabled={true}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Add Questions
+              </ModalHeader>
+              <ModalBody>
+                <div className="grid grid-cols-2 gap-3">
+                  <Input
+                    labelPlacement="outside"
+                    variant="bordered"
+                    label="MSQs questions"
+                    name="MCQs"
+                    placeholder="0"
+                    value={numberOfQuestions.MCQs}
+                    onChange={handleQuestionsInputChange}
+                    min={0}
+                    type="number"
+                  ></Input>
+                  <Input
+                    labelPlacement="outside"
+                    variant="bordered"
+                    label="True or false questions"
+                    placeholder="0"
+                    name="FillInTheBlank"
+                    value={numberOfQuestions.FillInTheBlank}
+                    onChange={handleQuestionsInputChange}
+                    min={0}
+                    type="number"
+                  ></Input>
+                  <Input
+                    labelPlacement="outside"
+                    variant="bordered"
+                    label="Fill in the black questions"
+                    placeholder="0"
+                    name="trueOrFalse"
+                    value={numberOfQuestions.trueOrFalse}
+                    onChange={handleQuestionsInputChange}
+                    min={0}
+                    type="number"
+                  ></Input>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+                <Button
+                  color="primary"
+                  onPress={onClose}
+                  onClick={() => handleAddingQuestions()}
+                >
+                  Add
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}

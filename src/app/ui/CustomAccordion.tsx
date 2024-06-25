@@ -1,5 +1,5 @@
 import { Accordion, AccordionItem, Card } from "@nextui-org/react";
-import { useQuizHeaderStore } from "../lib/store/QuizState";
+import { useQuizStore } from "../store/QuizState";
 import { Text } from "../lib/TextComponents";
 import { ReactNode } from "react";
 
@@ -11,11 +11,11 @@ type CustomAccordionType = {
 
 function CustomAccordion({ title, index, children }: CustomAccordionType) {
   return (
-    <Accordion variant="splitted" className="__accordion-btn">
+    <Accordion variant="splitted" className="__accordion-btn ">
       <AccordionItem
         key="1"
         aria-label="Accordion 1"
-        className="__shadow-none"
+        className="__shadow-none border-forground border-[1px]"
         classNames={{
           startContent: "h-10 w-10 shadow-none",
           title: "text-sm font-medium",

@@ -2,15 +2,16 @@
 
 import React from "react";
 import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
-import { SubHeader } from "@/app/lib/TextComponents";
+import { SubHeader, Text } from "@/app/lib/TextComponents";
 
 function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
-    <>
+    <div className="block space-y-2">
+      <Text>Control</Text>
       <Card
         radius="sm"
-        className="hidden h-fit min-w-[260px] px-6 py-3  shadow-sm md:flex lg:w-[28%]"
+        className="hidden  min-w-[260px] px-6 py-3  shadow-sm md:flex lg:w-[28%]"
       >
         <Tabs
           color="primary"
@@ -51,7 +52,7 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
           </Tab>
         </Tabs>
       </Card>
-    </>
+    </div>
   );
 }
 
