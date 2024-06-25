@@ -1,5 +1,4 @@
 import { Accordion, AccordionItem, Card } from "@nextui-org/react";
-import { useQuizStore } from "../store/QuizState";
 import { Text } from "../lib/TextComponents";
 import { ReactNode } from "react";
 
