@@ -37,11 +37,9 @@ const page = () => {
       defineThefollowing: null,
       writeShortAnswer: null,
     });
-  const updateQuizHeaderData = useQuizStore(
-    (state) => state.handleInputsChange,
-  );
+  const { handleInputsChange } = useQuizStore();
 
-  const formData = useQuizStore((state) => state.QuizFormHeaderDetails);
+  const { QuizFormHeaderDetails } = useQuizStore();
   const route = useRouter();
 
   return (
@@ -53,16 +51,16 @@ const page = () => {
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <QuizDetailsStep
-            formData={formData}
-            updateQuizHeaderData={updateQuizHeaderData}
+            QuizFormHeaderDetails={QuizFormHeaderDetails}
+            handleInputsChange={handleInputsChange}
           />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
           <EnterInstatuteDetails
             instatuteDetails={instatuteDetails}
             setInstatuteDetails={setInstatuteDetails}
-            formData={formData}
-            updateQuizHeaderData={updateQuizHeaderData}
+            QuizFormHeaderDetails={QuizFormHeaderDetails}
+            handleInputsChange={handleInputsChange}
           />
         </div>
         <div className="mt-4 flex h-full w-full flex-col items-center justify-center gap-3">
@@ -139,7 +137,7 @@ function StepOne({}) {
   );
 }
 
-function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
+function QuizDetailsStep({ QuizFormHeaderDetails, handleInputsChange }: any) {
   const Inputs = [
     {
       label: "subject",
@@ -223,8 +221,8 @@ function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
                 key={input.label}
                 name={input.name}
                 type={input.type}
-                onChange={(e) => updateQuizHeaderData(e)}
-                value={formData[input.name]}
+                onChange={(e) => handleInputsChange(e)}
+                value={QuizFormHeaderDetails[input.name]}
               />
             );
           })}
@@ -235,8 +233,8 @@ function QuizDetailsStep({ formData, updateQuizHeaderData }: any) {
 }
 
 function EnterInstatuteDetails({
-  formData,
-  updateQuizHeaderData,
+  QuizFormHeaderDetails,
+  handleInputsChange,
   instatuteDetails,
   setInstatuteDetails,
 }: any) {
@@ -282,7 +280,7 @@ function EnterInstatuteDetails({
   }
   const onDrop = useCallback((acceptedFiles: any) => {
     setLogoFileData(acceptedFiles);
-    // updateQuizHeaderData();
+    // handleInputsChange();
     setInstatuteDetails((prev: InstatuteDetailsFromType) => ({
       ...prev,
       logo: acceptedFiles,
@@ -308,8 +306,8 @@ function EnterInstatuteDetails({
                 type={input.type}
                 variant="bordered"
                 labelPlacement="outside"
-                value={formData[input.name]}
-                onChange={(e) => updateQuizHeaderData(e)}
+                value={QuizFormHeaderDetails[input.name]}
+                onChange={(e) => handleInputsChange(e)}
                 name={input.name}
               />
             );
