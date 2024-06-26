@@ -106,7 +106,7 @@ function QuestionsComponent() {
 
   return (
     <div className="flex flex-col gap-2">
-      <section className="flex cursor-pointer items-baseline gap-1">
+      <section className="flex items-baseline gap-1">
         <Text>Questions</Text>
       </section>
       <Card
@@ -159,7 +159,12 @@ function QuestionsComponent() {
                                     label={`Choice ${idx + 1}`}
                                     placeholder="Add choice..."
                                     onChange={(e) =>
-                                      setChoicesText(e, index, i, idx)
+                                      setChoicesText(
+                                        e.target.value,
+                                        index,
+                                        i,
+                                        idx,
+                                      )
                                     }
                                   ></Input>
 
@@ -195,6 +200,10 @@ function QuestionsModal({
 }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  function handleSubmit(closeFunction: () => void) {
+    closeFunction();
+    handleAddingQuestions();
+  }
   return (
     <>
       <Button onPress={onOpen} color="primary" size="sm">
@@ -213,7 +222,10 @@ function QuestionsModal({
                 Add Questions
               </ModalHeader>
               <ModalBody>
-                <div className="grid grid-cols-2 gap-3">
+                <form
+                  onSubmit={() => handleSubmit(onClose)}
+                  className="grid grid-cols-2 gap-3"
+                >
                   <Input
                     labelPlacement="outside"
                     variant="bordered"
@@ -247,7 +259,7 @@ function QuestionsModal({
                     min={0}
                     type="number"
                   ></Input>
-                </div>
+                </form>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
@@ -255,8 +267,8 @@ function QuestionsModal({
                 </Button>
                 <Button
                   color="primary"
-                  onPress={onClose}
-                  onClick={() => handleAddingQuestions()}
+                  type="submit"
+                  onClick={() => handleSubmit(onClose)}
                 >
                   Add
                 </Button>

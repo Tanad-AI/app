@@ -125,9 +125,42 @@ export const useQuizStore = create<any>((set: any) => ({
     }),
 
   setChoicesText: (
-    question: string,
+    newChoiceText: string,
     sectionIndex: number,
     questionIndex: number,
     choiceIndex: number,
-  ) => {},
+  ) =>
+    set((state: any) => {
+      // Create a copy of the current questionsSections state
+      const updatedQuestionsSections = [...state.questionsSections];
+
+      // Create a copy of the specific section's questions
+      const updatedQuestions = [
+        ...updatedQuestionsSections[sectionIndex].questions,
+      ];
+
+      // Create a copy of the specific question's choices
+      const updatedChoices = [...updatedQuestions[questionIndex].choices];
+
+      // Update the specific choice's text
+      updatedChoices[choiceIndex] = {
+        ...updatedChoices[choiceIndex],
+        choiceText: newChoiceText,
+      };
+
+      // Update the question with the modified choices array
+      updatedQuestions[questionIndex] = {
+        ...updatedQuestions[questionIndex],
+        choices: updatedChoices,
+      };
+
+      // Update the section with the modified questions array
+      updatedQuestionsSections[sectionIndex] = {
+        ...updatedQuestionsSections[sectionIndex],
+        questions: updatedQuestions,
+      };
+
+      // Return the new state
+      return { questionsSections: updatedQuestionsSections };
+    }),
 }));

@@ -1,70 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { Key, useState } from "react";
 import { useQuizStore } from "@/app/store/QuizState";
 import MCQsQuestion from "@/app/ui/MCQsQuestion";
-
-const Questions = [
-  {
-    questionText: "ما هي الخاصية التي تصف درجة الاتقان في القياس؟",
-    choices: ["الدقة", "التحكم", "السرعة", "الموثوقية"],
-    page: 0,
-    الإجابة: "الدقة",
-  },
-  {
-    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
-    choices: [
-      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
-      "زاوية النتيجة المحصلة ",
-    ],
-    page: 0,
-    الإجابة: "زاوية النتيجة المحصلة",
-  },
-  {
-    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
-    choices: [
-      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
-      "زاوية النتيجة المحصلة ",
-    ],
-    page: 0,
-    الإجابة: "زاوية النتيجة المحصلة",
-  },
-  {
-    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
-    choices: [
-      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
-      "زاوية النتيجة المحصلة ",
-    ],
-    page: 0,
-    الإجابة: "زاوية النتيجة المحصلة",
-  },
-  {
-    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
-    choices: [
-      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
-      "زاوية النتيجة المحصلة ",
-    ],
-    page: 0,
-    الإجابة: "زاوية النتيجة المحصلة",
-  },
-  {
-    questionText: "ماذا يمثل زاوية النتيجة المحصلة في الفضاء الثلاثي؟",
-    choices: [
-      "زاوية النتيجة المحصلة المحصلة المحصلة المحصلة",
-      "زاوية النتيجة المحصلة ",
-    ],
-    page: 0,
-    الإجابة: "زاوية النتيجة المحصلة",
-  },
-];
+import { Spacer } from "@nextui-org/react";
+import { useState } from "react";
 
 const A4page = () => {
   const { QuizFormHeaderDetails, questionsSections } = useQuizStore();
-  const [MCQsQuestions, setMCQsQuestions] = useState([]);
+  const [documentName, setDocumentName] = useState("Untitled document");
 
   return (
-    <div className="hidden w-[520px] flex-col  items-end overflow-y-scroll lg:flex">
+    <div className="hidden w-[520px] flex-col items-end overflow-y-scroll lg:flex">
+      <input
+        value={documentName}
+        onChange={(e) => setDocumentName(e.target.value)}
+        className="w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
+      />
+      <Spacer y={2} />
       <div className="__scaled-element __a4-page flex min-h-[297mm]  min-w-[210mm] flex-col gap-8 bg-white px-8 py-12">
         <table className="w-full" dir="rtl">
           <tr>

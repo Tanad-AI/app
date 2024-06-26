@@ -28,7 +28,7 @@ const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
             </th>
           </tr>
         </>
-        <tr>
+        <tr className="w-full">
           {Choices.map((choice, i) => (
             <Choice key={i} choiceText={choice.choiceText} index={i} />
           ))}
@@ -44,12 +44,14 @@ type ChoiceType = {
 
 function Choice({ index, choiceText }: ChoiceType) {
   const letters = ["أ", "ب", "ج", "د"];
-  console.log(choiceText);
 
   return (
     <>
       <th className="w-8 text-center">{letters[index]}</th>
-      <th className="max-w-1/4 border-[1px]  border-black px-2" scope="col">
+      <th
+        className="h-fit max-w-[1/4] text-wrap border-[1px]  border-black px-2"
+        scope="col"
+      >
         {choiceText}
       </th>
     </>
