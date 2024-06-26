@@ -1,5 +1,5 @@
 "use client";
-import { TanadLogo, EightStar } from "@/assets";
+import { TanadLogo } from "@/assets";
 import React from "react";
 import {
   Header,
@@ -10,56 +10,81 @@ import {
 } from "./lib/TextComponents";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
+import { Check, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
+const SubtleTextAnimation = ({ text }: { text: string }) => {
+  const textVariants = {
+    hidden: {
+      opacity: 0,
+      y: 10,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        type: "sring",
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="scale-text-container"
+      initial="hidden"
+      animate="visible"
+      variants={textVariants}
+    >
+      {text}
+      <span className="text-primary"> exams</span>
+    </motion.div>
+  );
+};
 function page() {
   return (
     <main className="container mx-auto flex flex-col bg-background px-20 py-4">
-      <section className="h-svh">
-        <nav className="flex grow-0 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <TanadLogo />
-            <Text>Tanad AI</Text>
-          </div>
-          <div></div>
-          <div className="flex gap-2">
-            <Button
-              radius="sm"
-              variant="solid"
-              className="bg-white font-normal text-primary shadow-md"
-            >
-              Sign up
-            </Button>
-            <Link href="/dashboard">
-              <Button radius="sm" color="primary" className="__classic_effect">
-                Try now!
-              </Button>
-            </Link>
-          </div>
-        </nav>
-        <section className="flex h-[87%]  items-center justify-between  ">
-          <div id="left-section" className="flex w-1/2 flex-col gap-6">
+      <section className="h-svh pt-6">
+        <NavBar />
+        <section className="flex h-[87%]  items-center justify-center  ">
+          <div className="flex  flex-col items-center gap-6 text-center">
+            <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-sm">
+              <div className="flex items-center gap-1 rounded-full bg-orange-200 px-3 py-1 text-orange-600">
+                <Sparkles size={16} />
+                new
+              </div>
+              <div>AI Powered Tool</div>
+            </div>
             <div className="flex flex-col space-y-2">
               <Header>
-                The best way to write your
-                <span className="text-primary"> exams</span>
+                <SubtleTextAnimation text="The best way to write your" />
               </Header>
               <Paragraph>
                 Revolutionize your assessment creation process with AI:
-                effortlessly turn screenshots into print-ready exams. Streamline
-                your workflow, save time, and unlock professional-grade results.
-                Experience the power of efficiency today.
+                effortlessly turn screenshots into print-ready exams
               </Paragraph>
             </div>
-            <div className="flex gap-2">
+            <div className="gap-2">
               <Link href="/dashboard">
-                <Button radius="sm" variant="shadow" color="primary">
-                  Try now! for free
+                <Button radius="sm" color="primary">
+                  Get Started
                 </Button>
               </Link>
             </div>
-          </div>
-          <div id="right-section">
-            <HeroImage />
+            <div className="flex gap-2">
+              <span className="flex items-center gap-1">
+                <Check size={16} className="stroke-primary" />
+                <Paragraph>Try for free</Paragraph>
+              </span>
+              <span className="flex items-center gap-1">
+                <Check size={16} className="stroke-primary" />
+                <Paragraph>No credit card required</Paragraph>
+              </span>
+              <span className="flex items-center gap-1">
+                <Check size={16} className="stroke-primary" />
+                <Paragraph>AI powered</Paragraph>
+              </span>
+            </div>
           </div>
         </section>
       </section>
@@ -89,23 +114,28 @@ function page() {
 
 export default page;
 
-function HeroImage() {
+function NavBar({}) {
   return (
-    <div className="scale-90">
-      <div
-        id="big-card"
-        className="relative h-96  w-80 rounded-[2.2rem] border-[1.5px] border-black bg-white/70"
-      >
-        <EightStar className="absolute -left-[52px] -top-[25px] fill-[#D4CBF4]" />
-        <div
-          id="card"
-          className="absolute -right-[62px] top-[150px] h-80 w-56 rounded-[2.2rem] border-[1.5px] border-black bg-white"
-        ></div>
-        <div
-          id="card"
-          className="absolute -right-[38px] top-[42px] z-10 h-96 w-80 rounded-[2.2rem] border-[1.5px] border-black bg-white"
-        ></div>
+    <nav className="flex grow-0 items-center justify-between">
+      <div className="flex items-center gap-2">
+        <TanadLogo />
+        <Text>Tanad AI</Text>
       </div>
-    </div>
+      <div></div>
+      <div className="flex gap-6">
+        <Button
+          radius="sm"
+          variant="solid"
+          className="bg-white font-normal shadow-md"
+        >
+          Sign up
+        </Button>
+        <Link href="/dashboard">
+          <Button radius="sm" color="primary" className="__classic_effect">
+            Try now!
+          </Button>
+        </Link>
+      </div>
+    </nav>
   );
 }

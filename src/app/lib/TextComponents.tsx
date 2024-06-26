@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const Header = ({ children, className }: TextProps) => {
   return (
-    <h1 className={`text-6xl font-medium capitalize  ${className}`}>
+    <h1 className={`text-balance text-7xl font-bold capitalize  ${className}`}>
       {children}
     </h1>
   );
