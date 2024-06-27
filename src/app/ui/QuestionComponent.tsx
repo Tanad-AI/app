@@ -11,20 +11,16 @@ import {
   ModalHeader,
   Textarea,
   useDisclosure,
+  Divider,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import {
-  Paragraph,
-  SectionHeader,
-  SubHeader,
-  Text,
-  TinyText,
-} from "../lib/TextComponents";
+import { Text, TinyText } from "../lib/TextComponents";
 import CustomAccordion from "./CustomAccordion";
 import { PlusIcon } from "lucide-react";
 import { useQuizStore } from "../store/QuizState";
 
 const msqsQuestion: QuestionType = {
+  id: "",
   questionText: "Click to enter a question",
   answer: "",
   placeholder: "Enter a question",
@@ -48,6 +44,7 @@ const msqsQuestion: QuestionType = {
   ],
 };
 const otherQuestion: QuestionType = {
+  id: "",
   questionText: "Click to enter a question",
   answer: "",
   placeholder: "",
@@ -59,6 +56,7 @@ type choiceType = {
   isTrue: boolean;
 };
 type QuestionType = {
+  id: string;
   questionText: string;
   answer: string;
   placeholder: string;
@@ -94,6 +92,7 @@ function QuestionsComponent() {
     const otherQuestions = otherQuestion;
     setIsThereQuestions(true);
     addQuestions(mcqsQuestion, otherQuestions);
+    console.log(questionsSections);
   };
 
   function handleQuestionTextareaChange(
@@ -111,6 +110,7 @@ function QuestionsComponent() {
       </section>
       <Card
         radius="sm"
+        shadow="none"
         className={`flex min-h-full flex-col pb-8 pt-4 ${
           !isThereQuestions && "hidden"
         }`}
@@ -121,10 +121,33 @@ function QuestionsComponent() {
               {section.questions.length === 0 ? (
                 <></>
               ) : (
-                <div className="flex items-baseline gap-2 px-4">
-                  <Text>{section.title}</Text>
-                  <TinyText>{section.questions.length} questions</TinyText>
-                </div>
+                <>
+                  {index == 0 ? (
+                    <></>
+                  ) : (
+                    <div className="mt-2 h-2 w-full bg-[#FAE9DF]"></div>
+                  )}
+
+                  <div className={`space-y-2 px-3 ${index !== 0 && "pt-3"}`}>
+                    <div className="flex items-baseline gap-2">
+                      <Text>{section.title}</Text>
+                      <TinyText>{section.questions.length} questions</TinyText>
+                    </div>
+                    <div>
+                      <Input
+                        size="sm"
+                        value="اختر الاجابة الصحيحة في كل مما يلي"
+                        variant="bordered"
+                        className=""
+                        classNames={{
+                          inputWrapper: "h-0",
+                        }}
+                      ></Input>
+                    </div>
+                  </div>
+
+                  <div className="mt-2 h-[2px] w-full bg-[#FAE9DF]"></div>
+                </>
               )}
               {section.questions &&
                 section.questions.map((question: any, i: number) => {

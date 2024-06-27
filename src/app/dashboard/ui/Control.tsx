@@ -6,7 +6,7 @@ import DocumentHeader from "@/app/ui/DocumentHeader";
 
 const currentView = [<DocumentHeader />, <QuestionsComponent />];
 
-const Control = ({ activeControlView, setActiveControlView }: any) => {
+const Control = ({ activeControlView }: any) => {
   return (
     <>
       <div className="w-full overflow-y-scroll  pb-10 lg:w-1/2">

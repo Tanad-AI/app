@@ -118,7 +118,7 @@ const DocumentHeader = () => {
         <TinyText>3 sections</TinyText>
       </div>
       <Spacer y={2} />
-      <Card radius="sm" className="flex min-h-full flex-col pb-8">
+      <Card radius="sm" shadow="none" className="flex min-h-full flex-col pb-8">
         {headerInfo.map((item, i) => {
           return (
             <div key={i}>

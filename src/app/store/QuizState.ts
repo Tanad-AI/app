@@ -3,6 +3,7 @@ import {
   QuizHeaderFormDataType,
 } from "@/app/create/lib/formsTypes";
 import { create } from "zustand";
+import { createId } from "@paralleldrive/cuid2";
 
 type HeaderStore = {
   sections: any;
@@ -72,19 +73,21 @@ export const useQuizStore = create<any>((set: any) => ({
       for (let i = 0; i < +MCQs; i++) {
         updatedSections[0].questions = [
           ...updatedSections[0].questions,
-          mcqsQuestion,
+          { ...mcqsQuestion, id: createId() },
         ];
       }
       for (let i = 0; i < +trueOrFalse; i++) {
         updatedSections[1].questions = [
           ...updatedSections[1].questions,
           otherQuestions,
+          { ...mcqsQuestion, id: createId() }, // Assign unique ID
         ];
       }
       for (let i = 0; i < +FillInTheBlank; i++) {
         updatedSections[2].questions = [
           ...updatedSections[2].questions,
           otherQuestions,
+          { ...mcqsQuestion, id: createId() }, // Assign unique ID
         ];
       }
 
