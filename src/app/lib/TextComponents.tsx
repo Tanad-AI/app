@@ -19,12 +19,12 @@ export const Header = ({ children, className }: TextProps) => {
 
 export const SectionHeader = ({ children }: TextProps) => {
   return (
-    <h2 className="balanced  text-2xl font-medium capitalize ">{children}</h2>
+    <h2 className="balanced  text-5xl font-bold capitalize ">{children}</h2>
   );
 };
 
 export const SubHeader = ({ children, className }: TextProps) => {
-  return <h3 className={`text-lg  font-medium ${className}`}>{children}</h3>;
+  return <h3 className={`text-2xl  font-medium ${className}`}>{children}</h3>;
 };
 
 export const Text = ({ children, className }: TextProps) => {
