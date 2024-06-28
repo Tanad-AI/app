@@ -7,8 +7,10 @@ import { Spacer } from "@nextui-org/react";
 import { useState } from "react";
 
 const A4page = () => {
-  const { QuizFormHeaderDetails, questionsSections } = useQuizStore();
+  const { QuizFormHeaderDetails, questionsSections, SectionQuestion } =
+    useQuizStore();
   const [documentName, setDocumentName] = useState("Untitled document");
+  console.log(SectionQuestion["MCQs"].text);
 
   return (
     <div className="hidden w-[520px] flex-col items-end overflow-y-scroll lg:flex">
@@ -18,8 +20,11 @@ const A4page = () => {
         className="w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
       />
       <Spacer y={2} />
-      <div className="__scaled-element __a4-page flex min-h-[297mm]  min-w-[210mm] flex-col gap-8 bg-white px-8 py-12">
-        <table className="w-full" dir="rtl">
+      <div
+        dir="rtl"
+        className="__scaled-element __a4-page flex min-h-[297mm]  min-w-[210mm] flex-col gap-8 bg-white px-8 py-12"
+      >
+        <table className="w-full">
           <tr>
             <td>{QuizFormHeaderDetails.country}</td>
             <td className="text-center" rowSpan={4}>
@@ -67,6 +72,8 @@ const A4page = () => {
             </td>
           </tr>
         </table>
+        {questionsSections[0].questions.length !== 0 &&
+          SectionQuestion["MCQs"].text}
         {questionsSections[0].questions.map((question: any, i: number) => {
           return (
             <MCQsQuestion

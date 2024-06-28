@@ -166,4 +166,32 @@ export const useQuizStore = create<any>((set: any) => ({
       // Return the new state
       return { questionsSections: updatedQuestionsSections };
     }),
+  SectionQuestion: {
+    MCQs: {
+      text: "اختر الإجابة الصحيحة من بين الخيارات التالية:",
+      marks: "",
+    },
+    trueOrFalse: {
+      text: "اختر: صح أم خطأ للعبارة التالية:",
+      marks: "",
+    },
+    FillInTheBlank: {
+      text: "املأ الفراغ بالكلمة المناسبة:",
+      marks: "",
+    },
+  },
+  setSectionQuestion: (
+    sectionName: string,
+    questionText: string,
+    field: "text" | "marks",
+  ) =>
+    set((state: any) => ({
+      ...state,
+      SectionQuestion: {
+        ...state.SectionQuestion,
+        [sectionName]: {
+          [field]: questionText,
+        },
+      },
+    })),
 }));

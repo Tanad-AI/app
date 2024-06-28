@@ -11,7 +11,7 @@ import {
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 import { Check, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 
 const SubtleTextAnimation = ({ text }: { text: string }) => {
   const textVariants = {
@@ -25,6 +25,7 @@ const SubtleTextAnimation = ({ text }: { text: string }) => {
       transition: {
         duration: 0.3,
         type: "sring",
+        delay: 0.5,
       },
     },
   };

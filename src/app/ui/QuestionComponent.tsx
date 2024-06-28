@@ -18,6 +18,7 @@ import { Text, TinyText } from "../lib/TextComponents";
 import CustomAccordion from "./CustomAccordion";
 import { PlusIcon } from "lucide-react";
 import { useQuizStore } from "../store/QuizState";
+import Chip from "@/components/Chip";
 
 const msqsQuestion: QuestionType = {
   id: "",
@@ -77,6 +78,8 @@ function QuestionsComponent() {
     addQuestions,
     setQuestionsText,
     setChoicesText,
+    SectionQuestion,
+    setSectionQuestion,
   } = useQuizStore();
   const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
 
@@ -125,9 +128,8 @@ function QuestionsComponent() {
                   {index == 0 ? (
                     <></>
                   ) : (
-                    <div className="mt-2 h-2 w-full bg-[#FAE9DF]"></div>
+                    <div className="mt-2 h-3 w-full bg-[#FAE9DF]"></div>
                   )}
-
                   <div className={`space-y-2 px-3 ${index !== 0 && "pt-3"}`}>
                     <div className="flex items-baseline gap-2">
                       <Text>{section.title}</Text>
@@ -136,8 +138,15 @@ function QuestionsComponent() {
                     <div>
                       <Input
                         size="sm"
-                        value="اختر الاجابة الصحيحة في كل مما يلي"
+                        value={SectionQuestion[section.name].text}
                         variant="bordered"
+                        onChange={(e) =>
+                          setSectionQuestion(
+                            section.name,
+                            e.target.value,
+                            "text",
+                          )
+                        }
                         className=""
                         classNames={{
                           inputWrapper: "h-0",
@@ -145,8 +154,7 @@ function QuestionsComponent() {
                       ></Input>
                     </div>
                   </div>
-
-                  <div className="mt-2 h-[2px] w-full bg-[#FAE9DF]"></div>
+                  <div className="mt-2 h-[1.5px] w-full bg-[#FAE9DF]"></div>
                 </>
               )}
               {section.questions &&
