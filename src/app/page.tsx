@@ -11,7 +11,7 @@ import {
 } from "./lib/TextComponents";
 import { Button, Card } from "@nextui-org/react";
 import Link from "next/link";
-import { Check, Sparkles, X } from "lucide-react";
+import { Check, File, Sparkles, X } from "lucide-react";
 import { delay, motion } from "framer-motion";
 import Chip2 from "@/components/Chip2";
 
@@ -52,7 +52,7 @@ function page() {
         <section className="flex h-[87%]  items-center justify-center  ">
           <div className="flex  flex-col items-center gap-6 text-center">
             <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
-              <div className="flex items-center gap-1 rounded-full bg-orange-200 px-1 py-1  text-orange-600">
+              <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-1  text-secondary-700">
                 <Sparkles size={14} />
                 NEW
               </div>
@@ -165,7 +165,7 @@ function page() {
         </div>
       </section>
       <section>
-        <div className="grid grid-cols-2  gap-32">
+        <div className="grid grid-cols-2 content-between justify-between">
           <div className="space-y-3">
             <Chip2>FEATURES</Chip2>
             <SectionHeader className="balanced">
@@ -180,13 +180,13 @@ function page() {
               Get Started
             </Button>
           </div>
-          <div className="space-y-14">
+          <div className="flex flex-col items-end space-y-14">
             <Card
               shadow="sm"
               className="w-10/12 space-y-4 border-none px-12 py-16"
             >
-              <div className="flex aspect-square size-12 items-center justify-center rounded-md border-4 border-primary/10 bg-primary/15">
-                <X className="stroke-primary" size={24} />
+              <div className="flex aspect-square size-12 items-center justify-center rounded-lg border-4 border-primary/10 bg-primary-100/80">
+                <File className="stroke-primary" size={24} />
               </div>
               <SubHeader>Avoid Mistakes</SubHeader>
               <Paragraph>
