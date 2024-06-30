@@ -17,9 +17,11 @@ export const Header = ({ children, className }: TextProps) => {
   );
 };
 
-export const SectionHeader = ({ children }: TextProps) => {
+export const SectionHeader = ({ children, className }: TextProps) => {
   return (
-    <h2 className="balanced  text-5xl font-bold capitalize ">{children}</h2>
+    <h2 className={`balanced  text-5xl font-bold capitalize ${className}`}>
+      {children}
+    </h2>
   );
 };
 
