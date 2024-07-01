@@ -77,17 +77,15 @@ export const useQuizStore = create<any>((set: any) => ({
         ];
       }
       for (let i = 0; i < +trueOrFalse; i++) {
-        updatedSections[1].questions = [
-          ...updatedSections[1].questions,
-          otherQuestions,
-          { ...mcqsQuestion, id: createId() }, // Assign unique ID
+        updatedSections[2].questions = [
+          ...updatedSections[2].questions,
+          { ...otherQuestions, id: createId() }, // Assign unique ID
         ];
       }
       for (let i = 0; i < +FillInTheBlank; i++) {
-        updatedSections[2].questions = [
-          ...updatedSections[2].questions,
-          otherQuestions,
-          { ...mcqsQuestion, id: createId() }, // Assign unique ID
+        updatedSections[1].questions = [
+          ...updatedSections[1].questions,
+          { ...otherQuestions, id: createId() }, // Assign unique ID
         ];
       }
 
@@ -194,4 +192,10 @@ export const useQuizStore = create<any>((set: any) => ({
         },
       },
     })),
+  setNewQuestions: (newQuestions: any, sectionIndex: number) =>
+    set((state: any) => {
+      const updatedQuestions = [...state.questionsSections];
+      updatedQuestions[sectionIndex].questions = newQuestions;
+      return { questionsSections: updatedQuestions };
+    }),
 }));

@@ -11,14 +11,15 @@ import {
   ModalHeader,
   Textarea,
   useDisclosure,
-  Divider,
+  Tooltip,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { Text, TinyText } from "../lib/TextComponents";
 import CustomAccordion from "./CustomAccordion";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, Trash } from "lucide-react";
 import { useQuizStore } from "../store/QuizState";
-import Chip from "@/components/Chip";
+import { AnimatePresence, delay, motion } from "framer-motion";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const msqsQuestion: QuestionType = {
   id: "",
@@ -80,8 +81,10 @@ function QuestionsComponent() {
     setChoicesText,
     SectionQuestion,
     setSectionQuestion,
+    setNewQuestions,
   } = useQuizStore();
   const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
+  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   const handleQuestionsInputChange = (e: {
     target: { name: any; value: any };
@@ -95,7 +98,6 @@ function QuestionsComponent() {
     const otherQuestions = otherQuestion;
     setIsThereQuestions(true);
     addQuestions(mcqsQuestion, otherQuestions);
-    console.log(questionsSections);
   };
 
   function handleQuestionTextareaChange(
@@ -104,6 +106,13 @@ function QuestionsComponent() {
     questionIndex: number,
   ) {
     setQuestionsText(sectionIndex, questionIndex, e.target.value);
+  }
+
+  function handleDeletingQuestion(id: string, sectionIndex: number) {
+    const updatedQuestions = questionsSections[sectionIndex].questions.filter(
+      (question: { id: string }) => question.id !== id,
+    );
+    setNewQuestions(updatedQuestions, sectionIndex);
   }
 
   return (
@@ -157,57 +166,104 @@ function QuestionsComponent() {
                   <div className="mt-2 h-[1.5px] w-full bg-[#FAE9DF]"></div>
                 </>
               )}
-              {section.questions &&
-                section.questions.map((question: any, i: number) => {
-                  return (
-                    <CustomAccordion
-                      key={i}
-                      index={i + 1}
-                      title={question.questionText}
-                    >
-                      <div className="flex flex-col gap-4">
-                        <section>
-                          <Textarea
-                            variant="bordered"
-                            placeholder="Enter your Question"
-                            value={question.questionText}
-                            onChange={(e) =>
-                              handleQuestionTextareaChange(e, index, i)
-                            }
-                            classNames={{
-                              input: "resize-y min-h-32",
-                            }}
-                          />
-                        </section>
-                        <section className="flex flex-col gap-4">
-                          {question.choices &&
-                            question.choices.map(
-                              (choice: choiceType, idx: number) => (
-                                <div key={idx} className="flex flex-col gap-1">
-                                  <Input
-                                    variant="bordered"
-                                    labelPlacement="outside"
-                                    label={`Choice ${idx + 1}`}
-                                    placeholder="Add choice..."
-                                    onChange={(e) =>
-                                      setChoicesText(
-                                        e.target.value,
-                                        index,
-                                        i,
-                                        idx,
-                                      )
+              <div>
+                {section.questions &&
+                  section.questions.map((question: any, i: number) => {
+                    return (
+                      <AnimatePresence key={i}>
+                        <motion.div
+                          key={section.questions}
+                          initial={{
+                            opacity: 0,
+                            y: 56,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            transition: { delay: 0.2, duration: 0.2 },
+                          }}
+                          exit={{
+                            opacity: 0,
+                            height: 0,
+                            transition: { duration: 0.2 },
+                          }}
+                        >
+                          <CustomAccordion
+                            index={i + 1}
+                            title={question.questionText}
+                          >
+                            <div className="flex flex-col gap-4">
+                              <section className="flex justify-end space-x-3">
+                                <Tooltip
+                                  size="sm"
+                                  radius="sm"
+                                  delay={100}
+                                  content="Delete Question"
+                                >
+                                  <Button
+                                    isIconOnly
+                                    size="sm"
+                                    onClick={() =>
+                                      handleDeletingQuestion(question.id, index)
                                     }
-                                  ></Input>
+                                    className="flex items-center justify-center rounded-full border-3 border-red-600/10 bg-red-100 "
+                                    startContent={
+                                      <Trash
+                                        size={14}
+                                        className="stroke-red-500"
+                                      />
+                                    }
+                                  ></Button>
+                                </Tooltip>
+                              </section>
+                              <section>
+                                <Textarea
+                                  variant="bordered"
+                                  placeholder="Enter your Question"
+                                  value={question.questionText}
+                                  onChange={(e) =>
+                                    handleQuestionTextareaChange(e, index, i)
+                                  }
+                                  classNames={{
+                                    input: "resize-y min-h-32",
+                                  }}
+                                />
+                              </section>
+                              <section className="flex flex-col gap-4">
+                                {question.choices &&
+                                  question.choices.map(
+                                    (choice: choiceType, idx: number) => (
+                                      <div
+                                        key={idx}
+                                        className="flex flex-col gap-1"
+                                      >
+                                        <Input
+                                          variant="bordered"
+                                          labelPlacement="outside"
+                                          label={`Choice ${idx + 1}`}
+                                          placeholder="Add choice..."
+                                          onChange={(e) =>
+                                            setChoicesText(
+                                              e.target.value,
+                                              index,
+                                              i,
+                                              idx,
+                                            )
+                                          }
+                                        ></Input>
 
-                                  <Checkbox>set as true</Checkbox>
-                                </div>
-                              ),
-                            )}
-                        </section>
-                      </div>
-                    </CustomAccordion>
-                  );
-                })}
+                                        <Checkbox>set as true</Checkbox>
+                                      </div>
+                                    ),
+                                  )}
+                              </section>
+                            </div>
+                          </CustomAccordion>
+                        </motion.div>
+                      </AnimatePresence>
+                    );
+                  })}
+              </div>
             </div>
           ))}
       </Card>

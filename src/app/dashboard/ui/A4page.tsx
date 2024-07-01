@@ -10,7 +10,6 @@ const A4page = () => {
   const { QuizFormHeaderDetails, questionsSections, SectionQuestion } =
     useQuizStore();
   const [documentName, setDocumentName] = useState("Untitled document");
-  console.log(SectionQuestion["MCQs"].text);
 
   return (
     <div className="hidden w-[520px] flex-col items-end overflow-y-scroll lg:flex">

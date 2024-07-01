@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { TanadLogo } from "@/assets";
-import React from "react";
+import React, { useRef } from "react";
 import {
   Header,
   Paragraph,
@@ -12,56 +13,49 @@ import {
 import { Button, Card, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import { Check, File, Sparkles, X } from "lucide-react";
-import { delay, motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Chip2 from "@/components/Chip2";
+import InViewAnimationBoundry from "@/components/InViewAnimationBoundry";
 
-const SubtleTextAnimation = ({ text }: { text: string }) => {
-  const textVariants = {
-    hidden: {
-      opacity: 0,
-      y: 10,
-    },
+function page() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref);
+
+  const scrollAnimationVarients = {
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
-        type: "sring",
+        duration: 0.7,
+        ease: [0.06, 0.61, 0.25, 0.99],
         delay: 0.5,
       },
     },
   };
-
-  return (
-    <motion.div
-      className="scale-text-container"
-      initial="hidden"
-      animate="visible"
-      variants={textVariants}
-    >
-      {text}
-      <span className="text-primary"> exams</span>
-    </motion.div>
-  );
-};
-function page() {
   return (
     <>
       <main className="container mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
         <section className="h-svh pt-6">
           <NavBar />
           <section className="flex h-[87%]  items-center justify-center  ">
-            <div className="flex  flex-col items-center gap-6 text-center">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={scrollAnimationVarients}
+              className="flex  flex-col items-center gap-6 text-center"
+            >
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
-                <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-1  text-secondary-700">
-                  <Sparkles size={14} />
+                <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
+                  <Sparkles size={12} />
                   NEW
                 </div>
                 <div>AI Powered Tool</div>
               </div>
               <div className="flex flex-col space-y-2">
                 <Header>
-                  <SubtleTextAnimation text="The best way to write your" />
+                  The best way to write your
+                  <span className="text-primary"> exams</span>
                 </Header>
                 <Paragraph>
                   Revolutionize your assessment creation process with AI:
@@ -89,11 +83,11 @@ function page() {
                   <Paragraph>AI Powered</Paragraph>
                 </span>
               </div>
-            </div>
+            </motion.div>
           </section>
         </section>
-        <section className="mx-auto flex h-svh w-full flex-col items-center space-y-14 px-32">
-          <div className="flex w-full items-center justify-between">
+        <section className="mx-auto -mt-36 flex h-svh w-full flex-col items-center space-y-14 px-32">
+          <InViewAnimationBoundry className="flex w-full items-center justify-between">
             <div className="w-3/5 space-y-2 ">
               <Chip2>TUTORIAL</Chip2>
               <div>
@@ -113,16 +107,16 @@ function page() {
                 it&apos;s absolutly free
               </TinyText>
             </div>
-          </div>
-          <div className="w-full px-20">
+          </InViewAnimationBoundry>
+          <InViewAnimationBoundry className="w-full px-20">
             <video className="w-full rounded-md" controls></video>
-          </div>
+          </InViewAnimationBoundry>
         </section>
         <section className="space-y-14">
           <div className="flex w-full justify-center">
             <Chip2>BENEFITS</Chip2>
           </div>
-          <div dir="ltr" className="grid grid-cols-2 gap-36">
+          <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
             <div className="h-96 w-full bg-slate-500"></div>
             <div className="space-y-3">
               <SectionHeader>Convert Screenshot to Exams</SectionHeader>
@@ -135,10 +129,10 @@ function page() {
                 Try Now
               </Button>
             </div>
-          </div>
-          <div dir="rtl" className="grid grid-cols-2 gap-36">
+          </InViewAnimationBoundry>
+          <InViewAnimationBoundry className="rtl grid grid-cols-2 gap-36">
             <div className="h-96 w-full bg-slate-500"></div>
-            <div dir="ltr" className="space-y-3">
+            <div className="rtl space-y-3">
               <SectionHeader>Edit Existing Exams</SectionHeader>
               <Paragraph>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
@@ -149,8 +143,8 @@ function page() {
                 Try Now
               </Button>
             </div>
-          </div>
-          <div dir="ltr" className="grid grid-cols-2 gap-36">
+          </InViewAnimationBoundry>
+          <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
             <div className="h-96 w-full bg-slate-500"></div>
             <div className="space-y-3">
               <SectionHeader>Save Time</SectionHeader>
@@ -163,11 +157,11 @@ function page() {
                 Try Now
               </Button>
             </div>
-          </div>
+          </InViewAnimationBoundry>
         </section>
         <section>
           <div className="grid grid-cols-2 content-between justify-between">
-            <div className="space-y-3">
+            <InViewAnimationBoundry className="space-y-3">
               <Chip2>FEATURES</Chip2>
               <SectionHeader className="balanced">
                 Crafting an Exam Has Never Been Easier
@@ -180,8 +174,8 @@ function page() {
               <Button color="primary" radius="sm" size="lg">
                 Get Started
               </Button>
-            </div>
-            <div className="flex flex-col items-end space-y-14">
+            </InViewAnimationBoundry>
+            <InViewAnimationBoundry className="flex flex-col items-end space-y-14">
               <Card
                 shadow="sm"
                 className="w-10/12 space-y-4 border-none px-12 py-16"
@@ -195,7 +189,33 @@ function page() {
                   esse.
                 </Paragraph>
               </Card>
-            </div>
+              <Card
+                shadow="sm"
+                className="w-10/12 space-y-4 border-none px-12 py-16"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <File className="stroke-primary" size={24} />
+                </div>
+                <SubHeader>Avoid Mistakes</SubHeader>
+                <Paragraph>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui,
+                  esse.
+                </Paragraph>
+              </Card>
+              <Card
+                shadow="sm"
+                className="w-10/12 space-y-4 border-none px-12 py-16"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <File className="stroke-primary" size={24} />
+                </div>
+                <SubHeader>Avoid Mistakes</SubHeader>
+                <Paragraph>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui,
+                  esse.
+                </Paragraph>
+              </Card>
+            </InViewAnimationBoundry>
           </div>
         </section>
       </main>
@@ -222,7 +242,7 @@ function page() {
               <TanadLogo />
               <Text className="">Tanad AI</Text>
             </div>
-            <Text>Made with ❤️</Text>
+            <Text>Made with 💚</Text>
           </div>
           <Divider className="bg-white/20" />
           <Paragraph className="text-white/70">
