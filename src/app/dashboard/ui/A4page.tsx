@@ -13,14 +13,20 @@ const A4page = () => {
   const { QuizFormHeaderDetails, questionsSections, SectionQuestion } =
     useQuizStore();
   const [documentName, setDocumentName] = useState("Untitled document");
-  const componentRef = useRef();
+  const componentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = () => {
     const options = {
       scale: 5, // Adjust as needed, higher scale means higher resolution
       allowTaint: true, // Allow rendering images from other domains
     };
+
     const element = componentRef.current;
+
+    if (!element) {
+      console.error("Print element is null.");
+      return;
+    }
 
     element.classList.add("pdf-style");
 
