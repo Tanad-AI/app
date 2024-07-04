@@ -65,7 +65,7 @@ export const useQuizStore = create<any>((set: any) => ({
       numberOfQuestions: { ...state.numberOfQuestions, ...newCounts },
     })),
 
-  addQuestions: (mcqsQuestion: any, otherQuestions: any) =>
+  addQuestions: (mcqsQuestion: any, otherQuestions: any, TOrFQuestion: any) =>
     set((state: any) => {
       const updatedSections = [...state.questionsSections];
       const { MCQs, trueOrFalse, FillInTheBlank } = state.numberOfQuestions;
@@ -77,14 +77,14 @@ export const useQuizStore = create<any>((set: any) => ({
         ];
       }
       for (let i = 0; i < +trueOrFalse; i++) {
-        updatedSections[2].questions = [
-          ...updatedSections[2].questions,
-          { ...otherQuestions, id: createId() }, // Assign unique ID
+        updatedSections[1].questions = [
+          ...updatedSections[1].questions,
+          { ...TOrFQuestion, id: createId() }, // Assign unique ID
         ];
       }
       for (let i = 0; i < +FillInTheBlank; i++) {
-        updatedSections[1].questions = [
-          ...updatedSections[1].questions,
+        updatedSections[2].questions = [
+          ...updatedSections[2].questions,
           { ...otherQuestions, id: createId() }, // Assign unique ID
         ];
       }

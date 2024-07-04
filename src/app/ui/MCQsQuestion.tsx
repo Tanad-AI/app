@@ -9,31 +9,21 @@ type MCQsQuestionType = {
 const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
   return (
     <>
-      <table dir="rtl" className="w-full border-[1px] border-black text-right">
-        <>
-          <tr>
-            <th
-              className="w-[4%] border-[1px] border-black text-center"
-              scope="col"
-              rowSpan={2}
-            >
-              {index}
-            </th>
-            <th
-              className="h-8 border-[1px] border-black px-2"
-              scope="col"
-              colSpan={12}
-            >
-              {questionText}
-            </th>
-          </tr>
-        </>
-        <tr className="w-full">
-          {Choices.map((choice, i) => (
-            <Choice key={i} choiceText={choice.choiceText} index={i} />
-          ))}
-        </tr>
-      </table>
+      <div className="grid-cols-24 grid border-[1px] border-black">
+        <div className="flex items-center justify-center border-l-[1px] border-black ">
+          <h6>{index}</h6>
+        </div>
+        <div className="col-span-23 grid grid-cols-subgrid grid-rows-2  border-black">
+          <div className="col-span-23 grid w-full px-1.5">
+            <h6>{questionText}</h6>
+          </div>
+          <div className="col-span-23 flex ">
+            {Choices.map((choice, i) => (
+              <Choice key={i} choiceText={choice.choiceText} index={i} />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
@@ -46,15 +36,14 @@ function Choice({ index, choiceText }: ChoiceType) {
   const letters = ["أ", "ب", "ج", "د"];
 
   return (
-    <>
-      <th className="w-8 text-center">{letters[index]}</th>
-      <th
-        className="h-fit max-w-[1/4] text-wrap border-[1px]  border-black px-2"
-        scope="col"
-      >
-        {choiceText}
-      </th>
-    </>
+    <div className="grid w-full grid-cols-20 border-[1px] border-b-0 border-r-0 border-black  ">
+      <div className="col-span-2 border-l-[1px] border-black text-center">
+        <h6>{letters[index]}</h6>
+      </div>
+      <div className="col-span-18 h-fit  grid-cols-subgrid text-wrap px-2 ">
+        <h6>{choiceText}</h6>
+      </div>
+    </div>
   );
 }
 

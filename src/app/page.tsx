@@ -113,11 +113,18 @@ function page() {
           </InViewAnimationBoundry>
         </section>
         <section className="space-y-14">
-          <div className="flex w-full justify-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="flex w-full justify-center"
+          >
             <Chip2>BENEFITS</Chip2>
-          </div>
+          </motion.div>
           <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
-            <div className="h-96 w-full bg-slate-500"></div>
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="h-96 w-full bg-slate-500"
+            ></InViewAnimationBoundry>
             <div className="space-y-3">
               <SectionHeader>Convert Screenshot to Exams</SectionHeader>
               <Paragraph>
@@ -130,9 +137,15 @@ function page() {
               </Button>
             </div>
           </InViewAnimationBoundry>
-          <InViewAnimationBoundry className="rtl grid grid-cols-2 gap-36">
-            <div className="h-96 w-full bg-slate-500"></div>
-            <div className="rtl space-y-3">
+          <InViewAnimationBoundry
+            dir="rtl"
+            className=" grid grid-cols-2 gap-36"
+          >
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="h-96 w-full bg-slate-500"
+            ></InViewAnimationBoundry>
+            <div dir="ltr" className=" space-y-3">
               <SectionHeader>Edit Existing Exams</SectionHeader>
               <Paragraph>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
@@ -145,7 +158,10 @@ function page() {
             </div>
           </InViewAnimationBoundry>
           <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
-            <div className="h-96 w-full bg-slate-500"></div>
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="h-96 w-full bg-slate-500"
+            ></InViewAnimationBoundry>
             <div className="space-y-3">
               <SectionHeader>Save Time</SectionHeader>
               <Paragraph>
@@ -163,7 +179,8 @@ function page() {
           <div className="grid grid-cols-2 content-between justify-between">
             <InViewAnimationBoundry className="space-y-3">
               <Chip2>FEATURES</Chip2>
-              <SectionHeader className="balanced">
+
+              <SectionHeader className="balanced sticky">
                 Crafting an Exam Has Never Been Easier
               </SectionHeader>
               <Paragraph>
@@ -175,7 +192,10 @@ function page() {
                 Get Started
               </Button>
             </InViewAnimationBoundry>
-            <InViewAnimationBoundry className="flex flex-col items-end space-y-14">
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="flex flex-col items-end space-y-14"
+            >
               <Card
                 shadow="sm"
                 className="w-10/12 space-y-4 border-none px-12 py-16"

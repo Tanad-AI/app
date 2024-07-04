@@ -55,9 +55,28 @@ td {
 .__a4-page > * {
   font-size: 11pt;
 }
+@media print {
+  .__a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 11mm;
+    box-sizing: border-box;
+    scale: 2;
+    font-family: __Bricolage_Grotesque_9b492f;
+  }
+}
+
 .__shadow-none {
   box-shadow: none !important;
   border-radius: 0.5rem !important;
   padding-inline-start: 0.5rem !important;
   height: fit-content !important;
+}
+
+.pdf-style .doc-element {
+  transform: translateY(-8px);
+}
+
+.pdf-style h6 {
+  transform: translateY(-8px);
 }

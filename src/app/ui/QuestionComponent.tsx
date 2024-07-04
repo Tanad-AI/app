@@ -45,6 +45,22 @@ const msqsQuestion: QuestionType = {
     },
   ],
 };
+const TOrFQuestion: QuestionType = {
+  id: "",
+  questionText: "Click to enter a question",
+  answer: "",
+  placeholder: "Enter a question",
+  choices: [
+    {
+      choiceText: "صح",
+      isTrue: false,
+    },
+    {
+      choiceText: "خطأ",
+      isTrue: false,
+    },
+  ],
+};
 const otherQuestion: QuestionType = {
   id: "",
   questionText: "Click to enter a question",
@@ -97,7 +113,7 @@ function QuestionsComponent() {
     const mcqsQuestion = msqsQuestion;
     const otherQuestions = otherQuestion;
     setIsThereQuestions(true);
-    addQuestions(mcqsQuestion, otherQuestions);
+    addQuestions(mcqsQuestion, otherQuestions, TOrFQuestion);
   };
 
   function handleQuestionTextareaChange(
