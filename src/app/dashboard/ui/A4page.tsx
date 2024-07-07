@@ -41,19 +41,18 @@ const A4page = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-2/5   flex-col overflow-y-scroll">
       <button onClick={handlePrint}>Download as PDF</button>
       <input
         value={documentName}
         onChange={(e) => setDocumentName(e.target.value)}
         className="w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
       />
-      <div className="hidden w-[520px] flex-col items-end overflow-y-scroll lg:flex">
-        <Spacer y={2} />
+      <div className=" hidden flex-col items-end lg:flex">
         <div
           dir="rtl"
           ref={componentRef}
-          className="__scaled-element __a4-page flex min-h-[297mm]  min-w-[210mm] flex-col gap-8 bg-white p-[11mm]"
+          className="__a4-page  flex h-[297mm] w-[210mm] origin-top-right scale-50 flex-col gap-8 bg-white p-[11mm]"
         >
           <table className="__table-border w-full">
             <tr>
@@ -149,7 +148,6 @@ const A4page = () => {
             );
           })}
         </div>
-        <div className="__scaled-element mt-[-500px] min-h-[297mm] min-w-[210mm] border-2 border-black bg-white p-2 "></div>
       </div>
     </div>
   );

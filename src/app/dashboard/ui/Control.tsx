@@ -8,11 +8,9 @@ const currentView = [<DocumentHeader />, <QuestionsComponent />];
 
 const Control = ({ activeControlView }: any) => {
   return (
-    <>
-      <div className="w-full overflow-y-scroll  pb-10 lg:w-1/2">
-        {currentView[activeControlView]}
-      </div>
-    </>
+    <div className=" overflow-y-scroll pb-10">
+      {currentView[activeControlView]}
+    </div>
   );
 };
 

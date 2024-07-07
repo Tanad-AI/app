@@ -7,7 +7,7 @@ import { SubHeader, Text } from "@/app/lib/TextComponents";
 function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
-    <div className="block space-y-2">
+    <div className="block   space-y-2">
       <Text>Control</Text>
       <Card
         radius="sm"

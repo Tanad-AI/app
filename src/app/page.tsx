@@ -112,7 +112,7 @@ function page() {
             <video className="w-full rounded-md" controls></video>
           </InViewAnimationBoundry>
         </section>
-        <section className="space-y-14">
+        <section className="space-y-28">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -176,8 +176,8 @@ function page() {
           </InViewAnimationBoundry>
         </section>
         <section>
-          <div className="grid grid-cols-2 content-between justify-between">
-            <InViewAnimationBoundry className="space-y-3">
+          <div className="relative flex grid-cols-2 content-between items-start justify-between ">
+            <InViewAnimationBoundry className="sticky bottom-60 w-1/2 space-y-3 self-end">
               <Chip2>FEATURES</Chip2>
 
               <SectionHeader className="balanced sticky">
@@ -192,13 +192,14 @@ function page() {
                 Get Started
               </Button>
             </InViewAnimationBoundry>
+
             <InViewAnimationBoundry
               delay={0.4}
-              className="flex flex-col items-end space-y-14"
+              className="flex flex-col items-end space-y-14 "
             >
               <Card
                 shadow="sm"
-                className="w-10/12 space-y-4 border-none px-12 py-16"
+                className=" w-10/12 space-y-4 border-none px-12 py-16"
               >
                 <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
                   <File className="stroke-primary" size={24} />

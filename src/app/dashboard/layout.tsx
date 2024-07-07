@@ -8,7 +8,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="dashboard relative z-0 flex max-h-[100svh] w-full flex-col gap-3 overflow-hidden   bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]  px-6 py-3">
+    <section className=" dashboard relative z-0 flex max-h-[100svh] w-full flex-col gap-3 overflow-hidden   bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]  px-6 py-3">
       <div className="-z-10">
         <DashboardNav />
         <Spacer y={3} />
