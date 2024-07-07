@@ -12,7 +12,19 @@ import {
 } from "./lib/TextComponents";
 import { Button, Card, Divider } from "@nextui-org/react";
 import Link from "next/link";
-import { Check, File, Sparkles, X } from "lucide-react";
+import {
+  Check,
+  File,
+  Hammer,
+  Landmark,
+  PiggyBank,
+  Printer,
+  Sparkles,
+  TabletSmartphone,
+  Timer,
+  Wallpaper,
+  X,
+} from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import Chip2 from "@/components/Chip2";
 import InViewAnimationBoundry from "@/components/InViewAnimationBoundry";
@@ -25,7 +37,7 @@ function page() {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
-      y: 0,
+      y: -160,
       transition: {
         duration: 0.7,
         ease: [0.06, 0.61, 0.25, 0.99],
@@ -33,18 +45,59 @@ function page() {
       },
     },
   };
+
+  const featuresCards = [
+    {
+      title: "Time-Saving Automation",
+      paragraph:
+        "By automating the most time-consuming aspects of exam creation, Tanad frees up valuable time for educators, allowing them to focus on teaching and other important tasks.",
+      icon: <Timer className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Simplified User Interface",
+      paragraph:
+        "Tanad boasts an intuitive and user-friendly interface that makes exam creation easier than ever. Our tool is designed to be more straightforward and efficient than traditional platforms like Microsoft Office or Google Docs.",
+      icon: <Wallpaper className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Ready-to-Print Exams",
+      paragraph:
+        "Tanad provides ready-to-print exams that can be customized to suit individual requirements. This feature streamlines the exam preparation process, making it quicker and more efficient.",
+      icon: <Printer className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Standalone Tool",
+      paragraph:
+        "Tanad does not require integration with other educational platforms, making it easy to adopt and use without additional setup or complexity.",
+      icon: <Hammer className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Reusable Question",
+      paragraph:
+        "Educators can store and reuse question components. This feature facilitates the creation of standardized and consistent assessments, saving educators valuable time.",
+      icon: <Landmark className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Multi-Device Compatibility",
+      paragraph:
+        "Tanad is designed to be accessible both on computers and phones, giving educators the flexibility to create and manage assessments seamlessly across different devices.",
+      icon: <TabletSmartphone className="stroke-primary" size={24} />,
+    },
+    {
+      title: "Cost-Effective Solution",
+      paragraph:
+        "By reducing the time spent on exam creation and minimizing the need for manual corrections, Tanad offers a cost-effective solution for educational institutions looking to optimize their resources.",
+      icon: <PiggyBank className="stroke-primary" size={24} />,
+    },
+  ];
+
   return (
     <>
       <main className="container mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
         <section className="h-svh pt-6">
           <NavBar />
           <section className="flex h-[87%]  items-center justify-center  ">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={scrollAnimationVarients}
-              className="flex  flex-col items-center gap-6 text-center"
-            >
+            <InViewAnimationBoundry className="flex  flex-col items-center gap-6 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
                 <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
                   <Sparkles size={12} />
@@ -83,7 +136,7 @@ function page() {
                   <Paragraph>AI Powered</Paragraph>
                 </span>
               </div>
-            </motion.div>
+            </InViewAnimationBoundry>
           </section>
         </section>
         <section className="mx-auto -mt-36 flex h-svh w-full flex-col items-center space-y-14 px-32">
@@ -176,14 +229,14 @@ function page() {
           </InViewAnimationBoundry>
         </section>
         <section>
-          <div className="relative flex grid-cols-2 content-between items-start justify-between ">
-            <InViewAnimationBoundry className="sticky bottom-60 w-1/2 space-y-3 self-end">
+          <div className="relative flex  items-start justify-between ">
+            <InViewAnimationBoundry className="sticky bottom-60 w-[48%] space-y-3 self-end">
               <Chip2>FEATURES</Chip2>
 
               <SectionHeader className="balanced sticky">
                 Crafting an Exam Has Never Been Easier
               </SectionHeader>
-              <Paragraph>
+              <Paragraph className="balanced">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Officia et nisi quo libero sunt veniam praesentium modi
                 similique voluptatibus obcaecati?
@@ -193,50 +246,27 @@ function page() {
               </Button>
             </InViewAnimationBoundry>
 
-            <InViewAnimationBoundry
-              delay={0.4}
-              className="flex flex-col items-end space-y-14 "
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={scrollAnimationVarients}
+              viewport={{ once: true }}
+              className="relative top-40  flex w-1/2 flex-col items-end space-y-14 "
             >
-              <Card
-                shadow="sm"
-                className=" w-10/12 space-y-4 border-none px-12 py-16"
-              >
-                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
-                  <File className="stroke-primary" size={24} />
-                </div>
-                <SubHeader>Avoid Mistakes</SubHeader>
-                <Paragraph>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui,
-                  esse.
-                </Paragraph>
-              </Card>
-              <Card
-                shadow="sm"
-                className="w-10/12 space-y-4 border-none px-12 py-16"
-              >
-                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
-                  <File className="stroke-primary" size={24} />
-                </div>
-                <SubHeader>Avoid Mistakes</SubHeader>
-                <Paragraph>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui,
-                  esse.
-                </Paragraph>
-              </Card>
-              <Card
-                shadow="sm"
-                className="w-10/12 space-y-4 border-none px-12 py-16"
-              >
-                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
-                  <File className="stroke-primary" size={24} />
-                </div>
-                <SubHeader>Avoid Mistakes</SubHeader>
-                <Paragraph>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui,
-                  esse.
-                </Paragraph>
-              </Card>
-            </InViewAnimationBoundry>
+              {featuresCards.map((feature, i) => (
+                <Card
+                  shadow="sm"
+                  className="w-[87%] space-y-4 border-none px-12 py-16"
+                  key={i}
+                >
+                  <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                    {feature.icon}
+                  </div>
+                  <SubHeader>{feature.title}</SubHeader>
+                  <Paragraph>{feature.paragraph}</Paragraph>
+                </Card>
+              ))}
+            </motion.div>
           </div>
         </section>
       </main>

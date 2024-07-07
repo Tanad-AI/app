@@ -7,14 +7,18 @@ const InViewAnimationBoundry = ({
   className,
   dir,
   delay,
+  y,
 }: {
   children?: React.ReactNode;
   ref?: any;
   className: string;
   dir?: "ltr" | "rtl";
   delay?: number;
+  y?: number;
 }) => {
   if (delay == undefined) delay = 0.3;
+  if (delay == undefined) y = 0;
+
   const scrollAnimationVarients = {
     hidden: { opacity: 0, y: 150 },
     visible: {
