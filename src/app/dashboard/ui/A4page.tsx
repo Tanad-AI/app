@@ -41,18 +41,117 @@ const A4page = () => {
   };
 
   return (
-    <div className="flex w-2/5   flex-col overflow-y-scroll">
-      <button onClick={handlePrint}>Download as PDF</button>
+    <div className="flex min-w-[516px]  flex-col space-y-2 overflow-y-auto">
+      {/* <button onClick={handlePrint}>Download as PDF</button> */}
       <input
         value={documentName}
         onChange={(e) => setDocumentName(e.target.value)}
-        className="w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
+        className="min-w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
       />
-      <div className=" hidden flex-col items-end lg:flex">
+      <div className="hidden origin-top-left scale-[0.65] flex-col space-y-14 lg:flex">
         <div
           dir="rtl"
           ref={componentRef}
-          className="__a4-page  flex h-[297mm] w-[210mm] origin-top-right scale-50 flex-col gap-8 bg-white p-[11mm]"
+          className="__a4-page  flex h-[297mm] w-[210mm]  flex-col gap-8 bg-white p-[11mm]"
+        >
+          <table className="__table-border w-full">
+            <tr>
+              <td>{QuizFormHeaderDetails.country}</td>
+              <td className="items-center text-center" rowSpan={4}>
+                <img
+                  className="mx-auto h-28 object-cover align-middle"
+                  src="images/logo.png"
+                  alt="logo goes here"
+                />
+              </td>
+              <td>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</td>
+            </tr>
+            <tr>
+              <td>{QuizFormHeaderDetails.countryDepartmentName}</td>
+              <td>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</td>
+            </tr>
+            <tr>
+              <td>{QuizFormHeaderDetails.stateDepartmentName}</td>
+              <td>الزمن: {QuizFormHeaderDetails.durationInHours}</td>
+            </tr>
+            <tr>
+              <td>{QuizFormHeaderDetails.instatuteName}</td>
+              <td>عدد الصفحات:</td>
+            </tr>
+            <tr>
+              <td colSpan={3}>
+                <span>
+                  اختبار الفصل الدراسي
+                  <span> {QuizFormHeaderDetails.termSemester} </span>
+                  لمادة
+                  <span> {QuizFormHeaderDetails.subject} </span>
+                  (الفترة الأولى) للصف
+                  <span> {QuizFormHeaderDetails.class} </span>
+                  للعام الدراسي 1445هـ
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3}>
+                <span>
+                  اسم
+                  الطالب..........................................................
+                </span>
+                {"    "}
+                <span> رقم الجلوس............................</span>
+              </td>
+            </tr>
+          </table>
+          {questionsSections[0].questions.length !== 0 && (
+            <div className="doc-element -mb-7">
+              {SectionQuestion["MCQs"].text}
+            </div>
+          )}
+          {questionsSections[0].questions.map((question: any, i: number) => {
+            return (
+              <MCQsQuestion
+                key={i}
+                index={i + 1}
+                Choices={question.choices}
+                questionText={question.questionText}
+              ></MCQsQuestion>
+            );
+          })}
+          {questionsSections[1].questions.length !== 0 && (
+            <div className="doc-element -mb-7">
+              {SectionQuestion["trueOrFalse"].text}
+            </div>
+          )}
+          {questionsSections[1].questions.map((question: any, i: number) => {
+            return (
+              <MCQsQuestion
+                key={i}
+                index={i + 1}
+                Choices={question.choices}
+                questionText={question.questionText}
+              ></MCQsQuestion>
+            );
+          })}
+          {questionsSections[2].questions.length !== 0 && (
+            <div className="doc-element -mb-7">
+              {SectionQuestion["FillInTheBlank"].text}
+            </div>
+          )}
+          {questionsSections[2].questions.map((question: any, i: number) => {
+            return (
+              <MCQsQuestion
+                key={i}
+                index={i + 1}
+                Choices={question.choices}
+                questionText={question.questionText}
+              ></MCQsQuestion>
+            );
+          })}
+        </div>
+        <div
+          dir="rtl"
+          ref={componentRef}
+          className="__a4-page  flex h-[297mm] w-[210mm]  flex-col gap-8 bg-white p-[11mm]"
         >
           <table className="__table-border w-full">
             <tr>
