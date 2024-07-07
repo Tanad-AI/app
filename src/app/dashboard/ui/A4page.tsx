@@ -46,7 +46,7 @@ const A4page = () => {
       <input
         value={documentName}
         onChange={(e) => setDocumentName(e.target.value)}
-        className="min-w-fit border-none bg-transparent p-0 text-sm outline-1 -outline-offset-1 outline-black/50"
+        className="box-border min-w-fit rounded-md bg-transparent p-0 text-sm focus:border-[2px] focus:border-blue-300 focus:outline-none"
       />
       <div className="hidden origin-top-left scale-[0.65] flex-col space-y-14 lg:flex">
         <div

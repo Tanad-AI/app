@@ -19,53 +19,52 @@ import CustomAccordion from "./CustomAccordion";
 import { PlusIcon, Trash } from "lucide-react";
 import { useQuizStore } from "../store/QuizState";
 import { AnimatePresence, delay, motion } from "framer-motion";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const msqsQuestion: QuestionType = {
   id: "",
-  questionText: "Click to enter a question",
+  questionText: "",
   answer: "",
-  placeholder: "Enter a question",
+  placeholder: "enter a question",
   choices: [
     {
-      choiceText: "first Choice",
+      choiceText: "",
       isTrue: false,
     },
     {
-      choiceText: "second Choice",
+      choiceText: "",
       isTrue: false,
     },
     {
-      choiceText: "third Choice",
+      choiceText: "",
       isTrue: false,
     },
     {
-      choiceText: "Fourth Choice",
+      choiceText: "",
       isTrue: true,
     },
   ],
 };
 const TOrFQuestion: QuestionType = {
   id: "",
-  questionText: "Click to enter a question",
+  questionText: "",
   answer: "",
-  placeholder: "Enter a question",
+  placeholder: "enter a question",
   choices: [
     {
-      choiceText: "صح",
+      choiceText: "",
       isTrue: false,
     },
     {
-      choiceText: "خطأ",
+      choiceText: "",
       isTrue: false,
     },
   ],
 };
 const otherQuestion: QuestionType = {
   id: "",
-  questionText: "Click to enter a question",
+  questionText: "",
   answer: "",
-  placeholder: "",
+  placeholder: "enter a question",
   choices: [],
 };
 
@@ -100,7 +99,6 @@ function QuestionsComponent() {
     setNewQuestions,
   } = useQuizStore();
   const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
-  const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
 
   const handleQuestionsInputChange = (e: {
     target: { name: any; value: any };
@@ -206,7 +204,11 @@ function QuestionsComponent() {
                         >
                           <CustomAccordion
                             index={i + 1}
-                            title={question.questionText}
+                            title={
+                              question.questionText == ""
+                                ? "Click to enter a question"
+                                : question.questionText
+                            }
                           >
                             <div className="flex flex-col gap-4">
                               <section className="flex justify-end space-x-3">
