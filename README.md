@@ -1,22 +1,12 @@
-### Full Example
-Here's how the complete guideline might look:
-
-```markdown
-# Contributing to [Your Project Name]
-
-Thank you for considering contributing to [Your Project Name]! Your help is essential for the project's success. This guide outlines the process for contributing to our Next.js application.
-
-## Code of Conduct
-
-Please read and follow our [Code of Conduct](link-to-code-of-conduct). We expect all contributors to adhere to these guidelines.
-
-## Getting Started
+# Getting Started
 
 1. **Fork the repository**: Click the 'Fork' button at the top right of the repository page.
 2. **Clone your fork**:
    ```bash
    git clone https://github.com/your-username/your-repo.git
    ```
+````
+
 3. **Navigate to the project directory**:
    ```bash
    cd your-repo
@@ -52,11 +42,31 @@ Please read and follow our [Code of Conduct](link-to-code-of-conduct). We expect
 
 ## Coding Standards
 
-- **Format**: Use Prettier for code formatting. You can run `npm run format` to format your code.
-- **Linting**: Ensure your code passes ESLint checks. Run `npm run lint` before committing.
-- **Testing**: Write unit tests for your changes. Run `npm test` to ensure all tests pass.
-- **Comments**: Write clear and concise comments to explain your code where necessary.
-- **Commit Messages**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for commit messages.
+### 1. Code Formatting
+
+- **Use Prettier**: Ensure your code is formatted using Prettier. You can run `npm run format` to automatically format your code.
+- **Indentation**: Use 2 spaces for indentation.
+- **Line Length**: Keep lines to a maximum of 80 characters.
+
+### 3. Naming Conventions
+
+- **Variables and Functions**: Use camelCase for variable and function names (e.g., `myVariable`, `myFunction`).
+- **Classes and Components**: Use PascalCase for classes and React components (e.g., `MyClass`, `MyComponent`).
+- **Constants**: Use UPPER_SNAKE_CASE for constants (e.g., `MY_CONSTANT`).
+
+### 4. Comments
+
+- **Inline Comments**: Use inline comments sparingly and only when necessary to explain complex logic.
+
+### 5. React/Next.js Specific
+
+- **Functional Components**: Prefer functional components over class components.
+- **Hooks**: Use React hooks for state and lifecycle management.
+- **Prop Types**: Define prop types for your components using TypeScript or PropTypes.
+
+### 6. Git Commit Messages
+
+- **Conventional Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for commit messages. Example format:
 
 ## Additional Resources
 
@@ -64,10 +74,3 @@ Please read and follow our [Code of Conduct](link-to-code-of-conduct). We expect
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [Node.js Documentation](https://nodejs.org/en/docs/)
 - [Project Wiki](link-to-project-wiki)
-
-## Contact
-
-If you have any questions or need further assistance, feel free to open an issue or contact us at [your-email@example.com].
-```
-
-Feel free to modify this template to better fit your project's needs.
