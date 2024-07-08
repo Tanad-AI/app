@@ -5,9 +5,6 @@
    ```bash
    git clone https://github.com/your-username/your-repo.git
    ```
-
-````
-
 3. **Navigate to the project directory**:
    ```bash
    cd your-repo
@@ -75,4 +72,12 @@
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [Node.js Documentation](https://nodejs.org/en/docs/)
 - [Project Wiki](link-to-project-wiki)
-````
+
+## Contact
+
+If you have any questions or need further assistance, feel free to open an issue or contact us at [your-email@example.com].
+
+```
+
+Feel free to modify this template to better fit your project's needs.
+```
