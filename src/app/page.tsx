@@ -28,6 +28,7 @@ import Chip2 from "@/components/Chip2";
 import InViewAnimationBoundry from "@/components/InViewAnimationBoundry";
 import { cn } from "@/lib/utils";
 import GridPattern from "@/components/GridPattern";
+import WordRotate from "@/components/WordRotate";
 
 function page() {
   const scrollAnimationVarients = {
@@ -96,7 +97,7 @@ function page() {
             <NavBar />
           </div>
           <section className="relative flex h-[87%] items-center justify-center  ">
-            <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-6 text-center">
+            <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
                 <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
                   <Sparkles size={12} />
@@ -104,13 +105,18 @@ function page() {
                 </div>
                 <div>AI Powered Tool</div>
               </div>
-              <div className="flex flex-col space-y-2">
-                <Header>
+              <div className="relative flex flex-col space-y-2">
+                <Header className="text-balance">
                   The best way to write your
-                  <span className="bg-gradient-to-b from-primary-800 to-primary-600 bg-clip-text text-transparent">
-                    {" "}
-                    exams
-                  </span>
+                  <WordRotate
+                    words={[
+                      "exams",
+                      "worksheets",
+                      "quizzes",
+                      "survey",
+                      "tests",
+                    ]}
+                  />
                 </Header>
                 <Paragraph>
                   Revolutionize your assessment creation process with AI:
