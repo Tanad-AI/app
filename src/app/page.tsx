@@ -107,7 +107,10 @@ function page() {
               <div className="flex flex-col space-y-2">
                 <Header>
                   The best way to write your
-                  <span className="text-primary"> exams</span>
+                  <span className="bg-gradient-to-b from-primary-800 to-primary-600 bg-clip-text text-transparent">
+                    {" "}
+                    exams
+                  </span>
                 </Header>
                 <Paragraph>
                   Revolutionize your assessment creation process with AI:
