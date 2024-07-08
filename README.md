@@ -19,28 +19,6 @@ Please read and follow our [Code of Conduct](link-to-code-of-conduct). We expect
 ```
 
 ### 3. Getting Started
-```markdown
-Creating a contribution guideline for a Next.js app is essential to ensure that contributions are consistent, high-quality, and align with the project's goals. Here’s a step-by-step guide to help you create one:
-
-### 1. Introduction
-Start by welcoming contributors and giving a brief overview of the project.
-
-```markdown
-# Contributing to Tanad AI
-
-Thank you for considering contributing to Tanad AI Your help is essential for the project's success. This guide outlines the process for contributing to our Next.js application.
-```
-
-### 2. Code of Conduct
-Include a code of conduct to ensure a respectful and inclusive environment.
-
-```markdown
-## Code of Conduct
-
-Please read and follow our [Code of Conduct](link-to-code-of-conduct). We expect all contributors to adhere to these guidelines.
-```
-
-### 3. Getting Started
 Provide instructions on how to set up the development environment.
 
 ```markdown
