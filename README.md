@@ -82,8 +82,7 @@ If you have any questions or need further assistance, feel free to open an issue
 Feel free to modify this template to better fit your project's needs.
 ```
 
-
-Here is the translation of your text to Arabic:
+_____________________________________________________________________________________________________________________________________________________________________________
 
 ```
 # البدء
