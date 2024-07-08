@@ -1,15 +1,11 @@
-````markdown
-# Contributing to Tanad AI
-
-Thank you for considering contributing to Tanad AI! Your help is essential for the project's success. This guide outlines the process for contributing to our Next.js application.
-
-## Getting Started
+# Getting Started
 
 1. **Fork the repository**: Click the 'Fork' button at the top right of the repository page.
 2. **Clone your fork**:
    ```bash
    git clone https://github.com/your-username/your-repo.git
    ```
+
 ````
 
 3. **Navigate to the project directory**:
@@ -79,3 +75,4 @@ Thank you for considering contributing to Tanad AI! Your help is essential for t
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [Node.js Documentation](https://nodejs.org/en/docs/)
 - [Project Wiki](link-to-project-wiki)
+````
