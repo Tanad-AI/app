@@ -13,10 +13,7 @@ const page = () => {
         activeControlView={activeControlView}
         setActiveControlView={setActiveControlView}
       />
-      <Control
-        activeControlView={activeControlView}
-        setActiveControlView={setActiveControlView}
-      />
+      <Control activeControlView={activeControlView} />
       <A4page />
     </div>
   );

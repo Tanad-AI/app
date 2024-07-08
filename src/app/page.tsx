@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { TanadLogo } from "@/assets";
-import React, { useRef } from "react";
+import React from "react";
 import {
   Header,
   Paragraph,
@@ -14,7 +14,6 @@ import { Button, Card, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import {
   Check,
-  File,
   Hammer,
   Landmark,
   PiggyBank,
@@ -23,16 +22,14 @@ import {
   TabletSmartphone,
   Timer,
   Wallpaper,
-  X,
 } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Chip2 from "@/components/Chip2";
 import InViewAnimationBoundry from "@/components/InViewAnimationBoundry";
+import { cn } from "@/lib/utils";
+import GridPattern from "@/components/GridPattern";
 
 function page() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref);
-
   const scrollAnimationVarients = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -93,15 +90,17 @@ function page() {
 
   return (
     <>
-      <main className="container mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
-        <section className="h-svh pt-6">
-          <NavBar />
-          <section className="flex h-[87%]  items-center justify-center  ">
-            <InViewAnimationBoundry className="flex  flex-col items-center gap-6 text-center">
+      <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
+        <section className="relative h-svh pt-6">
+          <div className="relative z-50">
+            <NavBar />
+          </div>
+          <section className="relative flex h-[87%] items-center justify-center  ">
+            <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-6 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
                 <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
                   <Sparkles size={12} />
-                  NEW
+                  SOON
                 </div>
                 <div>AI Powered Tool</div>
               </div>
@@ -138,6 +137,15 @@ function page() {
               </div>
             </InViewAnimationBoundry>
           </section>
+          <GridPattern
+            width={75}
+            height={75}
+            x={-1}
+            y={-1}
+            className={cn(
+              "z-1 opacity-70 [mask-image:radial-gradient(1500px_circle_at_center,white,transparent)]",
+            )}
+          />
         </section>
         <section className="mx-auto -mt-36 flex h-svh w-full flex-col items-center space-y-14 px-32">
           <InViewAnimationBoundry className="flex w-full items-center justify-between">

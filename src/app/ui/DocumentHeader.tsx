@@ -112,7 +112,7 @@ const headerInfo = [
 
 const DocumentHeader = () => {
   return (
-    <>
+    <div className="h-full">
       <div className="flex cursor-pointer items-baseline gap-1">
         <Text>Header</Text>
         <TinyText>3 sections</TinyText>
@@ -132,7 +132,7 @@ const DocumentHeader = () => {
           );
         })}
       </Card>
-    </>
+    </div>
   );
 };
 

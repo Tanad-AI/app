@@ -6,9 +6,13 @@ import DocumentHeader from "@/app/ui/DocumentHeader";
 
 const currentView = [<DocumentHeader />, <QuestionsComponent />];
 
-const Control = ({ activeControlView }: any) => {
+interface ControlProps {
+  activeControlView: number;
+}
+
+const Control = ({ activeControlView }: ControlProps) => {
   return (
-    <div className="w-full overflow-y-scroll pb-10">
+    <div className="w-full overflow-y-scroll pb-20">
       {currentView[activeControlView]}
     </div>
   );

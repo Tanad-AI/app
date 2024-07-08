@@ -39,14 +39,14 @@ const A4page = () => {
   };
 
   return (
-    <div className="flex min-w-[516px]  flex-col space-y-2 overflow-y-auto">
+    <div className="hidden min-w-[516px] flex-col  space-y-2 overflow-y-auto lg:flex">
       {/* <button onClick={handlePrint}>Download as PDF</button> */}
       <input
         value={documentName}
         onChange={(e) => setDocumentName(e.target.value)}
         className="box-border min-w-fit rounded-md bg-transparent p-0 text-sm focus:border-[2px] focus:border-blue-300 focus:outline-none"
       />
-      <div className="hidden origin-top-left scale-[0.65] flex-col space-y-14 lg:flex">
+      <div className="flex origin-top-left scale-[0.65] flex-col space-y-14">
         <div
           dir="rtl"
           ref={componentRef}
