@@ -1,5 +1,3 @@
-Creating a contribution guideline for a Next.js app is essential to ensure that contributions are consistent, high-quality, and align with the project's goals. Here’s a step-by-step guide to help you create one:
-
 ### 1. Introduction
 Start by welcoming contributors and giving a brief overview of the project.
 
