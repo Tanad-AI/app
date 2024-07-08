@@ -127,6 +127,7 @@ function QuestionsComponent() {
       (question: { id: string }) => question.id !== id,
     );
     setNewQuestions(updatedQuestions, sectionIndex);
+    console.log(questionsSections)
   }
 
   return (

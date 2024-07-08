@@ -4,10 +4,8 @@
 import React, { useRef, useState } from "react";
 import { useQuizStore } from "@/app/store/QuizState";
 import MCQsQuestion from "@/app/ui/MCQsQuestion";
-import { Spacer } from "@nextui-org/react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import image from "../../../../public/images/logo.png";
 
 const A4page = () => {
   const { QuizFormHeaderDetails, questionsSections, SectionQuestion } =
