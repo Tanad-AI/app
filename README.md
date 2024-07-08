@@ -4,9 +4,9 @@ Creating a contribution guideline for a Next.js app is essential to ensure that 
 Start by welcoming contributors and giving a brief overview of the project.
 
 ```markdown
-# Contributing to [Your Project Name]
+# Contributing to Tanad AI
 
-Thank you for considering contributing to [Your Project Name]! Your help is essential for the project's success. This guide outlines the process for contributing to our Next.js application.
+Thank you for considering contributing to Tanad AI Your help is essential for the project's success. This guide outlines the process for contributing to our Next.js application.
 ```
 
 ### 2. Code of Conduct
