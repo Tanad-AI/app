@@ -35,7 +35,6 @@ const DashboardNav = () => {
       const pdf = new jsPDF();
       pdf.addImage(dataUrl, "PNG", 0, 0, 208, 297);
       pdf.save("download.pdf");
-      document.body.appendChild(img);
     });
     // html2canvas(element, options).then((canvas) => {
     //   const imgData = canvas.toDataURL("image/png");
