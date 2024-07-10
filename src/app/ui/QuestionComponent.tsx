@@ -93,7 +93,7 @@ function QuestionsComponent() {
     const mcqsQuestion = msqsQuestion;
     const otherQuestions = otherQuestion;
     setIsThereQuestions(true);
-    addQuestions(mcqsQuestion, otherQuestions, TOrFQuestion);
+    addQuestions(mcqsQuestion, TOrFQuestion, otherQuestions);
   };
 
   function handleQuestionTextareaChange(
@@ -109,7 +109,6 @@ function QuestionsComponent() {
       (question: { id: string }) => question.id !== id,
     );
     setNewQuestions(updatedQuestions, sectionIndex);
-    console.log(questionsSections);
   }
 
   return (

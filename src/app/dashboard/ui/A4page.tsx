@@ -82,7 +82,8 @@ const A4page = () => {
             </tr>
           </table>
           {questionsSections.map((section: any) => {
-            console.log(section);
+            console.log();
+            if (section.questions.length == 0) return;
             return (
               <div key={createId()}>
                 <div className="doc-element">

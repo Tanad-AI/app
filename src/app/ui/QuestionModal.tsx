@@ -59,8 +59,8 @@ function QuestionsModal({
                     variant="bordered"
                     label="True or false questions"
                     placeholder="0"
-                    name="FillInTheBlank"
-                    value={numberOfQuestions.FillInTheBlank}
+                    name="trueOrFalse"
+                    value={numberOfQuestions.trueOrFalse}
                     onChange={handleQuestionsInputChange}
                     min={0}
                     type="number"
@@ -70,8 +70,8 @@ function QuestionsModal({
                     variant="bordered"
                     label="Fill in the black questions"
                     placeholder="0"
-                    name="trueOrFalse"
-                    value={numberOfQuestions.trueOrFalse}
+                    name="FillInTheBlank"
+                    value={numberOfQuestions.FillInTheBlank}
                     onChange={handleQuestionsInputChange}
                     min={0}
                     type="number"
