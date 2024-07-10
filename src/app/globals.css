@@ -63,8 +63,8 @@ td {
     min-height: 297mm;
     padding: 11mm;
     box-sizing: border-box;
-    scale: 2;
-    font-family: __Bricolage_Grotesque_9b492f;
+    font-size: 11pt;
+    /* font-family: __Bricolage_Grotesque_9b492f; */
   }
 }
 

@@ -4,6 +4,8 @@ import {
 } from "@/app/create/lib/formsTypes";
 import { create } from "zustand";
 import { createId } from "@paralleldrive/cuid2";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 type HeaderStore = {
   sections: any;
@@ -198,4 +200,12 @@ export const useQuizStore = create<any>((set: any) => ({
       updatedQuestions[sectionIndex].questions = newQuestions;
       return { questionsSections: updatedQuestions };
     }),
+
+  a4Page: null,
+
+  setA4Page: (element: HTMLDivElement) => {
+    set((state: any) => ({
+      a4Page: element,
+    }));
+  },
 }));
