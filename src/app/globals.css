@@ -67,12 +67,12 @@ td {
   background-color: white;
   border: 1px solid rgb(191, 191, 191);
   margin-block: 52px;
+  height: 297mm;
+  width: 210mm;
 }
-.pagedjs_margin-content::after {
-  content: counter(page);
-}
+
 @page {
-  size: 148mm 210mm;
+  size: A4;
   margin-top: 10mm;
   margin-right: 20mm;
   margin-bottom: 25mm;

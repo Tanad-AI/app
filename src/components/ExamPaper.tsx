@@ -18,7 +18,7 @@ const ExamPaper = ({
     <div
       ref={ref}
       dir="rtl"
-      className={`__a4-page  flex flex-col gap-5 bg-white ${
+      className={`__a4-page  flex  flex-col gap-5 bg-white ${
         varient == "normal" && "min-h-[297mm] w-[210mm] p-[20mm] "
       } `}
     >
