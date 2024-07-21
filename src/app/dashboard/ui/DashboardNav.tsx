@@ -36,13 +36,6 @@ const DashboardNav = () => {
       pdf.addImage(dataUrl, "PNG", 0, 0, 208, 297);
       pdf.save("download.pdf");
     });
-    // html2canvas(element, options).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new jsPDF();
-    //   const imgHeight = (canvas.height * 208) / canvas.width; // 208 is the width of A4 page in mm
-    //   pdf.addImage(imgData, "PNG", 0, 0, 208, imgHeight);
-    //   pdf.save("download.pdf");
-    // });
   };
 
   return (

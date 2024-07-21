@@ -7,7 +7,7 @@ import { SubHeader, Text } from "@/app/lib/TextComponents";
 function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
   return (
-    <div className=" hidden min-w-[260px]  flex-col space-y-2 md:flex   lg:w-[28%]">
+    <div className="min-w-[260px]  flex-col space-y-2 md:flex   lg:w-[28%]">
       <Text>Control</Text>
       <Card radius="sm" className=" px-6 py-3 shadow-sm ">
         <Tabs

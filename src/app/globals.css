@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@page {
-  size: A4 portrait;
-  margin: 5mm;
-}
-
 * {
   scrollbar-width: none;
   box-sizing: border-box;
@@ -57,16 +52,6 @@ td {
 .__a4-page > * {
   font-size: 11pt;
 }
-@media print {
-  .__a4-page {
-    width: 210mm;
-    min-height: 297mm;
-    padding: 11mm;
-    box-sizing: border-box;
-    font-size: 11pt;
-    /* font-family: __Bricolage_Grotesque_9b492f; */
-  }
-}
 
 .__shadow-none {
   box-shadow: none !important;
@@ -74,11 +59,28 @@ td {
   padding-inline-start: 0.5rem !important;
   height: fit-content !important;
 }
-
-.pdf-style .doc-element {
-  transform: translateY(-8px);
+.pagedjs_pages {
+  zoom: 0.6;
+  transform-origin: top left;
 }
+.pagedjs_sheet {
+  background-color: white;
+  border: 1px solid rgb(191, 191, 191);
+  margin-block: 52px;
+}
+.pagedjs_margin-content::after {
+  content: counter(page);
+}
+@page {
+  size: 148mm 210mm;
+  margin-top: 10mm;
+  margin-right: 20mm;
+  margin-bottom: 25mm;
+  margin-left: 15mm;
+  background-color: white;
 
-.pdf-style h6 {
-  transform: translateY(-8px);
+  @bottom-left {
+    content: counter(page);
+    text-transform: uppercase;
+  }
 }
