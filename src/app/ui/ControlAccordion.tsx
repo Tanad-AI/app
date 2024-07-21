@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useQuizStore } from "../store/QuizState";
 import CustomAccordion from "./CustomAccordion";
 import { Input } from "@nextui-org/react";
-import { Text } from "@react-pdf/renderer";
+import { Text } from "../lib/TextComponents";
 
 type PropsType = {
   label: string;

@@ -5,11 +5,9 @@ import { TanadLogo } from "@/assets";
 import { Avatar, Button } from "@nextui-org/react";
 import { FileDown } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 
 const DashboardNav = () => {
   const a4Page = useQuizStore((state: any) => state.a4Page);

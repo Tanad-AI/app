@@ -1,18 +1,16 @@
-import {
-  QuestionsDataType,
-  QuizHeaderFormDataType,
-} from "@/app/create/lib/formsTypes";
 import { create } from "zustand";
 import { createId } from "@paralleldrive/cuid2";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import {
+  QuizHeaderFormDataType,
+  SectionsData,
+} from "../types/document-elements.types";
 
 type HeaderStore = {
   sections: any;
   setQuestionText: any;
   QuizFormHeaderDetails: QuizHeaderFormDataType;
   handleInputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  QuestionsSections: QuestionsDataType[];
+  QuestionsSections: SectionsData[];
 };
 
 export const useQuizStore = create<any>((set: any) => ({
@@ -33,7 +31,7 @@ export const useQuizStore = create<any>((set: any) => ({
     teacherName: "",
     logo: [],
   },
-  handleInputsChange: (event: { target: { name: any; value: any } }) => {
+  handleInputsChange: (event: { target: { name: string; value: string } }) => {
     const { name, value } = event.target;
     // set function
     set((state: HeaderStore) => ({
