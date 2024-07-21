@@ -60,7 +60,7 @@ td {
   height: fit-content !important;
 }
 .pagedjs_pages {
-  zoom: 0.6;
+  scale: 0.5;
   transform-origin: top left;
 }
 .pagedjs_sheet {

@@ -58,7 +58,7 @@ const config: Config = {
               DEFAULT: "#43766C",
             },
             secondary: {
-              50: "##FFF6F0",
+              50: "#FFF6F0",
               100: "#FFEADE",
               200: "#FFDFCF",
               300: "#FFD5BF",

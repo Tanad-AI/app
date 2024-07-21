@@ -10,12 +10,6 @@ const PrintPreview = () => {
       ["../app/globals.css"],
       document.querySelector("#preview"),
     );
-
-    return () => {
-      document.head
-        .querySelectorAll("[data-pagedjs-inserted-styles]")
-        .forEach((e) => e.parentNode?.removeChild(e));
-    };
   }, []);
   return <div></div>;
 };

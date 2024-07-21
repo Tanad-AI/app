@@ -72,21 +72,24 @@ const ExamPaper = ({
           </tr>
         </tbody>
       </table>
-      {/* {section.questions.length !== 0 && (
-        <div>{SectionQuestion[section.name].text}</div>
-      )} */}
-      {/* {Array.from({ length: 50 }, (_, i) => (
-        <h1 key={i}>hello world {i}</h1>
-      ))} */}
-      {questionsSections.map((section: any) =>
-        section.questions.map((question: any, i: number) => (
-          <MCQsQuestion
-            key={question.id}
-            index={i + 1}
-            Choices={question.choices}
-            questionText={question.questionText}
-          />
-        )),
+
+      {questionsSections.map(
+        (section: any) =>
+          section.questions.length !== 0 && (
+            <div key={section.name}>
+              <div>{SectionQuestion[section.name].text}</div>
+              <div className="space-y-4">
+                {section.questions.map((question: any, i: number) => (
+                  <MCQsQuestion
+                    key={question.id}
+                    index={i + 1}
+                    Choices={question.choices}
+                    questionText={question.questionText}
+                  />
+                ))}
+              </div>
+            </div>
+          ),
       )}
     </div>
   );

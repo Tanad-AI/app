@@ -4,11 +4,13 @@
 import React, { useState } from "react";
 import { useQuizStore } from "@/app/store/QuizState";
 import { Play } from "lucide-react";
-import { Text } from "@/app/lib/TextComponents";
+import { SubHeader, Text } from "@/app/lib/TextComponents";
 import {
+  Button,
   Modal,
   ModalBody,
   ModalContent,
+  ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
 import ExamPaper from "@/components/ExamPaper";
@@ -34,18 +36,23 @@ const A4page: React.FC = () => {
         isDismissable={true}
         scrollBehavior="inside"
         placement="bottom-center"
-        className="max-h-svh p-0"
+        className="h-svh w-fit bg-secondary-50 p-0"
         size="xl"
       >
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
+              <ModalHeader>
+                <div className="flex w-full justify-between pr-5 ">
+                  <Text>{documentName}</Text>
+                  <Button size="sm" className="bg-primary-700 text-white">
+                    download
+                  </Button>
+                </div>
+              </ModalHeader>
               <ModalBody className="h-svh w-fit">
                 <div>
-                  <div
-                    id="pagedjsdocroot"
-                    style={{ display: "none", scale: 0 }}
-                  >
+                  <div id="pagedjsdocroot" style={{ display: "none" }}>
                     <ExamPaper
                       varient="print"
                       QuizFormHeaderDetails={QuizFormHeaderDetails}
@@ -53,7 +60,7 @@ const A4page: React.FC = () => {
                       SectionQuestion={SectionQuestion}
                     />
                   </div>
-                  <div id="preview"></div>
+                  <div id="preview" className=""></div>
                   <PrintPreview />
                 </div>
               </ModalBody>
