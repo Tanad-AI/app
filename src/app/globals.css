@@ -59,9 +59,8 @@ td {
   padding-inline-start: 0.5rem !important;
   height: fit-content !important;
 }
-.pagedjs_pages {
-  scale: 0.5;
-  transform-origin: top left;
+.pagedjs_page {
+  max-height: 520px;
 }
 .pagedjs_sheet {
   background-color: white;
@@ -69,6 +68,7 @@ td {
   margin-block: 52px;
   height: 297mm;
   width: 210mm;
+  zoom: 0.5;
 }
 
 @page {
