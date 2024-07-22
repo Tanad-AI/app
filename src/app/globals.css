@@ -60,7 +60,8 @@ td {
   height: fit-content !important;
 }
 .pagedjs_page {
-  max-height: 520px;
+  zoom: 0.5;
+  -webkit-text-size-adjust: none;
 }
 .pagedjs_sheet {
   background-color: white;
@@ -68,7 +69,6 @@ td {
   margin-block: 52px;
   height: 297mm;
   width: 210mm;
-  zoom: 0.5;
 }
 
 @page {
