@@ -62,6 +62,7 @@ td {
 .pagedjs_page {
   zoom: 0.5;
   -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 .pagedjs_sheet {
   background-color: white;
@@ -74,6 +75,7 @@ td {
 @page {
   size: A4;
   margin-top: 10mm;
+  font-size: 11pt;
   margin-right: 20mm;
   margin-bottom: 25mm;
   margin-left: 15mm;
