@@ -3,17 +3,12 @@
 @tailwind utilities;
 
 * {
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
   box-sizing: border-box;
 }
 
 *::-webkit-scrollbar {
-  display: none;
-}
-
-.x {
-  page-break-after: always;
-  break-after: page;
+  /* display: none; */
 }
 
 .__box {
@@ -59,17 +54,20 @@ td {
   padding-inline-start: 0.5rem !important;
   height: fit-content !important;
 }
+
+.pagedjs_pages {
+  transform-origin: top left;
+  display: flex;
+  flex-direction: column;
+  gap: 62px;
+}
+
 .pagedjs_page {
-  zoom: 0.5;
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
 }
 .pagedjs_sheet {
   background-color: white;
   border: 1px solid rgb(191, 191, 191);
-  margin-block: 52px;
-  height: 297mm;
-  width: 210mm;
+  margin: 0;
 }
 
 @page {

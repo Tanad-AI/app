@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useQuizStore } from "@/app/store/QuizState";
 import { Play } from "lucide-react";
-import { SubHeader, Text } from "@/app/lib/TextComponents";
+import { Text } from "@/app/lib/TextComponents";
 import {
-  Button,
   Modal,
   ModalBody,
   ModalContent,
@@ -15,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import ExamPaper from "@/components/ExamPaper";
 import PrintPreview from "@/components/PrintPreview";
+import DownloadButton from "@/components/DownloadButton";
 
 const A4page: React.FC = () => {
   const QuizFormHeaderDetails = useQuizStore(
@@ -24,9 +24,16 @@ const A4page: React.FC = () => {
     (state: any) => state.questionsSections,
   );
   const SectionQuestion = useQuizStore((state: any) => state.SectionQuestion);
+  const setA4Page = useQuizStore((state: any) => state.setA4Page);
+  const pageRef = useRef<HTMLDivElement>(null);
 
   const [documentName, setDocumentName] = useState("Untitled document");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isDocumentLoaded, setIsDocumentLoaded] = useState(false);
+
+  if (isOpen) {
+    setA4Page(pageRef);
+  }
 
   return (
     <div className="hidden min-w-[516px] flex-col  space-y-2 overflow-y-auto lg:flex">
@@ -35,9 +42,9 @@ const A4page: React.FC = () => {
         onOpenChange={onOpenChange}
         isDismissable={true}
         scrollBehavior="inside"
-        placement="bottom-center"
-        className="h-svh w-fit bg-secondary-50 p-0"
-        size="xl"
+        placement="center"
+        className=" w-fit  bg-secondary-50 "
+        size="3xl"
       >
         <ModalContent>
           {() => (
@@ -45,23 +52,30 @@ const A4page: React.FC = () => {
               <ModalHeader>
                 <div className="flex w-full justify-between pr-5 ">
                   <Text>{documentName}</Text>
-                  <Button size="sm" className="bg-primary-700 text-white">
-                    download
-                  </Button>
+                  <DownloadButton />
                 </div>
               </ModalHeader>
               <ModalBody className="h-svh w-fit">
                 <div>
-                  <div id="pagedjsdocroot" style={{ display: "none" }}>
-                    <ExamPaper
-                      varient="print"
-                      QuizFormHeaderDetails={QuizFormHeaderDetails}
-                      questionsSections={questionsSections}
-                      SectionQuestion={SectionQuestion}
-                    />
-                  </div>
-                  <div id="preview" className=""></div>
-                  <PrintPreview />
+                  <>
+                    <div id="pagedjsdocroot" style={{ display: "none" }}>
+                      <ExamPaper
+                        varient="print"
+                        QuizFormHeaderDetails={QuizFormHeaderDetails}
+                        questionsSections={questionsSections}
+                        SectionQuestion={SectionQuestion}
+                      />
+                    </div>
+                    <div
+                      id="preview"
+                      ref={pageRef}
+                      className={`${
+                        isDocumentLoaded &&
+                        "w-[390px] origin-top-left scale-50 opacity-100"
+                      } opacity-0`}
+                    ></div>
+                    <PrintPreview setIsDocumentLoaded={setIsDocumentLoaded} />
+                  </>
                 </div>
               </ModalBody>
             </>
