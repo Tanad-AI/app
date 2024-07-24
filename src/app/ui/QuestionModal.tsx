@@ -30,6 +30,7 @@ function QuestionsModal({
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={false}
+        disableAnimation
         isKeyboardDismissDisabled={true}
       >
         <ModalContent>

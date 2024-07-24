@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import htmlToImage, { toJpeg, toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { useQuizStore } from "@/app/store/QuizState";
+import { Button } from "@nextui-org/react";
 
 function DownloadButton() {
   const a4Page = useQuizStore((state: any) => state.a4Page);
@@ -31,7 +32,7 @@ function DownloadButton() {
     }
   };
 
-  return <div onClick={handleDownload}>DownloadButton</div>;
+  return <Button onClick={handleDownload}>Download</Button>;
 }
 
 export default DownloadButton;

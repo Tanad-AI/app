@@ -41,6 +41,7 @@ const A4page: React.FC = () => {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={true}
+        disableAnimation
         scrollBehavior="inside"
         placement="center"
         className=" w-fit  bg-secondary-50 "
