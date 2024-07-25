@@ -202,8 +202,14 @@ export const useQuizStore = create<any>((set: any) => ({
   a4Page: null,
 
   setA4Page: (element: HTMLDivElement) => {
-    set((state: any) => ({
+    set(() => ({
       a4Page: element,
+    }));
+  },
+  documentName: "Untitled document",
+  setDocumentName: (inputValue: string) => {
+    set(() => ({
+      documentName: inputValue,
     }));
   },
 }));

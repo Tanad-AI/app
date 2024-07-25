@@ -17,8 +17,8 @@ function QuestionsModal({
 }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  function handleSubmit(closeFunction: () => void) {
-    closeFunction();
+  function handleSubmit(closeModalFunction: () => void) {
+    closeModalFunction();
     handleAddingQuestions();
   }
   return (
