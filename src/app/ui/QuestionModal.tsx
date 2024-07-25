@@ -1,3 +1,4 @@
+import NumberInput from "@/components/NumberInput";
 import {
   Button,
   Input,
@@ -44,39 +45,31 @@ function QuestionsModal({
                   onSubmit={() => handleSubmit(onClose)}
                   className="grid grid-cols-2 gap-3"
                 >
-                  <Input
-                    labelPlacement="outside"
-                    variant="bordered"
+                  <NumberInput
+                    maxValue="400"
+                    minValue="0"
+                    onChange={handleQuestionsInputChange}
+                    value={numberOfQuestions.MCQs}
                     label="MSQs questions"
                     name="MCQs"
-                    placeholder="0"
-                    value={numberOfQuestions.MCQs}
-                    onChange={handleQuestionsInputChange}
-                    min={0}
-                    type="number"
-                  ></Input>
-                  <Input
-                    labelPlacement="outside"
-                    variant="bordered"
+                  />
+
+                  <NumberInput
+                    maxValue="400"
+                    minValue="0"
                     label="True or false questions"
-                    placeholder="0"
                     name="trueOrFalse"
                     value={numberOfQuestions.trueOrFalse}
                     onChange={handleQuestionsInputChange}
-                    min={0}
-                    type="number"
-                  ></Input>
-                  <Input
-                    labelPlacement="outside"
-                    variant="bordered"
+                  />
+                  <NumberInput
+                    maxValue="400"
+                    minValue="0"
                     label="Fill in the black questions"
-                    placeholder="0"
                     name="FillInTheBlank"
                     value={numberOfQuestions.FillInTheBlank}
                     onChange={handleQuestionsInputChange}
-                    min={0}
-                    type="number"
-                  ></Input>
+                  />
                 </form>
               </ModalBody>
               <ModalFooter>

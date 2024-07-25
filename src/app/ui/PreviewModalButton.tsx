@@ -40,7 +40,7 @@ const PreviewModalButton = () => {
         className="hidden md:flex"
         startContent={<Play size={16} />}
       >
-        Preview/Download
+        Preview/Download  
       </Button>
       <Button
         isIconOnly

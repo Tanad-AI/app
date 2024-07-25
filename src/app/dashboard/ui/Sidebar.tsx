@@ -1,8 +1,17 @@
 "use client";
 
 import React from "react";
-import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Select,
+  SelectItem,
+  Spacer,
+  Tab,
+  Tabs,
+} from "@nextui-org/react";
 import { SubHeader, Text } from "@/app/lib/TextComponents";
+import { Globe } from "lucide-react";
 
 function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
@@ -46,6 +55,22 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
             title="Customize"
           >
             <Text>Customize</Text>
+            <div className="flex w-full flex-col gap-3">
+              <Select
+                placeholder="Select an language"
+                labelPlacement="outside"
+                className="max-w-28"
+                selectorIcon={<Globe opacity={0.7} />}
+                defaultSelectedKeys={["english"]}
+              >
+                <SelectItem value="arabic" key={"arabic"}>
+                  arabic
+                </SelectItem>
+                <SelectItem value="english" key={"english"}>
+                  english
+                </SelectItem>
+              </Select>
+            </div>
           </Tab>
         </Tabs>
       </Card>

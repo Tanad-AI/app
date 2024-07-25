@@ -7,8 +7,8 @@ import { Globe } from "lucide-react";
 
 function CreatePageNavbar() {
   return (
-    <nav className="w-full flex justify-between items-center">
-      <section className="flex gap-1 items-center">
+    <nav className="flex w-full items-center justify-between">
+      <section className="flex items-center gap-1">
         <TanadLogo />
         <TinyText>Tanad AI</TinyText>
       </section>
