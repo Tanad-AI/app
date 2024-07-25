@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { toJpeg } from "html-to-image";
 import { jsPDF } from "jspdf";
-import { useQuizStore } from "../store/QuizState";
 
-const handleDocumentDownload = async () => {
+const handleDocumentDownload = async (documetName: string) => {
   const pages = document.querySelectorAll<HTMLElement>(".pagedjs_sheet");
-  const documetName = useQuizStore((state: any) => state.documetName);
+
   if (pages) {
     const pdf = new jsPDF();
 
