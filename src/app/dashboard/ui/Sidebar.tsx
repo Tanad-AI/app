@@ -4,14 +4,15 @@ import React from "react";
 import {
   Button,
   Card,
+  Divider,
   Select,
   SelectItem,
   Spacer,
   Tab,
   Tabs,
 } from "@nextui-org/react";
-import { SubHeader, Text } from "@/app/lib/TextComponents";
-import { Globe } from "lucide-react";
+import { Paragraph, SubHeader, Text } from "@/app/lib/TextComponents";
+import { AlignLeft, AlignRight, Globe } from "lucide-react";
 
 function sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
@@ -29,7 +30,6 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
           }}
         >
           <Tab key="content" className="flex flex-col" title="Content">
-            <Text>Content</Text>
             <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
               {controlsButtons.map((button, i) => (
@@ -49,27 +49,39 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
               ))}
             </div>
           </Tab>
-          <Tab
-            key="Customize"
-            className="flex flex-col rounded-none"
-            title="Customize"
-          >
-            <Text>Customize</Text>
+          <Tab key="Customize" className="flex flex-col" title="Customize">
+            <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
-              <Select
-                placeholder="Select an language"
-                labelPlacement="outside"
-                className="max-w-28"
-                selectorIcon={<Globe opacity={0.7} />}
-                defaultSelectedKeys={["english"]}
-              >
-                <SelectItem value="arabic" key={"arabic"}>
-                  arabic
-                </SelectItem>
-                <SelectItem value="english" key={"english"}>
-                  english
-                </SelectItem>
-              </Select>
+              <section className="space-y-2">
+                <Paragraph>Exam language</Paragraph>
+                <Select
+                  placeholder="Select an language"
+                  labelPlacement="outside"
+                  className="max-w-28"
+                  selectorIcon={<Globe opacity={0.7} />}
+                  defaultSelectedKeys={["english"]}
+                >
+                  <SelectItem value="arabic" key={"arabic"}>
+                    arabic
+                  </SelectItem>
+                  <SelectItem value="english" key={"english"}>
+                    english
+                  </SelectItem>
+                </Select>
+                <Divider />
+              </section>
+              <section className="space-y-2">
+                <Paragraph>Alignment</Paragraph>
+                <div className="space-x-3">
+                  <Button variant="faded" isIconOnly>
+                    <AlignLeft />
+                  </Button>
+                  <Button variant="faded" isIconOnly>
+                    <AlignRight />
+                  </Button>
+                </div>
+                <Divider />
+              </section>
             </div>
           </Tab>
         </Tabs>

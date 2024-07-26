@@ -26,7 +26,6 @@ function NumberInput({
   const setNumberOfQuestions = useQuizStore(
     (state: any) => state.setNumberOfQuestions,
   );
-  const [count, setCount] = useState(0);
   function handleCount(type: CountType) {
     if (type == "increment") {
       if (parseInt(value) >= parseInt(maxValue)) {
@@ -68,7 +67,7 @@ function NumberInput({
           variant="bordered"
         />
         <Button
-          isDisabled={count >= parseInt(maxValue)}
+          isDisabled={parseInt(value) >= parseInt(maxValue)}
           onClick={() => handleCount("increment")}
           isIconOnly
           color="secondary"
