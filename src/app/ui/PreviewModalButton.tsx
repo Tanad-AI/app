@@ -40,15 +40,16 @@ const PreviewModalButton = () => {
         className="hidden md:flex"
         startContent={<Play size={16} />}
       >
-        Preview/Download  
+        Preview/Download
       </Button>
       <Button
+        onClick={onOpen}
         isIconOnly
         size="sm"
         color="primary"
         className=" justify-between md:hidden lg:hidden"
       >
-        <FileDown className="mx-auto" size={16} />
+        <Play className="mx-auto" size={16} />
       </Button>
       <Modal
         isOpen={isOpen}
