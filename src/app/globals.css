@@ -11,6 +11,13 @@
   /* display: none; */
 }
 
+:root {
+  --pagedjs-margin-top: 12.5mm !important;
+  --pagedjs-margin-right: 12.5mm !important;
+  --pagedjs-margin-bottom: 12.5mm !important;
+  --pagedjs-margin-left: 12.5mm !important;
+}
+
 .__box {
   background-color: #ea580c1a;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='22' ry='22' stroke='%23EA580CFF' stroke-width='1' stroke-dasharray='6' stroke-dashoffset='33' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -63,11 +70,14 @@ td {
 }
 
 .pagedjs_page {
+  size: A4;
 }
 .pagedjs_sheet {
   background-color: white;
   border: 1px solid rgb(191, 191, 191);
   margin: 0;
+  width: 210mm;
+  height: 297mm;
 }
 
 @page {

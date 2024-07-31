@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useQuizStore } from "@/app/store/QuizState";
 import MCQsQuestion from "@/app/ui/MCQsQuestion";
 
 const ExamPaper = ({
@@ -14,6 +15,8 @@ const ExamPaper = ({
   varient: "print" | "normal";
   ref?: any;
 }) => {
+  const examLogo = useQuizStore((state) => state.examLogo);
+
   return (
     <div
       ref={ref}
@@ -26,12 +29,18 @@ const ExamPaper = ({
         <tbody>
           <tr>
             <td>{QuizFormHeaderDetails.country}</td>
-            <td className="items-center text-center" rowSpan={4}>
-              <img
-                className="mx-auto h-28 object-cover align-middle"
-                src="images/logo.png"
-                alt="logo goes here"
-              />
+            <td className="items-center p-3 text-center" rowSpan={4}>
+              {examLogo == "" ? (
+                <div className="flex h-full items-center justify-center ">
+                  logo goes here
+                </div>
+              ) : (
+                <img
+                  className="mx-auto h-28  object-cover align-middle"
+                  src={examLogo}
+                  alt="logo goes here"
+                />
+              )}
             </td>
             <td>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</td>
           </tr>

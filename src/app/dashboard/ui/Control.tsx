@@ -12,7 +12,7 @@ interface ControlProps {
 
 const Control = ({ activeControlView }: ControlProps) => {
   return (
-    <div className="w-full overflow-y-scroll pb-20">
+    <div className="hidden w-full overflow-y-scroll pb-20 md:block">
       {currentView[activeControlView]}
     </div>
   );

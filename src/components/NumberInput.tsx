@@ -26,6 +26,7 @@ function NumberInput({
   const setNumberOfQuestions = useQuizStore(
     (state: any) => state.setNumberOfQuestions,
   );
+  const [isDecrementBtnDisabled, setIsDecrementBtnDisabled] = useState(true);
   function handleCount(type: CountType) {
     if (type == "increment") {
       if (parseInt(value) >= parseInt(maxValue)) {
@@ -36,11 +37,13 @@ function NumberInput({
     }
     if (type == "decrement") {
       if (parseInt(value) <= parseInt(minValue)) {
+        setIsDecrementBtnDisabled(true);
         setNumberOfQuestions({ [name]: 0 });
       } else {
         setNumberOfQuestions({ [name]: +value - 1 });
       }
     }
+    setIsDecrementBtnDisabled(false);
   }
 
   return (
@@ -48,7 +51,9 @@ function NumberInput({
       <Text className="font-normal">{label}</Text>
       <div className="flex items-end space-x-1">
         <Button
-          isDisabled={parseInt(value) <= parseInt(minValue)}
+          isDisabled={
+            isDecrementBtnDisabled || parseInt(value) <= parseInt(minValue)
+          }
           onClick={() => handleCount("decrement")}
           isIconOnly
           variant="bordered"

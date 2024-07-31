@@ -1,9 +1,22 @@
-import React, { ReactComponentElement } from "react";
+import React from "react";
 import { Text, TinyText } from "../lib/TextComponents";
 import { Card, Spacer } from "@nextui-org/react";
 import ControlAccordion from "./ControlAccordion";
 
-const headerInfo = [
+interface HeaderInfoType {
+  label: string;
+  name: string;
+  content: HeaderContentType[];
+}
+type HeaderContentType = {
+  label: string;
+  placeholder: string;
+  type: string;
+  name: string;
+  required?: boolean;
+};
+
+const headerInfo: HeaderInfoType[] = [
   {
     label: "Instatute Details",
     name: "instatuteDetails",

@@ -6,7 +6,7 @@ import Control from "./ui/Control";
 import A4page from "./ui/A4page";
 
 const page = () => {
-  const [activeControlView, setActiveControlView] = useState<number>(0);
+  const [activeControlView, setActiveControlView] = useState<number>(1);
   return (
     <div className=" flex h-[100svh] w-full justify-between gap-3 overflow-y-hidden pb-5">
       <Sidebar

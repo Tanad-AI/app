@@ -1,7 +1,6 @@
 import NumberInput from "@/components/NumberInput";
 import {
   Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,

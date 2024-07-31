@@ -5,16 +5,70 @@ import {
   SectionsData,
 } from "../types/document-elements.types";
 
-type HeaderStore = {
-  sections: any;
-  setQuestionText: any;
+interface Question {
+  text: string;
+  marks: string;
+}
+interface SectionQuestionType {
+  MCQs: Question;
+  trueOrFalse: Question;
+  FillInTheBlank: Question;
+}
+type storeType = {
+  sections: SectionsData[];
+  setQuestionText: (
+    sectionIndex: number,
+    questionIndex: number,
+    question: string,
+  ) => void;
   QuizFormHeaderDetails: QuizHeaderFormDataType;
   handleInputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  QuestionsSections: SectionsData[];
+  questionsSections: SectionsData[];
+  numberOfQuestions: {
+    MCQs: string;
+    trueOrFalse: string;
+    FillInTheBlank: string;
+  };
+  setNumberOfQuestions: (newCounts: {
+    MCQs?: string;
+    trueOrFalse?: string;
+    FillInTheBlank?: string;
+  }) => void;
+  addQuestions: (
+    mcqsQuestion: any,
+    otherQuestions: any,
+    TOrFQuestion: any,
+  ) => void;
+  setQuestionsText: (
+    sectionIndex: number,
+    questionIndex: number,
+    question: string,
+  ) => void;
+  setChoicesText: (
+    newChoiceText: string,
+    sectionIndex: number,
+    questionIndex: number,
+    choiceIndex: number,
+  ) => void;
+  SectionQuestion: SectionQuestionType;
+  setSectionQuestion: (
+    sectionName: keyof SectionQuestionType,
+    questionText: string,
+    field: keyof Question,
+  ) => void;
+  setNewQuestions: (newQuestions: any, sectionIndex: number) => void;
+  a4Page: HTMLDivElement | null;
+  setA4Page: (element: HTMLDivElement) => void;
+  documentName: string;
+  setDocumentName: (inputValue: string) => void;
+  examLogo: string;
+  setExamLogo: (image: string) => void;
 };
 
-export const useQuizStore = create<any>((set: any) => ({
-  //initial state
+export const useQuizStore = create<storeType>((set) => ({
+  // initial state
+  sections: [],
+  setQuestionText: () => {}, // Provide a dummy implementation or the actual one
   QuizFormHeaderDetails: {
     subject: "",
     termSemester: "",
@@ -29,12 +83,12 @@ export const useQuizStore = create<any>((set: any) => ({
     countryDepartmentName: "",
     stateDepartmentName: "",
     teacherName: "",
-    logo: [],
+    logo: null,
   },
-  handleInputsChange: (event: { target: { name: string; value: string } }) => {
+  handleInputsChange: (event) => {
     const { name, value } = event.target;
     // set function
-    set((state: HeaderStore) => ({
+    set((state) => ({
       ...state,
       QuizFormHeaderDetails: {
         ...state.QuizFormHeaderDetails,
@@ -43,30 +97,29 @@ export const useQuizStore = create<any>((set: any) => ({
     }));
   },
   questionsSections: [
-    { name: "MCQs", title: "MCQs", added: false, questions: [] },
+    { name: "MCQs", title: "MCQs", added: false, questions: [], id: "" },
     {
       name: "trueOrFalse",
       title: "True or false",
       added: false,
       questions: [],
+      id: "",
     },
     {
       name: "FillInTheBlank",
       title: "Fill in the blank",
       added: false,
       questions: [],
+      id: "",
     },
   ],
-
   numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
-
-  setNumberOfQuestions: (newCounts: any) =>
-    set((state: any) => ({
+  setNumberOfQuestions: (newCounts) =>
+    set((state) => ({
       numberOfQuestions: { ...state.numberOfQuestions, ...newCounts },
     })),
-
-  addQuestions: (mcqsQuestion: any, otherQuestions: any, TOrFQuestion: any) =>
-    set((state: any) => {
+  addQuestions: (mcqsQuestion, otherQuestions, TOrFQuestion) =>
+    set((state) => {
       const updatedSections = [...state.questionsSections];
       const { MCQs, trueOrFalse, FillInTheBlank } = state.numberOfQuestions;
 
@@ -94,13 +147,8 @@ export const useQuizStore = create<any>((set: any) => ({
         numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
       };
     }),
-
-  setQuestionsText: (
-    sectionIndex: number,
-    questionIndex: number,
-    question: string,
-  ) =>
-    set((state: any) => {
+  setQuestionsText: (sectionIndex, questionIndex, question) =>
+    set((state) => {
       // Create a copy of the current questionsSections state
       const updatedQuestionsSections = [...state.questionsSections];
 
@@ -124,14 +172,8 @@ export const useQuizStore = create<any>((set: any) => ({
       // Return the new state
       return { questionsSections: updatedQuestionsSections };
     }),
-
-  setChoicesText: (
-    newChoiceText: string,
-    sectionIndex: number,
-    questionIndex: number,
-    choiceIndex: number,
-  ) =>
-    set((state: any) => {
+  setChoicesText: (newChoiceText, sectionIndex, questionIndex, choiceIndex) =>
+    set((state) => {
       // Create a copy of the current questionsSections state
       const updatedQuestionsSections = [...state.questionsSections];
 
@@ -178,12 +220,8 @@ export const useQuizStore = create<any>((set: any) => ({
       marks: "",
     },
   },
-  setSectionQuestion: (
-    sectionName: string,
-    questionText: string,
-    field: "text" | "marks",
-  ) =>
-    set((state: any) => ({
+  setSectionQuestion: (sectionName, questionText, field) =>
+    set((state) => ({
       ...state,
       SectionQuestion: {
         ...state.SectionQuestion,
@@ -192,24 +230,28 @@ export const useQuizStore = create<any>((set: any) => ({
         },
       },
     })),
-  setNewQuestions: (newQuestions: any, sectionIndex: number) =>
-    set((state: any) => {
+  setNewQuestions: (newQuestions, sectionIndex) =>
+    set((state) => {
       const updatedQuestions = [...state.questionsSections];
       updatedQuestions[sectionIndex].questions = newQuestions;
       return { questionsSections: updatedQuestions };
     }),
-
   a4Page: null,
-
-  setA4Page: (element: HTMLDivElement) => {
+  setA4Page: (element) => {
     set(() => ({
       a4Page: element,
     }));
   },
   documentName: "Untitled document",
-  setDocumentName: (inputValue: string) => {
+  setDocumentName: (inputValue) => {
     set(() => ({
       documentName: inputValue,
+    }));
+  },
+  examLogo: "",
+  setExamLogo: (image: string) => {
+    set((state) => ({
+      examLogo: image,
     }));
   },
 }));
