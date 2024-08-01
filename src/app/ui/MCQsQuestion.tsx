@@ -9,7 +9,7 @@ type MCQsQuestionType = {
 const MCQsQuestion = ({ index, questionText, Choices }: MCQsQuestionType) => {
   return (
     <div className="grid grid-cols-24 border-[1px] border-black">
-      <div className="flex items-center justify-center border-l-[1px] border-black ">
+      <div className="flex items-center justify-center border-e-[1px] border-black ">
         <h6>{index}</h6>
       </div>
       <div className="col-span-23 grid grid-cols-subgrid grid-rows-2  border-black">
@@ -35,7 +35,7 @@ function Choice({ index, choiceText }: ChoiceType) {
 
   return (
     <div className="grid w-full grid-cols-20 border-[1px] border-b-0 border-r-0 border-black  ">
-      <div className="col-span-2 border-l-[1px] border-black text-center">
+      <div className="col-span-2 border-e-[1px] border-black text-center">
         <h6>{letters[index]}</h6>
       </div>
       <div className="col-span-18 h-fit  grid-cols-subgrid text-wrap px-2 ">

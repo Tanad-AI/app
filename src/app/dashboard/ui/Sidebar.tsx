@@ -11,11 +11,14 @@ import {
   Tab,
   Tabs,
 } from "@nextui-org/react";
-import { Paragraph, SubHeader, Text } from "@/app/lib/TextComponents";
+import { Paragraph, Text } from "@/app/lib/TextComponents";
 import { AlignLeft, AlignRight, Globe } from "lucide-react";
+import { useQuizStore } from "@/app/store/QuizState";
 
-function sidebar({ activeControlView, setActiveControlView }: any) {
+function Sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];
+  const setExamDirection = useQuizStore((state) => state.setExamDirection);
+  const examDirection = useQuizStore((state) => state.examDirection);
   return (
     <div className="hidden  min-w-[260px] flex-col space-y-2 md:block   lg:w-[28%]">
       <Text>Control</Text>
@@ -73,11 +76,35 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
               <section className="space-y-2">
                 <Paragraph>Alignment</Paragraph>
                 <div className="space-x-3">
-                  <Button variant="faded" isIconOnly>
-                    <AlignLeft />
+                  <Button
+                    onPress={() => setExamDirection("ltr")}
+                    className={`${
+                      examDirection == "ltr" && "stronke-red-200 bg-gray-300"
+                    }`}
+                    variant="flat"
+                    isIconOnly
+                  >
+                    <AlignLeft
+                      className={`${
+                        examDirection == "ltr"
+                          ? "stroke-black"
+                          : "stroke-slate-400 opacity-75"
+                      }`}
+                    />
                   </Button>
-                  <Button variant="faded" isIconOnly>
-                    <AlignRight />
+                  <Button
+                    onPress={() => setExamDirection("rtl")}
+                    className={`${examDirection == "rtl" && "bg-gray-300 "}`}
+                    variant="flat"
+                    isIconOnly
+                  >
+                    <AlignRight
+                      className={`${
+                        examDirection == "rtl"
+                          ? "stroke-black"
+                          : "stroke-slate-400 opacity-75"
+                      }`}
+                    />
                   </Button>
                 </div>
                 <Divider />
@@ -90,4 +117,4 @@ function sidebar({ activeControlView, setActiveControlView }: any) {
   );
 }
 
-export default sidebar;
+export default Sidebar;

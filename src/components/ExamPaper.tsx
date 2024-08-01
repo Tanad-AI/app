@@ -16,71 +16,99 @@ const ExamPaper = ({
   ref?: any;
 }) => {
   const examLogo = useQuizStore((state) => state.examLogo);
+  const examDirection = useQuizStore((state) => state.examDirection);
 
   return (
     <div
       ref={ref}
-      dir="rtl"
+      dir={examDirection}
       className={`__a4-page  flex  flex-col gap-5 bg-white ${
         varient == "normal" && "min-h-[297mm] w-[210mm] p-[20mm] "
       } `}
     >
-      <table className="__table-border w-full">
-        <tbody>
-          <tr>
-            <td>{QuizFormHeaderDetails.country}</td>
-            <td className="items-center p-3 text-center" rowSpan={4}>
-              {examLogo == "" ? (
-                <div className="flex h-full items-center justify-center ">
-                  logo goes here
-                </div>
-              ) : (
-                <img
-                  className="mx-auto h-28  object-cover align-middle"
-                  src={examLogo}
-                  alt="logo goes here"
-                />
-              )}
-            </td>
-            <td>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</td>
-          </tr>
-          <tr>
-            <td>{QuizFormHeaderDetails.countryDepartmentName}</td>
-            <td>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</td>
-          </tr>
-          <tr>
-            <td>{QuizFormHeaderDetails.stateDepartmentName}</td>
-            <td>الزمن: {QuizFormHeaderDetails.durationInHours}</td>
-          </tr>
-          <tr>
-            <td>{QuizFormHeaderDetails.instatuteName}</td>
-            <td>عدد الصفحات:</td>
-          </tr>
-          <tr>
-            <td colSpan={3}>
-              <span>
-                اختبار الفصل الدراسي
-                <span> {QuizFormHeaderDetails.termSemester} </span>
-                لمادة
-                <span> {QuizFormHeaderDetails.subject} </span>
-                (الفترة الأولى) للصف
-                <span> {QuizFormHeaderDetails.class} </span>
-                للعام الدراسي 1445هـ
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td colSpan={3}>
-              <span>
-                اسم
-                الطالب..........................................................
-              </span>
-              {"    "}
-              <span> رقم الجلوس............................</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {/* <div className="grid w-full grid-cols-3 border-[1px]">
+        <div>
+          <div>{QuizFormHeaderDetails.country}</div>
+          <div className="items-center p-3 text-center">
+            {examLogo == "" ? (
+              <div className="flex h-full items-center justify-center ">
+                logo goes here
+              </div>
+            ) : (
+              <img
+                className="mx-auto h-28  object-cover align-middle"
+                src={examLogo}
+                alt="logo goes here"
+              />
+            )}
+          </div>
+          <div>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</div>
+        </div>
+        <div>
+          <div>{QuizFormHeaderDetails.countryDepartmentName}</div>
+          <div>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</div>
+        </div>
+        <div>
+          <div>{QuizFormHeaderDetails.stateDepartmentName}</div>
+          <div>الزمن: {QuizFormHeaderDetails.durationInHours}</div>
+        </div>
+        <div>
+          <div>{QuizFormHeaderDetails.instatuteName}</div>
+          <div>عدد الصفحات:</div>
+        </div>
+        <div>
+          <div>
+            <span>
+              اختبار الفصل الدراسي
+              <span> {QuizFormHeaderDetails.termSemester} </span>
+              لمادة
+              <span> {QuizFormHeaderDetails.subject} </span>
+              (الفترة الأولى) للصف
+              <span> {QuizFormHeaderDetails.class} </span>
+              للعام الدراسي 1445هـ
+            </span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span>
+              اسم
+              الطالب..........................................................
+            </span>
+            {"    "}
+            <span> رقم الجلوس............................</span>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="grid w-full grid-cols-3 border-[1px] border-black">
+        <section>
+          <div>{QuizFormHeaderDetails.country}</div>
+          <div>{QuizFormHeaderDetails.countryDepartmentName}</div>
+          <div>{QuizFormHeaderDetails.stateDepartmentName}</div>
+          <div>{QuizFormHeaderDetails.instatuteName}</div>
+        </section>
+        <section>
+          <div className="items-center p-3 text-center">
+            {examLogo == "" ? (
+              <div className="flex h-full items-center justify-center ">
+                logo goes here
+              </div>
+            ) : (
+              <img
+                className="mx-auto h-28  object-cover align-middle"
+                src={examLogo}
+                alt="logo goes here"
+              />
+            )}
+          </div>
+        </section>
+        <section>
+          <div>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</div>
+          <div>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</div>
+          <div>الزمن: {QuizFormHeaderDetails.durationInHours}</div>
+        </section>
+      </div>
 
       {questionsSections.map(
         (section: any) =>

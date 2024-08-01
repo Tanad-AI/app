@@ -29,16 +29,19 @@ type storeType = {
     trueOrFalse: string;
     FillInTheBlank: string;
   };
+
   setNumberOfQuestions: (newCounts: {
     MCQs?: string;
     trueOrFalse?: string;
     FillInTheBlank?: string;
   }) => void;
+
   addQuestions: (
     mcqsQuestion: any,
     otherQuestions: any,
     TOrFQuestion: any,
   ) => void;
+
   setQuestionsText: (
     sectionIndex: number,
     questionIndex: number,
@@ -63,6 +66,8 @@ type storeType = {
   setDocumentName: (inputValue: string) => void;
   examLogo: string;
   setExamLogo: (image: string) => void;
+  examDirection: "ltr" | "rtl";
+  setExamDirection: (direction: "ltr" | "rtl") => void;
 };
 
 export const useQuizStore = create<storeType>((set) => ({
@@ -249,9 +254,15 @@ export const useQuizStore = create<storeType>((set) => ({
     }));
   },
   examLogo: "",
-  setExamLogo: (image: string) => {
-    set((state) => ({
+  setExamLogo: (image) => {
+    set(() => ({
       examLogo: image,
+    }));
+  },
+  examDirection: "ltr",
+  setExamDirection: (direction) => {
+    set(() => ({
+      examDirection: direction,
     }));
   },
 }));
