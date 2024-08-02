@@ -18,6 +18,41 @@ const ExamPaper = ({
   const examLogo = useQuizStore((state) => state.examLogo);
   const examDirection = useQuizStore((state) => state.examDirection);
 
+  const {
+    country,
+    countryDepartmentName,
+    stateDepartmentName,
+    instatuteName,
+    dayOfTheExam,
+    dateOfTheExam,
+    durationInHours,
+  } = QuizFormHeaderDetails;
+
+  const instatuteInfo = [
+    country,
+    countryDepartmentName,
+    stateDepartmentName,
+    instatuteName,
+  ];
+  const examDetailsInfo = [
+    {
+      title: "اليوم",
+      text: dayOfTheExam,
+    },
+    {
+      title: "التاريخ",
+      text: dateOfTheExam,
+    },
+    {
+      title: "الزمن",
+      text: durationInHours,
+    },
+    {
+      title: "عدد الصفحات",
+      text: "",
+    },
+  ];
+
   return (
     <div
       ref={ref}
@@ -26,37 +61,48 @@ const ExamPaper = ({
         varient == "normal" && "min-h-[297mm] w-[210mm] p-[20mm] "
       } `}
     >
-      {/* <div className="grid w-full grid-cols-3 border-[1px]">
-        <div>
-          <div>{QuizFormHeaderDetails.country}</div>
+      <div className="grid  w-full grid-cols-3  border-[1px] border-black">
+        <section className="border-e-[1px] border-black">
+          {instatuteInfo.map((info, i) => {
+            return (
+              info && (
+                <div
+                  key={i}
+                  className="h-6 border-b-[1px] border-black ps-2 last:border-none"
+                >
+                  {info}
+                </div>
+              )
+            );
+          })}
+        </section>
+        <section className="border-e-[1px] border-black">
           <div className="items-center p-3 text-center">
             {examLogo == "" ? (
-              <div className="flex h-full items-center justify-center ">
+              <div className="flex  items-center justify-center ">
                 logo goes here
               </div>
             ) : (
               <img
-                className="mx-auto h-28  object-cover align-middle"
+                className="mx-auto max-h-16  object-cover align-middle"
                 src={examLogo}
                 alt="logo goes here"
               />
             )}
           </div>
-          <div>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</div>
-        </div>
-        <div>
-          <div>{QuizFormHeaderDetails.countryDepartmentName}</div>
-          <div>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</div>
-        </div>
-        <div>
-          <div>{QuizFormHeaderDetails.stateDepartmentName}</div>
-          <div>الزمن: {QuizFormHeaderDetails.durationInHours}</div>
-        </div>
-        <div>
-          <div>{QuizFormHeaderDetails.instatuteName}</div>
-          <div>عدد الصفحات:</div>
-        </div>
-        <div>
+        </section>
+        <section className="">
+          {examDetailsInfo.map((info, i) => {
+            return (
+              info && (
+                <div className="h-6 border-b-[1px] border-black ps-2 last:border-none">
+                  {info.title}: {info.text}
+                </div>
+              )
+            );
+          })}
+        </section>
+        <section className="col-span-3 border-y-[1px] border-black ps-2">
           <div>
             <span>
               اختبار الفصل الدراسي
@@ -68,8 +114,8 @@ const ExamPaper = ({
               للعام الدراسي 1445هـ
             </span>
           </div>
-        </div>
-        <div>
+        </section>
+        <section className="col-span-3 ps-2">
           <div>
             <span>
               اسم
@@ -78,35 +124,6 @@ const ExamPaper = ({
             {"    "}
             <span> رقم الجلوس............................</span>
           </div>
-        </div>
-      </div> */}
-
-      <div className="grid w-full grid-cols-3 border-[1px] border-black">
-        <section>
-          <div>{QuizFormHeaderDetails.country}</div>
-          <div>{QuizFormHeaderDetails.countryDepartmentName}</div>
-          <div>{QuizFormHeaderDetails.stateDepartmentName}</div>
-          <div>{QuizFormHeaderDetails.instatuteName}</div>
-        </section>
-        <section>
-          <div className="items-center p-3 text-center">
-            {examLogo == "" ? (
-              <div className="flex h-full items-center justify-center ">
-                logo goes here
-              </div>
-            ) : (
-              <img
-                className="mx-auto h-28  object-cover align-middle"
-                src={examLogo}
-                alt="logo goes here"
-              />
-            )}
-          </div>
-        </section>
-        <section>
-          <div>اليوم: {QuizFormHeaderDetails.dayOfTheExam}</div>
-          <div>التاريخ: {QuizFormHeaderDetails.dateOfTheExam}</div>
-          <div>الزمن: {QuizFormHeaderDetails.durationInHours}</div>
         </section>
       </div>
 
