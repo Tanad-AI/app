@@ -1,5 +1,5 @@
-import { Text } from "@/app/lib/TextComponents";
-import { useQuizStore } from "@/app/store/QuizState";
+import { Text } from "@/app/[local]/lib/TextComponents";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
 import { Button, Input } from "@nextui-org/react";
 import { Minus, Plus } from "lucide-react";
 import React, { ChangeEventHandler, useState } from "react";

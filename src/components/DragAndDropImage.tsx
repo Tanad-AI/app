@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useQuizStore } from "@/app/store/QuizState";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 

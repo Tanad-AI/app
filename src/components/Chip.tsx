@@ -1,4 +1,4 @@
-import { TinyText } from "@/app/lib/TextComponents";
+import { TinyText } from "@/app/[local]/lib/TextComponents";
 import React from "react";
 
 export default function Chip({}) {

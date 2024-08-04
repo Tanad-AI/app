@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { useQuizStore } from "@/app/store/QuizState";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
 import { Play } from "lucide-react";
-import { Text } from "@/app/lib/TextComponents";
+import { Text } from "@/app/[local]/lib/TextComponents";
 import {
   Modal,
   ModalBody,

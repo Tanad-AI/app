@@ -29,8 +29,39 @@ import InViewAnimationBoundry from "@/components/InViewAnimationBoundry";
 import { cn } from "@/lib/utils";
 import GridPattern from "@/components/GridPattern";
 import WordRotate from "@/components/WordRotate";
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+
+function TryNowButton() {
+  const t = useTranslations("NavBar");
+  const pathName = usePathname();
+
+  return (
+    <Link href={`${pathName}/dashboard`}>
+      <Button color="primary" radius="sm" size="lg">
+        {t("tryNow")}
+      </Button>
+    </Link>
+  );
+}
+
+function SignUpButton() {
+  const t = useTranslations("NavBar");
+  return (
+    <Link href="#">
+      <Button
+        className="border-3 border-black/15 bg-primary-900 text-white"
+        radius="sm"
+      >
+        {t("signUp")}
+      </Button>
+    </Link>
+  );
+}
 
 function page() {
+  const t = useTranslations("Home");
+
   const scrollAnimationVarients = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -94,54 +125,43 @@ function page() {
       <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
         <section className="relative h-svh pt-6">
           <div className="relative z-50">
-            <NavBar />
+            <NavBar t={t} />
           </div>
           <section className="relative flex h-[87%] items-center justify-center  ">
             <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
                 <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
                   <Sparkles size={12} />
-                  SOON
+                  {t("banner.title")}
                 </div>
-                <div>AI Powered Tool</div>
+                <div>{t("banner.subtitle")}</div>
               </div>
               <div className="relative flex flex-col space-y-2">
                 <Header className="text-balance">
-                  The best way to write your
-                  <WordRotate
-                    words={[
-                      "exams",
-                      "worksheets",
-                      "quizzes",
-                      "survey",
-                      "tests",
-                    ]}
-                  />
+                  {t("banner.description")}
+                  <WordRotate words={t.raw("banner.features")} />
                 </Header>
-                <Paragraph>
-                  Revolutionize your assessment creation process with AI:
-                  effortlessly turn screenshots into print-ready exams
-                </Paragraph>
+                <Paragraph>{t("banner.highlight")}</Paragraph>
               </div>
               <div className="gap-2">
-                <Link href="/dashboard">
+                <Link href="dashboard">
                   <Button radius="sm" color="primary">
-                    Get Started
+                    {t("banner.cta_button")}
                   </Button>
                 </Link>
               </div>
               <div className="flex gap-4">
                 <span className="flex items-center gap-1">
                   <Check size={16} className="stroke-primary" />
-                  <Paragraph>Try for free</Paragraph>
+                  <Paragraph>{t.raw("banner.notes")[0]}</Paragraph>
                 </span>
                 <span className="flex items-center gap-1">
                   <Check size={16} className="stroke-primary" />
-                  <Paragraph>No credit card required</Paragraph>
+                  <Paragraph>{t.raw("banner.notes")[1]}</Paragraph>
                 </span>
                 <span className="flex items-center gap-1">
                   <Check size={16} className="stroke-primary" />
-                  <Paragraph>AI Powered</Paragraph>
+                  <Paragraph>{t.raw("banner.notes")[2]}</Paragraph>
                 </span>
               </div>
             </InViewAnimationBoundry>
@@ -159,22 +179,18 @@ function page() {
         <section className="mx-auto -mt-36 flex h-svh w-full flex-col items-center space-y-14 px-32">
           <InViewAnimationBoundry className="flex w-full items-center justify-between">
             <div className="w-3/5 space-y-2 ">
-              <Chip2>TUTORIAL</Chip2>
+              <Chip2>{t("sections.tutorial.subtitle")}</Chip2>
               <div>
-                <SubHeader>How does Tanad work?</SubHeader>
-                <Paragraph>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Assumenda quae inventore ipsa nemo vel. Enim odio quisquam
-                  laborum porro architecto?
-                </Paragraph>
+                <SubHeader>{t("sections.tutorial.description")}</SubHeader>
+                <Paragraph>{t("sections.tutorial.content")}</Paragraph>
               </div>
             </div>
             <div className="flex flex-col items-center space-y-1">
               <Button color="primary" radius="sm" size="lg">
-                Try Now
+                {t("sections.tutorial.cta_button.text")}
               </Button>
               <TinyText className="text-foreground/80">
-                it&apos;s absolutly free
+                {t("sections.tutorial.cta_button.note")}{" "}
               </TinyText>
             </div>
           </InViewAnimationBoundry>
@@ -188,78 +204,48 @@ function page() {
             whileInView={{ opacity: 1 }}
             className="flex w-full justify-center"
           >
-            <Chip2>BENEFITS</Chip2>
+            <Chip2>{t("sections.benefits.title")}</Chip2>
           </motion.div>
-          <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
-            <InViewAnimationBoundry
-              delay={0.4}
-              className="h-96 w-full bg-slate-500"
-            ></InViewAnimationBoundry>
-            <div className="space-y-3">
-              <SectionHeader>Convert Screenshot to Exams</SectionHeader>
-              <Paragraph>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
-                veritatis unde officia beatae in enim temporibus expedita
-                pariatur! Laboriosam, officiis?
-              </Paragraph>
-              <Button color="primary" radius="sm" size="lg">
-                Try Now
-              </Button>
-            </div>
-          </InViewAnimationBoundry>
-          <InViewAnimationBoundry
-            dir="rtl"
-            className=" grid grid-cols-2 gap-36"
-          >
-            <InViewAnimationBoundry
-              delay={0.4}
-              className="h-96 w-full bg-slate-500"
-            ></InViewAnimationBoundry>
-            <div dir="ltr" className=" space-y-3">
-              <SectionHeader>Edit Existing Exams</SectionHeader>
-              <Paragraph>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
-                veritatis unde officia beatae in enim temporibus expedita
-                pariatur! Laboriosam, officiis?
-              </Paragraph>
-              <Button color="primary" radius="sm" size="lg">
-                Try Now
-              </Button>
-            </div>
-          </InViewAnimationBoundry>
-          <InViewAnimationBoundry className="ltr grid grid-cols-2 gap-36">
-            <InViewAnimationBoundry
-              delay={0.4}
-              className="h-96 w-full bg-slate-500"
-            ></InViewAnimationBoundry>
-            <div className="space-y-3">
-              <SectionHeader>Save Time</SectionHeader>
-              <Paragraph>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo
-                veritatis unde officia beatae in enim temporibus expedita
-                pariatur! Laboriosam, officiis?
-              </Paragraph>
-              <Button color="primary" radius="sm" size="lg">
-                Try Now
-              </Button>
-            </div>
-          </InViewAnimationBoundry>
+          {t
+            .raw("sections.benefits.items")
+            .map((item: { title: string; description: string }, i: number) => {
+              let dir: "ltr" | "rtl" = "ltr";
+              if (i % 2 != 0) {
+                dir = "rtl";
+              } else dir = "ltr";
+              return (
+                <>
+                  <InViewAnimationBoundry
+                    dir={dir}
+                    className="ltr grid grid-cols-2 gap-36"
+                  >
+                    <InViewAnimationBoundry
+                      delay={0.4}
+                      className="h-96 w-full bg-slate-500"
+                    ></InViewAnimationBoundry>
+                    <div dir="ltr" className="space-y-3">
+                      <SectionHeader>{item.title}</SectionHeader>
+                      <Paragraph>{item.description}</Paragraph>
+                      <TryNowButton />
+                    </div>
+                  </InViewAnimationBoundry>
+                </>
+              );
+            })}
         </section>
         <section>
           <div className="relative flex  items-start justify-between ">
             <InViewAnimationBoundry className="sticky bottom-60 w-[48%] space-y-3 self-end">
-              <Chip2>FEATURES</Chip2>
+              <Chip2>{t("sections.features.title")}</Chip2>
 
               <SectionHeader className="balanced sticky">
-                Crafting an Exam Has Never Been Easier
+                {t("sections.features.header")}
               </SectionHeader>
               <Paragraph className="balanced">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Officia et nisi quo libero sunt veniam praesentium modi
-                similique voluptatibus obcaecati?
+                {t("sections.features.paragraph")}
               </Paragraph>
               <Button color="primary" radius="sm" size="lg">
-                Get Started
+                {t("banner.cta_button")}
               </Button>
             </InViewAnimationBoundry>
 
@@ -279,8 +265,12 @@ function page() {
                   <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
                     {feature.icon}
                   </div>
-                  <SubHeader>{feature.title}</SubHeader>
-                  <Paragraph>{feature.paragraph}</Paragraph>
+                  <SubHeader>
+                    {t.raw("sections.features.items")[i].title}
+                  </SubHeader>
+                  <Paragraph>
+                    {t.raw("sections.features.items")[i].description}
+                  </Paragraph>
                 </Card>
               ))}
             </motion.div>
@@ -288,19 +278,12 @@ function page() {
         </section>
       </main>
       <section className="mt-14 flex flex-col items-center space-y-6 bg-primary-700 py-32">
-        <SectionHeader className="text-white">
-          Craft Your Exams Pain Free Now
-        </SectionHeader>
+        <SectionHeader className="text-white">{t("footer.cta")}</SectionHeader>
         <div className="space-x-6">
           <Button className="border-3 border-black/15 bg-white" radius="sm">
-            Get Started
+            {t("banner.cta_button")}{" "}
           </Button>
-          <Button
-            className="border-3 border-black/15 bg-primary-900 text-white"
-            radius="sm"
-          >
-            Sign Up
-          </Button>
+          <SignUpButton />
         </div>
       </section>
       <footer className="bg-primary-900 pb-8 pt-32 text-white">
@@ -308,13 +291,13 @@ function page() {
           <div className="flex items-center justify-between">
             <div className=" flex items-center gap-2">
               <TanadLogo />
-              <Text className="">Tanad AI</Text>
+              <Text className="">{t("tanad")}</Text>
             </div>
-            <Text>Made with 💚</Text>
+            <Text>{t("footer.note")}</Text>
           </div>
           <Divider className="bg-white/20" />
           <Paragraph className="text-white/70">
-            © Copyright 2024, All Rights Reserved by Tanad AI
+            {t("footer.copyright")}
           </Paragraph>
         </div>
       </footer>
@@ -324,27 +307,17 @@ function page() {
 
 export default page;
 
-function NavBar({}) {
+function NavBar({ t }: { t: any }) {
   return (
     <nav className="flex grow-0 items-center justify-between">
       <div className="flex items-center gap-2">
         <TanadLogo />
-        <Text>Tanad AI</Text>
+        <Text>{t("tanad")}</Text>
       </div>
       <div></div>
       <div className="flex gap-6">
-        <Button
-          radius="sm"
-          variant="solid"
-          className="bg-white font-normal shadow-md"
-        >
-          Sign up
-        </Button>
-        <Link href="/dashboard">
-          <Button radius="sm" color="primary" className="__classic_effect">
-            Try now!
-          </Button>
-        </Link>
+        <SignUpButton />
+        <TryNowButton />
       </div>
     </nav>
   );

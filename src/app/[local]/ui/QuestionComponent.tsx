@@ -51,11 +51,11 @@ const TOrFQuestion: QuestionType = {
   placeholder: "enter a question",
   choices: [
     {
-      choiceText: "",
+      choiceText: "صحيح",
       isTrue: false,
     },
     {
-      choiceText: "",
+      choiceText: "خطأ",
       isTrue: false,
     },
   ],

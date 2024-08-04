@@ -29,7 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/assets/index.tsz",
-    "src/app/create/page.jsx",
+    "src/app/[local]/create/page.jsx",
     "src/components/PrintPreview.jsx"
   ],
   "exclude": ["node_modules"]

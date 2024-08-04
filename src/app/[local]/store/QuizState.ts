@@ -259,7 +259,7 @@ export const useQuizStore = create<storeType>((set) => ({
       examLogo: image,
     }));
   },
-  examDirection: "ltr",
+  examDirection: "rtl",
   setExamDirection: (direction) => {
     set(() => ({
       examDirection: direction,

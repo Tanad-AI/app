@@ -1,5 +1,5 @@
 "use client";
-import { Paragraph, Text, TinyText } from "@/app/lib/TextComponents";
+import { Paragraph, Text, TinyText } from "@/app/[local]/lib/TextComponents";
 import { TanadLogo } from "@/assets";
 import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";

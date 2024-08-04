@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-key */
 "use client";
 import React from "react";
-import QuestionsComponent from "@/app/ui/QuestionComponent";
-import DocumentHeader from "@/app/ui/DocumentHeader";
+import QuestionsComponent from "@/app/[local]/ui/QuestionComponent";
+import DocumentHeader from "@/app/[local]/ui/DocumentHeader";
 
 const currentView = [<DocumentHeader />, <QuestionsComponent />];
 

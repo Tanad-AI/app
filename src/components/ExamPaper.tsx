@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { useQuizStore } from "@/app/store/QuizState";
-import MCQsQuestion from "@/app/ui/MCQsQuestion";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
+import MCQsQuestion from "@/app/[local]/ui/MCQsQuestion";
 
 const ExamPaper = ({
   QuizFormHeaderDetails,

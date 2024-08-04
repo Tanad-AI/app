@@ -11,9 +11,9 @@ import {
   Tab,
   Tabs,
 } from "@nextui-org/react";
-import { Paragraph, Text } from "@/app/lib/TextComponents";
+import { Paragraph, Text } from "@/app/[local]/lib/TextComponents";
 import { AlignLeft, AlignRight, Globe } from "lucide-react";
-import { useQuizStore } from "@/app/store/QuizState";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
 
 function Sidebar({ activeControlView, setActiveControlView }: any) {
   const controlsButtons = ["header", "questions", "footer"];

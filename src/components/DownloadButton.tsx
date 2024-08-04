@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@nextui-org/react";
-import handleDocumentDownload from "@/app/lib/handleDocumentDownload";
+import handleDocumentDownload from "@/app/[local]/lib/handleDocumentDownload";
 import { FileDown } from "lucide-react";
-import { useQuizStore } from "@/app/store/QuizState";
+import { useQuizStore } from "@/app/[local]/store/QuizState";
 
 function DownloadButton({ disabled }: { disabled: boolean }) {
   const documentName = useQuizStore((state: any) => state.documentName);
