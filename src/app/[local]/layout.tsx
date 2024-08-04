@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/react";
 
 const darkereGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default async function RootLayout({
       <body className={darkereGrotesque.className}>
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>
+          <Analytics />
         </NextIntlClientProvider>
       </body>
     </html>
