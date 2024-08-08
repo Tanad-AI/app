@@ -1,7 +1,7 @@
 {
   "NavBar": {
-    "signUp": "Sign up",
-    "tryNow": "Try now"
+    "signUp": "Sign Up",
+    "tryNow": "Try Now"
   },
   "Home": {
     "tanad": "Tanad AI",
@@ -79,5 +79,53 @@
       "note": "Made with 💚",
       "copyright": "© Copyright 2024, All Rights Reserved by Tanad AI"
     }
+  },
+  "Create": {
+    "control": "Control",
+    "content": "Content",
+    "customize": "Customize",
+    "header": "Header",
+    "questions": "Questions",
+    "questionsDuplicate": "Questions",
+    "footer": "Footer",
+    "examLanguage": "Exam Language",
+    "english": "English",
+    "arabic": "Arabic",
+    "alignment": "Alignment",
+    "questionsTitle": "Questions",
+    "addQuestions": "Add Questions",
+    "mcqQuestions": "MCQ Questions",
+    "fillInTheBlankQuestions": "Fill in the Blank Questions",
+    "trueFalseQuestions": "True or False Questions",
+    "add": "Add",
+    "close": "Close",
+    "clickToEnterQuestion": "Click to Enter a Question",
+    "enterYourQuestions": "Enter your Question",
+    "choice": "Choice",
+    "true": "True",
+    "false": "false",
+    "addChoice": "Add Choice...",
+    "setAsTrue": "Set as True",
+    "deleteQuestion": "Delete Question",
+    "untitledDocument": "Untitled Document",
+    "previewDownload": "Preview/Download",
+    "previewPdf": "Preview how your pages will appear in PDF format here.",
+    "download": "Download",
+    "loadingPreview": "Loading Preview"
+  },
+  "examPaper": {
+    "day": "day",
+    "date": "date",
+    "time": "time",
+    "pages": "No. of Pages",
+    "logoPlaceHolder": "logo goes here",
+    "examTitle": "examination paper for",
+    "studentName": "Name",
+    "studentId": "Student No",
+    "MCQSectionQuestion": "Choose the correct answer for each question below.",
+    "FillInTheBlankSectionQuestion": "Fill in the blanks.",
+    "TrueOrFalseSectionQuestion": "Determine if the following statements are True or False.",
+    "true": "true",
+    "false": "false"
   }
 }

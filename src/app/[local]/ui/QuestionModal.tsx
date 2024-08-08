@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { PlusIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 function QuestionsModal({
   numberOfQuestions,
@@ -16,6 +17,7 @@ function QuestionsModal({
   handleQuestionsInputChange,
 }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const t = useTranslations("Create");
 
   function handleSubmit(closeModalFunction: () => void) {
     closeModalFunction();
@@ -24,7 +26,7 @@ function QuestionsModal({
   return (
     <>
       <Button onPress={onOpen} color="primary" size="sm">
-        <PlusIcon size={16} /> Add Questions
+        <PlusIcon size={16} /> {t("addQuestions")}
       </Button>
       <Modal
         isOpen={isOpen}
@@ -37,7 +39,7 @@ function QuestionsModal({
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Add Questions
+                {t("addQuestions")}
               </ModalHeader>
               <ModalBody>
                 <form
@@ -49,14 +51,14 @@ function QuestionsModal({
                     minValue="0"
                     onChange={handleQuestionsInputChange}
                     value={numberOfQuestions.MCQs}
-                    label="MSQs questions"
+                    label={t("mcqQuestions")}
                     name="MCQs"
                   />
 
                   <NumberInput
                     maxValue="400"
                     minValue="0"
-                    label="True or false questions"
+                    label={t("trueFalseQuestions")}
                     name="trueOrFalse"
                     value={numberOfQuestions.trueOrFalse}
                     onChange={handleQuestionsInputChange}
@@ -64,7 +66,7 @@ function QuestionsModal({
                   <NumberInput
                     maxValue="400"
                     minValue="0"
-                    label="Fill in the black questions"
+                    label={t("fillInTheBlankQuestions")}
                     name="FillInTheBlank"
                     value={numberOfQuestions.FillInTheBlank}
                     onChange={handleQuestionsInputChange}
@@ -73,14 +75,14 @@ function QuestionsModal({
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  {t("close")}
                 </Button>
                 <Button
                   color="primary"
                   type="submit"
                   onClick={() => handleSubmit(onClose)}
                 >
-                  Add
+                  {t("add")}
                 </Button>
               </ModalFooter>
             </>

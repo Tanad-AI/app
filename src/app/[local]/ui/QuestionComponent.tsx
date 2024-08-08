@@ -13,60 +13,9 @@ import CustomAccordion from "./CustomAccordion";
 import { Trash } from "lucide-react";
 import { useQuizStore } from "../store/QuizState";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  choiceType,
-  QuestionType,
-  SectionsData,
-} from "../types/document-elements.types";
+import { choiceType, QuestionType } from "../types/document-elements.types";
 import QuestionsModal from "./QuestionModal";
-
-const msqsQuestion: QuestionType = {
-  id: "",
-  questionText: "",
-  answer: "",
-  placeholder: "enter a question",
-  choices: [
-    {
-      choiceText: "",
-      isTrue: false,
-    },
-    {
-      choiceText: "",
-      isTrue: false,
-    },
-    {
-      choiceText: "",
-      isTrue: false,
-    },
-    {
-      choiceText: "",
-      isTrue: true,
-    },
-  ],
-};
-const TOrFQuestion: QuestionType = {
-  id: "",
-  questionText: "",
-  answer: "",
-  placeholder: "enter a question",
-  choices: [
-    {
-      choiceText: "صحيح",
-      isTrue: false,
-    },
-    {
-      choiceText: "خطأ",
-      isTrue: false,
-    },
-  ],
-};
-const otherQuestion: QuestionType = {
-  id: "",
-  questionText: "",
-  answer: "",
-  placeholder: "enter a question",
-  choices: [],
-};
+import { useTranslations } from "next-intl";
 
 function QuestionsComponent() {
   const {
@@ -80,7 +29,56 @@ function QuestionsComponent() {
     setSectionQuestion,
     setNewQuestions,
   } = useQuizStore();
+  const t = useTranslations("Create");
+
   const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
+  const msqsQuestion: QuestionType = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: true,
+      },
+    ],
+  };
+  const TOrFQuestion: QuestionType = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [
+      {
+        choiceText: t("true"),
+        isTrue: false,
+      },
+      {
+        choiceText: t("false"),
+        isTrue: false,
+      },
+    ],
+  };
+  const otherQuestion: QuestionType = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [],
+  };
 
   const handleQuestionsInputChange = (e: {
     target: { name: string; value: string };
@@ -114,7 +112,7 @@ function QuestionsComponent() {
   return (
     <div className="flex flex-col gap-2">
       <section className="flex items-baseline gap-1">
-        <Text>Questions</Text>
+        <Text>{t("questions")}</Text>
       </section>
       <Card
         radius="sm"
@@ -142,7 +140,7 @@ function QuestionsComponent() {
                       <div className="flex items-baseline gap-2">
                         <Text>{section.title}</Text>
                         <TinyText>
-                          {section.questions.length} questions
+                          {section.questions.length} {t("questionsDuplicate")}
                         </TinyText>
                       </div>
                       <div>
@@ -194,7 +192,7 @@ function QuestionsComponent() {
                                 index={i + 1}
                                 title={
                                   question.questionText == ""
-                                    ? "Click to enter a question"
+                                    ? t("clickToEnterQuestion")
                                     : question.questionText
                                 }
                               >
@@ -204,7 +202,7 @@ function QuestionsComponent() {
                                       size="sm"
                                       radius="sm"
                                       delay={100}
-                                      content="Delete Question"
+                                      content={t("deleteQuestion")}
                                     >
                                       <Button
                                         isIconOnly
@@ -228,7 +226,7 @@ function QuestionsComponent() {
                                   <section>
                                     <Textarea
                                       variant="bordered"
-                                      placeholder="Enter your Question"
+                                      placeholder={question.placeholder}
                                       value={question.questionText}
                                       onChange={(e) =>
                                         handleQuestionTextareaChange(
@@ -253,8 +251,10 @@ function QuestionsComponent() {
                                             <Input
                                               variant="bordered"
                                               labelPlacement="outside"
-                                              label={`Choice ${idx + 1}`}
-                                              placeholder="Add choice..."
+                                              label={`${t("choice")} ${
+                                                idx + 1
+                                              }`}
+                                              placeholder={choice.choiceText}
                                               onChange={(e) =>
                                                 setChoicesText(
                                                   e.target.value,
@@ -265,7 +265,9 @@ function QuestionsComponent() {
                                               }
                                             ></Input>
 
-                                            <Checkbox>set as true</Checkbox>
+                                            <Checkbox>
+                                              {t("setAsTrue")}
+                                            </Checkbox>
                                           </div>
                                         ),
                                       )}

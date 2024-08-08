@@ -71,6 +71,13 @@ const config: Config = {
               DEFAULT: "#FFDFCF",
             },
           },
+          layout: {
+            radius: {
+              small: "6px",
+              medium: "10px",
+              large: "16px",
+            },
+          },
         },
       },
     }),

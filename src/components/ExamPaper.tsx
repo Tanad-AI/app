@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import MCQsQuestion from "@/app/[local]/ui/MCQsQuestion";
+import examLanguage from "@/lib/examLanguage";
+import { usePathname } from "next/navigation";
 
 const ExamPaper = ({
   QuizFormHeaderDetails,
@@ -17,6 +19,8 @@ const ExamPaper = ({
 }) => {
   const examLogo = useQuizStore((state) => state.examLogo);
   const examDirection = useQuizStore((state) => state.examDirection);
+  const pathName = usePathname();
+  const language: "en" | "ar" = pathName.slice(1, 3);
 
   const {
     country,
@@ -36,19 +40,19 @@ const ExamPaper = ({
   ];
   const examDetailsInfo = [
     {
-      title: "اليوم",
+      title: examLanguage[language].day,
       text: dayOfTheExam,
     },
     {
-      title: "التاريخ",
+      title: examLanguage[language].date,
       text: dateOfTheExam,
     },
     {
-      title: "الزمن",
+      title: examLanguage[language].time,
       text: durationInHours,
     },
     {
-      title: "عدد الصفحات",
+      title: examLanguage[language].pages,
       text: "",
     },
   ];
@@ -80,13 +84,13 @@ const ExamPaper = ({
           <div className="items-center p-3 text-center">
             {examLogo == "" ? (
               <div className="flex  items-center justify-center ">
-                logo goes here
+                {examLanguage[language].logoPlaceHolder}
               </div>
             ) : (
               <img
                 className="mx-auto max-h-16  object-cover align-middle"
                 src={examLogo}
-                alt="logo goes here"
+                alt={examLanguage[language].logoPlaceHolder}
               />
             )}
           </div>
@@ -118,11 +122,14 @@ const ExamPaper = ({
         <section className="col-span-3 ps-2">
           <div>
             <span>
-              اسم
-              الطالب..........................................................
+              {examLanguage[language].studentName}
+              .........................................................
             </span>
             {"    "}
-            <span> رقم الجلوس............................</span>
+            <span>
+              {" "}
+              {examLanguage[language].studentId}............................
+            </span>
           </div>
         </section>
       </div>

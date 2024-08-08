@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { create } from "zustand";
 import { createId } from "@paralleldrive/cuid2";
 import {
   QuizHeaderFormDataType,
   SectionsData,
 } from "../types/document-elements.types";
+import { useTranslations } from "next-intl";
 
 interface Question {
   text: string;
@@ -69,7 +71,6 @@ type storeType = {
   examDirection: "ltr" | "rtl";
   setExamDirection: (direction: "ltr" | "rtl") => void;
 };
-
 export const useQuizStore = create<storeType>((set) => ({
   // initial state
   sections: [],

@@ -13,7 +13,10 @@ import {
 import { Button, Card, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import {
+  ArrowRight,
+  ArrowRightCircle,
   Check,
+  ChevronRight,
   Hammer,
   Landmark,
   PiggyBank,
@@ -32,25 +35,66 @@ import WordRotate from "@/components/WordRotate";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-function TryNowButton() {
+function TryNowButton({
+  type,
+  theme,
+}: {
+  type?: "primary";
+  theme?: "dark" | "light";
+}) {
   const t = useTranslations("NavBar");
   const pathName = usePathname();
-
+  const arrow = {
+    initial: { x: 0 },
+    animate: { x: 6 },
+  };
   return (
-    <Link href={`${pathName}/dashboard`}>
-      <Button color="primary" radius="sm" size="lg">
-        {t("tryNow")}
-      </Button>
-    </Link>
+    <>
+      {type === "primary" ? (
+        <Link href={`${pathName}/dashboard`}>
+          <motion.button
+            initial="initial"
+            animate="initial"
+            whileHover="animate"
+            className={`flex w-44 items-center justify-center gap-2 rounded-md  ${
+              theme == "light"
+                ? "border-[1px] border-black/15 bg-white text-black"
+                : " border-3 border-black/15 bg-primary text-white "
+            }`}
+          >
+            <div>{t("tryNow")}</div>
+            <motion.div variants={arrow}>
+              <ChevronRight color="white" size={16} />
+            </motion.div>
+          </motion.button>
+        </Link>
+      ) : (
+        <Link href={`${pathName}/dashboard`}>
+          <Button
+            className={`${
+              theme == "light" ? "bg-white" : "bg-primary text-white"
+            }`}
+            radius="sm"
+            size="md"
+          >
+            {t("tryNow")}
+          </Button>
+        </Link>
+      )}
+    </>
   );
 }
 
-function SignUpButton() {
+function SignUpButton({ theme }: { theme?: "dark" | "light" }) {
   const t = useTranslations("NavBar");
   return (
     <Link href="#">
       <Button
-        className="border-3 border-black/15 bg-primary-900 text-white"
+        className={` ${
+          theme == "dark"
+            ? " border-3 border-black/15 bg-primary-900 text-white "
+            : "border-[1px] border-black/15 bg-white text-black"
+        }`}
         radius="sm"
       >
         {t("signUp")}
@@ -127,7 +171,7 @@ function page() {
           <div className="relative z-50">
             <NavBar t={t} />
           </div>
-          <section className="relative flex h-[87%] items-center justify-center  ">
+          <section className="relative mt-20 flex h-[87%] items-center justify-center  ">
             <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
                 <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
@@ -144,11 +188,7 @@ function page() {
                 <Paragraph>{t("banner.highlight")}</Paragraph>
               </div>
               <div className="gap-2">
-                <Link href="dashboard">
-                  <Button radius="sm" color="primary">
-                    {t("banner.cta_button")}
-                  </Button>
-                </Link>
+                <TryNowButton type="primary" />
               </div>
               <div className="flex gap-4">
                 <span className="flex items-center gap-1">
@@ -185,10 +225,8 @@ function page() {
                 <Paragraph>{t("sections.tutorial.content")}</Paragraph>
               </div>
             </div>
-            <div className="flex flex-col items-center space-y-1">
-              <Button color="primary" radius="sm" size="lg">
-                {t("sections.tutorial.cta_button.text")}
-              </Button>
+            <div className="flex flex-col items-center gap-1">
+              <TryNowButton />
               <TinyText className="text-foreground/80">
                 {t("sections.tutorial.cta_button.note")}{" "}
               </TinyText>
@@ -223,7 +261,7 @@ function page() {
                       delay={0.4}
                       className="h-96 w-full bg-slate-500"
                     ></InViewAnimationBoundry>
-                    <div dir="ltr" className="space-y-3">
+                    <div dir="ltr" className="flex flex-col gap-3">
                       <SectionHeader>{item.title}</SectionHeader>
                       <Paragraph>{item.description}</Paragraph>
                       <TryNowButton />
@@ -235,7 +273,7 @@ function page() {
         </section>
         <section>
           <div className="relative flex  items-start justify-between ">
-            <InViewAnimationBoundry className="sticky bottom-60 w-[48%] space-y-3 self-end">
+            <InViewAnimationBoundry className="sticky bottom-60 flex w-[48%] flex-col gap-3 self-end">
               <Chip2>{t("sections.features.title")}</Chip2>
 
               <SectionHeader className="balanced sticky">
@@ -244,9 +282,7 @@ function page() {
               <Paragraph className="balanced">
                 {t("sections.features.paragraph")}
               </Paragraph>
-              <Button color="primary" radius="sm" size="lg">
-                {t("banner.cta_button")}
-              </Button>
+              <TryNowButton />
             </InViewAnimationBoundry>
 
             <motion.div
@@ -280,10 +316,8 @@ function page() {
       <section className="mt-14 flex flex-col items-center space-y-6 bg-primary-700 py-32">
         <SectionHeader className="text-white">{t("footer.cta")}</SectionHeader>
         <div className="space-x-6">
-          <Button className="border-3 border-black/15 bg-white" radius="sm">
-            {t("banner.cta_button")}{" "}
-          </Button>
-          <SignUpButton />
+          <TryNowButton theme="light" />
+          <SignUpButton theme="dark" />
         </div>
       </section>
       <footer className="bg-primary-900 pb-8 pt-32 text-white">

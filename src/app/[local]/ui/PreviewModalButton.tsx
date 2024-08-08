@@ -16,6 +16,7 @@ import ExamPaper from "@/components/ExamPaper";
 import PrintPreview from "@/components/PrintPreview";
 import { useQuizStore } from "../store/QuizState";
 import { FileDown, Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const PreviewModalButton = () => {
   const QuizFormHeaderDetails = useQuizStore(
@@ -30,6 +31,7 @@ const PreviewModalButton = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isDocumentLoaded, setIsDocumentLoaded] = useState(false);
   const documentName = useQuizStore((state: any) => state.documentName);
+  const t = useTranslations("Create");
 
   return (
     <>
@@ -40,8 +42,9 @@ const PreviewModalButton = () => {
         className="hidden md:flex"
         startContent={<Play size={16} />}
       >
-        Preview/Download
+        {t("previewDownload")}
       </Button>
+
       <Button
         onClick={onOpen}
         isIconOnly
@@ -69,7 +72,7 @@ const PreviewModalButton = () => {
                   <div className="w-3/4">
                     <Text>{documentName}</Text>
                     <TinyText className="font-normal text-gray-600">
-                      Preview how your pages will appear in PDF format here.
+                      {t("previewPdf")}
                     </TinyText>
                   </div>
                   <DownloadButton disabled={isDocumentLoaded} />
@@ -84,7 +87,7 @@ const PreviewModalButton = () => {
                       <div className="flex flex-col items-center gap-2">
                         <Spinner />
                         <Paragraph className="text-primary-700">
-                          Loading Preview
+                          {t("loadingPreview")}
                         </Paragraph>
                       </div>
                     </div>

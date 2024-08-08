@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TinyText } from "../lib/TextComponents";
 import { Card, Spacer } from "@nextui-org/react";
 import ControlAccordion from "./ControlAccordion";
+import { useTranslations } from "next-intl";
 
 interface HeaderInfoType {
   label: string;
@@ -124,11 +125,11 @@ const headerInfo: HeaderInfoType[] = [
 ];
 
 const DocumentHeader = () => {
+  const t = useTranslations("Create");
   return (
     <div className="h-full">
       <div className="flex cursor-pointer items-baseline gap-1">
-        <Text>Header</Text>
-        <TinyText>3 sections</TinyText>
+        <Text>{t("header")}</Text>
       </div>
       <Spacer y={2} />
       <Card

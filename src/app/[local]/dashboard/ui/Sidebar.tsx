@@ -14,14 +14,17 @@ import {
 import { Paragraph, Text } from "@/app/[local]/lib/TextComponents";
 import { AlignLeft, AlignRight, Globe } from "lucide-react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
+import { useTranslations } from "next-intl";
 
 function Sidebar({ activeControlView, setActiveControlView }: any) {
-  const controlsButtons = ["header", "questions", "footer"];
+  const t = useTranslations("Create");
+  const controlsButtons = [t("header"), t("questions"), t("footer")];
   const setExamDirection = useQuizStore((state) => state.setExamDirection);
   const examDirection = useQuizStore((state) => state.examDirection);
+
   return (
     <div className="hidden  min-w-[260px] flex-col space-y-2 md:block   lg:w-[28%]">
-      <Text>Control</Text>
+      <Text>{t("control")}</Text>
       <Card radius="sm" className=" px-6 py-3 shadow-sm ">
         <Tabs
           color="primary"
@@ -32,7 +35,7 @@ function Sidebar({ activeControlView, setActiveControlView }: any) {
             cursor: "rounded-none p-0",
           }}
         >
-          <Tab key="content" className="flex flex-col" title="Content">
+          <Tab key="content" className="flex flex-col" title={t("content")}>
             <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
               {controlsButtons.map((button, i) => (
@@ -52,11 +55,11 @@ function Sidebar({ activeControlView, setActiveControlView }: any) {
               ))}
             </div>
           </Tab>
-          <Tab key="Customize" className="flex flex-col" title="Customize">
+          <Tab key="Customize" className="flex flex-col" title={t("customize")}>
             <Spacer y={3} />
             <div className="flex w-full flex-col gap-3">
               <section className="space-y-2">
-                <Paragraph>Exam language</Paragraph>
+                <Paragraph>{t("examLanguage")}</Paragraph>
                 <Select
                   placeholder="Select an language"
                   labelPlacement="outside"
@@ -65,16 +68,16 @@ function Sidebar({ activeControlView, setActiveControlView }: any) {
                   defaultSelectedKeys={["english"]}
                 >
                   <SelectItem value="arabic" key={"arabic"}>
-                    arabic
+                    {t("arabic")}
                   </SelectItem>
                   <SelectItem value="english" key={"english"}>
-                    english
+                    {t("english")}
                   </SelectItem>
                 </Select>
                 <Divider />
               </section>
               <section className="space-y-2">
-                <Paragraph>Alignment</Paragraph>
+                <Paragraph>{t("alignment")}</Paragraph>
                 <div className="space-x-3">
                   <Button
                     onPress={() => setExamDirection("ltr")}
