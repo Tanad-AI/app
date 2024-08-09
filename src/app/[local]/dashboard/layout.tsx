@@ -1,6 +1,5 @@
-import { AbstractPattern } from "@/assets/";
-import DashboardNav from "./ui/DashboardNav";
-import { Spacer } from "@nextui-org/react";
+import { TanadLogo } from "@/assets";
+import { Home } from "lucide-react";
 
 export default function DashboardLayout({
   children,
@@ -8,15 +7,22 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="  relative z-0 flex max-h-[100svh] w-full flex-col gap-3 overflow-hidden    bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]  px-6 py-3">
-      <div className="container mx-auto">
-        <div className="-z-10 ">
-          <DashboardNav />
-          <Spacer y={3} />
-          {children}
+    <div className="container mx-auto flex">
+      <div className="flex h-svh w-[22%] flex-col gap-16  border-e-[1px] border-slate-300 bg-white px-6 py-3">
+        <div className="flex items-center gap-1">
+          <TanadLogo /> Tanad AI
         </div>
-        <AbstractPattern className="absolute -top-14 left-0 -z-20  h-screen w-screen opacity-65 mix-blend-darken" />
+        <div>
+          <ul>
+            <li className="flex items-center gap-2 rounded-sm bg-primary-800/10 px-3 py-1 font-medium  text-primary">
+              <Home size={16} />
+              Home
+            </li>
+          </ul>
+        </div>
+        <div></div>
       </div>
-    </section>
+      {children}
+    </div>
   );
 }

@@ -19,8 +19,8 @@ const ExamPaper = ({
 }) => {
   const examLogo = useQuizStore((state) => state.examLogo);
   const examDirection = useQuizStore((state) => state.examDirection);
-  const pathName = usePathname();
-  const language: "en" | "ar" = pathName.slice(1, 3);
+  const pathName = usePathname().slice(1, 3);
+  const language: "en" | "ar" = pathName as "en" | "ar";
 
   const {
     country,

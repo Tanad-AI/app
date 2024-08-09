@@ -32,7 +32,7 @@ export const SectionHeader = ({ children, className }: TextProps) => {
 };
 
 export const SubHeader = ({ children, className }: TextProps) => {
-  return <h3 className={`text-2xl  font-medium ${className}`}>{children}</h3>;
+  return <h3 className={`text-xl  font-medium ${className}`}>{children}</h3>;
 };
 
 export const Text = ({ children, className }: TextProps) => {

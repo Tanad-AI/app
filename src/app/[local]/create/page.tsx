@@ -1,0 +1,22 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
+import React, { useState } from "react";
+import Sidebar from "./ui/Sidebar";
+import Control from "./ui/Control";
+import A4page from "./ui/A4page";
+
+const page = () => {
+  const [activeControlView, setActiveControlView] = useState<number>(1);
+  return (
+    <div className=" flex h-[100svh] w-full justify-between gap-3 overflow-y-hidden pb-5">
+      <Sidebar
+        activeControlView={activeControlView}
+        setActiveControlView={setActiveControlView}
+      />
+      <Control activeControlView={activeControlView} />
+      <A4page />
+    </div>
+  );
+};
+
+export default page;
