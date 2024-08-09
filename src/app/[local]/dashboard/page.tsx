@@ -18,7 +18,9 @@ function page() {
         <div>
           <Input
             className="w-96"
-            size="sm"
+            size="md"
+            radius="sm"
+            labelPlacement="outside"
             variant="bordered"
             startContent={<Search size={20} color="gray" />}
             placeholder="Search for your documents here"

@@ -59,7 +59,7 @@ function TryNowButton({
             className={`flex w-44 items-center justify-center gap-2 rounded-md  ${
               theme == "light"
                 ? "border-[1px] border-black/15 bg-white text-black"
-                : " border-3 border-black/15 bg-primary text-white "
+                : "  border-black/15 bg-primary text-white "
             }`}
           >
             <div>{t("tryNow")}</div>

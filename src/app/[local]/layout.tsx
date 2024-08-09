@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Rubik } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";
@@ -7,7 +7,7 @@ import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 
-const darkereGrotesque = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
 });
 const AR_rubik = Rubik({
@@ -28,7 +28,7 @@ export default async function RootLayout({
 }) {
   const messages = await getMessages();
   const lang = cookies().get("NEXT_LOCALE")?.value;
-  let font = lang === "en" ? darkereGrotesque : AR_rubik;
+  let font = lang === "en" ? inter : AR_rubik;
 
   return (
     <html lang={locale} className="light">
