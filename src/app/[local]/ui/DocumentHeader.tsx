@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Text, TinyText } from "../lib/TextComponents";
-import { Button, Card, Input, Spacer, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Divider,
+  Input,
+  Spacer,
+  Tooltip,
+} from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { X, ArrowUp, ArrowDown, Trash2 } from "lucide-react";
+import { ArrowUp, ArrowDown, Trash2 } from "lucide-react";
 import { useExamHeaderStore } from "../store/HeaderStore";
 import autoAnimate from "@formkit/auto-animate";
 
@@ -20,11 +27,13 @@ const InputFieldsList = ({
   handleDelete,
   handleMoveUp,
   handleMoveDown,
+  setFieldsFunction,
 }: {
   fields: InputField[];
   handleDelete: (field: InputField) => void;
   handleMoveUp: (field: InputField) => void;
   handleMoveDown: (field: InputField) => void;
+  setFieldsFunction: "teacher" | "students";
 }) => {
   const parent = useRef(null);
 
@@ -41,17 +50,29 @@ const InputFieldsList = ({
             variant="bordered"
             label={field.title}
             value={field.inputValue}
-            onChange={(e) =>
-              useExamHeaderStore
-                .getState()
-                .setTeacherInputs(
-                  fields.map((input) =>
-                    input.name === field.name
-                      ? { ...input, inputValue: e.target.value }
-                      : input,
-                  ),
-                )
-            }
+            onChange={(e) => {
+              if (setFieldsFunction == "teacher") {
+                useExamHeaderStore
+                  .getState()
+                  .setTeacherInputs(
+                    fields.map((input) =>
+                      input.name === field.name
+                        ? { ...input, inputValue: e.target.value }
+                        : input,
+                    ),
+                  );
+              } else {
+                useExamHeaderStore
+                  .getState()
+                  .setStudentInputs(
+                    fields.map((input) =>
+                      input.name === field.name
+                        ? { ...input, inputValue: e.target.value }
+                        : input,
+                    ),
+                  );
+              }
+            }}
             labelPlacement="outside"
             endContent={
               <Tooltip content="Remove Field" size="sm" delay={400}>
@@ -65,12 +86,12 @@ const InputFieldsList = ({
             }
             placeholder={field.placeholder_text}
           />
-          <div className="flex h-full flex-col  items-center gap-2 ">
+          <div className="flex h-full flex-col  items-center">
             <Button
               isDisabled={i == 0}
               isIconOnly
               size="sm"
-              variant="ghost"
+              variant="light"
               className="cursor-pointer"
               onClick={() => handleMoveUp(field)}
             >
@@ -80,7 +101,7 @@ const InputFieldsList = ({
               isDisabled={i == fields.length - 1}
               isIconOnly
               size="sm"
-              variant="ghost"
+              variant="light"
               className="cursor-pointer"
               onClick={() => handleMoveDown(field)}
             >
@@ -99,23 +120,25 @@ const AddMoreFields = ({
 }: {
   fields: InputField[];
   handleAdd: (field: InputField) => void;
-}) => (
-  <div className="flex flex-wrap gap-2">
-    {fields.map((field) => (
-      <div key={field.name}>
-        <Button
-          onClick={() => handleAdd(field)}
-          variant="faded"
-          color="primary"
-          size="sm"
-          className="rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
-        >
-          {field.title}
-        </Button>
-      </div>
-    ))}
-  </div>
-);
+}) => {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {fields.map((field) => (
+        <div key={field.name}>
+          <Button
+            onClick={() => handleAdd(field)}
+            variant="faded"
+            color="primary"
+            size="sm"
+            className="rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
+          >
+            {field.title}
+          </Button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const DocumentHeader = () => {
   const t = useTranslations("Create");
@@ -131,7 +154,11 @@ const DocumentHeader = () => {
     removeStudentField,
     moveFieldUp,
     moveFieldDown,
+    setTeacherInputs,
+    setStudentInputs,
   } = useExamHeaderStore();
+
+  console.log(teacherButtons.length);
 
   return (
     <div className="h-full">
@@ -152,18 +179,32 @@ const DocumentHeader = () => {
           handleDelete={(field) => removeTeacherField(field)}
           handleMoveUp={(field) => moveFieldUp(field, true)}
           handleMoveDown={(field) => moveFieldDown(field, true)}
+          setFieldsFunction="teacher"
         />
 
         <Spacer y={3} />
-        <TinyText className="mb-2 text-gray-500">+ Add more fields</TinyText>
+        {teacherButtons.length != 0 ? (
+          <TinyText className="mb-2 text-gray-500">+ Add more fields</TinyText>
+        ) : (
+          <TinyText className="mb-2 text-gray-500">
+            All fields are added
+          </TinyText>
+        )}
         <AddMoreFields
           fields={teacherButtons}
           handleAdd={(field) => addTeacherField(field)}
         />
 
         <Spacer y={2} />
-        {studentInputs.length !== 0 && (
-          <TinyText className="text-gray-500">Student information</TinyText>
+        <Divider />
+        <Spacer y={2} />
+        {studentInputs.length != 0 && (
+          <>
+            <TinyText className="">Student information</TinyText>
+            <TinyText className="text-gray-500">
+              The student should fill these fields
+            </TinyText>
+          </>
         )}
         <Spacer y={2} />
         <InputFieldsList
@@ -171,10 +212,15 @@ const DocumentHeader = () => {
           handleDelete={(field) => removeStudentField(field)}
           handleMoveUp={(field) => moveFieldUp(field, false)}
           handleMoveDown={(field) => moveFieldDown(field, false)}
+          setFieldsFunction="students"
         />
         <Spacer y={3} />
-        {studentButtons.length !== 0 && (
+        {studentButtons.length !== 0 ? (
           <TinyText className="mb-2 text-gray-500">+ Add more fields</TinyText>
+        ) : (
+          <TinyText className="mb-2 text-gray-500">
+            All fields are added
+          </TinyText>
         )}
         <AddMoreFields
           fields={studentButtons}
