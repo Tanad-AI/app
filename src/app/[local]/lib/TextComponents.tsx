@@ -52,7 +52,7 @@ export const Paragraph = ({ children, className }: TextProps) => {
   const font = lang == "ar" ? rubik : inter;
   return (
     <p
-      className={`text-sm font-medium  text-gray-500 ${className} ${font.className}`}
+      className={`text-sm font-normal  text-gray-500 ${className} ${font.className}`}
     >
       {children}
     </p>

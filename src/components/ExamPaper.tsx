@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useExamHeaderStore } from "@/app/[local]/store/HeaderStore";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import MCQsQuestion from "@/app/[local]/ui/MCQsQuestion";
 import examLanguage from "@/lib/examLanguage";
@@ -21,6 +22,7 @@ const ExamPaper = ({
   const examDirection = useQuizStore((state) => state.examDirection);
   const pathName = usePathname().slice(1, 3);
   const language: "en" | "ar" = pathName as "en" | "ar";
+  const teacherInputs = useExamHeaderStore((state) => state.teacherInputs);
 
   const {
     country,
@@ -32,12 +34,6 @@ const ExamPaper = ({
     durationInHours,
   } = QuizFormHeaderDetails;
 
-  const instatuteInfo = [
-    country,
-    countryDepartmentName,
-    stateDepartmentName,
-    instatuteName,
-  ];
   const examDetailsInfo = [
     {
       title: examLanguage[language].day,
@@ -67,14 +63,14 @@ const ExamPaper = ({
     >
       <div className="grid  w-full grid-cols-3  border-[1px] border-black">
         <section className="border-e-[1px] border-black">
-          {instatuteInfo.map((info, i) => {
+          {teacherInputs.map((input, i) => {
             return (
-              info && (
+              input.inputValue && (
                 <div
                   key={i}
                   className="h-6 border-b-[1px] border-black ps-2 last:border-none"
                 >
-                  {info}
+                  {input.inputValue}
                 </div>
               )
             );
