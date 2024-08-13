@@ -144,7 +144,8 @@ export const initialDefaultStudentsFields = [
     name: "std_name",
     placeholder_text: "Enter student name",
     value_field: "",
-    inputValue: "",
+    inputValue:
+      "الاسم..................................................................",
     title: "Student Name",
     isAdded: true,
   },
@@ -153,7 +154,8 @@ export const initialDefaultStudentsFields = [
     name: "std_number",
     placeholder_text: "Enter student number",
     value_field: "",
-    inputValue: "",
+    inputValue:
+      "رقم الجلوس.........................................................",
     title: "Student Number",
     isAdded: true,
   },

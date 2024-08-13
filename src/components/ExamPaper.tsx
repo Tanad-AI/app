@@ -23,6 +23,7 @@ const ExamPaper = ({
   const pathName = usePathname().slice(1, 3);
   const language: "en" | "ar" = pathName as "en" | "ar";
   const teacherInputs = useExamHeaderStore((state) => state.teacherInputs);
+  const studentInputs = useExamHeaderStore((state) => state.studentInputs);
 
   const {
     country,
@@ -118,13 +119,17 @@ const ExamPaper = ({
         <section className="col-span-3 ps-2">
           <div>
             <span>
-              {examLanguage[language].studentName}
-              .........................................................
+              {
+                studentInputs.filter((input) => input.name == "std_name")[0]
+                  .inputValue
+              }{" "}
             </span>
-            {"    "}
             <span>
               {" "}
-              {examLanguage[language].studentId}............................
+              {
+                studentInputs?.filter((input) => input.name == "std_number")[0]
+                  .inputValue
+              }
             </span>
           </div>
         </section>
