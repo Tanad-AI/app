@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { ArrowUp, ArrowDown, Trash2 } from "lucide-react";
 import { useExamHeaderStore } from "../store/HeaderStore";
 import autoAnimate from "@formkit/auto-animate";
+import DragAndDropImageUpload from "@/components/DragAndDropImage";
 
 interface InputField {
   name: string;
@@ -20,6 +21,7 @@ interface InputField {
   inputValue: string;
   title: string;
   isAdded: boolean;
+  placementOnPaper: string;
 }
 
 const InputFieldsList = ({
@@ -45,47 +47,53 @@ const InputFieldsList = ({
     <div ref={parent} className="flex flex-col gap-3">
       {fields.map((field, i) => (
         <div key={field.name} className="mb-2 flex items-center gap-2">
-          <Input
-            name={field.name}
-            variant="bordered"
-            label={field.title}
-            value={field.inputValue}
-            onChange={(e) => {
-              if (setFieldsFunction == "teacher") {
-                useExamHeaderStore
-                  .getState()
-                  .setTeacherInputs(
-                    fields.map((input) =>
-                      input.name === field.name
-                        ? { ...input, inputValue: e.target.value }
-                        : input,
-                    ),
-                  );
-              } else {
-                useExamHeaderStore
-                  .getState()
-                  .setStudentInputs(
-                    fields.map((input) =>
-                      input.name === field.name
-                        ? { ...input, inputValue: e.target.value }
-                        : input,
-                    ),
-                  );
+          {field.name == "logo" ? (
+            <>
+              <DragAndDropImageUpload />
+            </>
+          ) : (
+            <Input
+              name={field.name}
+              variant="bordered"
+              label={field.title}
+              value={field.inputValue}
+              onChange={(e) => {
+                if (setFieldsFunction == "teacher") {
+                  useExamHeaderStore
+                    .getState()
+                    .setTeacherInputs(
+                      fields.map((input) =>
+                        input.name === field.name
+                          ? { ...input, inputValue: e.target.value }
+                          : input,
+                      ),
+                    );
+                } else {
+                  useExamHeaderStore
+                    .getState()
+                    .setStudentInputs(
+                      fields.map((input) =>
+                        input.name === field.name
+                          ? { ...input, inputValue: e.target.value }
+                          : input,
+                      ),
+                    );
+                }
+              }}
+              labelPlacement="outside"
+              endContent={
+                <Tooltip content="Remove Field" size="sm" delay={400}>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleDelete(field)}
+                  >
+                    <Trash2 size={14} color="gray" />
+                  </div>
+                </Tooltip>
               }
-            }}
-            labelPlacement="outside"
-            endContent={
-              <Tooltip content="Remove Field" size="sm" delay={400}>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => handleDelete(field)}
-                >
-                  <Trash2 size={14} color="gray" />
-                </div>
-              </Tooltip>
-            }
-            placeholder={field.placeholder_text}
-          />
+              placeholder={field.placeholder_text}
+            />
+          )}
           <div className="flex h-full flex-col  items-center">
             <Button
               isDisabled={i == 0}

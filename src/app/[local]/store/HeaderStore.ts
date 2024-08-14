@@ -6,6 +6,13 @@ import {
   initialOtherTeacherFields,
 } from "../lib/ExamHeaderInitialState";
 
+// type PlacementOnPaper =
+//   | "instatute_section"
+//   | "exam_details_section"
+//   | "exam_title"
+//   | "notes_section"
+//   | "logo_section";
+
 interface InputField {
   name: string;
   placeholder_text: string;
@@ -13,6 +20,7 @@ interface InputField {
   inputValue: string;
   title: string;
   isAdded: boolean;
+  placementOnPaper: string;
 }
 
 interface StoreState {

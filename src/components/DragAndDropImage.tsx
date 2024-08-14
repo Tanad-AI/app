@@ -32,7 +32,7 @@ const DragAndDropImageUpload = () => {
       <p>Drag and drop an image here, or click to select one</p>
       {examLogo && (
         <img
-          className="mt-5 max-h-72 max-w-full"
+          className="mt-5 max-h-14 max-w-full"
           src={examLogo}
           alt="Preview"
         />

@@ -6,6 +6,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "School/College Name",
     isAdded: true,
+    placementOnPaper: "instatute_section",
   },
   {
     name: "subject",
@@ -14,6 +15,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Subject",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "term_semester",
@@ -22,6 +24,16 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Term/Semester",
     isAdded: true,
+    placementOnPaper: "exam_title",
+  },
+  {
+    name: "year",
+    placeholder_text: "Enter the year",
+    value_field: "",
+    inputValue: "",
+    title: "Year",
+    isAdded: true,
+    placementOnPaper: "exam_title",
   },
   {
     name: "class",
@@ -30,6 +42,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Class",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "type",
@@ -38,6 +51,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Type",
     isAdded: true,
+    placementOnPaper: "exam_title",
   },
   {
     name: "number_of_marks",
@@ -46,6 +60,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Number of Marks",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "day_of_exam",
@@ -54,6 +69,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Day of the Exam",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "date_of_exam",
@@ -62,6 +78,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Date of the Exam",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "duration_in_hours",
@@ -70,6 +87,7 @@ export const initialDefaultTeacherFields = [
     inputValue: "",
     title: "Duration in Hours",
     isAdded: true,
+    placementOnPaper: "exam_details_section",
   },
 ];
 export const initialOtherTeacherFields = [
@@ -80,6 +98,16 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "Notes/Instructions",
     isAdded: false,
+    placementOnPaper: "notes_section",
+  },
+  {
+    name: "class_section",
+    placeholder_text: "Enter class section",
+    value_field: "",
+    inputValue: "",
+    title: "class_section",
+    isAdded: false,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "number_of_questions",
@@ -88,15 +116,9 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "Number of Questions",
     isAdded: false,
+    placementOnPaper: "exam_details_section",
   },
-  {
-    name: "custom_field",
-    placeholder_text: "Enter custom field",
-    value_field: "",
-    inputValue: "",
-    title: "Custom Field",
-    isAdded: false,
-  },
+
   {
     name: "country",
     placeholder_text: "Enter country",
@@ -104,6 +126,16 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "Country",
     isAdded: false,
+    placementOnPaper: "instatute_section",
+  },
+  {
+    name: "number_of_page",
+    placeholder_text: "Enter the number of pages",
+    value_field: "",
+    inputValue: "",
+    title: "Number of pages",
+    isAdded: false,
+    placementOnPaper: "exam_details_section",
   },
   {
     name: "state_department_name",
@@ -112,6 +144,7 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "State Department Name",
     isAdded: false,
+    placementOnPaper: "instatute_section",
   },
   {
     name: "ministry_department_name",
@@ -120,14 +153,7 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "Ministry/Department Name",
     isAdded: false,
-  },
-  {
-    name: "teacher_name",
-    placeholder_text: "Enter teacher's name",
-    value_field: "",
-    inputValue: "",
-    title: "Teacher's Name",
-    isAdded: false,
+    placementOnPaper: "instatute_section",
   },
   {
     name: "logo",
@@ -136,6 +162,7 @@ export const initialOtherTeacherFields = [
     inputValue: "",
     title: "Logo",
     isAdded: false,
+    placementOnPaper: "logo_section",
   },
 ];
 
@@ -148,6 +175,7 @@ export const initialDefaultStudentsFields = [
       "الاسم..................................................................",
     title: "Student Name",
     isAdded: true,
+    placementOnPaper: "student_section",
   },
 
   {
@@ -157,7 +185,8 @@ export const initialDefaultStudentsFields = [
     inputValue:
       "رقم الجلوس.........................................................",
     title: "Student Number",
-    isAdded: true,
+    isAdded: false,
+    placementOnPaper: "student_section",
   },
 ];
 export const initialOtherStudentsFields = [
@@ -165,8 +194,9 @@ export const initialOtherStudentsFields = [
     name: "std_class",
     placeholder_text: "Enter student class",
     value_field: "",
-    inputValue: "",
+    inputValue: "الصف.........................................................",
     title: "Student Class",
     isAdded: false,
+    placementOnPaper: "student_section",
   },
 ];

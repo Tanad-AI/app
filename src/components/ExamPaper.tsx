@@ -6,13 +6,11 @@ import examLanguage from "@/lib/examLanguage";
 import { usePathname } from "next/navigation";
 
 const ExamPaper = ({
-  QuizFormHeaderDetails,
   questionsSections,
   SectionQuestion,
   varient,
   ref,
 }: {
-  QuizFormHeaderDetails: any;
   questionsSections: any;
   SectionQuestion: any;
   varient: "print" | "normal";
@@ -24,35 +22,6 @@ const ExamPaper = ({
   const language: "en" | "ar" = pathName as "en" | "ar";
   const teacherInputs = useExamHeaderStore((state) => state.teacherInputs);
   const studentInputs = useExamHeaderStore((state) => state.studentInputs);
-
-  const {
-    country,
-    countryDepartmentName,
-    stateDepartmentName,
-    instatuteName,
-    dayOfTheExam,
-    dateOfTheExam,
-    durationInHours,
-  } = QuizFormHeaderDetails;
-
-  const examDetailsInfo = [
-    {
-      title: examLanguage[language].day,
-      text: dayOfTheExam,
-    },
-    {
-      title: examLanguage[language].date,
-      text: dateOfTheExam,
-    },
-    {
-      title: examLanguage[language].time,
-      text: durationInHours,
-    },
-    {
-      title: examLanguage[language].pages,
-      text: "",
-    },
-  ];
 
   return (
     <div
@@ -66,7 +35,8 @@ const ExamPaper = ({
         <section className="border-e-[1px] border-black">
           {teacherInputs.map((input, i) => {
             return (
-              input.inputValue && (
+              input.inputValue &&
+              input.placementOnPaper == "instatute_section" && (
                 <div
                   key={i}
                   className="h-6 border-b-[1px] border-black ps-2 last:border-none"
@@ -93,11 +63,15 @@ const ExamPaper = ({
           </div>
         </section>
         <section className="">
-          {examDetailsInfo.map((info, i) => {
+          {teacherInputs.map((input, i) => {
             return (
-              info && (
-                <div className="h-6 border-b-[1px] border-black ps-2 last:border-none">
-                  {info.title}: {info.text}
+              input.inputValue &&
+              input.placementOnPaper == "exam_details_section" && (
+                <div
+                  key={i}
+                  className="h-6 border-b-[1px] border-black ps-2 last:border-none"
+                >
+                  {input.inputValue}
                 </div>
               )
             );
@@ -106,13 +80,27 @@ const ExamPaper = ({
         <section className="col-span-3 border-y-[1px] border-black ps-2">
           <div>
             <span>
-              اختبار الفصل الدراسي
-              <span> {QuizFormHeaderDetails.termSemester} </span>
-              لمادة
-              <span> {QuizFormHeaderDetails.subject} </span>
-              (الفترة الأولى) للصف
-              <span> {QuizFormHeaderDetails.class} </span>
-              للعام الدراسي 1445هـ
+              <span>
+                اختبار{" "}
+                {
+                  teacherInputs.filter((input) => input.name == "type")[0]
+                    .inputValue
+                }{" "}
+              </span>
+              للفصل الدراسي
+              <span>
+                {" "}
+                {
+                  teacherInputs.filter(
+                    (input) => input.name == "term_semester",
+                  )[0].inputValue
+                }
+              </span>{" "}
+              للعام الدراسي{" "}
+              {
+                teacherInputs.filter((input) => input.name == "year")[0]
+                  .inputValue
+              }
             </span>
           </div>
         </section>
@@ -120,7 +108,7 @@ const ExamPaper = ({
           <div>
             <span>
               {
-                studentInputs.filter((input) => input.name == "std_name")[0]
+                studentInputs?.filter((input) => input.name == "std_name")[0]
                   .inputValue
               }{" "}
             </span>
@@ -130,6 +118,13 @@ const ExamPaper = ({
                 studentInputs?.filter((input) => input.name == "std_number")[0]
                   .inputValue
               }
+            </span>
+            <span>
+              {" "}
+              {/* {studentInputs?.filter((input) => input.name == "std_class")[0]
+                .inputValue &&
+                studentInputs?.filter((input) => input.name == "std_class")[0]
+                  .inputValue} */}
             </span>
           </div>
         </section>
