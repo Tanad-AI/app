@@ -48,9 +48,20 @@ const InputFieldsList = ({
       {fields.map((field, i) => (
         <div key={field.name} className="mb-2 flex items-center gap-2">
           {field.name == "logo" ? (
-            <>
-              <DragAndDropImageUpload />
-            </>
+            <div className="flex flex-col  gap-2">
+              <Text>{field.title}</Text>
+              <div className="flex items-center gap-2">
+                <DragAndDropImageUpload />
+                <Tooltip content="Remove Field" size="sm" delay={400}>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => handleDelete(field)}
+                  >
+                    <Trash2 size={14} color="gray" />
+                  </div>
+                </Tooltip>
+              </div>
+            </div>
           ) : (
             <Input
               name={field.name}
