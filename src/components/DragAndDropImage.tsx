@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useQuizStore } from "@/app/[local]/store/QuizState";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
 const DragAndDropImageUpload = () => {

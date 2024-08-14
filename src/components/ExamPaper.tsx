@@ -104,29 +104,16 @@ const ExamPaper = ({
             </span>
           </div>
         </section>
-        <section className="col-span-3 ps-2">
-          <div>
-            <span>
-              {
-                studentInputs?.filter((input) => input.name == "std_name")[0]
-                  .inputValue
-              }{" "}
-            </span>
-            <span>
-              {" "}
-              {
-                studentInputs?.filter((input) => input.name == "std_number")[0]
-                  .inputValue
-              }
-            </span>
-            <span>
-              {" "}
-              {/* {studentInputs?.filter((input) => input.name == "std_class")[0]
-                .inputValue &&
-                studentInputs?.filter((input) => input.name == "std_class")[0]
-                  .inputValue} */}
-            </span>
-          </div>
+        <section className="col-span-3 space-y-3 py-3 ps-2">
+          {studentInputs?.map((field, i) => {
+            return (
+              field.placementOnPaper == "student_section" && (
+                <div className="flex items-baseline" key={i}>
+                  <div className="w-fit">{field.inputValue}</div>
+                </div>
+              )
+            );
+          })}
         </section>
       </div>
 

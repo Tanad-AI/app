@@ -171,8 +171,7 @@ export const initialDefaultStudentsFields = [
     name: "std_name",
     placeholder_text: "Enter student name",
     value_field: "",
-    inputValue:
-      "الاسم..................................................................",
+    inputValue: "الاسم:  ",
     title: "Student Name",
     isAdded: true,
     placementOnPaper: "student_section",
@@ -182,8 +181,7 @@ export const initialDefaultStudentsFields = [
     name: "std_number",
     placeholder_text: "Enter student number",
     value_field: "",
-    inputValue:
-      "رقم الجلوس.........................................................",
+    inputValue: "رقم الجلوس:  ",
     title: "Student Number",
     isAdded: false,
     placementOnPaper: "student_section",
@@ -194,7 +192,7 @@ export const initialOtherStudentsFields = [
     name: "std_class",
     placeholder_text: "Enter student class",
     value_field: "",
-    inputValue: "الصف.........................................................",
+    inputValue: "الصف:  ",
     title: "Student Class",
     isAdded: false,
     placementOnPaper: "student_section",
