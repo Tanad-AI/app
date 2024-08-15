@@ -49,7 +49,7 @@ const InputFieldsList = ({
         <div key={field.name} className="mb-2 flex items-center gap-2">
           {field.name == "logo" ? (
             <div className="flex flex-col  gap-2">
-              <Text>{field.title}</Text>
+              <Text className="font-normal">{field.title}</Text>
               <div className="flex items-center gap-2">
                 <DragAndDropImageUpload />
                 <Tooltip content="Remove Field" size="sm" delay={400}>
