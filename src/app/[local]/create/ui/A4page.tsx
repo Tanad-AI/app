@@ -5,7 +5,11 @@ import React, { useState } from "react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import ExamPaper from "@/components/ExamPaper";
 
-const A4page: React.FC = () => {
+interface A4PagePropsType {
+  className: string;
+}
+
+const A4page = ({ className }: A4PagePropsType) => {
   const questionsSections = useQuizStore(
     (state: any) => state.questionsSections,
   );
@@ -14,7 +18,9 @@ const A4page: React.FC = () => {
   const setDocumentName = useQuizStore((state: any) => state.setDocumentName);
 
   return (
-    <div className="hidden min-w-[516px] flex-col  space-y-2 overflow-y-auto lg:flex">
+    <div
+      className={`hidden min-w-[516px] flex-col  space-y-2 overflow-y-auto lg:flex ${className}`}
+    >
       <div className="flex justify-between">
         <input
           value={documentName}

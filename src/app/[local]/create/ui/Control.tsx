@@ -8,11 +8,12 @@ const currentView = [<DocumentHeader />, <QuestionsComponent />];
 
 interface ControlProps {
   activeControlView: number;
+  className?: string;
 }
 
-const Control = ({ activeControlView }: ControlProps) => {
+const Control = ({ activeControlView, className }: ControlProps) => {
   return (
-    <div className=" w-full overflow-y-scroll pb-20 ">
+    <div className={`w-full overflow-y-scroll pb-20 ${className}`}>
       {currentView[activeControlView]}
     </div>
   );

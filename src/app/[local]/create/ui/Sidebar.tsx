@@ -16,14 +16,26 @@ import { AlignLeft, AlignRight, Globe } from "lucide-react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import { useTranslations } from "next-intl";
 
-function Sidebar({ activeControlView, setActiveControlView }: any) {
+interface SidebarType {
+  activeControlView: number;
+  setActiveControlView: any;
+  className: string;
+}
+
+function Sidebar({
+  activeControlView,
+  setActiveControlView,
+  className,
+}: SidebarType) {
   const t = useTranslations("Create");
   const controlsButtons = [t("header"), t("questions"), t("footer")];
   const setExamDirection = useQuizStore((state) => state.setExamDirection);
   const examDirection = useQuizStore((state) => state.examDirection);
 
   return (
-    <div className="hidden  min-w-[260px] flex-col space-y-2 md:block   lg:w-[28%]">
+    <div
+      className={`min-w-[260px] flex-col space-y-2 md:block lg:w-[28%] ${className}`}
+    >
       <Text>{t("control")}</Text>
       <Card radius="sm" className=" px-6 py-3 shadow-sm ">
         <Tabs
