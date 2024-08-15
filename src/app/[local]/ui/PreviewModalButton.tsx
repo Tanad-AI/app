@@ -19,9 +19,6 @@ import { FileDown, Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const PreviewModalButton = () => {
-  const QuizFormHeaderDetails = useQuizStore(
-    (state: any) => state.QuizFormHeaderDetails,
-  );
   const questionsSections = useQuizStore(
     (state: any) => state.questionsSections,
   );
@@ -95,7 +92,6 @@ const PreviewModalButton = () => {
                   <div id="pagedjsdocroot" style={{ display: "none" }}>
                     <ExamPaper
                       varient="print"
-                      QuizFormHeaderDetails={QuizFormHeaderDetails}
                       questionsSections={questionsSections}
                       SectionQuestion={SectionQuestion}
                     />
