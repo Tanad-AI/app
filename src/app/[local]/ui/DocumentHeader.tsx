@@ -177,8 +177,6 @@ const DocumentHeader = () => {
     setStudentInputs,
   } = useExamHeaderStore();
 
-  console.log(teacherButtons.length);
-
   return (
     <div className="h-full">
       <div className="flex cursor-pointer items-baseline gap-1">
