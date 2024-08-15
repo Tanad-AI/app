@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 export const initialDefaultTeacherFields = [
   {
     name: "school_name",

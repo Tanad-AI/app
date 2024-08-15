@@ -28,6 +28,19 @@ const page = () => {
               <X size={16} />
             </DockIcon>
             <DockIcon
+              clickFunction={() => setActiveControlView(1)}
+              className={`${
+                activeSection == 0
+                  ? "bg-green-50 text-primary hover:bg-green-100"
+                  : "hover:bg-slate-100"
+              } transition-colors `}
+              size={14}
+              magnification={50}
+              distance={10}
+            >
+              Questions
+            </DockIcon>
+            <DockIcon
               clickFunction={() => setActiveSection(0)}
               className={`${
                 activeSection == 0
@@ -84,13 +97,13 @@ const page = () => {
       <Sidebar
         activeControlView={activeControlView}
         setActiveControlView={setActiveControlView}
-        className={activeSection == 0 ? "block" : "hidden"}
+        className={activeSection == 0 ? "md:block" : ""}
       />
       <Control
-        className={activeSection == 1 ? "block" : "hidden"}
+        className={activeSection == 1 ? "md:block" : ""}
         activeControlView={activeControlView}
       />
-      <A4page className={activeSection == 2 ? "block" : "hidden"} />
+      <A4page className={activeSection == 2 ? "md:block" : ""} />
     </div>
   );
 };

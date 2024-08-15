@@ -38,6 +38,7 @@ const InputFieldsList = ({
   setFieldsFunction: "teacher" | "students";
 }) => {
   const parent = useRef(null);
+  const t = useTranslations("documentHeader");
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
@@ -52,7 +53,7 @@ const InputFieldsList = ({
               <Text className="font-normal">{field.title}</Text>
               <div className="flex items-center gap-2">
                 <DragAndDropImageUpload />
-                <Tooltip content="Remove Field" size="sm" delay={400}>
+                <Tooltip content={t("removeField")} size="sm" delay={400}>
                   <div
                     className="cursor-pointer"
                     onClick={() => handleDelete(field)}
@@ -93,7 +94,7 @@ const InputFieldsList = ({
               }}
               labelPlacement="outside"
               endContent={
-                <Tooltip content="Remove Field" size="sm" delay={400}>
+                <Tooltip content={t("removeField")} size="sm" delay={400}>
                   <div
                     className="cursor-pointer"
                     onClick={() => handleDelete(field)}
@@ -160,7 +161,7 @@ const AddMoreFields = ({
 };
 
 const DocumentHeader = () => {
-  const t = useTranslations("Create");
+  const t = useTranslations("documentHeader");
 
   const {
     teacherInputs,
@@ -173,8 +174,6 @@ const DocumentHeader = () => {
     removeStudentField,
     moveFieldUp,
     moveFieldDown,
-    setTeacherInputs,
-    setStudentInputs,
   } = useExamHeaderStore();
 
   return (
@@ -188,7 +187,7 @@ const DocumentHeader = () => {
         shadow="none"
         className="flex min-h-full flex-col px-3 pb-14 pt-4"
       >
-        <TinyText className="text-gray-500">Exam information</TinyText>
+        <TinyText className="text-gray-500">{t("examInfo")}</TinyText>
         <Spacer y={2} />
 
         <InputFieldsList
@@ -201,10 +200,12 @@ const DocumentHeader = () => {
 
         <Spacer y={3} />
         {teacherButtons.length != 0 ? (
-          <TinyText className="mb-2 text-gray-500">+ Add more fields</TinyText>
+          <TinyText className="mb-2 text-gray-500">
+            + {t("addMoreFields")}
+          </TinyText>
         ) : (
           <TinyText className="mb-2 text-gray-500">
-            All fields are added
+            {t("allFieldsAdded")}
           </TinyText>
         )}
         <AddMoreFields
@@ -217,9 +218,9 @@ const DocumentHeader = () => {
         <Spacer y={2} />
         {studentInputs.length != 0 && (
           <>
-            <TinyText className="">Student information</TinyText>
+            <TinyText className="">{t("studentInformation")}</TinyText>
             <TinyText className="text-gray-500">
-              The student should fill these fields
+              {t("studentInstruction")}
             </TinyText>
           </>
         )}
@@ -233,10 +234,12 @@ const DocumentHeader = () => {
         />
         <Spacer y={3} />
         {studentButtons.length !== 0 ? (
-          <TinyText className="mb-2 text-gray-500">+ Add more fields</TinyText>
+          <TinyText className="mb-2 text-gray-500">
+            + {t("addMoreFields")}
+          </TinyText>
         ) : (
           <TinyText className="mb-2 text-gray-500">
-            All fields are added
+            {t("allFieldsAdded")}{" "}
           </TinyText>
         )}
         <AddMoreFields
