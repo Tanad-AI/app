@@ -1,10 +1,10 @@
 import create from "zustand";
 import {
-  initialDefaultStudentsFields,
-  initialDefaultTeacherFields,
-  initialOtherStudentsFields,
-  initialOtherTeacherFields,
-} from "../lib/ExamHeaderInitialState";
+  getInitialOtherStudentsButtons,
+  getInitialStudentsInputs,
+  getInitialTeacherButtons,
+  getInititalTeacherInputs,
+} from "../lib/useExamHeaderInitialState";
 
 // type PlacementOnPaper =
 //   | "instatute_section"
@@ -24,6 +24,8 @@ interface InputField {
 }
 
 interface StoreState {
+  pageLanguage: "ar" | "en";
+  setPageLanguage: (language: "ar" | "en") => void;
   teacherInputs: InputField[];
   teacherButtons: InputField[];
   studentInputs: InputField[];
@@ -41,10 +43,19 @@ interface StoreState {
 }
 
 export const useExamHeaderStore = create<StoreState>((set) => ({
-  teacherInputs: initialDefaultTeacherFields,
-  teacherButtons: initialOtherTeacherFields,
-  studentInputs: initialDefaultStudentsFields,
-  studentButtons: initialOtherStudentsFields,
+  pageLanguage: "en",
+  setPageLanguage: (language) =>
+    set({
+      pageLanguage: language,
+      teacherInputs: getInititalTeacherInputs(language),
+      teacherButtons: getInitialTeacherButtons(language),
+      studentInputs: getInitialStudentsInputs(language),
+      studentButtons: getInitialOtherStudentsButtons(language),
+    }),
+  teacherInputs: getInititalTeacherInputs("ar"),
+  teacherButtons: getInitialTeacherButtons("ar"),
+  studentInputs: getInitialStudentsInputs("ar"),
+  studentButtons: getInitialOtherStudentsButtons("ar"),
   setTeacherInputs: (inputs) => set({ teacherInputs: inputs }),
   setTeacherButtons: (buttons) => set({ teacherButtons: buttons }),
   setStudentInputs: (inputs) => set({ studentInputs: inputs }),

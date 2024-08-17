@@ -7,11 +7,20 @@ import A4page from "./ui/A4page";
 import { FileIcon, Menu, Pen, Settings2, X } from "lucide-react";
 import { Dock, DockIcon } from "@/components/Dock";
 import { Button } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
+import { useExamHeaderStore } from "../store/HeaderStore";
 
 const page = () => {
   const [activeControlView, setActiveControlView] = useState<number>(0);
   const [activeSection, setActiveSection] = useState(1);
   const [toggleDock, setToggleDock] = useState(true);
+  const pathname = usePathname();
+  let locale = pathname.slice(1, 3);
+  if (locale !== "ar" && locale !== "en") {
+    throw new Error(`Unsupported locale: ${locale}`);
+  }
+  const setPageLanguage = useExamHeaderStore((state) => state.setPageLanguage);
+  setPageLanguage(locale);
 
   return (
     <div className=" relative flex h-[100svh]  w-full justify-between gap-3 overflow-y-hidden pb-5">

@@ -70,6 +70,8 @@ type storeType = {
   setExamLogo: (image: string) => void;
   examDirection: "ltr" | "rtl";
   setExamDirection: (direction: "ltr" | "rtl") => void;
+  examLanguage: "ar" | "en";
+  setExamLanguage: (language: "ar" | "en") => void;
 };
 export const useQuizStore = create<storeType>((set) => ({
   // initial state
@@ -264,6 +266,12 @@ export const useQuizStore = create<storeType>((set) => ({
   setExamDirection: (direction) => {
     set(() => ({
       examDirection: direction,
+    }));
+  },
+  examLanguage: "en",
+  setExamLanguage: (language) => {
+    set(() => ({
+      examLanguage: language,
     }));
   },
 }));

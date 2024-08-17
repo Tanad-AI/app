@@ -31,6 +31,10 @@ function Sidebar({
   const controlsButtons = [t("header"), t("questions"), t("footer")];
   const setExamDirection = useQuizStore((state) => state.setExamDirection);
   const examDirection = useQuizStore((state) => state.examDirection);
+  const examLanguage = useQuizStore((state) => state.examLanguage);
+  const setExamLanguage = useQuizStore((state) => state.setExamLanguage);
+
+  console.log(examLanguage);
 
   return (
     <div
@@ -79,10 +83,18 @@ function Sidebar({
                   selectorIcon={<Globe opacity={0.7} />}
                   defaultSelectedKeys={["english"]}
                 >
-                  <SelectItem value="arabic" key={"arabic"}>
+                  <SelectItem
+                    onClick={() => setExamLanguage("ar")}
+                    value="arabic"
+                    key={"arabic"}
+                  >
                     {t("arabic")}
                   </SelectItem>
-                  <SelectItem value="english" key={"english"}>
+                  <SelectItem
+                    value="english"
+                    onClick={() => setExamLanguage("en")}
+                    key={"english"}
+                  >
                     {t("english")}
                   </SelectItem>
                 </Select>
