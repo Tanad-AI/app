@@ -81,24 +81,24 @@ const ExamPaper = ({
           <div>
             <span>
               <span>
-                اختبار{" "}
+                {examLanguage.en.examTitle[0]}{" "}
                 {
-                  teacherInputs.filter((input) => input.name == "type")[0]
+                  teacherInputs?.filter((input) => input.name == "type")[0]
                     .inputValue
                 }{" "}
               </span>
-              للفصل الدراسي
+              {examLanguage.en.examTitle[1]}
               <span>
                 {" "}
                 {
-                  teacherInputs.filter(
+                  teacherInputs?.filter(
                     (input) => input.name == "term_semester",
                   )[0].inputValue
                 }
               </span>{" "}
-              للعام الدراسي{" "}
+              {examLanguage.en.examTitle[2]}{" "}
               {
-                teacherInputs.filter((input) => input.name == "year")[0]
+                teacherInputs?.filter((input) => input.name == "year")[0]
                   .inputValue
               }
             </span>

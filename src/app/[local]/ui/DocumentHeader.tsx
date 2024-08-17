@@ -239,7 +239,7 @@ const DocumentHeader = () => {
           </TinyText>
         ) : (
           <TinyText className="mb-2 text-gray-500">
-            {t("allFieldsAdded")}{" "}
+            {t("allFieldsAdded")}
           </TinyText>
         )}
         <AddMoreFields
