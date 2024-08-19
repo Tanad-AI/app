@@ -26,6 +26,8 @@ interface InputField {
 interface StoreState {
   pageLanguage: "ar" | "en";
   setPageLanguage: (language: "ar" | "en") => void;
+  examLanguage: "ar" | "en";
+  setExamLanguage: (language: "ar" | "en") => void;
   teacherInputs: InputField[];
   teacherButtons: InputField[];
   studentInputs: InputField[];
@@ -45,17 +47,32 @@ interface StoreState {
 export const useExamHeaderStore = create<StoreState>((set) => ({
   pageLanguage: "en",
   setPageLanguage: (language) =>
-    set({
+    set((state) => ({
       pageLanguage: language,
-      teacherInputs: getInititalTeacherInputs(language),
-      teacherButtons: getInitialTeacherButtons(language),
-      studentInputs: getInitialStudentsInputs(language),
-      studentButtons: getInitialOtherStudentsButtons(language),
-    }),
-  teacherInputs: getInititalTeacherInputs("ar"),
-  teacherButtons: getInitialTeacherButtons("ar"),
-  studentInputs: getInitialStudentsInputs("ar"),
-  studentButtons: getInitialOtherStudentsButtons("ar"),
+      teacherInputs: getInititalTeacherInputs(language, state.examLanguage),
+      teacherButtons: getInitialTeacherButtons(language, state.examLanguage),
+      studentInputs: getInitialStudentsInputs(language, state.examLanguage),
+      studentButtons: getInitialOtherStudentsButtons(
+        language,
+        state.examLanguage,
+      ),
+    })),
+  examLanguage: "en",
+  setExamLanguage: (language) =>
+    set((state) => ({
+      examLanguage: language,
+      teacherInputs: getInititalTeacherInputs(state.pageLanguage, language),
+      teacherButtons: getInitialTeacherButtons(state.pageLanguage, language),
+      studentInputs: getInitialStudentsInputs(state.pageLanguage, language),
+      studentButtons: getInitialOtherStudentsButtons(
+        state.pageLanguage,
+        language,
+      ),
+    })),
+  teacherInputs: getInititalTeacherInputs("en", "en"),
+  teacherButtons: getInitialTeacherButtons("en", "en"),
+  studentInputs: getInitialStudentsInputs("en", "en"),
+  studentButtons: getInitialOtherStudentsButtons("en", "en"),
   setTeacherInputs: (inputs) => set({ teacherInputs: inputs }),
   setTeacherButtons: (buttons) => set({ teacherButtons: buttons }),
   setStudentInputs: (inputs) => set({ studentInputs: inputs }),

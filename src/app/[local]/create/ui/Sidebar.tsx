@@ -15,6 +15,7 @@ import { Paragraph, Text } from "@/app/[local]/lib/TextComponents";
 import { AlignLeft, AlignRight, Globe } from "lucide-react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import { useTranslations } from "next-intl";
+import { useExamHeaderStore } from "../../store/HeaderStore";
 
 interface SidebarType {
   activeControlView: number;
@@ -32,7 +33,8 @@ function Sidebar({
   const setExamDirection = useQuizStore((state) => state.setExamDirection);
   const examDirection = useQuizStore((state) => state.examDirection);
   const examLanguage = useQuizStore((state) => state.examLanguage);
-  const setExamLanguage = useQuizStore((state) => state.setExamLanguage);
+  // const setExamLanguage = useQuizStore((state) => state.setExamLanguage);
+  const setExamLanguage = useExamHeaderStore((state) => state.setExamLanguage);
 
   console.log(examLanguage);
 

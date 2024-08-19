@@ -30,7 +30,8 @@
     ".next/types/**/*.ts",
     "src/assets/index.tsz",
     "src/app/[local]/create/page.jsx",
-    "src/components/PrintPreview.jsx"
+    "src/components/PrintPreview.jsx",
+    "src/app/[local]/lib/useExamHeaderInitialState.js"
   ],
   "exclude": ["node_modules"]
 }
