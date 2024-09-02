@@ -36,8 +36,6 @@ function Sidebar({
   // const setExamLanguage = useQuizStore((state) => state.setExamLanguage);
   const setExamLanguage = useExamHeaderStore((state) => state.setExamLanguage);
 
-  console.log(examLanguage);
-
   return (
     <div
       className={`min-w-[260px] flex-col space-y-2 md:block lg:w-[28%] ${className}`}

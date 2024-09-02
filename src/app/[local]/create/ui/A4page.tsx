@@ -10,9 +10,6 @@ interface A4PagePropsType {
 }
 
 const A4page = ({ className }: A4PagePropsType) => {
-  const questionsSections = useQuizStore(
-    (state: any) => state.questionsSections,
-  );
   const SectionQuestion = useQuizStore((state: any) => state.SectionQuestion);
   const documentName = useQuizStore((state: any) => state.documentName);
   const setDocumentName = useQuizStore((state: any) => state.setDocumentName);
@@ -29,11 +26,7 @@ const A4page = ({ className }: A4PagePropsType) => {
         />
       </div>
       <div className="flex origin-top-left scale-[0.65] flex-col space-y-14">
-        <ExamPaper
-          varient="normal"
-          questionsSections={questionsSections}
-          SectionQuestion={SectionQuestion}
-        />
+        <ExamPaper varient="normal" SectionQuestion={SectionQuestion} />
       </div>
     </div>
   );

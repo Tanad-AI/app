@@ -14,10 +14,15 @@ import { useExamHeaderStore } from "../store/HeaderStore";
 import autoAnimate from "@formkit/auto-animate";
 import DragAndDropImageUpload from "@/components/DragAndDropImage";
 
+type ValueField = {
+  en: string;
+  ar: string;
+};
+
 interface InputField {
   name: string;
   placeholder_text: string;
-  value_field: string;
+  value_field: ValueField;
   inputValue: string;
   title: string;
   isAdded: boolean;
@@ -39,6 +44,7 @@ const InputFieldsList = ({
 }) => {
   const parent = useRef(null);
   const t = useTranslations("documentHeader");
+  const examLanguage = useExamHeaderStore((state) => state.examLanguage);
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
@@ -46,90 +52,92 @@ const InputFieldsList = ({
 
   return (
     <div ref={parent} className="flex flex-col gap-3">
-      {fields.map((field, i) => (
-        <div key={field.name} className="mb-2 flex items-center gap-2">
-          {field.name == "logo" ? (
-            <div className="flex flex-col  gap-2">
-              <Text className="font-normal">{field.title}</Text>
-              <div className="flex items-center gap-2">
-                <DragAndDropImageUpload />
-                <Tooltip content={t("removeField")} size="sm" delay={400}>
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleDelete(field)}
-                  >
-                    <Trash2 size={14} color="gray" />
-                  </div>
-                </Tooltip>
+      {fields.map((field, i) => {
+        return (
+          <div key={field.name} className="mb-2 flex items-center gap-2">
+            {field.name == "logo" ? (
+              <div className="flex flex-col  gap-2">
+                <Text className="font-normal">{field.title}</Text>
+                <div className="flex items-center gap-2">
+                  <DragAndDropImageUpload />
+                  <Tooltip content={t("removeField")} size="sm" delay={400}>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleDelete(field)}
+                    >
+                      <Trash2 size={14} color="gray" />
+                    </div>
+                  </Tooltip>
+                </div>
               </div>
-            </div>
-          ) : (
-            <Input
-              name={field.name}
-              variant="bordered"
-              label={field.title}
-              value={field.inputValue}
-              onChange={(e) => {
-                if (setFieldsFunction == "teacher") {
-                  useExamHeaderStore
-                    .getState()
-                    .setTeacherInputs(
-                      fields.map((input) =>
-                        input.name === field.name
-                          ? { ...input, inputValue: e.target.value }
-                          : input,
-                      ),
-                    );
-                } else {
-                  useExamHeaderStore
-                    .getState()
-                    .setStudentInputs(
-                      fields.map((input) =>
-                        input.name === field.name
-                          ? { ...input, inputValue: e.target.value }
-                          : input,
-                      ),
-                    );
+            ) : (
+              <Input
+                name={field.name}
+                variant="bordered"
+                label={field.title}
+                value={field.inputValue}
+                onChange={(e) => {
+                  if (setFieldsFunction == "teacher") {
+                    useExamHeaderStore
+                      .getState()
+                      .setTeacherInputs(
+                        fields.map((input) =>
+                          input.name === field.name
+                            ? { ...input, inputValue: e.target.value }
+                            : input,
+                        ),
+                      );
+                  } else {
+                    useExamHeaderStore
+                      .getState()
+                      .setStudentInputs(
+                        fields.map((input) =>
+                          input.name === field.name
+                            ? { ...input, inputValue: e.target.value }
+                            : input,
+                        ),
+                      );
+                  }
+                }}
+                labelPlacement="outside"
+                endContent={
+                  <Tooltip content={t("removeField")} size="sm" delay={400}>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleDelete(field)}
+                    >
+                      <Trash2 size={14} color="gray" />
+                    </div>
+                  </Tooltip>
                 }
-              }}
-              labelPlacement="outside"
-              endContent={
-                <Tooltip content={t("removeField")} size="sm" delay={400}>
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleDelete(field)}
-                  >
-                    <Trash2 size={14} color="gray" />
-                  </div>
-                </Tooltip>
-              }
-              placeholder={field.placeholder_text}
-            />
-          )}
-          <div className="flex h-full flex-col  items-center">
-            <Button
-              isDisabled={i == 0}
-              isIconOnly
-              size="sm"
-              variant="light"
-              className="cursor-pointer"
-              onClick={() => handleMoveUp(field)}
-            >
-              <ArrowUp size={16} color="gray" />
-            </Button>
-            <Button
-              isDisabled={i == fields.length - 1}
-              isIconOnly
-              size="sm"
-              variant="light"
-              className="cursor-pointer"
-              onClick={() => handleMoveDown(field)}
-            >
-              <ArrowDown size={16} color="gray" />
-            </Button>
+                placeholder={field.placeholder_text}
+              />
+            )}
+            <div className="flex h-full flex-col  items-center">
+              <Button
+                isDisabled={i == 0}
+                isIconOnly
+                size="sm"
+                variant="light"
+                className="cursor-pointer"
+                onClick={() => handleMoveUp(field)}
+              >
+                <ArrowUp size={16} color="gray" />
+              </Button>
+              <Button
+                isDisabled={i == fields.length - 1}
+                isIconOnly
+                size="sm"
+                variant="light"
+                className="cursor-pointer"
+                onClick={() => handleMoveDown(field)}
+              >
+                <ArrowDown size={16} color="gray" />
+              </Button>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

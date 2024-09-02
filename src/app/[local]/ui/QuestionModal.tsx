@@ -1,3 +1,4 @@
+"use client";
 import NumberInput from "@/components/NumberInput";
 import {
   Button,
@@ -10,19 +11,120 @@ import {
 } from "@nextui-org/react";
 import { PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useQuizStore } from "../store/QuizState";
+
+const initialMcqsSection = {
+  name: "MCQs",
+  title: "MCQs",
+  added: false,
+  questions: [],
+  id: "",
+};
+const initialTrueOrFalseSecttion = {
+  name: "trueOrFalse",
+  title: "True or false",
+  added: false,
+  questions: [],
+  id: "",
+};
+
+const initialFillInTheBlankSections = {
+  name: "FillInTheBlank",
+  title: "Fill in the blank",
+  added: false,
+  questions: [],
+  id: "",
+};
 
 function QuestionsModal({
   numberOfQuestions,
-  handleAddingQuestions,
   handleQuestionsInputChange,
 }: any) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const t = useTranslations("Create");
+
+  const mcqsQuestion = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: false,
+      },
+      {
+        choiceText: "",
+        isTrue: true,
+      },
+    ],
+  };
+
+  const tOrFQuestion = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [
+      {
+        choiceText: t("true"),
+        isTrue: false,
+      },
+      {
+        choiceText: t("false"),
+        isTrue: false,
+      },
+    ],
+  };
+
+  const otherQuestion = {
+    id: "",
+    questionText: "",
+    answer: "",
+    placeholder: t("enterYourQuestions"),
+    choices: [],
+  };
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const setExamQuestionsSection = useQuizStore(
+    (state) => state.setExamQuestionsSection,
+  );
+  const setNumberOfQuestions = useQuizStore(
+    (state) => state.setNumberOfQuestions,
+  );
+
+  const examQuestionsSections = useQuizStore(
+    (state) => state.examQuestionsSections,
+  );
 
   function handleSubmit(closeModalFunction: () => void) {
     closeModalFunction();
-    handleAddingQuestions();
+    setExamQuestionsSection(
+      initialMcqsSection,
+      mcqsQuestion,
+      +numberOfQuestions["MCQs"],
+    );
+    setExamQuestionsSection(
+      initialTrueOrFalseSecttion,
+      tOrFQuestion,
+      +numberOfQuestions["trueOrFalse"],
+    );
+    setExamQuestionsSection(
+      initialFillInTheBlankSections,
+      otherQuestion,
+      +numberOfQuestions["FillInTheBlank"],
+    );
+
+    setNumberOfQuestions({ MCQs: "", FillInTheBlank: "", trueOrFalse: "" });
   }
+
   return (
     <>
       <Button onPress={onOpen} color="primary" size="sm">

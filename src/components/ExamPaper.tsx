@@ -6,12 +6,10 @@ import examLanguage from "@/lib/examLanguage";
 import { usePathname } from "next/navigation";
 
 const ExamPaper = ({
-  questionsSections,
   SectionQuestion,
   varient,
   ref,
 }: {
-  questionsSections: any;
   SectionQuestion: any;
   varient: "print" | "normal";
   ref?: any;
@@ -22,6 +20,9 @@ const ExamPaper = ({
   const language: "en" | "ar" = pathName as "en" | "ar";
   const teacherInputs = useExamHeaderStore((state) => state.teacherInputs);
   const studentInputs = useExamHeaderStore((state) => state.studentInputs);
+  const examQuestionsSections = useQuizStore(
+    (state) => state.examQuestionsSections,
+  );
 
   return (
     <div
@@ -117,7 +118,7 @@ const ExamPaper = ({
         </section>
       </div>
 
-      {questionsSections.map(
+      {examQuestionsSections.map(
         (section: any) =>
           section.questions.length !== 0 && (
             <div key={section.name}>

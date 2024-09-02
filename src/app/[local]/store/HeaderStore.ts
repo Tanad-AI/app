@@ -12,11 +12,15 @@ import {
 //   | "exam_title"
 //   | "notes_section"
 //   | "logo_section";
+type ValueField = {
+  en: string;
+  ar: string;
+};
 
 interface InputField {
   name: string;
   placeholder_text: string;
-  value_field: string;
+  value_field: ValueField;
   inputValue: string;
   title: string;
   isAdded: boolean;
@@ -61,13 +65,6 @@ export const useExamHeaderStore = create<StoreState>((set) => ({
   setExamLanguage: (language) =>
     set((state) => ({
       examLanguage: language,
-      teacherInputs: getInititalTeacherInputs(state.pageLanguage, language),
-      teacherButtons: getInitialTeacherButtons(state.pageLanguage, language),
-      studentInputs: getInitialStudentsInputs(state.pageLanguage, language),
-      studentButtons: getInitialOtherStudentsButtons(
-        state.pageLanguage,
-        language,
-      ),
     })),
   teacherInputs: getInititalTeacherInputs("en", "en"),
   teacherButtons: getInitialTeacherButtons("en", "en"),

@@ -9,19 +9,16 @@ import {
   Spinner,
   useDisclosure,
 } from "@nextui-org/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Paragraph, Text, TinyText } from "../lib/TextComponents";
 import DownloadButton from "@/components/DownloadButton";
 import ExamPaper from "@/components/ExamPaper";
 import PrintPreview from "@/components/PrintPreview";
 import { useQuizStore } from "../store/QuizState";
-import { FileDown, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const PreviewModalButton = () => {
-  const questionsSections = useQuizStore(
-    (state: any) => state.questionsSections,
-  );
   const SectionQuestion = useQuizStore((state: any) => state.SectionQuestion);
   const pageRef = useRef<HTMLDivElement>(null);
 
@@ -92,7 +89,6 @@ const PreviewModalButton = () => {
                   <div id="pagedjsdocroot" style={{ display: "none" }}>
                     <ExamPaper
                       varient="print"
-                      questionsSections={questionsSections}
                       SectionQuestion={SectionQuestion}
                     />
                   </div>

@@ -2,10 +2,10 @@
 import { create } from "zustand";
 import { createId } from "@paralleldrive/cuid2";
 import {
+  QuestionType,
   QuizHeaderFormDataType,
   SectionsData,
 } from "../types/document-elements.types";
-import { useTranslations } from "next-intl";
 
 interface Question {
   text: string;
@@ -25,7 +25,6 @@ type storeType = {
   ) => void;
   QuizFormHeaderDetails: QuizHeaderFormDataType;
   handleInputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  questionsSections: SectionsData[];
   numberOfQuestions: {
     MCQs: string;
     trueOrFalse: string;
@@ -37,12 +36,6 @@ type storeType = {
     trueOrFalse?: string;
     FillInTheBlank?: string;
   }) => void;
-
-  addQuestions: (
-    mcqsQuestion: any,
-    otherQuestions: any,
-    TOrFQuestion: any,
-  ) => void;
 
   setQuestionsText: (
     sectionIndex: number,
@@ -72,9 +65,14 @@ type storeType = {
   setExamDirection: (direction: "ltr" | "rtl") => void;
   examLanguage: "ar" | "en";
   setExamLanguage: (language: "ar" | "en") => void;
+  examQuestionsSections: SectionsData[];
+  setExamQuestionsSection: (
+    questions: SectionsData,
+    newQuestion: QuestionType,
+    times: number,
+  ) => void;
 };
 export const useQuizStore = create<storeType>((set) => ({
-  // initial state
   sections: [],
   setQuestionText: () => {}, // Provide a dummy implementation or the actual one
   QuizFormHeaderDetails: {
@@ -104,61 +102,17 @@ export const useQuizStore = create<storeType>((set) => ({
       },
     }));
   },
-  questionsSections: [
-    { name: "MCQs", title: "MCQs", added: false, questions: [], id: "" },
-    {
-      name: "trueOrFalse",
-      title: "True or false",
-      added: false,
-      questions: [],
-      id: "",
-    },
-    {
-      name: "FillInTheBlank",
-      title: "Fill in the blank",
-      added: false,
-      questions: [],
-      id: "",
-    },
-  ],
+
   numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
   setNumberOfQuestions: (newCounts) =>
     set((state) => ({
       numberOfQuestions: { ...state.numberOfQuestions, ...newCounts },
     })),
-  addQuestions: (mcqsQuestion, otherQuestions, TOrFQuestion) =>
-    set((state) => {
-      const updatedSections = [...state.questionsSections];
-      const { MCQs, trueOrFalse, FillInTheBlank } = state.numberOfQuestions;
 
-      for (let i = 0; i < +MCQs; i++) {
-        updatedSections[0].questions = [
-          ...updatedSections[0].questions,
-          { ...mcqsQuestion, id: createId() },
-        ];
-      }
-      for (let i = 0; i < +trueOrFalse; i++) {
-        updatedSections[1].questions = [
-          ...updatedSections[1].questions,
-          { ...TOrFQuestion, id: createId() }, // Assign unique ID
-        ];
-      }
-      for (let i = 0; i < +FillInTheBlank; i++) {
-        updatedSections[2].questions = [
-          ...updatedSections[2].questions,
-          { ...otherQuestions, id: createId() }, // Assign unique ID
-        ];
-      }
-
-      return {
-        questionsSections: updatedSections,
-        numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
-      };
-    }),
   setQuestionsText: (sectionIndex, questionIndex, question) =>
     set((state) => {
       // Create a copy of the current questionsSections state
-      const updatedQuestionsSections = [...state.questionsSections];
+      const updatedQuestionsSections = [...state.examQuestionsSections];
 
       // Create a copy of the specific section's questions
       const updatedQuestions = [
@@ -178,12 +132,12 @@ export const useQuizStore = create<storeType>((set) => ({
       };
 
       // Return the new state
-      return { questionsSections: updatedQuestionsSections };
+      return { examQuestionsSections: updatedQuestionsSections };
     }),
   setChoicesText: (newChoiceText, sectionIndex, questionIndex, choiceIndex) =>
     set((state) => {
       // Create a copy of the current questionsSections state
-      const updatedQuestionsSections = [...state.questionsSections];
+      const updatedQuestionsSections = [...state.examQuestionsSections];
 
       // Create a copy of the specific section's questions
       const updatedQuestions = [
@@ -212,7 +166,7 @@ export const useQuizStore = create<storeType>((set) => ({
       };
 
       // Return the new state
-      return { questionsSections: updatedQuestionsSections };
+      return { examQuestionsSections: updatedQuestionsSections };
     }),
   SectionQuestion: {
     MCQs: {
@@ -240,9 +194,9 @@ export const useQuizStore = create<storeType>((set) => ({
     })),
   setNewQuestions: (newQuestions, sectionIndex) =>
     set((state) => {
-      const updatedQuestions = [...state.questionsSections];
+      const updatedQuestions = [...state.examQuestionsSections];
       updatedQuestions[sectionIndex].questions = newQuestions;
-      return { questionsSections: updatedQuestions };
+      return { examQuestionsSections: updatedQuestions };
     }),
   a4Page: null,
   setA4Page: (element) => {
@@ -274,4 +228,45 @@ export const useQuizStore = create<storeType>((set) => ({
       examLanguage: language,
     }));
   },
+  examQuestionsSections: [],
+  setExamQuestionsSection: (newSection, newQuestion, times) =>
+    set((state) => {
+      const existingSection = state.examQuestionsSections.find(
+        (section) => section.name === newSection.name,
+      );
+
+      let updatedSections;
+
+      // If the section does not exist, add it once
+      if (!existingSection) {
+        updatedSections = [
+          ...state.examQuestionsSections,
+          {
+            ...newSection,
+            questions: Array(times)
+              .fill("")
+              .map(() => ({ ...newQuestion, id: createId() })),
+          },
+        ];
+      } else {
+        // If the section exists, update the questions in that section
+        updatedSections = state.examQuestionsSections.map((section) =>
+          section.name === newSection.name
+            ? {
+                ...section,
+                questions: [
+                  ...section.questions,
+                  ...Array(times)
+                    .fill(null)
+                    .map(() => ({ ...newQuestion, id: createId() })),
+                ],
+              }
+            : section,
+        );
+      }
+
+      return {
+        examQuestionsSections: updatedSections,
+      };
+    }),
 }));

@@ -4,6 +4,8 @@ import {
   Card,
   Checkbox,
   Input,
+  Radio,
+  RadioGroup,
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
@@ -19,79 +21,25 @@ import { useTranslations } from "next-intl";
 
 function QuestionsComponent() {
   const {
-    questionsSections,
     numberOfQuestions,
     setNumberOfQuestions,
-    addQuestions,
     setQuestionsText,
     setChoicesText,
     SectionQuestion,
     setSectionQuestion,
     setNewQuestions,
   } = useQuizStore();
-  const t = useTranslations("Create");
 
-  const [isThereQuestions, setIsThereQuestions] = useState<boolean>(false);
-  const msqsQuestion: QuestionType = {
-    id: "",
-    questionText: "",
-    answer: "",
-    placeholder: t("enterYourQuestions"),
-    choices: [
-      {
-        choiceText: "",
-        isTrue: false,
-      },
-      {
-        choiceText: "",
-        isTrue: false,
-      },
-      {
-        choiceText: "",
-        isTrue: false,
-      },
-      {
-        choiceText: "",
-        isTrue: true,
-      },
-    ],
-  };
-  const TOrFQuestion: QuestionType = {
-    id: "",
-    questionText: "",
-    answer: "",
-    placeholder: t("enterYourQuestions"),
-    choices: [
-      {
-        choiceText: t("true"),
-        isTrue: false,
-      },
-      {
-        choiceText: t("false"),
-        isTrue: false,
-      },
-    ],
-  };
-  const otherQuestion: QuestionType = {
-    id: "",
-    questionText: "",
-    answer: "",
-    placeholder: t("enterYourQuestions"),
-    choices: [],
-  };
+  const examQuestionsSections = useQuizStore(
+    (state) => state.examQuestionsSections,
+  );
+  const t = useTranslations("Create");
 
   const handleQuestionsInputChange = (e: {
     target: { name: string; value: string };
   }) => {
     const { name, value } = e.target;
     setNumberOfQuestions({ [name]: value });
-  };
-
-  const handleAddingQuestions = () => {
-    const mcqsQuestion = msqsQuestion;
-    const otherQuestions = otherQuestion;
-    setIsThereQuestions(true);
-    addQuestions(mcqsQuestion, TOrFQuestion, otherQuestions);
   };
 
   function handleQuestionTextareaChange(
@@ -103,9 +51,9 @@ function QuestionsComponent() {
   }
 
   function handleDeletingQuestion(id: string, sectionIndex: number) {
-    const updatedQuestions = questionsSections[sectionIndex].questions.filter(
-      (question: { id: string }) => question.id !== id,
-    );
+    const updatedQuestions = examQuestionsSections[
+      sectionIndex
+    ].questions.filter((question: { id: string }) => question.id !== id);
     setNewQuestions(updatedQuestions, sectionIndex);
   }
 
@@ -114,19 +62,13 @@ function QuestionsComponent() {
       <section className="flex items-baseline gap-1">
         <Text>{t("questions")}</Text>
       </section>
-      <Card
-        radius="sm"
-        shadow="none"
-        className={`flex min-h-full flex-col pb-8 pt-4 ${
-          !isThereQuestions && "hidden"
-        }`}
-      >
-        {questionsSections &&
-          questionsSections.map((section: any, index: number) => {
+      <Card radius="sm" shadow="none" className={`flex  flex-col pb-8 pt-4`}>
+        {examQuestionsSections &&
+          examQuestionsSections.map((section: any, index: number) => {
             const sectionName: "MCQs" | "trueOrFalse" | "FillInTheBlank" =
               section.name;
             return (
-              <div key={index}>
+              <div key={section.name}>
                 {section.questions.length === 0 ? (
                   <></>
                 ) : (
@@ -264,10 +206,21 @@ function QuestionsComponent() {
                                                 )
                                               }
                                             ></Input>
-
-                                            <Checkbox>
-                                              {t("setAsTrue")}
-                                            </Checkbox>
+                                            <div className="flex  items-center gap-1">
+                                              <input
+                                                type="radio"
+                                                id={`${idx}`}
+                                                name={question.id}
+                                                title={t("setAsTrue")}
+                                                className="cursor-pointer"
+                                              />
+                                              <label
+                                                className="cursor-pointer"
+                                                htmlFor={`${idx}`}
+                                              >
+                                                {t("setAsTrue")}
+                                              </label>
+                                            </div>
                                           </div>
                                         ),
                                       )}
@@ -287,7 +240,6 @@ function QuestionsComponent() {
       <section className="flex w-full justify-center">
         <QuestionsModal
           numberOfQuestions={numberOfQuestions}
-          handleAddingQuestions={handleAddingQuestions}
           handleQuestionsInputChange={handleQuestionsInputChange}
         />
       </section>
