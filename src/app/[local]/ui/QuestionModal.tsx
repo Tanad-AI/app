@@ -51,18 +51,22 @@ function QuestionsModal({
       {
         choiceText: "",
         isTrue: false,
+        id: "",
       },
       {
         choiceText: "",
         isTrue: false,
+        id: "",
       },
       {
         choiceText: "",
         isTrue: false,
+        id: "",
       },
       {
         choiceText: "",
         isTrue: false,
+        id: "",
       },
     ],
   };
@@ -76,10 +80,12 @@ function QuestionsModal({
       {
         choiceText: t("true"),
         isTrue: false,
+        id: "",
       },
       {
         choiceText: t("false"),
         isTrue: false,
+        id: "",
       },
     ],
   };

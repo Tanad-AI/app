@@ -206,7 +206,7 @@ function QuestionsComponent() {
                                               <input
                                                 type="radio"
                                                 id={`${choiceIdx}`}
-                                                name={question.id}
+                                                name={section[sectionName].question.id}
                                                 title={t("setAsTrue")}
                                                 onChange={(e) => {
                                                   setChoiceAsTrue(
