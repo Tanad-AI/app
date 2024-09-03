@@ -5,6 +5,7 @@ import {
   QuestionType,
   QuizHeaderFormDataType,
   SectionsData,
+  choiceType,
 } from "../types/document-elements.types";
 
 interface Question {
@@ -71,6 +72,12 @@ type storeType = {
     newQuestion: QuestionType,
     times: number,
   ) => void;
+  setChoiceAsTrue: (
+    checked: boolean,
+    questionId: string,
+    choiceIndex: number,
+    sectionName: string,
+  ) => void;
 };
 export const useQuizStore = create<storeType>((set) => ({
   sections: [],
@@ -102,7 +109,6 @@ export const useQuizStore = create<storeType>((set) => ({
       },
     }));
   },
-
   numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
   setNumberOfQuestions: (newCounts) =>
     set((state) => ({
@@ -245,7 +251,10 @@ export const useQuizStore = create<storeType>((set) => ({
             ...newSection,
             questions: Array(times)
               .fill("")
-              .map(() => ({ ...newQuestion, id: createId() })),
+              .map(() => ({
+                ...newQuestion,
+                id: createId(),
+              })),
           },
         ];
       } else {
@@ -267,6 +276,31 @@ export const useQuizStore = create<storeType>((set) => ({
 
       return {
         examQuestionsSections: updatedSections,
+      };
+    }),
+
+  setChoiceAsTrue: (checked, questionId, choiceIndex, sectionName) =>
+    set((state) => {
+      // Copy the sections array to maintain immutability
+      const sections = [...state.examQuestionsSections];
+
+      // Find the specific section by name
+      const currentSection = sections.find((item) => item.name === sectionName);
+
+      // Find the specific question within that section by ID
+      const currentQuestion = currentSection?.questions.find(
+        (item) => item.id === questionId,
+      );
+
+      if (currentQuestion) {
+        // Set all choices' isTrue to false before setting the selected one to true
+        // You can also update other properties like `choice` and `checked` if needed
+        currentQuestion.choices[choiceIndex].isTrue = checked;
+      }
+
+      // Return the updated state
+      return {
+        examQuestionsSections: sections, // Return the updated sections array
       };
     }),
 }));

@@ -24,6 +24,7 @@ function QuestionsComponent() {
   const examQuestionsSections = useQuizStore(
     (state) => state.examQuestionsSections,
   );
+  const setChoiceAsTrue = useQuizStore((state) => state.setChoiceAsTrue);
   const t = useTranslations("Create");
 
   const handleQuestionsInputChange = (e: {
@@ -177,16 +178,19 @@ function QuestionsComponent() {
                                   <section className="flex flex-col gap-4">
                                     {question.choices &&
                                       question.choices.map(
-                                        (choice: choiceType, idx: number) => (
+                                        (
+                                          choice: choiceType,
+                                          choiceIdx: number,
+                                        ) => (
                                           <div
-                                            key={idx}
+                                            key={choiceIdx}
                                             className="flex flex-col gap-1"
                                           >
                                             <Input
                                               variant="bordered"
                                               labelPlacement="outside"
                                               label={`${t("choice")} ${
-                                                idx + 1
+                                                choiceIdx + 1
                                               }`}
                                               placeholder={choice.choiceText}
                                               onChange={(e) =>
@@ -194,21 +198,30 @@ function QuestionsComponent() {
                                                   e.target.value,
                                                   index,
                                                   i,
-                                                  idx,
+                                                  choiceIdx,
                                                 )
                                               }
                                             ></Input>
                                             <div className="flex  items-center gap-1">
                                               <input
                                                 type="radio"
-                                                id={`${idx}`}
+                                                id={`${choiceIdx}`}
                                                 name={question.id}
                                                 title={t("setAsTrue")}
+                                                onChange={(e) => {
+                                                  setChoiceAsTrue(
+                                                    e.target.checked,
+                                                    question.id,
+                                                    choiceIdx,
+                                                    sectionName,
+                                                  );
+                                                  console.log(question.id);
+                                                }}
                                                 className="cursor-pointer"
                                               />
                                               <label
                                                 className="cursor-pointer"
-                                                htmlFor={`${idx}`}
+                                                htmlFor={`${choiceIdx}`}
                                               >
                                                 {t("setAsTrue")}
                                               </label>

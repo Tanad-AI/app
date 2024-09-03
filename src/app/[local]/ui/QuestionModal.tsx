@@ -62,7 +62,7 @@ function QuestionsModal({
       },
       {
         choiceText: "",
-        isTrue: true,
+        isTrue: false,
       },
     ],
   };

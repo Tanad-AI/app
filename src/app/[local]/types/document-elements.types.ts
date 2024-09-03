@@ -1,6 +1,7 @@
 export type choiceType = {
   choiceText: string;
   isTrue: boolean;
+  id: string;
 };
 export type QuestionType = {
   id: string;
