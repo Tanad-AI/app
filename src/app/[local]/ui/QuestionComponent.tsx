@@ -1,15 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  Button,
-  Card,
-  Checkbox,
-  Input,
-  Radio,
-  RadioGroup,
-  Textarea,
-  Tooltip,
-} from "@nextui-org/react";
-import React, { useState } from "react";
+import { Button, Card, Input, Textarea, Tooltip } from "@nextui-org/react";
+import React from "react";
 import { Text, TinyText } from "../lib/TextComponents";
 import CustomAccordion from "./CustomAccordion";
 import { Trash } from "lucide-react";
@@ -62,7 +53,13 @@ function QuestionsComponent() {
       <section className="flex items-baseline gap-1">
         <Text>{t("questions")}</Text>
       </section>
-      <Card radius="sm" shadow="none" className={`flex  flex-col pb-8 pt-4`}>
+      <Card
+        radius="sm"
+        shadow="none"
+        className={`flex flex-col pb-8 pt-4 ${
+          examQuestionsSections.length == 0 && "hidden"
+        }`}
+      >
         {examQuestionsSections &&
           examQuestionsSections.map((section: any, index: number) => {
             const sectionName: "MCQs" | "trueOrFalse" | "FillInTheBlank" =
@@ -73,11 +70,6 @@ function QuestionsComponent() {
                   <></>
                 ) : (
                   <>
-                    {index == 0 ? (
-                      <></>
-                    ) : (
-                      <div className="mt-2 h-3 w-full bg-[#FAE9DF]"></div>
-                    )}
                     <div className={`space-y-2 px-3 ${index !== 0 && "pt-3"}`}>
                       <div className="flex items-baseline gap-2">
                         <Text>{section.title}</Text>

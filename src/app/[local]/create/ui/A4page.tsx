@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import ExamPaper from "@/components/ExamPaper";
 
@@ -10,9 +10,9 @@ interface A4PagePropsType {
 }
 
 const A4page = ({ className }: A4PagePropsType) => {
-  const SectionQuestion = useQuizStore((state: any) => state.SectionQuestion);
-  const documentName = useQuizStore((state: any) => state.documentName);
-  const setDocumentName = useQuizStore((state: any) => state.setDocumentName);
+  const SectionQuestion = useQuizStore((state) => state.SectionQuestion);
+  const documentName = useQuizStore((state) => state.documentName);
+  const setDocumentName = useQuizStore((state) => state.setDocumentName);
 
   return (
     <div

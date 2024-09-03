@@ -100,27 +100,25 @@ function QuestionsModal({
     (state) => state.setNumberOfQuestions,
   );
 
-  const examQuestionsSections = useQuizStore(
-    (state) => state.examQuestionsSections,
-  );
-
   function handleSubmit(closeModalFunction: () => void) {
     closeModalFunction();
-    setExamQuestionsSection(
-      initialMcqsSection,
-      mcqsQuestion,
-      +numberOfQuestions["MCQs"],
-    );
-    setExamQuestionsSection(
-      initialTrueOrFalseSecttion,
-      tOrFQuestion,
-      +numberOfQuestions["trueOrFalse"],
-    );
-    setExamQuestionsSection(
-      initialFillInTheBlankSections,
-      otherQuestion,
-      +numberOfQuestions["FillInTheBlank"],
-    );
+    const sections = [
+      { section: initialMcqsSection, question: mcqsQuestion, key: "MCQs" },
+      {
+        section: initialTrueOrFalseSecttion,
+        question: tOrFQuestion,
+        key: "trueOrFalse",
+      },
+      {
+        section: initialFillInTheBlankSections,
+        question: otherQuestion,
+        key: "FillInTheBlank",
+      },
+    ];
+
+    sections.forEach(({ section, question, key }) => {
+      setExamQuestionsSection(section, question, +numberOfQuestions[key]);
+    });
 
     setNumberOfQuestions({ MCQs: "", FillInTheBlank: "", trueOrFalse: "" });
   }
