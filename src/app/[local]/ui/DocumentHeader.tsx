@@ -44,7 +44,6 @@ const InputFieldsList = ({
 }) => {
   const parent = useRef(null);
   const t = useTranslations("documentHeader");
-  const examLanguage = useExamHeaderStore((state) => state.examLanguage);
 
   useEffect(() => {
     parent.current && autoAnimate(parent.current);

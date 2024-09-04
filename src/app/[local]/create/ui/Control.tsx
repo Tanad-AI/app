@@ -3,8 +3,13 @@
 import React from "react";
 import QuestionsComponent from "@/app/[local]/ui/QuestionComponent";
 import DocumentHeader from "@/app/[local]/ui/DocumentHeader";
+import FooterControl from "../../ui/FooterControl";
 
-const currentView = [<DocumentHeader />, <QuestionsComponent />];
+const currentView = [
+  <DocumentHeader />,
+  <QuestionsComponent />,
+  <FooterControl />,
+];
 
 interface ControlProps {
   activeControlView: number;

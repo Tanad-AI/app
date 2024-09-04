@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { useExamHeaderStore } from "@/app/[local]/store/HeaderStore";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
+import useFooterStore from "@/app/[local]/store/useFooterStore";
 import MCQsQuestion from "@/app/[local]/ui/MCQsQuestion";
 import examLanguage from "@/lib/examLanguage";
+import { createId } from "@paralleldrive/cuid2";
 import { usePathname } from "next/navigation";
 
 const ExamPaper = ({
@@ -23,6 +25,7 @@ const ExamPaper = ({
   const examQuestionsSections = useQuizStore(
     (state) => state.examQuestionsSections,
   );
+  const lines = useFooterStore((state) => state.lines);
 
   return (
     <div
@@ -117,7 +120,6 @@ const ExamPaper = ({
           })}
         </section>
       </div>
-
       {examQuestionsSections.map(
         (section: any) =>
           section.questions.length !== 0 && (
@@ -136,6 +138,11 @@ const ExamPaper = ({
             </div>
           ),
       )}
+      <div className="flex w-full flex-col items-center">
+        {lines.map((line) => (
+          <div key={createId()}>{line}</div>
+        ))}
+      </div>
     </div>
   );
 };
