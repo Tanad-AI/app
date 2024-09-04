@@ -205,8 +205,8 @@ function QuestionsComponent() {
                                             <div className="flex  items-center gap-1">
                                               <input
                                                 type="radio"
-                                                id={`${choiceIdx}`}
-                                                name={section[sectionName].question.id}
+                                                id={`${choiceIdx}${question.id}`}
+                                                name={section.questions[i].id}
                                                 title={t("setAsTrue")}
                                                 onChange={(e) => {
                                                   setChoiceAsTrue(
@@ -215,13 +215,13 @@ function QuestionsComponent() {
                                                     choiceIdx,
                                                     sectionName,
                                                   );
-                                                  console.log(question.id);
+                                                  console.log(question.choices);
                                                 }}
                                                 className="cursor-pointer"
                                               />
                                               <label
                                                 className="cursor-pointer"
-                                                htmlFor={`${choiceIdx}`}
+                                                htmlFor={`${choiceIdx}${question.id}`}
                                               >
                                                 {t("setAsTrue")}
                                               </label>

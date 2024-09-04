@@ -294,6 +294,11 @@ export const useQuizStore = create<storeType>((set) => ({
 
       if (currentQuestion) {
         // Set all choices' isTrue to false before setting the selected one to true
+        currentQuestion.choices.forEach((choice) => (choice.isTrue = false));
+
+        // Set the specific choice's isTrue property to true
+        currentQuestion.choices[choiceIndex].isTrue = true;
+
         // You can also update other properties like `choice` and `checked` if needed
         currentQuestion.choices[choiceIndex].isTrue = checked;
       }
