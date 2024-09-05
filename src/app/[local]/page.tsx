@@ -34,6 +34,7 @@ import GridPattern from "@/components/GridPattern";
 import WordRotate from "@/components/WordRotate";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function TryNowButton({
   type,
@@ -350,6 +351,7 @@ function NavBar({ t }: { t: any }) {
       </div>
       <div></div>
       <div className="flex gap-6">
+        <LanguageSwitcher />
         <SignUpButton />
         <TryNowButton />
       </div>
