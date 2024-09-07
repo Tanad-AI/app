@@ -328,12 +328,17 @@ function page() {
               <TanadLogo />
               <Text className="">{t("tanad")}</Text>
             </div>
-            <Text>{t("footer.note")}</Text>
+            <div>
+              <Text>{t("footer.note")}</Text>
+            </div>
           </div>
           <Divider className="bg-white/20" />
-          <Paragraph className="text-white/70">
-            {t("footer.copyright")}
-          </Paragraph>
+          <div className="flex justify-between">
+            <Paragraph className="text-white/70">
+              {t("footer.copyright")}
+            </Paragraph>
+            <LanguageSwitcher />
+          </div>
         </div>
       </footer>
     </>
@@ -351,7 +356,6 @@ function NavBar({ t }: { t: any }) {
       </div>
       <div></div>
       <div className="flex gap-6">
-        <LanguageSwitcher />
         <SignUpButton />
         <TryNowButton />
       </div>

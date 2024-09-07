@@ -1,7 +1,7 @@
 "use client";
-import { Select, Selection, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { Globe } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { ChangeEvent, useState, useTransition } from "react";
 
 const langueges = [
@@ -19,7 +19,8 @@ function LanguageSwitcher() {
   const [value, setValue] = useState<string>("en");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
+  const pathName = usePathname();
+  const locale = pathName.slice(1, 3);
   const handleSelectionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
     startTransition(() => {
@@ -29,9 +30,9 @@ function LanguageSwitcher() {
   return (
     <Select
       labelPlacement="outside"
-      className="min-w-36"
+      className="w-36"
       variant="bordered"
-      defaultSelectedKeys={[value]}
+      defaultSelectedKeys={[locale]}
       onChange={handleSelectionChange}
       selectorIcon={<Globe size={12} color="grey" />}
     >
