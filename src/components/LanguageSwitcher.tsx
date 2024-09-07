@@ -15,7 +15,12 @@ const langueges = [
   },
 ];
 
-function LanguageSwitcher() {
+type LanguageSwitcherType = {
+  path?: string;
+};
+
+function LanguageSwitcher({ path }: LanguageSwitcherType) {
+  if (!path) path = "";
   const [value, setValue] = useState<string>("en");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -24,7 +29,7 @@ function LanguageSwitcher() {
   const handleSelectionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
     startTransition(() => {
-      router.replace(`/${e.target.value}`);
+      router.replace(`/${e.target.value}/${path}`, { scroll: false });
     });
   };
   return (

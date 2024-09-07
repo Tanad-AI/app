@@ -22,6 +22,7 @@ import {
 import React, { useMemo, useState } from "react";
 import { Paragraph, SubHeader, Text } from "../lib/TextComponents";
 import Link from "next/link";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function page() {
   const [selectedKeys, setSelectedKeys] = useState(new Set(["Date Created"]));
