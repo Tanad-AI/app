@@ -181,6 +181,8 @@ const DocumentHeader = () => {
     removeStudentField,
     moveFieldUp,
     moveFieldDown,
+    setStudentInputs,
+    setTeacherInputs,
   } = useExamHeaderStore();
 
   return (

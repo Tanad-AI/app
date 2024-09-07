@@ -53,13 +53,6 @@ export const useExamHeaderStore = create<StoreState>((set) => ({
   setPageLanguage: (language) =>
     set((state) => ({
       pageLanguage: language,
-      teacherInputs: getInititalTeacherInputs(language, state.examLanguage),
-      teacherButtons: getInitialTeacherButtons(language, state.examLanguage),
-      studentInputs: getInitialStudentsInputs(language, state.examLanguage),
-      studentButtons: getInitialOtherStudentsButtons(
-        language,
-        state.examLanguage,
-      ),
     })),
   examLanguage: "en",
   setExamLanguage: (language) =>
