@@ -225,5 +225,12 @@
     "TrueOrFalseSectionQuestion": "Determine if the following statements are True or False.",
     "true": "true",
     "false": "false"
+  },
+  "footer": {
+    "footer": "Footer",
+    "line": "Line",
+    "typeAnyThing": "Type anything...",
+    "addNewLine": "Add a new line",
+    "removeField": "Remove Field"
   }
 }

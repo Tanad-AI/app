@@ -13,7 +13,7 @@ function FooterControl() {
   const handleChange = useFooterStore((state) => state.handleChange);
   const handleDelete = useFooterStore((state) => state.handleDelete);
   const moveLine = useFooterStore((state) => state.moveLine);
-  const t = useTranslations("documentHeader");
+  const t = useTranslations("footer");
   const parent = useRef(null);
 
   useEffect(() => {
@@ -22,11 +22,11 @@ function FooterControl() {
 
   return (
     <div className="h-full">
-      <Text className="mb-2">Footer</Text>
+      <Text className="mb-2">{t("footer")}</Text>
       <Card
         radius="sm"
         shadow="none"
-        className="flex min-h-full flex-col gap-3 px-3 pb-14 pt-4"
+        className="flex min-h-full flex-col gap-3 px-3 pb-28 pt-4"
       >
         <div ref={parent} className="flex flex-col gap-2">
           {lines.map((line, i) => (
@@ -34,8 +34,8 @@ function FooterControl() {
               <Input
                 value={line.text}
                 onChange={(e) => handleChange(i, e.target.value)}
-                placeholder="Type anything"
-                label={`Line ${i + 1}`}
+                placeholder={t("typeAnyThing")}
+                label={`${t("line")} ${i + 1}`}
                 labelPlacement="outside"
                 variant="bordered"
                 title="Footer"
@@ -81,10 +81,10 @@ function FooterControl() {
           color="primary"
           onClick={() => setLines([...lines, { text: "", id: createId() }])}
           size="sm"
-          className="min-h-8 w-fit rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
+          className="mx-auto min-h-8 w-fit rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
         >
           <PlusIcon size={12} />
-          Add a new line
+          {t("addNewLine")}
         </Button>
       </Card>
     </div>

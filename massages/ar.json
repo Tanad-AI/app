@@ -229,5 +229,12 @@
     "TrueOrFalseSectionQuestion": "اختر: صح أم خطأ للعبارة التالية:",
     "true": "صحيح",
     "false": "خطأ"
+  },
+  "footer": {
+    "footer": "نهاية الصفحة",
+    "line": "السطر",
+    "typeAnyThing": "اكتب أي شيء...",
+    "addNewLine": "إضافة سطر جديد",
+    "removeField": "حذف الحقل"
   }
 }
