@@ -140,7 +140,7 @@ const ExamPaper = ({
       )}
       <div className="flex w-full flex-col items-center">
         {lines.map((line) => (
-          <div key={createId()}>{line}</div>
+          <div key={createId()}>{line.text}</div>
         ))}
       </div>
     </div>

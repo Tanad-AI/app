@@ -1,21 +1,27 @@
+import { createId } from "@paralleldrive/cuid2";
 import create from "zustand";
 
+type LineType = {
+  text: string;
+  id: string;
+};
+
 interface FooterState {
-  lines: string[];
-  setLines: (lines: string[]) => void;
+  lines: LineType[];
+  setLines: (lines: LineType[]) => void;
   handleChange: (index: number, newText: string) => void;
   handleDelete: (fieldIndex: number) => void;
   moveLine: (index: number, direction: "up" | "down") => void;
 }
 
 const useFooterStore = create<FooterState>((set) => ({
-  lines: [""],
+  lines: [{ text: "", id: createId() }],
   setLines: (newLines) => set({ lines: newLines }),
 
   handleChange: (index, newText) =>
     set((state) => {
       const updatedLines = [...state.lines];
-      updatedLines[index] = newText;
+      updatedLines[index].text = newText;
       return { lines: updatedLines };
     }),
 
