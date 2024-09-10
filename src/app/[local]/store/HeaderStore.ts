@@ -51,7 +51,7 @@ interface StoreState {
 export const useExamHeaderStore = create<StoreState>((set) => ({
   pageLanguage: "en",
   setPageLanguage: (language) =>
-    set((state) => ({
+    set(() => ({
       pageLanguage: language,
     })),
   examLanguage: "en",
@@ -59,10 +59,10 @@ export const useExamHeaderStore = create<StoreState>((set) => ({
     set((state) => ({
       examLanguage: language,
     })),
-  teacherInputs: getInititalTeacherInputs("en", "en"),
-  teacherButtons: getInitialTeacherButtons("en", "en"),
-  studentInputs: getInitialStudentsInputs("en", "en"),
-  studentButtons: getInitialOtherStudentsButtons("en", "en"),
+  teacherInputs: getInititalTeacherInputs("en"),
+  teacherButtons: getInitialTeacherButtons("en"),
+  studentInputs: getInitialStudentsInputs("en"),
+  studentButtons: getInitialOtherStudentsButtons("en"),
   setTeacherInputs: (inputs) => set({ teacherInputs: inputs }),
   setTeacherButtons: (buttons) => set({ teacherButtons: buttons }),
   setStudentInputs: (inputs) => set({ studentInputs: inputs }),

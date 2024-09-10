@@ -120,53 +120,99 @@
   "documentHeader": {
     "header": "رأس الصفحة",
     "examInfo": "معلومات الاختبار",
+    "schoolName": {
+      "lable": "اسم المدرسة/الكلية",
+      "placeholder": "أدخل اسم المدرسة"
+    },
     "removeField": "حذف الحقل",
-    "schoolName": "اسم المدرسة/الكلية",
-    "enterSchoolName": "أدخل اسم المدرسة",
-    "subject": "المادة",
-    "enterSubject": "أدخل المادة",
-    "termSemester": "الفصل/الفصل الدراسي",
-    "enterTermSemester": "أدخل الفصل/الفصل الدراسي",
-    "year": "السنة",
-    "enterYear": "أدخل السنة",
-    "class": "الصف",
-    "enterClass": "أدخل الصف",
-    "type": "النوع",
-    "final": "نهائي",
-    "numberOfMarks": "عدد الدرجات",
-    "enterNumberOfMarks": "أدخل عدد الدرجات",
-    "dayOfExam": "يوم الامتحان",
-    "enterDayOfExam": "أدخل يوم الامتحان",
-    "dateOfExam": "تاريخ الامتحان",
-    "enterDateOfExam": "أدخل تاريخ الامتحان",
-    "durationInHours": "المدة بالساعات",
-    "enterDurationInHours": "أدخل المدة بالساعات",
-    "classSection": "الشعبة الدراسية",
-    "enterClassSection": "أدخل الشعبة الدراسية",
-    "notesInstructions": "ملاحظات/تعليمات",
-    "enterNotesInstructions": "أدخل الملاحظات/التعليمات",
-    "numberOfQuestions": "عدد الأسئلة",
-    "enterNumberOfQuestions": "أدخل عدد الأسئلة",
-    "country": "البلد",
-    "enterCountry": "أدخل البلد",
-    "numberOfPages": "عدد الصفحات",
-    "enterNumberOfPages": "أدخل عدد الصفحات",
-    "stateDepartmentName": "اسم إدارة الدولة",
-    "enterStateDepartmentName": "أدخل اسم إدارة الدولة",
-    "ministryDepartmentName": "اسم الوزارة/الإدارة",
-    "enterMinistryDepartmentName": "أدخل اسم الوزارة/الإدارة",
+    "subject": {
+      "lable": "المادة",
+      "placeholder": "أدخل المادة"
+    },
+    "termSemester": {
+      "lable": "الفصل/الفصل الدراسي",
+      "placeholder": "أدخل الفصل/الفصل الدراسي"
+    },
+    "year": {
+      "lable": "السنة",
+      "placeholder": "أدخل السنة"
+    },
+    "class": {
+      "lable": "الصف",
+      "placeholder": "أدخل الصف"
+    },
+    "type": {
+      "lable": "النوع",
+      "placeholder": "نهائي"
+    },
+    "numberOfMarks": {
+      "lable": "عدد الدرجات",
+      "placeholder": "أدخل عدد الدرجات"
+    },
+    "dayOfExam": {
+      "lable": "يوم الامتحان",
+      "placeholder": "أدخل يوم الامتحان"
+    },
+    "dateOfExam": {
+      "lable": "تاريخ الامتحان",
+      "placeholder": "أدخل تاريخ الامتحان"
+    },
+    "durationInHours": {
+      "lable": "المدة بالساعات",
+      "placeholder": "أدخل المدة بالساعات"
+    },
+    "classSection": {
+      "lable": "الشعبة الدراسية",
+      "placeholder": "أدخل الشعبة الدراسية"
+    },
+    "notesInstructions": {
+      "lable": "ملاحظات/تعليمات",
+      "placeholder": "أدخل الملاحظات/التعليمات"
+    },
+    "numberOfQuestions": {
+      "lable": "عدد الأسئلة",
+      "placeholder": "أدخل عدد الأسئلة"
+    },
+    "country": {
+      "lable": "البلد",
+      "placeholder": "أدخل البلد"
+    },
+    "numberOfPages": {
+      "lable": "عدد الصفحات",
+      "placeholder": "أدخل عدد الصفحات"
+    },
+    "stateDepartmentName": {
+      "lable": "اسم إدارة الدولة",
+      "placeholder": "أدخل اسم إدارة الدولة"
+    },
+    "ministryDepartmentName": {
+      "lable": "اسم الوزارة/الإدارة",
+      "placeholder": "أدخل اسم الوزارة/الإدارة"
+    },
     "addMoreFields": "إضافة حقول اخرى",
-    "logo": "الشعار",
+    "logo": {
+      "lable": "الشعار"
+    },
     "uploadLogo": "اسحب وأفلت صورة هنا، أو انقر لتحديد واحدة",
     "allFieldsAdded": "تمت إضافة جميع الحقول",
     "studentInformation": "معلومات الطالب",
     "studentInstruction": "يجب على الطالب تعبئة هذه الحقول",
-    "studentName": "اسم الطالب",
-    "enterStudentName": "الاسم:",
-    "studentNumber": "رقم الطالب",
-    "enterStudentNumber": "رقم الجلوس",
-    "studentClass": "صف الطالب",
-    "enterStudentClass": "الصف",
+    "studentName": {
+      "lable": "اسم الطالب",
+      "placeholder": "الاسم:"
+    },
+    "studentNumber": {
+      "lable": "رقم الطالب",
+      "placeholder": "رقم الجلوس:"
+    },
+    "studentClass": {
+      "lable": "صف الطالب",
+      "placeholder": "الصف"
+    },
+    "faculty": {
+      "lable": "الكلية",
+      "placeholder": "أدخل الكلية"
+    },
     "allStudentFieldsAdded": "تمت إضافة جميع الحقول"
   },
   "examPaper": {

@@ -83,7 +83,7 @@ const ExamPaper = ({
         </section>
         <section className="col-span-3 border-y-[1px] border-black ps-2">
           <div>
-            <span>
+            {/* <span>
               <span>
                 {examLanguage.en.examTitle[0]}{" "}
                 {
@@ -105,7 +105,7 @@ const ExamPaper = ({
                 teacherInputs?.filter((input) => input.name == "year")[0]
                   .inputValue
               }
-            </span>
+            </span> */}
           </div>
         </section>
         <section className="col-span-3 space-y-3 py-3 ps-2">

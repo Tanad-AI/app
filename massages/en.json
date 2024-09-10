@@ -116,53 +116,99 @@
   "documentHeader": {
     "header": "Header",
     "examInfo": "Exam information",
-    "schoolName": "School/College Name",
+    "schoolName": {
+      "lable": "School/College Name",
+      "placeholder": "Enter school name"
+    },
     "removeField": "Remove Field",
-    "enterSchoolName": "Enter school name",
-    "subject": "Subject",
-    "enterSubject": "Enter subject",
-    "termSemester": "Term/Semester",
-    "enterTermSemester": "Enter term/semester",
-    "year": "Year",
-    "enterYear": "Enter the year",
-    "class": "Class",
-    "enterClass": "Enter class",
-    "type": "Type",
-    "final": "Final",
-    "numberOfMarks": "Number of Marks",
-    "enterNumberOfMarks": "Enter number of marks",
-    "dayOfExam": "Day of the Exam",
-    "enterDayOfExam": "Enter day of the exam",
-    "dateOfExam": "Date of the Exam",
-    "enterDateOfExam": "Enter date of the exam",
-    "durationInHours": "Duration in Hours",
-    "enterDurationInHours": "Enter duration in hours",
-    "classSection": "Class Section",
-    "enterClassSection": "Enter class section",
-    "notesInstructions": "Notes/Instructions",
-    "enterNotesInstructions": "Enter notes/instructions",
-    "numberOfQuestions": "Number of Questions",
-    "enterNumberOfQuestions": "Enter number of questions",
-    "country": "Country",
-    "enterCountry": "Enter country",
-    "numberOfPages": "Number of Pages",
-    "enterNumberOfPages": "Enter the number of pages",
-    "stateDepartmentName": "State Department Name",
-    "enterStateDepartmentName": "Enter state department name",
-    "ministryDepartmentName": "Ministry/Department Name",
-    "enterMinistryDepartmentName": "Enter ministry/department name",
+    "subject": {
+      "lable": "Subject",
+      "placeholder": "Enter subject"
+    },
+    "termSemester": {
+      "lable": "Term/Semester",
+      "placeholder": "Enter term/semester"
+    },
+    "year": {
+      "lable": "Year",
+      "placeholder": "Enter the year"
+    },
+    "class": {
+      "lable": "Class",
+      "placeholder": "Enter class"
+    },
+    "type": {
+      "lable": "Type",
+      "placeholder": "Final"
+    },
+    "numberOfMarks": {
+      "lable": "Number of Marks",
+      "placeholder": "Enter number of marks"
+    },
+    "dayOfExam": {
+      "lable": "Day of the Exam",
+      "placeholder": "Enter day of the exam"
+    },
+    "dateOfExam": {
+      "lable": "Date of the Exam",
+      "placeholder": "Enter date of the exam"
+    },
+    "durationInHours": {
+      "lable": "Duration in Hours",
+      "placeholder": "Enter duration in hours"
+    },
+    "classSection": {
+      "lable": "Class Section",
+      "placeholder": "Enter class section"
+    },
+    "notesInstructions": {
+      "lable": "Notes/Instructions",
+      "placeholder": "Enter notes/instructions"
+    },
+    "numberOfQuestions": {
+      "lable": "Number of Questions",
+      "placeholder": "Enter number of questions"
+    },
+    "country": {
+      "lable": "Country",
+      "placeholder": "Enter country"
+    },
+    "numberOfPages": {
+      "lable": "Number of Pages",
+      "placeholder": "Enter the number of pages"
+    },
+    "stateDepartmentName": {
+      "lable": "State Department Name",
+      "placeholder": "Enter state department name"
+    },
+    "ministryDepartmentName": {
+      "lable": "Ministry/Department Name",
+      "placeholder": "Enter ministry/department name"
+    },
     "addMoreFields": "Add more fields",
-    "logo": "Logo",
+    "logo": {
+      "lable": "Logo"
+    },
     "uploadLogo": "Drag and drop an image here, or click to select one",
     "allFieldsAdded": "All fields are added",
     "studentInformation": "Student information",
     "studentInstruction": "The student should fill these fields",
-    "studentName": "Student Name",
-    "enterStudentName": "Name:",
-    "studentNumber": "Student Number",
-    "enterStudentNumber": "Roll Number",
-    "studentClass": "Student Class",
-    "enterStudentClass": "Class",
+    "studentName": {
+      "lable": "Student Name",
+      "placeholder": "Name:"
+    },
+    "studentNumber": {
+      "lable": "Student Number",
+      "placeholder": "Roll Number:"
+    },
+    "studentClass": {
+      "lable": "Student Class",
+      "placeholder": "Class"
+    },
+    "faculty": {
+      "lable": "Faculty",
+      "placeholder": "Enter Faculty"
+    },
     "allStudentFieldsAdded": "All fields are added"
   },
   "examPaper": {
@@ -172,7 +218,7 @@
     "pages": "No. of Pages",
     "logoPlaceHolder": "logo goes here",
     "examTitle": "examination paper for",
-    "studentName": "Name",
+    "studentName": "lable",
     "studentId": "Student No",
     "MCQSectionQuestion": "Choose the correct answer for each question below.",
     "FillInTheBlankSectionQuestion": "Fill in the blanks.",

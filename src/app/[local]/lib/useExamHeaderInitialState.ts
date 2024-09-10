@@ -38,12 +38,9 @@ const initialPlaceholderText = (language: ExamLang) => {
 
 export default lang;
 
-export const getInititalTeacherInputs = (
-  pageLanguage: "en" | "ar",
-  examLanguage: "en" | "ar",
-) => [
+export const getInititalTeacherInputs = (pageLanguage: "en" | "ar") => [
   {
-    name: "school_name",
+    name: "schoolName",
     placeholder_text: headerLanguage[pageLanguage].enterSchoolName,
     value_field: {
       en: "",
@@ -67,7 +64,7 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "term_semester",
+    name: "termSemester",
     placeholder_text: headerLanguage[pageLanguage].enterTermSemester,
     value_field: {
       en: "",
@@ -104,7 +101,7 @@ export const getInititalTeacherInputs = (
   },
   {
     name: "type",
-    placeholder_text: headerLanguage[pageLanguage].enterType,
+    placeholder_text: headerLanguage[pageLanguage].type, // No "Enter" version provided for "type"
     value_field: {
       en: "",
       ar: "",
@@ -115,7 +112,7 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_title",
   },
   {
-    name: "number_of_marks",
+    name: "numberOfMarks",
     placeholder_text: headerLanguage[pageLanguage].enterNumberOfMarks,
     value_field: {
       en: "",
@@ -127,7 +124,7 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "day_of_exam",
+    name: "dayOfExam",
     placeholder_text: headerLanguage[pageLanguage].enterDayOfExam,
     value_field: {
       en: lang["en"].day,
@@ -139,7 +136,7 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "date_of_exam",
+    name: "dateOfExam",
     placeholder_text: headerLanguage[pageLanguage].enterDateOfExam,
     value_field: {
       en: lang["en"].day,
@@ -151,7 +148,7 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "duration",
+    name: "durationInHours",
     placeholder_text: headerLanguage[pageLanguage].enterDurationInHours,
     value_field: {
       en: lang["en"].time,
@@ -163,12 +160,10 @@ export const getInititalTeacherInputs = (
     placementOnPaper: "exam_details_section",
   },
 ];
-export const getInitialTeacherButtons = (
-  pageLanguage: "en" | "ar",
-  examLanguage: "en" | "ar",
-) => [
+
+export const getInitialTeacherButtons = (pageLanguage: "en" | "ar") => [
   {
-    name: "notes_instructions",
+    name: "notesInstructions",
     placeholder_text: headerLanguage[pageLanguage].enterNotesInstructions,
     value_field: {
       en: "",
@@ -180,7 +175,7 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "notes_section",
   },
   {
-    name: "class_section",
+    name: "classSection",
     placeholder_text: headerLanguage[pageLanguage].enterClassSection,
     value_field: {
       en: "",
@@ -192,7 +187,7 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "number_of_questions",
+    name: "numberOfQuestions",
     placeholder_text: headerLanguage[pageLanguage].enterNumberOfQuestions,
     value_field: {
       en: "",
@@ -203,7 +198,6 @@ export const getInitialTeacherButtons = (
     isAdded: false,
     placementOnPaper: "exam_details_section",
   },
-
   {
     name: "faculty",
     placeholder_text: headerLanguage[pageLanguage].faculty,
@@ -229,7 +223,7 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "instatute_section",
   },
   {
-    name: "number_of_page",
+    name: "numberOfPages",
     placeholder_text: headerLanguage[pageLanguage].enterNumberOfPages,
     value_field: {
       en: "",
@@ -241,7 +235,7 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "exam_details_section",
   },
   {
-    name: "state_department_name",
+    name: "stateDepartmentName",
     placeholder_text: headerLanguage[pageLanguage].enterStateDepartmentName,
     value_field: {
       en: "",
@@ -253,7 +247,7 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "instatute_section",
   },
   {
-    name: "ministry_department_name",
+    name: "ministryDepartmentName",
     placeholder_text: headerLanguage[pageLanguage].enterMinistryDepartmentName,
     value_field: {
       en: "",
@@ -277,12 +271,10 @@ export const getInitialTeacherButtons = (
     placementOnPaper: "logo_section",
   },
 ];
-export const getInitialStudentsInputs = (
-  pageLanguage: "en" | "ar",
-  examLanguage: "en" | "ar",
-) => [
+
+export const getInitialStudentsInputs = (pageLanguage: "en" | "ar") => [
   {
-    name: "std_name",
+    name: "studentName",
     placeholder_text: headerLanguage[pageLanguage].enterStudentName,
     value_field: {
       en: lang["en"].studentName,
@@ -293,9 +285,8 @@ export const getInitialStudentsInputs = (
     isAdded: true,
     placementOnPaper: "student_section",
   },
-
   {
-    name: "std_number",
+    name: "studentNumber",
     placeholder_text: headerLanguage[pageLanguage].enterStudentNumber,
     value_field: {
       en: lang["en"].studentId,
@@ -307,12 +298,10 @@ export const getInitialStudentsInputs = (
     placementOnPaper: "student_section",
   },
 ];
-export const getInitialOtherStudentsButtons = (
-  pageLanguage: "en" | "ar",
-  examLanguage: "en" | "ar",
-) => [
+
+export const getInitialOtherStudentsButtons = (pageLanguage: "en" | "ar") => [
   {
-    name: "std_class",
+    name: "studentClass",
     placeholder_text: headerLanguage[pageLanguage].studentClass,
     value_field: {
       en: lang["en"].studentClass,

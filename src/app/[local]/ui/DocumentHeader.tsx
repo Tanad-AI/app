@@ -56,7 +56,9 @@ const InputFieldsList = ({
           <div key={field.name} className="mb-2 flex items-center gap-2">
             {field.name == "logo" ? (
               <div className="flex flex-col  gap-2">
-                <Text className="font-normal">{field.title}</Text>
+                <Text className="font-normal">
+                  {t.raw(`${field.name}`).lable}
+                </Text>
                 <div className="flex items-center gap-2">
                   <DragAndDropImageUpload />
                   <Tooltip content={t("removeField")} size="sm" delay={400}>
@@ -73,7 +75,7 @@ const InputFieldsList = ({
               <Input
                 name={field.name}
                 variant="bordered"
-                label={field.title}
+                label={t.raw(`${field.name}`).lable}
                 value={field.inputValue}
                 onChange={(e) => {
                   if (setFieldsFunction == "teacher") {
@@ -109,7 +111,7 @@ const InputFieldsList = ({
                     </div>
                   </Tooltip>
                 }
-                placeholder={field.placeholder_text}
+                placeholder={t.raw(`${field.name}`).placeholder}
               />
             )}
             <div className="flex h-full flex-col  items-center">
@@ -148,6 +150,8 @@ const AddMoreFields = ({
   fields: InputField[];
   handleAdd: (field: InputField) => void;
 }) => {
+  const t = useTranslations("documentHeader");
+
   return (
     <div className="flex flex-wrap gap-2">
       {fields.map((field) => (
@@ -159,7 +163,7 @@ const AddMoreFields = ({
             size="sm"
             className="rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
           >
-            {field.title}
+            {t.raw(`${field.name}`).lable}
           </Button>
         </div>
       ))}
@@ -181,8 +185,6 @@ const DocumentHeader = () => {
     removeStudentField,
     moveFieldUp,
     moveFieldDown,
-    setStudentInputs,
-    setTeacherInputs,
   } = useExamHeaderStore();
 
   return (

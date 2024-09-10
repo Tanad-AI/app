@@ -22,72 +22,68 @@ function FooterControl() {
   return (
     <div className="h-full">
       <Text className="mb-2">Footer</Text>
-      <section className="h-full">
-        <Card
-          className="h-full space-y-3 overflow-scroll px-2 pb-8 pt-4"
-          shadow="none"
-          radius="sm"
-        >
-          <div ref={parent} className="flex flex-col gap-2">
-            {lines.map((line, i) => (
-              <div key={i} className="flex">
-                <Input
-                  value={line}
-                  onChange={(e) => handleChange(i, e.target.value)}
-                  placeholder="Type anything"
-                  label={`Line ${i + 1}`}
-                  labelPlacement="outside"
-                  variant="bordered"
-                  title="Footer"
-                  endContent={
-                    <Tooltip content={t("removeField")} size="sm" delay={400}>
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleDelete(i)}
-                      >
-                        <Trash2 size={14} color="gray" />
-                      </div>
-                    </Tooltip>
-                  }
-                />
-                <div>
-                  <Button
-                    isDisabled={i === 0}
-                    isIconOnly
-                    size="sm"
-                    variant="light"
-                    className="cursor-pointer"
-                    onClick={() => moveLine(i, "up")}
-                  >
-                    <ArrowUp size={16} color="gray" />
-                  </Button>
-                  <Button
-                    isDisabled={i === lines.length - 1}
-                    isIconOnly
-                    size="sm"
-                    variant="light"
-                    className="cursor-pointer"
-                    onClick={() => moveLine(i, "down")}
-                  >
-                    <ArrowDown size={16} color="gray" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
+      <Card
+        radius="sm"
+        shadow="none"
+        className="flex min-h-full flex-col px-3 pb-14 pt-4"
+      >
+        <div className="flex flex-col gap-2">
+          {lines.map((line, i) => (
+            <div ref={parent} key={i} className="flex">
+              <Input
+                value={line}
+                onChange={(e) => handleChange(i, e.target.value)}
+                placeholder="Type anything"
+                label={`Line ${i + 1}`}
+                labelPlacement="outside"
+                variant="bordered"
+                title="Footer"
+                endContent={
+                  <Tooltip content={t("removeField")} size="sm" delay={400}>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => handleDelete(i)}
+                    >
+                      <Trash2 size={14} color="gray" />
+                    </div>
+                  </Tooltip>
+                }
+              />
+              <Button
+                isDisabled={i === 0}
+                isIconOnly
+                size="sm"
+                variant="light"
+                className="cursor-pointer"
+                onClick={() => moveLine(i, "up")}
+              >
+                <ArrowUp size={16} color="gray" />
+              </Button>
+              <Button
+                isDisabled={i === lines.length - 1}
+                isIconOnly
+                size="sm"
+                variant="light"
+                className="cursor-pointer"
+                onClick={() => moveLine(i, "down")}
+              >
+                <ArrowDown size={16} color="gray" />
+              </Button>
+            </div>
+          ))}
+        </div>
 
-          <Button
-            variant="faded"
-            color="primary"
-            onClick={() => setLines([...lines, ""])}
-            size="sm"
-            className="min-h-8 w-fit rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
-          >
-            <PlusIcon size={12} />
-            Add a new line
-          </Button>
-        </Card>
-      </section>
+        <Button
+          variant="faded"
+          color="primary"
+          onClick={() => setLines([...lines, ""])}
+          size="sm"
+          className="min-h-8 w-fit rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
+        >
+          <PlusIcon size={12} />
+          Add a new line
+        </Button>
+      </Card>
     </div>
   );
 }
