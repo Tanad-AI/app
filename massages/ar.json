@@ -115,7 +115,10 @@
     "previewDownload": "معاينة/تنزيل",
     "previewPdf": "معاينة كيف ستظهر صفحاتك في صيغة PDF هنا.",
     "download": "تنزيل",
-    "loadingPreview": "يتم إعداد المعاينة"
+    "loadingPreview": "يتم إعداد المعاينة",
+    "switchLanguage": "تغيير اللغة",
+    "signOut": "تسجيل الخروج",
+    "switching": "يتم التغيير"
   },
   "documentHeader": {
     "header": "رأس الصفحة",

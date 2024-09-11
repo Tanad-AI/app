@@ -1,6 +1,7 @@
 "use client";
-import { Select, SelectItem } from "@nextui-org/react";
+import { Select, SelectItem, Spinner } from "@nextui-org/react";
 import { Globe } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React, { ChangeEvent, useState, useTransition } from "react";
 
@@ -21,7 +22,9 @@ type LanguageSwitcherType = {
 
 function LanguageSwitcher({ path }: LanguageSwitcherType) {
   if (!path) path = "";
+  path = path.slice(4, path.length);
   const [value, setValue] = useState<string>("en");
+  const t = useTranslations("Create");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const pathName = usePathname();
@@ -32,6 +35,14 @@ function LanguageSwitcher({ path }: LanguageSwitcherType) {
       router.replace(`/${e.target.value}/${path}`, { scroll: false });
     });
   };
+  if (isPending)
+    return (
+      <div className="flex h-8 w-36 items-center gap-1 rounded-lg  px-3">
+        <Spinner size="sm" />
+        {t("switching")}
+      </div>
+    );
+
   return (
     <Select
       labelPlacement="outside"

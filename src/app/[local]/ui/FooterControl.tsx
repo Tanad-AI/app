@@ -28,7 +28,7 @@ function FooterControl() {
         shadow="none"
         className="flex min-h-full flex-col gap-3 px-3 pb-28 pt-4"
       >
-        <div ref={parent} className="flex flex-col gap-2">
+        <div ref={parent} className="flex flex-col gap-5">
           {lines.map((line, i) => (
             <div key={line.id} className="flex">
               <Input

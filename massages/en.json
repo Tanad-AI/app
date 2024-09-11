@@ -111,7 +111,10 @@
     "previewDownload": "Preview/Download",
     "previewPdf": "Preview how your pages will appear in PDF format here.",
     "download": "Download",
-    "loadingPreview": "Loading Preview"
+    "loadingPreview": "Loading Preview",
+    "switchLanguage": "Switch Language",
+    "signOut": "Sign out",
+    "switching": "Switching"
   },
   "documentHeader": {
     "header": "Header",
