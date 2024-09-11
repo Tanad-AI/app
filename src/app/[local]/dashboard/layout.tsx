@@ -9,8 +9,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="container mx-auto flex">
-      <div className="flex h-svh w-[22%] flex-col justify-between gap-16 border-e-[1px] border-slate-300 bg-white px-6 py-5">
+    <div className="flex">
+      <div className="hidden h-svh  w-72 flex-col  justify-between gap-16 border-e-[1px] border-slate-300 bg-white px-6 py-5 lg:flex">
         <div className="flex items-center gap-1">
           <TanadLogo />
           <Text>Tanad AI</Text>
