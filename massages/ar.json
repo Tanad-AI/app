@@ -239,5 +239,25 @@
     "typeAnyThing": "اكتب أي شيء...",
     "addNewLine": "إضافة سطر جديد",
     "removeField": "حذف الحقل"
+  },
+  "dashboard": {
+    "tanad": "تناد AI",
+    "create": "إنشاء",
+    "home": "الرئيسية",
+    "documents": "المستندات",
+    "questionBank": "بنك الأسئلة",
+    "templates": "القوالب",
+    "upgradeToPremium": "الترقية إلى النسخة المميزة",
+    "helloUser": "مرحباً المستخدم",
+    "searchPlaceholder": "ابحث عن مستنداتك هنا",
+    "myDocuments": "مستنداتي",
+    "editedLabel": "تم التعديل منذ 3 أشهر",
+    "untitledDocument": "مستند بدون عنوان",
+    "createNew": "إنشاء جديد",
+    "sortBy": "الترتيب حسب",
+    "dateCreated": "تاريخ الإنشاء",
+    "dateEdited": "تاريخ التعديل",
+    "titleSort": "العنوان",
+    "reverseOrder": "ترتيب عكسي"
   }
 }

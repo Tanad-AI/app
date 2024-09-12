@@ -235,5 +235,25 @@
     "typeAnyThing": "Type anything...",
     "addNewLine": "Add a new line",
     "removeField": "Remove Field"
+  },
+  "dashboard": {
+    "tanad": "Tanad AI",
+    "create": "Create",
+    "home": "Home",
+    "documents": "Documents",
+    "questionBank": "Question bank",
+    "templates": "Templates",
+    "upgradeToPremium": "Upgrade to Premium",
+    "helloUser": "Hello user",
+    "searchPlaceholder": "Search for your documents here",
+    "myDocuments": "My Documents",
+    "editedLabel": "Edited 3 months ago",
+    "untitledDocument": "Untitled document",
+    "createNew": "Create New",
+    "sortBy": "Sort by",
+    "dateCreated": "Date Created",
+    "dateEdited": "Date Edited",
+    "titleSort": "Title",
+    "reverseOrder": "Reverse Order"
   }
 }

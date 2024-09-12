@@ -22,10 +22,12 @@ import {
 import React, { useMemo, useState } from "react";
 import { Paragraph, SubHeader, Text } from "../lib/TextComponents";
 import Link from "next/link";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslations } from "next-intl";
+import UserAvatar from "@/components/UserAvatar";
 
 function page() {
-  const [selectedKeys, setSelectedKeys] = useState(new Set(["Date Created"]));
+  const t = useTranslations("dashboard");
+  const [selectedKeys, setSelectedKeys] = useState(new Set([t("dateCreated")]));
 
   const selectedValue = useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
@@ -42,30 +44,30 @@ function page() {
             labelPlacement="outside"
             variant="bordered"
             startContent={<Search size={20} color="gray" />}
-            placeholder="Search for your documents here"
+            placeholder={t("searchPlaceholder")}
           />
         </div>
         <div>
-          <Avatar size="sm" />
+          <UserAvatar />
         </div>
       </section>
       <section className="flex items-center justify-between border-[1px] border-b-slate-300 bg-white px-6 py-3 shadow-sm">
-        <SubHeader>Hello user</SubHeader>
+        <SubHeader>{t("helloUser")}</SubHeader>
         <Link href={`create`}>
           <Button
             radius="sm"
             color="primary"
             startContent={<PlusSquare size={16} />}
           >
-            Create New
+            {t("createNew")}
           </Button>
         </Link>
       </section>
       <section className="space-y-3 px-6 py-3">
         <div className="flex justify-between">
-          <Text>My Documents</Text>
+          <Text>{t("myDocuments")}</Text>
           <div className="flex items-center">
-            <Tooltip size="sm" content="Reverse Order">
+            <Tooltip size="sm" content={t("reverseOrder")}>
               <ArrowUpDown className="cursor-pointer" color="gray" size={16} />
             </Tooltip>
             <Spacer x={2} />
@@ -74,7 +76,7 @@ function page() {
               <Dropdown>
                 <DropdownTrigger>
                   <div className="flex items-center gap-1">
-                    <Paragraph>Sort by </Paragraph>
+                    <Paragraph>{t("sortBy")} </Paragraph>
                     <Text className="font-semibold"> {selectedValue}</Text>
                     <ChevronDown size={16} />
                   </div>
@@ -87,9 +89,15 @@ function page() {
                   }
                   aria-label="Static Actions"
                 >
-                  <DropdownItem key="Date Created">Date Created</DropdownItem>
-                  <DropdownItem key="Date Edited">Date Edited</DropdownItem>
-                  <DropdownItem key="Title">Title</DropdownItem>
+                  <DropdownItem key={t("dateCreated")}>
+                    {t("dateCreated")}
+                  </DropdownItem>
+                  <DropdownItem key={t("dateEdited")}>
+                    {t("dateEdited")}
+                  </DropdownItem>
+                  <DropdownItem key={t("titleSort")}>
+                    {t("titleSort")}
+                  </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -101,28 +109,28 @@ function page() {
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
-            <Paragraph>Edited 3 months ago</Paragraph>
+            <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
             <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
-            <Paragraph>Edited 3 months ago</Paragraph>
+            <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
             <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
-            <Paragraph>Edited 3 months ago</Paragraph>
+            <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
             <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
-            <Paragraph>Edited 3 months ago</Paragraph>
+            <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
         </div>
       </section>
