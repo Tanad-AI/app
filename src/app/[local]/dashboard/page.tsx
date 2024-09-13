@@ -38,7 +38,7 @@ function page() {
       <section className="flex items-center justify-between border-[1px] border-b-slate-300 bg-white px-6 py-3">
         <div>
           <Input
-            className="w-96"
+            className="md:w-96"
             size="md"
             radius="sm"
             labelPlacement="outside"
