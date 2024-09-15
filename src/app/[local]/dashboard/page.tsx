@@ -54,7 +54,7 @@ function page() {
           </Button>
         </Link>
       </section>
-      <section className="space-y-3 px-6 py-3">
+      <section className="space-y-6 px-6 py-3">
         <div className="flex justify-between">
           <Text>{t("myDocuments")}</Text>
           <div className="flex items-center">
@@ -94,35 +94,16 @@ function page() {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap gap-8">
-          <div className="cursor-pointer">
-            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
-              <FileIcon size={24} className="stroke-slate-400" />
+        <div className="grid grid-cols-2 justify-items-center gap-8 gap-x-0  md:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="cursor-pointer">
+              <div className="flex h-[42.42vw] w-[30vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[21.21vw] md:w-[15vw]">
+                <FileIcon size={24} className="stroke-slate-400" />
+              </div>
+              <Text>Untitled document</Text>
+              <Paragraph>{t("editedLabel")}</Paragraph>
             </div>
-            <Text>Untitled document</Text>
-            <Paragraph>{t("editedLabel")}</Paragraph>
-          </div>
-          <div className="cursor-pointer">
-            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
-              <FileIcon size={24} className="stroke-slate-400" />
-            </div>
-            <Text>Untitled document</Text>
-            <Paragraph>{t("editedLabel")}</Paragraph>
-          </div>
-          <div className="cursor-pointer">
-            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
-              <FileIcon size={24} className="stroke-slate-400" />
-            </div>
-            <Text>Untitled document</Text>
-            <Paragraph>{t("editedLabel")}</Paragraph>
-          </div>
-          <div className="cursor-pointer">
-            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
-              <FileIcon size={24} className="stroke-slate-400" />
-            </div>
-            <Text>Untitled document</Text>
-            <Paragraph>{t("editedLabel")}</Paragraph>
-          </div>
+          ))}
         </div>
       </section>
     </div>
