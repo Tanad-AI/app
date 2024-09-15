@@ -20,10 +20,9 @@ import {
   Search,
 } from "lucide-react";
 import React, { useMemo, useState } from "react";
-import { Paragraph, SubHeader, Text } from "../lib/TextComponents";
+import { Paragraph, Text } from "../lib/TextComponents";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import UserAvatar from "@/components/UserAvatar";
 
 function page() {
   const t = useTranslations("dashboard");
@@ -35,24 +34,16 @@ function page() {
   );
   return (
     <div className="w-full">
-      <section className="flex items-center justify-between border-[1px] border-b-slate-300 bg-white px-6 py-3">
-        <div>
-          <Input
-            className="md:w-96"
-            size="md"
-            radius="sm"
-            labelPlacement="outside"
-            variant="bordered"
-            startContent={<Search size={20} color="gray" />}
-            placeholder={t("searchPlaceholder")}
-          />
-        </div>
-        <div>
-          <UserAvatar />
-        </div>
-      </section>
-      <section className="flex items-center justify-between border-[1px] border-b-slate-300 bg-white px-6 py-3 shadow-sm">
-        <SubHeader>{t("helloUser")}</SubHeader>
+      <section className="flex items-center justify-between space-x-4 border-[1px] border-b-slate-300 bg-white px-6 py-3 shadow-sm">
+        <Input
+          className="md:w-96"
+          size="md"
+          radius="sm"
+          labelPlacement="outside"
+          variant="bordered"
+          startContent={<Search size={20} color="gray" />}
+          placeholder={t("searchPlaceholder")}
+        />
         <Link href={`create`}>
           <Button
             radius="sm"
