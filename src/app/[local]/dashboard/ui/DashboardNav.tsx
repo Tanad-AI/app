@@ -11,7 +11,7 @@ function DashboardNav({}) {
   const setIsSidebarOpen = useDashboardState((state) => state.setIsSidebarOpen);
   const t = useTranslations("dashboard");
   return (
-    <section className="flex w-full items-center justify-between bg-white px-6 py-3 ">
+    <section className="flex w-full  items-center justify-between border-b-[1px] border-b-slate-300 bg-white px-6 py-3 ">
       <Button
         isIconOnly
         onClick={setIsSidebarOpen}

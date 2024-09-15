@@ -34,7 +34,7 @@ function page() {
   );
   return (
     <div className="w-full">
-      <section className="flex items-center justify-between space-x-4 border-[1px] border-b-slate-300 bg-white px-6 py-3 shadow-sm">
+      <section className="sticky top-0 z-30 flex items-center justify-between space-x-4 border-b-[1px]  border-b-slate-300 bg-white px-6 py-3 ">
         <Input
           className="md:w-96"
           size="md"

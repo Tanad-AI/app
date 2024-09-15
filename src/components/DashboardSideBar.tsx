@@ -85,7 +85,7 @@ function DashboardSideBar() {
               color="primary"
               radius="full"
             >
-              <X size={18} className="stroke-primary" />
+              <X size={18} className="stroke-primary md:hidden" />
             </Button>
           </div>
           <ul className="mt-6 space-y-2">
