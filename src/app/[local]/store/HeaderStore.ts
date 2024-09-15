@@ -6,12 +6,6 @@ import {
   getInititalTeacherInputs,
 } from "../lib/useExamHeaderInitialState";
 
-// type PlacementOnPaper =
-//   | "instatute_section"
-//   | "exam_details_section"
-//   | "exam_title"
-//   | "notes_section"
-//   | "logo_section";
 type ValueField = {
   en: string;
   ar: string;

@@ -103,30 +103,30 @@ function page() {
             </div>
           </div>
         </div>
-        <div className="flex gap-8">
+        <div className="flex flex-wrap gap-8">
           <div className="cursor-pointer">
-            <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
+            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
             <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
-            <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
+            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
             <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
-            <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
+            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
             <Paragraph>{t("editedLabel")}</Paragraph>
           </div>
           <div className="cursor-pointer">
-            <div className="flex h-[59.4mm] w-[42mm] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200">
+            <div className="flex h-[20.28vw] w-[20vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[59.4mm] md:w-[42mm]">
               <FileIcon size={24} className="stroke-slate-400" />
             </div>
             <Text>Untitled document</Text>
