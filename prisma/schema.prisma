@@ -15,84 +15,34 @@ datasource db {
 
 // Define the data model for users
 model User {
-  id         String      @id @default(uuid())
-  username   String      @unique
-  email      String      @unique
-  password   String
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  // Define a relation to the exams created by the user
-  exams      Exam[]
-  // Define a relation to the worksheets created by the user
-  worksheets Worksheet[]
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-// Define the data model for exams
-model Exam {
-  id          String     @id @default(uuid())
-  title       String
-  description String?
-  header_id   String
-  header      Header     @relation(fields: [header_id], references: [id])
-  questions   Question[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  creator     User       @relation(fields: [creatorId], references: [id])
-  creatorId   String
+model QuestionSet {
+  id        String     @id @default(cuid())
+  title     String     @default("Untitled document")
+  questions Question[]
 }
 
-// Define the data model for worksheets
-model Worksheet {
-  id          String     @id @default(uuid())
-  title       String
-  description String?
-  header      Header     @relation(fields: [headerId], references: [id])
-  headerId    String
-  questions   Question[]
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  creator     User       @relation(fields: [creatorId], references: [id])
-  creatorId   String
-}
-
-// Define the header model which contains general information about the document
-model Header {
-  id         String             @id @default(uuid())
-  name       String
-  exam       Exam[]
-  worksheet  Worksheet[]
-  attributes Header_atrribute[]
-}
-
-model Header_atrribute {
-  id        String            @id @default(uuid())
-  name      String
-  type      HEADER_INPUT_TYPE
-  header    Header            @relation(fields: [header_id], references: [id])
-  header_id String
-
-  label        String
-  required     Boolean
-  placeholder  String
-  text_value   String? // Field that can store a inpnut text value
-  number_value Int? // Field that can store an inpnut number value
-  file_value   Json? // Field that can store JSON inpnut file value 
-}
-
-enum HEADER_INPUT_TYPE {
-  text
-  number
-  file
-}
-
-// Define the model for questions
 model Question {
-  id            String     @id @default(uuid())
-  content       String
-  options       String[] // If the question has multiple choice options
-  correctOption Int? // Index of the correct option if it's a multiple choice question
-  exam          Exam?      @relation(fields: [examId], references: [id])
-  examId        String?
-  worksheet     Worksheet? @relation(fields: [worksheetId], references: [id])
-  worksheetId   String?
+  id            String      @id @default(cuid())
+  questionText  String
+  answer        String
+  placeholder   String
+  questionSetId String
+  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
+  choices       Choice[]
+}
+
+model Choice {
+  id         String   @id @default(cuid())
+  choiceText String
+  isTrue     Boolean
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
 }

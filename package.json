@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "devStart": "nodemon ./src/app/script.mjs",
+    "devStart": "nodemon ./src/script.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

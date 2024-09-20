@@ -15,7 +15,7 @@ export default function DashboardLayout({
       <div>
         <DashboardSideBar />
       </div>
-      <div className="w-full  overflow-scroll">
+      <div className="w-full overflow-scroll">
         <DashboardNav />
         {children}
       </div>

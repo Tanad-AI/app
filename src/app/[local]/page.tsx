@@ -10,7 +10,17 @@ import {
   Text,
   TinyText,
 } from "./lib/TextComponents";
-import { Button, Card, Divider } from "@nextui-org/react";
+import {
+  Button,
+  Card,
+  Divider,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -52,7 +62,7 @@ function TryNowButton({
   return (
     <>
       {type === "primary" ? (
-        <Link href={`${pathName}/dashboard`}>
+        <Link href={`${pathName}/dashboard/home`}>
           <motion.button
             initial="initial"
             animate="initial"
@@ -70,7 +80,7 @@ function TryNowButton({
           </motion.button>
         </Link>
       ) : (
-        <Link href={`${pathName}/dashboard`}>
+        <Link href={`${pathName}/dashboard/home`}>
           <Button
             className={`${
               theme == "light" ? "bg-white" : "bg-primary text-white"
@@ -167,11 +177,9 @@ function page() {
 
   return (
     <>
-      <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-20 py-4">
+      <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-4 py-4  lg:px-20">
+        <NavBar t={t} />
         <section className="relative h-svh pt-6">
-          <div className="relative z-50">
-            <NavBar t={t} />
-          </div>
           <section className="relative mt-20 flex h-[87%] items-center justify-center  ">
             <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
               <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
@@ -348,17 +356,60 @@ function page() {
 export default page;
 
 function NavBar({ t }: { t: any }) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const menuItems = [
+    "Profile",
+    "Dashboard",
+    "Activity",
+    "Analytics",
+    "System",
+    "Deployments",
+    "My Settings",
+    "Team Settings",
+    "Help & Feedback",
+    "Log Out",
+  ];
+
   return (
-    <nav className="flex grow-0 items-center justify-between">
-      <div className="flex items-center gap-2">
-        <TanadLogo />
-        <Text>{t("tanad")}</Text>
-      </div>
-      <div></div>
-      <div className="flex gap-6">
-        <SignUpButton />
-        <TryNowButton />
-      </div>
-    </nav>
+    <Navbar position="static" className="" onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <div className="flex items-center gap-2">
+            <TanadLogo />
+            <Text>{t("tanad")}</Text>
+          </div>{" "}
+        </NavbarBrand>
+      </NavbarContent>
+      <SignUpButton />
+      <TryNowButton />
+      <NavbarContent
+        className="hidden gap-4 sm:flex"
+        justify="center"
+      ></NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              color={
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                    ? "danger"
+                    : "foreground"
+              }
+              className="w-full"
+              href="#"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Navbar>
   );
 }
