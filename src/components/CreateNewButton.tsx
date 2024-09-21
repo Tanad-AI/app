@@ -2,7 +2,7 @@
 import { Button } from "@nextui-org/react";
 import { PlusSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 function CreateNewButton() {
@@ -12,21 +12,20 @@ function CreateNewButton() {
   const locale = pathname.slice(1, 3);
   const router = useRouter();
 
-  const createSet = async () => {
-    await fetch("/api/create-set", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
-
   function handleClick() {
-    startTransition(() => {
-      createSet();
-      router.push(`/${locale}/create`, { scroll: false });
+    startTransition(async () => {
+      const response = await fetch("/api/create-set", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      router.push(`/${locale}/create/`, { scroll: false });
     });
   }
+
+  console.log(isPending);
 
   return (
     <Button
@@ -35,9 +34,10 @@ function CreateNewButton() {
       type="submit"
       radius="sm"
       color="primary"
+      className="me-0 min-w-full md:min-w-fit"
       onClick={handleClick}
       startContent={
-        <PlusSquare className={isPending ? "hidden" : "block"} size={16} />
+        <PlusSquare className={`${isPending ? "hidden" : "block"}`} size={16} />
       }
     >
       {t("createNew")}

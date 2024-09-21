@@ -6,13 +6,15 @@ interface FormData {
 }
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const create = await prisma.questionSet.create({
+  const newSet = await prisma.questionSet.create({
     data: {
       title: "from the api",
     },
   });
+  const newSetId = newSet.id;
+
   return Response.json(
-    { massage: "John Doe" },
+    { newSetId: newSetId },
     {
       status: 200,
     },

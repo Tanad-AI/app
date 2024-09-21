@@ -13,7 +13,7 @@ async function page() {
 
   return (
     <div className="w-full">
-      <section className="sticky top-0 z-30 flex items-center justify-between space-x-4 border-b-[1px]  border-b-slate-300 bg-white px-6 py-3 ">
+      <section className="sticky top-0 z-30 flex flex-col-reverse items-center justify-between  gap-2 border-b-[1px] border-b-slate-300 bg-white px-6  py-3 md:flex-row md:gap-4 ">
         <Input
           className="md:w-96"
           size="md"
