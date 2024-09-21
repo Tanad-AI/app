@@ -55,7 +55,7 @@ function DashboardSideBar() {
 
   return (
     <div className="flex w-full">
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         <motion.section
           key={+isSidebarOpen}
           initial={{ x: "-100%" }}

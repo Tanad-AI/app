@@ -4,6 +4,7 @@ import { PlusSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 function CreateNewButton() {
   const t = useTranslations("dashboard");
@@ -21,11 +22,10 @@ function CreateNewButton() {
         },
       });
       const data = await response.json();
-      router.push(`/${locale}/create`, { scroll: false });
+      router.push(`/${locale}/create/${data.newSetId}`, { scroll: false });
+      router.refresh();
     });
   }
-
-  console.log(isPending);
 
   return (
     <Button

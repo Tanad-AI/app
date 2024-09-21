@@ -7,9 +7,7 @@ interface FormData {
 
 export async function POST(request: NextRequest, response: NextResponse) {
   const newSet = await prisma.questionSet.create({
-    data: {
-      title: "from the api",
-    },
+    data: {},
   });
   const newSetId = newSet.id;
 

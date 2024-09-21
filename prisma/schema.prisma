@@ -24,9 +24,11 @@ model User {
 }
 
 model QuestionSet {
-  id        String     @id @default(cuid())
-  title     String     @default("Untitled document")
-  questions Question[]
+  id          String     @id @default(cuid())
+  title       String     @default("Untitled document")
+  questions   Question[]
+  date_added  DateTime   @default(now())
+  last_edited DateTime   @updatedAt
 }
 
 model Question {
