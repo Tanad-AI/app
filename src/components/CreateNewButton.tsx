@@ -21,7 +21,7 @@ function CreateNewButton() {
         },
       });
       const data = await response.json();
-      router.push(`/${locale}/create/`, { scroll: false });
+      router.push(`/${locale}/create`, { scroll: false });
     });
   }
 
