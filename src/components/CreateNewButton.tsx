@@ -4,7 +4,6 @@ import { PlusSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React, { useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 function CreateNewButton() {
   const t = useTranslations("dashboard");

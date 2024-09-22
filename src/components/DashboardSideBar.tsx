@@ -1,7 +1,6 @@
 "use client";
 import { TanadLogo } from "@/assets";
 import {
-  ArrowRightToLine,
   Building,
   Coins,
   FileBox,
@@ -9,44 +8,47 @@ import {
   LayoutTemplate,
   X,
 } from "lucide-react";
-import { Button, Divider, Tooltip } from "@nextui-org/react";
-import { createId } from "@paralleldrive/cuid2";
+import { Button, Divider } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { Text, TinyText } from "@/app/[local]/lib/TextComponents";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDashboardState } from "@/app/[local]/store/DashboardStore";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 function DashboardSideBar() {
   const t = useTranslations("dashboard");
   const isSidebarOpen = useDashboardState((state) => state.isSidebarOpen);
   const setIsSidebarOpen = useDashboardState((state) => state.setIsSidebarOpen);
-
+  const pathname = usePathname();
+  const segments = pathname.split("/").filter(Boolean);
+  const currentPath = segments[segments.length - 1];
+  console.log(currentPath);
   const SIDEBAR_ITEMS = [
     {
       title: t("home"),
-      href: "/",
+      href: "home",
       icon: ({ className }: { className?: string }) => (
         <Home className={`${className}`} color="gray" size={14} />
       ),
     },
     {
       title: t("documents"),
-      href: "/documents",
+      href: "documents",
       icon: ({ className }: { className?: string }) => (
         <FileBox className={`${className}`} color="gray" size={14} />
       ),
     },
     {
       title: t("questionBank"),
-      href: "/question-bank",
+      href: "question-bank",
       icon: ({ className }: { className?: string }) => (
         <Building className={`${className}`} color="gray" size={14} />
       ),
     },
     {
       title: t("templates"),
-      href: "/templates",
+      href: "templates",
       icon: ({ className }: { className?: string }) => (
         <LayoutTemplate className={`${className}`} color="gray" size={14} />
       ),
@@ -84,28 +86,41 @@ function DashboardSideBar() {
               variant="light"
               color="primary"
               radius="full"
+              className="md:hidden"
             >
-              <X size={18} className="stroke-primary md:hidden" />
+              <X size={18} className="stroke-primary " />
             </Button>
           </div>
           <ul className="mt-6 space-y-2">
             <TinyText className="font-normal text-gray-500">
               {t("create")}
             </TinyText>
-            {SIDEBAR_ITEMS.map((item) => (
-              <Tooltip
-                content={item.title}
-                className="block md:hidden"
-                size="md"
-                placement="right"
-                key={createId()}
-              >
-                <li className="flex h-7 cursor-pointer items-center gap-2 rounded-md px-1 py-1 text-sm font-medium text-gray-500 hover:bg-primary-800/10">
-                  {<item.icon />}
-                  <span>{item.title}</span>
-                </li>
-              </Tooltip>
-            ))}
+            <div className="flex flex-col gap-2">
+              {SIDEBAR_ITEMS.map((item) => (
+                <Link
+                  className="h-7"
+                  key={item.title}
+                  href={`dashboard/${item.href}`}
+                >
+                  <li
+                    className={`${
+                      item.href == currentPath
+                        ? "bg-primary-100 stroke-primary font-medium text-primary"
+                        : "font-normal text-gray-500"
+                    } flex h-7 cursor-pointer items-center gap-2 rounded-md px-1 py-1 text-sm  hover:bg-primary-100/70`}
+                  >
+                    {
+                      <item.icon
+                        className={`${
+                          item.href == currentPath ? " stroke-primary " : ""
+                        }`}
+                      />
+                    }
+                    <span>{item.title}</span>
+                  </li>
+                </Link>
+              ))}
+            </div>
           </ul>
           <Divider />
           <div />

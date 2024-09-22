@@ -16,6 +16,7 @@ import { AlignLeft, AlignRight, Globe } from "lucide-react";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import { useTranslations } from "next-intl";
 import { useExamHeaderStore } from "../../store/HeaderStore";
+import { usePathname } from "next/navigation";
 
 interface SidebarType {
   activeControlView: number;
@@ -33,9 +34,7 @@ function Sidebar({
   const setExamDirection = useQuizStore((state) => state.setExamDirection);
   const examDirection = useQuizStore((state) => state.examDirection);
   const examLanguage = useQuizStore((state) => state.examLanguage);
-  // const setExamLanguage = useQuizStore((state) => state.setExamLanguage);
   const setExamLanguage = useExamHeaderStore((state) => state.setExamLanguage);
-
   return (
     <div
       className={`min-w-[260px] flex-col space-y-2 md:block lg:w-[28%] ${className}`}
