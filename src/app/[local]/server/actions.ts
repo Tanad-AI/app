@@ -1,5 +1,5 @@
 "use server";
-import prisma from "../db";
+import prisma from "../../db";
 
 interface FormData {
   data: string;

@@ -26,7 +26,6 @@ const ExamPaper = ({
     (state) => state.examQuestionsSections,
   );
   const lines = useFooterStore((state) => state.lines);
-  console.log(examQuestionsSections);
 
   return (
     <div

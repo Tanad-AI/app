@@ -10,9 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// schema.prisma
-// schema.prisma
-
 // Define the data model for users
 model User {
   id        String   @id @default(uuid())
@@ -23,28 +20,38 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model QuestionSet {
-  id          String     @id @default(cuid())
-  title       String     @default("Untitled document")
-  questions   Question[]
-  date_added  DateTime   @default(now())
-  last_edited DateTime   @updatedAt
+model Set {
+  id        String     @id @default(cuid())
+  title     String?    @default("Untitled document")
+  questions Question[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model Question {
-  id            String      @id @default(cuid())
-  questionText  String
-  answer        String
-  placeholder   String
-  questionSetId String
-  questionSet   QuestionSet @relation(fields: [questionSetId], references: [id])
-  choices       Choice[]
+  id           String        @id @default(cuid())
+  questionText String
+  answer       String?
+  image        String[]
+  explanation  String?
+  type         QuestionTypes
+  choices      Choice[]
+  set          Set[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model Choice {
-  id         String   @id @default(cuid())
-  choiceText String
-  isTrue     Boolean
-  questionId String
-  question   Question @relation(fields: [questionId], references: [id])
+  id          String   @id @default(cuid())
+  choiceText  String
+  isTrue      Boolean
+  explanation String?
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id])
+}
+
+enum QuestionTypes {
+  MCQs
+  trueOrFalse
+  fillInTheBlank
 }

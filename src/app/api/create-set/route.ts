@@ -1,18 +1,14 @@
-import prisma from "@/app/[local]/db";
+import prisma from "@/app/db";
 import { NextRequest, NextResponse } from "next/server";
 
-interface FormData {
-  data: string;
-}
-
 export async function POST(request: NextRequest, response: NextResponse) {
-  const newSet = await prisma.questionSet.create({
+  const newSet = await prisma.set.create({
     data: {},
   });
   const newSetId = newSet.id;
 
-  return Response.json(
-    { newSetId: newSetId },
+  return NextResponse.json(
+    { newSetId: newSet.id },
     {
       status: 200,
     },

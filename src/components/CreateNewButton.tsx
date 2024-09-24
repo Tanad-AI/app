@@ -11,17 +11,25 @@ function CreateNewButton() {
   const pathname = usePathname();
   const locale = pathname.slice(1, 3);
   const router = useRouter();
+  const [error, setError] = useState("");
 
   function handleClick() {
     startTransition(async () => {
-      const response = await fetch("/api/create-set", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      router.push(`/${locale}/create/${data.newSetId}`, { scroll: false });
+      try {
+        const response = await fetch("/api/create-set", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          setError("Failed to create a new set");
+        }
+        const data = await response.json();
+        router.push(`/${locale}/create/${data.newSetId}`, { scroll: false });
+      } catch (error) {
+        console.log(error);
+      }
       router.refresh();
     });
   }
@@ -40,6 +48,7 @@ function CreateNewButton() {
       }
     >
       {t("createNew")}
+      {error && error}
     </Button>
   );
 }

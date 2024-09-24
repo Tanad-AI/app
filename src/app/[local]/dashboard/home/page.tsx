@@ -4,13 +4,13 @@ import { ArrowUpDown, FileIcon, Search } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Paragraph, Text } from "../../lib/TextComponents";
 import { SortDropDown } from "@/components/SortDropDown";
-import prisma from "../../db";
+import prisma from "../../../db";
 import CreateNewButton from "../../../../components/CreateNewButton";
 import Link from "next/link";
 
 async function page() {
   const t = await getTranslations("dashboard");
-  const documents = await prisma.questionSet.findMany();
+  const documents = await prisma.set.findMany();
 
   return (
     <div className="w-full">
@@ -51,7 +51,7 @@ async function page() {
                   <Text>{document.title}</Text>
                   <Paragraph>
                     {t("createdLabel")}{" "}
-                    {new Date(document.date_added).toLocaleDateString()}
+                    {new Date(document.createdAt).toLocaleDateString()}
                   </Paragraph>
                 </div>
               </Link>
