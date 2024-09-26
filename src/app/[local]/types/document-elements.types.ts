@@ -7,8 +7,13 @@ export type QuestionType = {
   id: string;
   questionText: string;
   answer: string;
-  placeholder: string;
+  placeholder?: string;
   choices: choiceType[];
+  explanation: string;
+  type: string;
+  image: string[];
+  createdAt?: string;
+  updatedAt?: string;
 };
 export type SectionsData = {
   id: string;

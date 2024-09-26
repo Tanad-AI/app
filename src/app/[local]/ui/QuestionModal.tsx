@@ -12,15 +12,16 @@ import {
 import { PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useQuizStore } from "../store/QuizState";
+import { SectionsData, QuestionType } from "../types/document-elements.types";
 
-const initialMcqsSection = {
+const initialMcqsSection: SectionsData = {
   name: "MCQs",
   title: "MCQs",
   added: false,
   questions: [],
   id: "",
 };
-const initialTrueOrFalseSecttion = {
+const initialTrueOrFalseSecttion: SectionsData = {
   name: "trueOrFalse",
   title: "True or false",
   added: false,
@@ -28,8 +29,8 @@ const initialTrueOrFalseSecttion = {
   id: "",
 };
 
-const initialFillInTheBlankSections = {
-  name: "FillInTheBlank",
+const initialFillInTheBlankSections: SectionsData = {
+  name: "fillInTheBlank",
   title: "Fill in the blank",
   added: false,
   questions: [],
@@ -42,7 +43,7 @@ function QuestionsModal({
 }: any) {
   const t = useTranslations("Create");
 
-  const mcqsQuestion = {
+  const mcqsQuestion: QuestionType = {
     id: "",
     questionText: "",
     answer: "",
@@ -69,9 +70,12 @@ function QuestionsModal({
         id: "",
       },
     ],
+    explanation: "",
+    type: "MCQs",
+    image: [],
   };
 
-  const tOrFQuestion = {
+  const tOrFQuestion: QuestionType = {
     id: "",
     questionText: "",
     answer: "",
@@ -88,14 +92,20 @@ function QuestionsModal({
         id: "",
       },
     ],
+    explanation: "",
+    type: "trueOrFalse",
+    image: [],
   };
 
-  const otherQuestion = {
+  const fillInTheBlankQuestion: QuestionType = {
     id: "",
     questionText: "",
     answer: "",
     placeholder: t("enterYourQuestions"),
     choices: [],
+    explanation: "",
+    type: "fillInTheBlank",
+    image: [],
   };
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -117,8 +127,8 @@ function QuestionsModal({
       },
       {
         section: initialFillInTheBlankSections,
-        question: otherQuestion,
-        key: "FillInTheBlank",
+        question: fillInTheBlankQuestion,
+        key: "fillInTheBlank",
       },
     ];
 
@@ -126,7 +136,7 @@ function QuestionsModal({
       setExamQuestionsSection(section, question, +numberOfQuestions[key]);
     });
 
-    setNumberOfQuestions({ MCQs: "", FillInTheBlank: "", trueOrFalse: "" });
+    setNumberOfQuestions({ MCQs: "", fillInTheBlank: "", trueOrFalse: "" });
   }
 
   return (
@@ -173,8 +183,8 @@ function QuestionsModal({
                     maxValue="400"
                     minValue="0"
                     label={t("fillInTheBlankQuestions")}
-                    name="FillInTheBlank"
-                    value={numberOfQuestions.FillInTheBlank}
+                    name="fillInTheBlank"
+                    value={numberOfQuestions.fillInTheBlank}
                     onChange={handleQuestionsInputChange}
                   />
                 </form>

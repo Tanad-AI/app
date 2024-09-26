@@ -47,27 +47,111 @@ async function saveSetChanges(setId: string, questionSet: any) {
       .filter((type: any) => type.name === "MCQs") // Find the MCQs section
       .map((type: any) => type.questions) // Extract the questions array
       .flat();
+    const trueOrFalseQuestions = questionSet
+      .filter((type: any) => type.name === "trueOrFalse") // Find the MCQs section
+      .map((type: any) => type.questions) // Extract the questions array
+      .flat();
+    const fillInTheBlank = questionSet
+      .filter((type: any) => type.name === "fillInTheBlank") // Find the MCQs section
+      .map((type: any) => type.questions) // Extract the questions array
+      .flat();
 
     const updatedMCQsSet = await prisma.set.update({
       where: { id: setId },
       data: {
         questions: {
-          create: mcqQuestions.map((question: any) => ({
-            id: question.id,
-            questionText: question.questionText,
-            answer: question.answer,
-            type: "MCQs",
-            choices: {
-              create: question.choices.map((choice: any) => ({
-                choiceText: choice.choiceText,
-                isTrue: choice.isTrue,
-              })),
+          upsert: mcqQuestions.map((question: any) => ({
+            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            create: {
+              id: question.id,
+              questionText: question.questionText,
+              answer: question.answer,
+              type: "MCQs",
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
+            },
+            update: {
+              questionText: question.questionText,
+              answer: question.answer,
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
             },
           })),
         },
       },
     });
-    return updatedMCQsSet;
+    const updatedTOFsSet = await prisma.set.update({
+      where: { id: setId },
+      data: {
+        questions: {
+          upsert: trueOrFalseQuestions.map((question: any) => ({
+            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            create: {
+              id: question.id,
+              questionText: question.questionText,
+              answer: question.answer,
+              type: "trueOrFalse",
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
+            },
+            update: {
+              questionText: question.questionText,
+              answer: question.answer,
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
+            },
+          })),
+        },
+      },
+    });
+    const updatedFIBSet = await prisma.set.update({
+      where: { id: setId },
+      data: {
+        questions: {
+          upsert: fillInTheBlank.map((question: any) => ({
+            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            create: {
+              id: question.id,
+              questionText: question.questionText,
+              answer: question.answer,
+              type: "fillInTheBlank",
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
+            },
+            update: {
+              questionText: question.questionText,
+              answer: question.answer,
+              choices: {
+                create: question.choices.map((choice: any) => ({
+                  choiceText: choice.choiceText,
+                  isTrue: choice.isTrue,
+                })),
+              },
+            },
+          })),
+        },
+      },
+    });
   }
 }
 

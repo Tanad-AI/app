@@ -6,7 +6,7 @@ interface FormData {
 }
 
 export async function createQuestionSet(formData: FormData) {
-  const create = await prisma.questionSet.create({
+  const create = await prisma.set.create({
     data: {
       title: "from new dashboard",
     },

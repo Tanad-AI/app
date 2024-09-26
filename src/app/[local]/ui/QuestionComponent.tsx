@@ -63,7 +63,7 @@ function QuestionsComponent() {
       >
         {examQuestionsSections &&
           examQuestionsSections.map((section: any, index: number) => {
-            const sectionName: "MCQs" | "trueOrFalse" | "FillInTheBlank" =
+            const sectionName: "MCQs" | "trueOrFalse" | "fillInTheBlank" =
               section.name;
             return (
               <div key={section.name}>

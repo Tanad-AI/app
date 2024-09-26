@@ -15,7 +15,7 @@ interface Question {
 interface SectionQuestionType {
   MCQs: Question;
   trueOrFalse: Question;
-  FillInTheBlank: Question;
+  fillInTheBlank: Question;
 }
 type storeType = {
   sections: SectionsData[];
@@ -29,13 +29,13 @@ type storeType = {
   numberOfQuestions: {
     MCQs: string;
     trueOrFalse: string;
-    FillInTheBlank: string;
+    fillInTheBlank: string;
   };
 
   setNumberOfQuestions: (newCounts: {
     MCQs?: string;
     trueOrFalse?: string;
-    FillInTheBlank?: string;
+    fillInTheBlank?: string;
   }) => void;
 
   setQuestionsText: (
@@ -78,6 +78,7 @@ type storeType = {
     choiceIndex: number,
     sectionName: string,
   ) => void;
+  setExamQuestionsSectionFromApi: (newSection: SectionsData[]) => void;
 };
 export const useQuizStore = create<storeType>((set) => ({
   sections: [],
@@ -109,7 +110,7 @@ export const useQuizStore = create<storeType>((set) => ({
       },
     }));
   },
-  numberOfQuestions: { MCQs: "", trueOrFalse: "", FillInTheBlank: "" },
+  numberOfQuestions: { MCQs: "", trueOrFalse: "", fillInTheBlank: "" },
   setNumberOfQuestions: (newCounts) =>
     set((state) => ({
       numberOfQuestions: { ...state.numberOfQuestions, ...newCounts },
@@ -183,7 +184,7 @@ export const useQuizStore = create<storeType>((set) => ({
       text: "اختر: صح أم خطأ للعبارة التالية:",
       marks: "",
     },
-    FillInTheBlank: {
+    fillInTheBlank: {
       text: "املأ الفراغ بالكلمة المناسبة:",
       marks: "",
     },
@@ -308,4 +309,9 @@ export const useQuizStore = create<storeType>((set) => ({
         examQuestionsSections: sections, // Return the updated sections array
       };
     }),
+  setExamQuestionsSectionFromApi: (newSection) => {
+    set(() => ({
+      examQuestionsSections: newSection,
+    }));
+  },
 }));
