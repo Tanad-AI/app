@@ -192,7 +192,7 @@ function QuestionsComponent() {
                                               label={`${t("choice")} ${
                                                 choiceIdx + 1
                                               }`}
-                                              placeholder={choice.choiceText}
+                                              value={choice.choiceText}
                                               onChange={(e) =>
                                                 setChoicesText(
                                                   e.target.value,
@@ -207,6 +207,7 @@ function QuestionsComponent() {
                                                 type="radio"
                                                 id={`${choiceIdx}${question.id}`}
                                                 name={section.questions[i].id}
+                                                checked={choice.isTrue}
                                                 title={t("setAsTrue")}
                                                 onChange={(e) => {
                                                   setChoiceAsTrue(
@@ -215,7 +216,6 @@ function QuestionsComponent() {
                                                     choiceIdx,
                                                     sectionName,
                                                   );
-                                                  console.log(question.choices);
                                                 }}
                                                 className="cursor-pointer"
                                               />

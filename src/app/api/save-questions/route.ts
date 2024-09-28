@@ -61,7 +61,7 @@ async function saveSetChanges(setId: string, questionSet: any) {
       data: {
         questions: {
           upsert: mcqQuestions.map((question: any) => ({
-            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            where: { id: question.id },
             create: {
               id: question.id,
               questionText: question.questionText,
@@ -77,7 +77,9 @@ async function saveSetChanges(setId: string, questionSet: any) {
             update: {
               questionText: question.questionText,
               answer: question.answer,
+              // Remove existing choices first to prevent duplication
               choices: {
+                deleteMany: {}, // Delete all existing choices for the question
                 create: question.choices.map((choice: any) => ({
                   choiceText: choice.choiceText,
                   isTrue: choice.isTrue,
@@ -88,12 +90,14 @@ async function saveSetChanges(setId: string, questionSet: any) {
         },
       },
     });
+
+    // Updating true or false questions
     const updatedTOFsSet = await prisma.set.update({
       where: { id: setId },
       data: {
         questions: {
           upsert: trueOrFalseQuestions.map((question: any) => ({
-            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            where: { id: question.id },
             create: {
               id: question.id,
               questionText: question.questionText,
@@ -110,6 +114,7 @@ async function saveSetChanges(setId: string, questionSet: any) {
               questionText: question.questionText,
               answer: question.answer,
               choices: {
+                deleteMany: {}, // Delete existing choices before creating new ones
                 create: question.choices.map((choice: any) => ({
                   choiceText: choice.choiceText,
                   isTrue: choice.isTrue,
@@ -120,12 +125,14 @@ async function saveSetChanges(setId: string, questionSet: any) {
         },
       },
     });
+
+    // Updating fill in the blank questions
     const updatedFIBSet = await prisma.set.update({
       where: { id: setId },
       data: {
         questions: {
           upsert: fillInTheBlank.map((question: any) => ({
-            where: { id: question.id }, // Use a non-existing ID like -1 if there's no question ID
+            where: { id: question.id },
             create: {
               id: question.id,
               questionText: question.questionText,
@@ -142,6 +149,7 @@ async function saveSetChanges(setId: string, questionSet: any) {
               questionText: question.questionText,
               answer: question.answer,
               choices: {
+                deleteMany: {}, // Delete existing choices before creating new ones
                 create: question.choices.map((choice: any) => ({
                   choiceText: choice.choiceText,
                   isTrue: choice.isTrue,

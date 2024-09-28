@@ -13,6 +13,7 @@ import { PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useQuizStore } from "../store/QuizState";
 import { SectionsData, QuestionType } from "../types/document-elements.types";
+import { createId } from "@paralleldrive/cuid2";
 
 const initialMcqsSection: SectionsData = {
   name: "MCQs",

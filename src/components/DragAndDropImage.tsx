@@ -12,7 +12,6 @@ const DragAndDropImageUpload = () => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     const reader = new FileReader();
-    console.log(reader);
     reader.onloadend = () => {
       setExamLogo(reader.result as string);
     };

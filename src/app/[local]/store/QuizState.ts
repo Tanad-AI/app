@@ -255,6 +255,10 @@ export const useQuizStore = create<storeType>((set) => ({
               .map(() => ({
                 ...newQuestion,
                 id: createId(),
+                choices: newQuestion.choices.map((choice) => ({
+                  ...choice,
+                  id: createId(), // Assign a new ID to each choice
+                })),
               })),
           },
         ];
@@ -268,7 +272,14 @@ export const useQuizStore = create<storeType>((set) => ({
                   ...section.questions,
                   ...Array(times)
                     .fill(null)
-                    .map(() => ({ ...newQuestion, id: createId() })),
+                    .map(() => ({
+                      ...newQuestion,
+                      id: createId(),
+                      choices: newQuestion.choices.map((choice) => ({
+                        ...choice,
+                        id: createId(), // Assign a new ID to each choice
+                      })),
+                    })),
                 ],
               }
             : section,

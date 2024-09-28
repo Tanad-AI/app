@@ -1,15 +1,23 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FileIcon, Menu, Pen, Settings2, X } from "lucide-react";
 import { Dock, DockIcon } from "@/components/Dock";
 import { Button } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useExamHeaderStore } from "../../store/HeaderStore";
 import Control from "../ui/Control";
 import A4page from "../ui/A4page";
 import Sidebar from "../ui/Sidebar";
+import { useQuizStore } from "../../store/QuizState";
+import { QuestionType, SectionsData } from "../../types/document-elements.types";
+
+async function getQuestions(setId: string) {
+  const response = await fetch(`/api/get-set?setId=${setId}`);
+  const { questions } = await response.json();
+  return questions;
+}
 
 const page = () => {
   const [activeControlView, setActiveControlView] = useState<number>(0);
@@ -22,6 +30,56 @@ const page = () => {
   }
   const setPageLanguage = useExamHeaderStore((state) => state.setPageLanguage);
   setPageLanguage(locale);
+  const setExamQuestionsSectionFromApi = useQuizStore(
+    (state) => state.setExamQuestionsSectionFromApi,
+  );
+  const params = useParams();
+  const setId = params.set as string;
+
+
+  useEffect(() => {
+    getQuestions(setId)
+      .then((set) => {
+        const mcqsQuestions = set.questions.filter(
+          (item: QuestionType) => item.type === "MCQs",
+        );
+        const TOF = set.questions.filter(
+          (item: QuestionType) => item.type === "trueOrFalse",
+        );
+        const FIB = set.questions.filter(
+          (item: QuestionType) => item.type === "fillInTheBlank",
+        );
+        const mcqsObject = {
+          name: "MCQs",
+          id: "",
+          title: "MCQs",
+          added: false,
+          questions: mcqsQuestions,
+        };
+        const TOFObject = {
+          name: "trueOrFalse",
+          id: "",
+          title: "trueOrFalse",
+          added: false,
+          questions: TOF,
+        };
+        const FIBOBject = {
+          name: "fillInTheBlank",
+          id: "",
+          title: "fillInTheBlank",
+          added: false,
+          questions: FIB,
+        };
+        const QuestionsFromApi: SectionsData[] = [
+          mcqsObject,
+          TOFObject,
+          FIBOBject,
+        ];
+        setExamQuestionsSectionFromApi(QuestionsFromApi);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
 
   return (
     <div className=" relative flex h-[100svh]  w-full justify-between gap-3 overflow-y-hidden pb-5">

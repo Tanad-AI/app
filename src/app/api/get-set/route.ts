@@ -1,5 +1,5 @@
 import prisma from "@/app/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 async function getQuestions(setId: string) {
   const questions = await prisma.set.findUnique({
@@ -15,8 +15,12 @@ async function getQuestions(setId: string) {
   return questions;
 }
 
-export async function GET() {
-  const questions = await getQuestions("cm1hy9hve00003decytmv1iyl");
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
 
-  return NextResponse.json({ questions: questions });
+  const setId = url.searchParams.get("setId");
+
+  const questions = await getQuestions(setId as string);
+
+  return NextResponse.json({ questions: questions, setId: setId });
 }

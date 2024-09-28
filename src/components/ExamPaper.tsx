@@ -3,22 +3,10 @@
 import { useExamHeaderStore } from "@/app/[local]/store/HeaderStore";
 import { useQuizStore } from "@/app/[local]/store/QuizState";
 import useFooterStore from "@/app/[local]/store/useFooterStore";
-import {
-  QuestionType,
-  SectionsData,
-} from "@/app/[local]/types/document-elements.types";
 import MCQsQuestion from "@/app/[local]/ui/MCQsQuestion";
-import prisma from "@/app/db";
 import examLanguage from "@/lib/examLanguage";
 import { createId } from "@paralleldrive/cuid2";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-
-async function getQuestions(setId: string) {
-  const response = await fetch("/api/get-set");
-  const { questions } = await response.json();
-  return questions;
-}
 
 const ExamPaper = ({
   SectionQuestion,
@@ -38,57 +26,7 @@ const ExamPaper = ({
   const examQuestionsSections = useQuizStore(
     (state) => state.examQuestionsSections,
   );
-  const setExamQuestionsSectionFromApi = useQuizStore(
-    (state) => state.setExamQuestionsSectionFromApi,
-  );
   const lines = useFooterStore((state) => state.lines);
-  const questionTitles = {
-    MCQs: "MCQs",
-    trueOrFalse: "True or false",
-    fillInTheBlank: "Fill in the blank",
-  };
-  useEffect(() => {
-    getQuestions("KDJSLA")
-      .then((set) => {
-        const mcqsQuestions = set.questions.filter(
-          (item: QuestionType) => item.type === "MCQs",
-        );
-        const TOF = set.questions.filter(
-          (item: QuestionType) => item.type === "trueOrFalse",
-        );
-        const FIB = set.questions.filter(
-          (item: QuestionType) => item.type === "fillInTheBlank",
-        );
-        const mcqsObject = {
-          name: "MCQs",
-          id: "",
-          title: "MCQs",
-          added: false,
-          questions: mcqsQuestions,
-        };
-        const TOFObject = {
-          name: "trueOrFalse",
-          id: "",
-          title: "trueOrFalse",
-          added: false,
-          questions: TOF,
-        };
-        const FIBOBject = {
-          name: "fillInTheBlank",
-          id: "",
-          title: "fillInTheBlank",
-          added: false,
-          questions: FIB,
-        };
-        const QuestionsFromApi: SectionsData[] = [
-          mcqsObject,
-          TOFObject,
-          FIBOBject,
-        ];
-        setExamQuestionsSectionFromApi(QuestionsFromApi);
-      })
-      .catch((error) => console.error(error));
-  }, []);
 
   return (
     <div
