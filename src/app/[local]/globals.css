@@ -88,6 +88,9 @@ td {
   /* Edge 12 -18 */
   color: gray !important;
 }
+.destructive {
+  color: red;
+}
 @page {
   size: A4;
   margin-top: 10mm;
