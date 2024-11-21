@@ -22,7 +22,7 @@ function SaveQuestionsChangesButton({ setId }: Props) {
     setIsPending(true);
 
     try {
-      const response = await fetch("/api/sav-questions", {
+      const response = await fetch("/api/save-questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

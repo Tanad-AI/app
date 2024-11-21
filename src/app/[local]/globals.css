@@ -91,6 +91,22 @@ td {
 .destructive {
   color: red;
 }
+
+.DragHandle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.DragHandle:focus-visible {
+  box-shadow: 0 0px 0px 2px #4c9ffe;
+}
+
+.DragHandle svg {
+  flex: 0 0 auto;
+  margin: auto;
+  height: 100%;
+  overflow: visible;
+  fill: #919eab;
+}
 @page {
   size: A4;
   margin-top: 10mm;
