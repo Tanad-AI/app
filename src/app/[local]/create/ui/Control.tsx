@@ -7,6 +7,10 @@ import { Text, TinyText } from "../../lib/TextComponents";
 import { motion } from "framer-motion";
 import { Field } from "../../types/report.typs";
 
+// get the vlue of each input
+// get the current value
+// chnage the value
+
 interface ControlProps {
   activeControlView: number;
   className?: string;
@@ -18,6 +22,7 @@ function View({ activeField }: { activeField: Field }) {
 
   const handleInputChange = (detailId: string, newValue: string) => {
     const currentFields = [...fields];
+
     const currentField = currentFields.find(
       (field) => field.id == activeField.id,
     );
