@@ -3,11 +3,9 @@ import { TinyText } from "@/app/[local]/lib/TextComponents";
 import { TanadLogo } from "@/assets";
 import Link from "next/link";
 import React from "react";
-import PreviewModalButton from "@/app/[local]/ui/PreviewModalButton";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import UserAvatar from "@/components/UserAvatar";
-import SaveQuestionsChangesButton from "@/components/SaveQuestionsChangesButton";
 
 const DashboardNav = () => {
   const pathName = usePathname();
@@ -25,10 +23,7 @@ const DashboardNav = () => {
           <TinyText>{homeT("tanad")}</TinyText>
         </div>
       </Link>
-      <SaveQuestionsChangesButton setId={setId as string} />
-
       <div className="flex items-center gap-2">
-        <PreviewModalButton />
         <UserAvatar />
       </div>
     </nav>

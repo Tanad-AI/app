@@ -115,7 +115,6 @@ async function saveSetChanges() {
       },
     });
 
-    console.log(updateQuestionSet);
     return updateQuestionSet; // Return the updated question set
   } catch (error) {
     console.error("Error updating question set:", error);

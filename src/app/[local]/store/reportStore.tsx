@@ -1,13 +1,21 @@
 import { createId } from "@paralleldrive/cuid2";
 import { create } from "zustand";
 import { Field } from "../types/report.typs";
+import { Image } from "lucide-react";
 
 export interface StoreState {
   fields: Field[];
   setFields: (fields: Field[]) => void;
   activeField: Field;
   setActiveField: (field: Field) => void;
-  updateDetailValue: (fieldId: string, detailId: string, value: string) => void;
+  setImages: (imgs: File[]) => void;
+  updateFieldDetail: (
+    fieldId: string,
+    detailId: string,
+    newValue: string,
+  ) => void;
+  reportImages: File[];
+  setReportImages: (newImages: File[]) => void;
 }
 
 const useReportStore = create<StoreState>((set) => ({
@@ -16,11 +24,36 @@ const useReportStore = create<StoreState>((set) => ({
       id: createId(),
       name: "cover",
       title: "الغلاف",
+      icon: (props) => <Image {...props} />,
       details: [
-        { id: createId(), detailName: "type", title: "النوع", value: "" },
-        { id: createId(), detailName: "location", title: "الموقع", value: "" },
-        { id: createId(), detailName: "title", title: "العنوان", value: "" },
-        { id: createId(), detailName: "owner", title: "المالك", value: "" },
+        {
+          id: createId(),
+          detailName: "type",
+          title: "النوع",
+          value: "",
+          placeholder: "تقرير ندب خبرة",
+        },
+        {
+          id: createId(),
+          detailName: "location",
+          title: "الموقع",
+          value: "",
+          placeholder: "حي الزهور",
+        },
+        {
+          id: createId(),
+          detailName: "title",
+          title: "عنوان التقرير",
+          value: "",
+          placeholder: "معاينة أضرار مبنى قايم",
+        },
+        {
+          id: createId(),
+          detailName: "owner",
+          title: "المالك",
+          value: "",
+          placeholder: "فلان الفلاني",
+        },
       ],
     },
     {
@@ -33,35 +66,64 @@ const useReportStore = create<StoreState>((set) => ({
           detailName: "projectName",
           title: "اسم المشروع",
           value: "",
+          placeholder: "عمارة سكنية",
         },
         {
           id: createId(),
           detailName: "ownerPlaintiff",
           title: "المالك / المدعي",
           value: "",
+          placeholder: "فلان الفلاني",
         },
         {
           id: createId(),
           detailName: "projectSubject",
           title: "موضوع التقرير",
           value: "",
+          placeholder: "الشخوص للعقار محل الدعوى...",
         },
-        { id: createId(), detailName: "city", title: "المدينة", value: "" },
+        {
+          id: createId(),
+          detailName: "city",
+          title: "المدينة",
+          value: "",
+          placeholder: "الرياض",
+        },
         {
           id: createId(),
           detailName: "contractNumber",
           title: "رقم العقد",
           value: "",
+          placeholder: "12345678",
         },
-        { id: createId(), detailName: "day", title: "اليوم", value: "" },
-        { id: createId(), detailName: "location", title: "الموقع", value: "" },
+        {
+          id: createId(),
+          detailName: "day",
+          title: "اليوم",
+          value: "",
+          placeholder: "الأحد",
+        },
+        {
+          id: createId(),
+          detailName: "location",
+          title: "الموقع",
+          value: "",
+          placeholder: "حي الزهور",
+        },
         {
           id: createId(),
           detailName: "contractDate",
           title: "تاريخ العقد",
           value: "",
+          placeholder: "م2024/12/3",
         },
-        { id: createId(), detailName: "date", title: "التاريخ", value: "" },
+        {
+          id: createId(),
+          detailName: "date",
+          title: "التاريخ",
+          value: "",
+          placeholder: "م2024/12/3",
+        },
       ],
     },
     {
@@ -69,27 +131,43 @@ const useReportStore = create<StoreState>((set) => ({
       name: "introductionText",
       title: "المقدمة",
       details: [
-        { id: createId(), detailName: "value", title: "النص", value: "" },
+        {
+          id: createId(),
+          detailName: "value",
+          title: "النص",
+          value: "",
+          content: "",
+          isTextArea: true,
+        },
       ],
-      isTextArea: true,
     },
     {
       id: createId(),
       name: "attendees",
       title: "الحضور",
       details: [
-        { id: createId(), detailName: "value", title: "القائمة", value: "" },
+        {
+          id: createId(),
+          detailName: "value",
+          title: "القائمة",
+          value: "",
+          isTextArea: true,
+        },
       ],
-      isMultipleLines: true,
     },
     {
       id: createId(),
       name: "estateDescription",
-      title: "معلومات العقار",
+      title: "مكونات العقار",
       details: [
-        { id: createId(), detailName: "value", title: "الوصف", value: "" },
+        {
+          id: createId(),
+          detailName: "value",
+          title: "الوصف",
+          value: "",
+          isTextArea: true,
+        },
       ],
-      isMultipleLines: true,
     },
     {
       id: createId(),
@@ -104,7 +182,6 @@ const useReportStore = create<StoreState>((set) => ({
           isTextArea: true,
         },
       ],
-      isMultipleLines: true,
     },
     {
       id: createId(),
@@ -144,10 +221,16 @@ const useReportStore = create<StoreState>((set) => ({
     },
     {
       id: createId(),
-      name: "customLine",
-      title: "مخصص",
+      name: "images",
+      title: "الصور",
       details: [
-        { id: createId(), detailName: "value", title: "النص", value: "" },
+        {
+          id: createId(),
+          detailName: "الصور",
+          title: "الصور",
+          value: "",
+          images: [],
+        },
       ],
     },
   ],
@@ -164,19 +247,38 @@ const useReportStore = create<StoreState>((set) => ({
     ],
   },
   setActiveField: (newActiveField) => set({ activeField: newActiveField }),
-  updateDetailValue: (fieldId, detailId, value) =>
+  updateFieldDetail: (fieldId, detailId, newValue) =>
     set((state) => ({
       fields: state.fields.map((field) =>
         field.id === fieldId
           ? {
               ...field,
               details: field.details.map((detail) =>
-                detail.id === detailId ? { ...detail, value } : detail,
+                detail.id === detailId
+                  ? { ...detail, value: newValue }
+                  : detail,
               ),
             }
           : field,
       ),
     })),
+  setImages: (imgs) => {
+    set((state) => ({
+      fields: state.fields.map((field) =>
+        field.details[0].images
+          ? {
+              ...field,
+              details: field.details.map((detail) => ({
+                ...detail,
+                images: imgs,
+              })),
+            }
+          : field,
+      ),
+    }));
+  },
+  reportImages: [],
+  setReportImages: (newImages: File[]) => set({ reportImages: newImages }),
 }));
 
 export default useReportStore;

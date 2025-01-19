@@ -1,26 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { SortableList } from "@/components/SortableList";
 import { Text } from "../../lib/TextComponents";
-import { Card, Spacer } from "@nextui-org/react";
+import { Card, Spacer, Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import useReportStore from "@/app/[local]/store/reportStore";
+import { Eye, EyeOff } from "lucide-react";
 
 interface SidebarType {
-  activeControlView: number;
-  setActiveControlView: (view: number) => void;
   className: string;
 }
 
-function Sidebar({
-  activeControlView,
-  setActiveControlView,
-  className,
-}: SidebarType) {
+function Sidebar({ className }: SidebarType) {
   const t = useTranslations("Create");
   const fields = useReportStore((state) => state.fields);
   const setFields = useReportStore((state) => state.setFields);
   const setActiveField = useReportStore((state) => state.setActiveField);
   const activeField = useReportStore((state) => state.activeField);
+  const [isFieldHidden, setIsFieldHidden] = useState(false);
+  const [selected, setSelected] = useState("content");
 
   return (
     <div
@@ -28,25 +25,60 @@ function Sidebar({
     >
       <Text>{t("control")}</Text>
       <Card radius="sm" className="h-full px-3 py-2  shadow-sm">
+        <Tabs
+          aria-label="Options"
+          selectedKey={selected}
+          onSelectionChange={(key) => setSelected(key.toString())}
+          classNames={{
+            tabList: "w-full p-0 text-sm",
+            panel: "flex flex-col gap-3",
+          }}
+          color="primary"
+          radius="full"
+        >
+          <Tab key="content" title="Content">
+            <h4>Page Content</h4>
+            <SortableList
+              items={fields}
+              onChange={setFields} // Directly passing the setFields function
+              renderItem={(item) => (
+                <SortableList.Item
+                  className={` cursor-default ${
+                    activeField.id == item.id
+                      ? "bg-green-500/10 text-primary"
+                      : "bg-white"
+                  }`}
+                  onClick={() => setActiveField(item)}
+                  id={item.id}
+                >
+                  <div className="flex w-full items-center justify-between ">
+                    <div className="flex items-center">
+                      <SortableList.DragHandle />
+                      <span className="cursor-pointer">{item.title}</span>
+                    </div>
+                    {isFieldHidden ? (
+                      <EyeOff
+                        onClick={() => setIsFieldHidden(!isFieldHidden)}
+                        className="cursor-pointer"
+                        size={14}
+                        strokeWidth={1.5}
+                      />
+                    ) : (
+                      <Eye
+                        onClick={() => setIsFieldHidden(!isFieldHidden)}
+                        className="cursor-pointer"
+                        size={14}
+                        strokeWidth={1.5}
+                      />
+                    )}
+                  </div>
+                </SortableList.Item>
+              )}
+            />
+          </Tab>
+          <Tab key="customize" title="Customize"></Tab>
+        </Tabs>
         <Spacer y={3} />
-        <SortableList
-          items={fields}
-          onChange={setFields} // Directly passing the setFields function
-          renderItem={(item) => (
-            <SortableList.Item
-              className={`${
-                activeField.id == item.id
-                  ? "bg-green-500/10 text-primary"
-                  : "bg-white"
-              }`}
-              onClick={() => setActiveField(item)}
-              id={item.id}
-            >
-              {item.title}
-              <SortableList.DragHandle />
-            </SortableList.Item>
-          )}
-        />
       </Card>
     </div>
   );

@@ -81,7 +81,7 @@ export function DragHandle() {
 
   return (
     <button
-      className="DragHandle flex w-3 flex-[0_0_auto] cursor-[var(--cursor,pointer)] touch-none appearance-none items-center justify-center rounded-[5px] border-none bg-transparent p-3 outline-none tap-highlight-transparent"
+      className="DragHandle flex w-3 flex-[0_0_auto] cursor-grab touch-none appearance-none items-center justify-center rounded-[5px] border-none bg-transparent p-3 outline-none tap-highlight-transparent active:cursor-grabbing"
       {...attributes}
       {...listeners}
       ref={ref}

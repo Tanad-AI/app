@@ -1,15 +1,13 @@
 /* eslint-disable react/jsx-key */
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
 import useReportStore from "../../store/reportStore";
-import { Spacer, Card, Input, Textarea, Button } from "@nextui-org/react";
-import { Text, TinyText } from "../../lib/TextComponents";
+import { Spacer, Card, Input } from "@nextui-org/react";
+import { Text } from "../../lib/TextComponents";
 import { motion } from "framer-motion";
 import { Field } from "../../types/report.typs";
-
-// get the vlue of each input
-// get the current value
-// chnage the value
+import { useDropzone } from "react-dropzone";
+import Tiptap from "@/components/Tiptap";
 
 interface ControlProps {
   activeControlView: number;
@@ -19,6 +17,14 @@ interface ControlProps {
 function View({ activeField }: { activeField: Field }) {
   const setFields = useReportStore((state) => state.setFields);
   const fields = useReportStore((state) => state.fields);
+  const setReportImages = useReportStore((state) => state.setReportImages);
+  const reportImages = useReportStore((state) => state.reportImages);
+
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    setReportImages([...acceptedFiles]);
+    console.log([...acceptedFiles]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleInputChange = (detailId: string, newValue: string) => {
     const currentFields = [...fields];
@@ -34,10 +40,11 @@ function View({ activeField }: { activeField: Field }) {
     }
     setFields(currentFields);
   };
+
   return (
-    <div className="h-full">
+    <div className="h-full ">
       <div className="flex items-baseline gap-1">
-        <Text>{activeField.title}</Text>
+        <Text>التحكم</Text>
       </div>
       <motion.div
         key={activeField.id}
@@ -49,47 +56,49 @@ function View({ activeField }: { activeField: Field }) {
         <Card
           radius="sm"
           shadow="none"
-          className="flex min-h-full flex-col gap-3 px-3 pb-40 pt-4"
+          className="flex min-h-full flex-col gap-5 px-3 pb-40 pt-4"
         >
-          <TinyText className="text-gray-500">{activeField.title}</TinyText>
-          <Spacer y={2} />
+          <div className="flex items-center gap-1">
+            {activeField.icon ? <activeField.icon size={20} /> : ""}
+            <h3>{activeField.title}</h3>
+            {reportImages.map((img, i) => (
+              <div key={i}>
+                <img src={URL.createObjectURL(img)} alt="" />
+              </div>
+            ))}
+          </div>
           {activeField.details.map((detail) =>
             detail.isTextArea ? (
-              <Textarea
-                key={detail.id}
-                variant="bordered"
-                labelPlacement="outside"
-                placeholder="أدخل النص"
-                label={detail.title}
+              <Tiptap
                 value={detail.value}
-                onChange={(e) => handleInputChange(detail.id, e.target.value)}
-                classNames={{
-                  input: "resize-y min-h-[40px]",
-                }}
-              ></Textarea>
+                onChange={(value: string) =>
+                  handleInputChange(detail.id, value)
+                }
+              />
+            ) : detail.images ? (
+              <div
+                {...getRootProps({
+                  className: `dropzone ${isDragActive ? "active" : ""}`,
+                })}
+              >
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the files here ...</p>
+                ) : (
+                  <p>Drag & drop files here, or click to select files</p>
+                )}
+              </div>
             ) : (
               <Input
                 key={detail.id}
                 variant="bordered"
                 labelPlacement="outside"
-                placeholder="أدخل النص"
                 label={detail.title}
                 value={detail.value}
+                placeholder={detail.placeholder}
                 onChange={(e) => handleInputChange(detail.id, e.target.value)}
               />
             ),
-          )}
-          {activeField.isMultipleLines && (
-            <div className="flex w-full justify-center">
-              <Button
-                variant="faded"
-                color="primary"
-                size="sm"
-                className="w-fit rounded-full border-[2px] border-purple-700/10 bg-green-300/15 text-xs font-medium"
-              >
-                إضافة سطر
-              </Button>
-            </div>
           )}
         </Card>
       </motion.div>

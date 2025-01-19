@@ -24,16 +24,6 @@
   border-radius: 22px;
 }
 
-.__fill-height {
-  height: calc(100svh - 5rem);
-}
-
-.__table-border {
-  border-width: 1px 1px 1px 0;
-  border-color: black;
-  /* border: 1px solid black; */
-  padding-inline: 6px;
-}
 .__accordion-btn,
 button {
   padding-block: 0.5rem !important;
@@ -45,15 +35,6 @@ button {
   transform-origin: top right;
   transform: scale(0.5);
 }
-td {
-  width: 33.33%;
-  border: 1px solid black;
-  padding: 2px;
-}
-
-.__a4-page > * {
-  font-size: 11pt;
-}
 
 .__shadow-none {
   box-shadow: none !important;
@@ -62,23 +43,6 @@ td {
   height: fit-content !important;
 }
 
-.pagedjs_pages {
-  transform-origin: top left;
-  display: flex;
-  flex-direction: column;
-  gap: 62px;
-}
-
-.pagedjs_page {
-  size: A4;
-}
-.pagedjs_sheet {
-  background-color: white;
-  border: 1px solid rgb(191, 191, 191);
-  margin: 0;
-  width: 210mm;
-  height: 297mm;
-}
 ::placeholder {
   color: gray !important;
   opacity: 1; /* Firefox */
@@ -115,6 +79,23 @@ td {
   height: 1123px;
   background-color: white;
 }
+
+.print-page h1 {
+  font-size: 48px;
+}
+.print-page h2 {
+  font-size: 32px;
+}
+.print-page h3 {
+  font-size: 24px;
+}
+ul {
+  list-style-type: disc !important;
+}
+ol {
+  list-style-type: decimal !important;
+}
+
 .cover {
   margin-top: 100px;
   height: 900px;
@@ -122,6 +103,55 @@ td {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.print-page {
+  background-image: url("/clish.jpg");
+  background-size: cover; /* Optional: covers the entire element */
+  background-position: center; /* Optional: centers the image */
+  background-repeat: no-repeat; /* Optional: prevents repeating the image */
+  padding: 120px 40px;
+} /* Add these styles to your global CSS or in a specific file like styles.css */
+
+.tiptap-editor {
+  border: 1px solid #e5e7eb; /* Tailwind's 'gray-300' */
+  border-radius: 0.375rem; /* Tailwind's 'rounded-md' */
+  padding: 1rem; /* Tailwind's 'p-4' */
+  background-color: #ffffff; /* Tailwind's 'bg-white' */
+  min-height: 200px;
+}
+
+.tiptap-editor:focus-within {
+  border-color: #3b82f6; /* Tailwind's 'blue-500' */
+  outline: none;
+}
+
+/* For the toolbar (MenuBar) */
+.tiptap-editor .menu-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tiptap-editor .menu-bar button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db; /* Tailwind's 'gray-300' */
+  border-radius: 0.375rem; /* Tailwind's 'rounded-md' */
+  background-color: #f9fafb; /* Tailwind's 'gray-100' */
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.tiptap-editor .menu-bar button:hover {
+  background-color: #f3f4f6; /* Tailwind's 'gray-200' */
+}
+
+.tiptap-editor .menu-bar button.active {
+  background-color: #3b82f6; /* Tailwind's 'blue-500' */
+  color: white;
+  border-color: #2563eb; /* Tailwind's 'blue-600' */
 }
 
 @page {
