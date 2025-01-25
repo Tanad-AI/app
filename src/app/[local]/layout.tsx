@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
-import { Toaster } from "@/components/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,10 +34,7 @@ export default async function RootLayout({
     <html lang={locale} className="light">
       <body className={font.className}>
         <NextIntlClientProvider messages={messages}>
-          <Providers>
-            {children}
-            <Toaster />
-          </Providers>
+          <Providers>{children}</Providers>
           <Analytics />
         </NextIntlClientProvider>
       </body>

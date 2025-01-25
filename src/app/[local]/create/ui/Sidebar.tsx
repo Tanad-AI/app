@@ -1,143 +1,91 @@
-"use client";
-
-import React from "react";
-import {
-  Button,
-  Card,
-  Divider,
-  Select,
-  SelectItem,
-  Spacer,
-  Tab,
-  Tabs,
-} from "@nextui-org/react";
-import { Paragraph, Text } from "@/app/[local]/lib/TextComponents";
-import { AlignLeft, AlignRight, Globe } from "lucide-react";
-import { useQuizStore } from "@/app/[local]/store/QuizState";
+import React, { useState } from "react";
+import { SortableList } from "@/components/SortableList";
+import { Text } from "../../lib/TextComponents";
+import { Card, Spacer, Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { useExamHeaderStore } from "../../store/HeaderStore";
-import { usePathname } from "next/navigation";
+import useReportStore from "@/app/[local]/store/reportStore";
+import { Eye, EyeOff } from "lucide-react";
+import PaddingControls from "@/components/PaddingControls";
+import LetterHeadUploader from "@/components/LetterheadUploader";
+import TextDirectionControls from "@/components/TextDirectionControls";
 
 interface SidebarType {
-  activeControlView: number;
-  setActiveControlView: any;
   className: string;
 }
 
-function Sidebar({
-  activeControlView,
-  setActiveControlView,
-  className,
-}: SidebarType) {
+function Sidebar({ className }: SidebarType) {
   const t = useTranslations("Create");
-  const controlsButtons = [t("header"), t("questions"), t("footer")];
-  const setExamDirection = useQuizStore((state) => state.setExamDirection);
-  const examDirection = useQuizStore((state) => state.examDirection);
-  const examLanguage = useQuizStore((state) => state.examLanguage);
-  const setExamLanguage = useExamHeaderStore((state) => state.setExamLanguage);
+  const fields = useReportStore((state) => state.fields);
+  const setFields = useReportStore((state) => state.setFields);
+  const setActiveField = useReportStore((state) => state.setActiveField);
+  const activeField = useReportStore((state) => state.activeField);
+  const [isFieldHidden, setIsFieldHidden] = useState(false);
+  const [selected, setSelected] = useState("content");
+
   return (
     <div
-      className={`min-w-[260px] flex-col space-y-2 md:block lg:w-[28%] ${className}`}
+      className={`h-svh min-w-[260px] flex-col space-y-2 overflow-y-scroll  pb-2  md:block lg:w-[28%] xl:h-[800px] ${className}`}
     >
       <Text>{t("control")}</Text>
-      <Card radius="sm" className=" px-6 py-3 shadow-sm ">
+      <Card radius="sm" className="h-full px-3 py-2  shadow-sm">
         <Tabs
-          color="primary"
-          size="sm"
-          radius="sm"
+          aria-label="Options"
+          selectedKey={selected}
+          onSelectionChange={(key) => setSelected(key.toString())}
           classNames={{
-            tabList: "w-full shadow-none p-0",
-            cursor: "rounded-none p-0",
+            tabList: "w-full p-0 text-sm",
+            panel: "flex flex-col gap-3",
           }}
+          color="primary"
+          radius="full"
         >
-          <Tab key="content" className="flex flex-col" title={t("content")}>
-            <Spacer y={3} />
-            <div className="flex w-full flex-col gap-3">
-              {controlsButtons.map((button, i) => (
-                <Button
-                  size="md"
-                  key={button}
-                  radius="sm"
-                  onClick={() => setActiveControlView(i)}
-                  variant="shadow"
-                  className={`w-full border-[1.5px] border-black/10 bg-transparent capitalize shadow-md ${
-                    activeControlView === i &&
-                    "bg-primary/15 font-semibold text-primary "
+          <Tab key="content" title="Content">
+            <h4>Page Content</h4>
+            <SortableList
+              items={fields}
+              onChange={setFields} // Directly passing the setFields function
+              renderItem={(item) => (
+                <SortableList.Item
+                  className={` cursor-default ${
+                    activeField.id == item.id
+                      ? "bg-green-500/10 text-primary"
+                      : "bg-white"
                   }`}
+                  onClick={() => setActiveField(item)}
+                  id={item.id}
                 >
-                  {button}
-                </Button>
-              ))}
-            </div>
+                  <div className="flex w-full items-center justify-between ">
+                    <div className="flex items-center">
+                      <SortableList.DragHandle />
+                      <span className="cursor-pointer">{item.title}</span>
+                    </div>
+                    {isFieldHidden ? (
+                      <EyeOff
+                        onClick={() => setIsFieldHidden(!isFieldHidden)}
+                        className="cursor-pointer"
+                        size={14}
+                        strokeWidth={1.5}
+                      />
+                    ) : (
+                      <Eye
+                        onClick={() => setIsFieldHidden(!isFieldHidden)}
+                        className="cursor-pointer"
+                        size={14}
+                        strokeWidth={1.5}
+                      />
+                    )}
+                  </div>
+                </SortableList.Item>
+              )}
+            />
           </Tab>
-          <Tab key="Customize" className="flex flex-col" title={t("customize")}>
-            <Spacer y={3} />
-            <div className="flex w-full flex-col gap-3">
-              <section className="space-y-2">
-                <Paragraph>{t("examLanguage")}</Paragraph>
-                <Select
-                  placeholder="Select an language"
-                  labelPlacement="outside"
-                  className="max-w-28"
-                  selectorIcon={<Globe opacity={0.7} />}
-                  defaultSelectedKeys={["english"]}
-                >
-                  <SelectItem
-                    onClick={() => setExamLanguage("ar")}
-                    value="arabic"
-                    key={"arabic"}
-                  >
-                    {t("arabic")}
-                  </SelectItem>
-                  <SelectItem
-                    value="english"
-                    onClick={() => setExamLanguage("en")}
-                    key={"english"}
-                  >
-                    {t("english")}
-                  </SelectItem>
-                </Select>
-                <Divider />
-              </section>
-              <section className="space-y-2">
-                <Paragraph>{t("alignment")}</Paragraph>
-                <div className="space-x-3">
-                  <Button
-                    onPress={() => setExamDirection("ltr")}
-                    className={`${
-                      examDirection == "ltr" && "stronke-red-200 bg-gray-300"
-                    }`}
-                    variant="flat"
-                    isIconOnly
-                  >
-                    <AlignLeft
-                      className={`${
-                        examDirection == "ltr"
-                          ? "stroke-black"
-                          : "stroke-slate-400 opacity-75"
-                      }`}
-                    />
-                  </Button>
-                  <Button
-                    onPress={() => setExamDirection("rtl")}
-                    className={`${examDirection == "rtl" && "bg-gray-300 "}`}
-                    variant="flat"
-                    isIconOnly
-                  >
-                    <AlignRight
-                      className={`${
-                        examDirection == "rtl"
-                          ? "stroke-black"
-                          : "stroke-slate-400 opacity-75"
-                      }`}
-                    />
-                  </Button>
-                </div>
-                <Divider />
-              </section>
-            </div>
+          <Tab key="customize" title="Customize">
+            <TextDirectionControls />
+            <LetterHeadUploader />
+            <PaddingControls />
           </Tab>
         </Tabs>
+        <Spacer y={3} />
       </Card>
     </div>
   );
