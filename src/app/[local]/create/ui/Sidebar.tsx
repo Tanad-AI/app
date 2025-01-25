@@ -5,6 +5,9 @@ import { Card, Spacer, Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import useReportStore from "@/app/[local]/store/reportStore";
 import { Eye, EyeOff } from "lucide-react";
+import PaddingControls from "@/components/PaddingControls";
+import LetterHeadUploader from "@/components/LetterheadUploader";
+import TextDirectionControls from "@/components/TextDirectionControls";
 
 interface SidebarType {
   className: string;
@@ -76,7 +79,11 @@ function Sidebar({ className }: SidebarType) {
               )}
             />
           </Tab>
-          <Tab key="customize" title="Customize"></Tab>
+          <Tab key="customize" title="Customize">
+            <TextDirectionControls />
+            <LetterHeadUploader />
+            <PaddingControls />
+          </Tab>
         </Tabs>
         <Spacer y={3} />
       </Card>

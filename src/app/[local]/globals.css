@@ -74,12 +74,18 @@ button {
 
 .print-page {
   margin-bottom: 34px;
-  padding: 10px;
-  width: 794px;
-  height: 1123px;
+  width: 555.56px;
+  height: 787.75px;
   background-color: white;
+  background-size: cover; /* Optional: covers the entire element */
+  background-position: center; /* Optional: centers the image */
+  background-repeat: no-repeat; /* Optional: prevents repeating the image */
 }
-
+.print-page:has(.images) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .print-page h1 {
   font-size: 48px;
 }
@@ -104,14 +110,6 @@ ol {
   align-items: center;
   justify-content: center;
 }
-
-.print-page {
-  background-image: url("/clish.jpg");
-  background-size: cover; /* Optional: covers the entire element */
-  background-position: center; /* Optional: centers the image */
-  background-repeat: no-repeat; /* Optional: prevents repeating the image */
-  padding: 120px 40px;
-} /* Add these styles to your global CSS or in a specific file like styles.css */
 
 .tiptap-editor {
   border: 1px solid #e5e7eb; /* Tailwind's 'gray-300' */

@@ -21,8 +21,7 @@ function View({ activeField }: { activeField: Field }) {
   const reportImages = useReportStore((state) => state.reportImages);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setReportImages([...acceptedFiles]);
-    console.log([...acceptedFiles]);
+    setReportImages(acceptedFiles.map((img) => URL.createObjectURL(img)));
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -59,13 +58,7 @@ function View({ activeField }: { activeField: Field }) {
           className="flex min-h-full flex-col gap-5 px-3 pb-40 pt-4"
         >
           <div className="flex items-center gap-1">
-            {activeField.icon ? <activeField.icon size={20} /> : ""}
             <h3>{activeField.title}</h3>
-            {reportImages.map((img, i) => (
-              <div key={i}>
-                <img src={URL.createObjectURL(img)} alt="" />
-              </div>
-            ))}
           </div>
           {activeField.details.map((detail) =>
             detail.isTextArea ? (

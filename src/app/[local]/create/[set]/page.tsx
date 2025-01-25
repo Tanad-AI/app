@@ -25,7 +25,7 @@ const page = () => {
         className={activeSection == 1 ? "md:block lg:w-[50%]" : ""}
         activeControlView={activeControlView}
       />
-      <A4page className={activeSection == 2 ? "md:block" : ""} />
+      <A4page className={`min-w-fit ${activeSection == 2 ? "md:block" : ""}`} />
     </div>
   );
 };

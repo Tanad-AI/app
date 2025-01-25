@@ -1,27 +1,38 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import useReportStore from "@/app/[local]/store/reportStore";
 import React, { useEffect, useState } from "react";
 
-const PAGE_HEIGHT = 1120;
+const PAGE_HEIGHT = 785.75;
 
 const A4Paper = () => {
   const fields = useReportStore((state) => state.fields);
   const [childrenCount, setChildrenCount] = useState(0); // State to track changes
   const reportImages = useReportStore((state) => state.reportImages);
+  const textDirection = useCustomizeStore((state) => state.textDirection);
+  const letterHead = useCustomizeStore((state) => state.letterHead);
+  const yPadding = useCustomizeStore((state) => state.yPadding);
+  const xPadding = useCustomizeStore((state) => state.xPadding);
 
   useEffect(() => {
     const parent = document.getElementById("perent");
     const printArea = document.getElementById("print-area");
 
     if (parent && printArea) {
-      const maxWrapperHeight = PAGE_HEIGHT; // Fixed height
+      const maxWrapperHeight = PAGE_HEIGHT - yPadding; // Fixed height
       let currentHeight = 0;
 
       printArea.innerHTML = ""; // Clear previous content
       let wrapper = document.createElement("div");
       wrapper.className = "print-page";
+      wrapper.style.paddingTop = yPadding.toString() + "px";
+      wrapper.style.paddingBottom = yPadding.toString() + "px";
+      wrapper.style.paddingInline = xPadding.toString() + "px";
 
+      if (wrapper && letterHead) {
+        wrapper.style.backgroundImage = `url(${letterHead})`;
+      }
       const calculateHeight = (element: any) => {
         const style = window.getComputedStyle(element);
         const margin =
@@ -38,7 +49,7 @@ const A4Paper = () => {
         printArea.removeChild(clone);
 
         // Check if adding the current element exceeds maxWrapperHeight
-        if (currentHeight + childHeight > maxWrapperHeight - 120 - 80) {
+        if (currentHeight + childHeight > maxWrapperHeight) {
           // Append the completed wrapper to printArea
           printArea.appendChild(wrapper);
 
@@ -46,6 +57,13 @@ const A4Paper = () => {
           wrapper = document.createElement("div");
           wrapper.className = "print-page";
           currentHeight = 0;
+          wrapper.style.paddingTop = yPadding.toString() + "px";
+          wrapper.style.paddingBottom = yPadding.toString() + "px";
+          wrapper.style.paddingInline = xPadding.toString() + "px";
+
+          if (wrapper && letterHead) {
+            wrapper.style.backgroundImage = `url(${letterHead})`;
+          }
         }
 
         // Add the cloned child to the wrapper and update the current height
@@ -58,7 +76,7 @@ const A4Paper = () => {
         printArea.appendChild(wrapper);
       }
     }
-  }, [childrenCount, fields, reportImages]);
+  }, [childrenCount, fields, reportImages, letterHead, yPadding]);
   // Observe changes in the parent element's children
   useEffect(() => {
     const parent = document.getElementById("perent");
@@ -74,8 +92,34 @@ const A4Paper = () => {
     }
   }, []);
 
+  const imageCount = reportImages.length;
+
+  // Determine the number of columns and rows dynamically
+  const calculateGridSize = () => {
+    if (imageCount === 1) return { cols: 1, rows: 1 };
+    if (imageCount === 2) return { cols: 1, rows: 2 };
+    if (imageCount <= 4) return { cols: 2, rows: 2 };
+    if (imageCount <= 6) return { cols: 3, rows: 2 };
+    if (imageCount <= 9) return { cols: 3, rows: 3 };
+    if (imageCount >= 36) return { cols: 6, rows: 6 };
+
+    const cols = Math.ceil(Math.sqrt(imageCount)); // Square root for balanced grid
+    const rows = Math.ceil(imageCount / cols);
+    return { cols, rows };
+  };
+  const { cols, rows } = calculateGridSize();
+
+  const reportImagesPagesCounter = (images: number): number => {
+    const imagesPerGroup = 36;
+    return Math.ceil(images / imagesPerGroup);
+  };
+
+  const counter = reportImagesPagesCounter(reportImages.length);
+  const groups = Array.from({ length: counter }, (_, index) => index + 1);
+
   return (
     <>
+      <link href="global.css"></link>
       <div
         id="perent"
         className={`__a4-page h-0 w-0 scroll-m-36 flex-col gap-5 bg-white opacity-0`}
@@ -83,7 +127,7 @@ const A4Paper = () => {
         {fields.map((field) => {
           if (field.name == "reportDetailsTable") {
             return (
-              <div dir="rtl" className="mx-auto w-full max-w-4xl p-4">
+              <div dir="rtl" className="mx-auto w-full max-w-4xl">
                 <div className="grid grid-cols-4 gap-px overflow-hidden rounded-lg border border-gray-300 bg-gray-300">
                   <div className="col-span-1 bg-gray-100 p-3 font-medium">
                     اسم المشروع
@@ -157,7 +201,7 @@ const A4Paper = () => {
             return (
               <div
                 className="flex  flex-col items-center justify-center"
-                style={{ height: PAGE_HEIGHT - 20 - 120 - 80 + "px" }}
+                style={{ height: PAGE_HEIGHT - 20 - yPadding + "px" }}
               >
                 {field.details.map((detail) => (
                   <div
@@ -193,22 +237,25 @@ const A4Paper = () => {
             );
           });
         })}
-        <div
-          className="grid grid-cols-6 grid-rows-6 gap-4"
-          style={{ height: PAGE_HEIGHT - 20 - 120 - 80 + "px" }}
-        >
-          {reportImages.map((img, i) => (
-            <div key={i}>
-              <img
-                className="size-full object-cover"
-                src={URL.createObjectURL(img)}
-                alt=""
-              />
-            </div>
-          ))}
-        </div>
+        {groups.map((group) => (
+          <div
+            className={`images grid h-full  w-full  gap-2`}
+            style={{
+              height: PAGE_HEIGHT - yPadding * 2 + "px",
+
+              gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+              gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+            }}
+          >
+            {reportImages.slice((group - 1) * 36, group * 36).map((img, i) => (
+              <div key={i}>
+                <img className="size-full object-cover" src={img} alt="" />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
-      <div id="print-area" style={{ margin: "0px" }}>
+      <div id="print-area" dir={textDirection} style={{ margin: "0px" }}>
         {/* Content will be grouped and displayed here */}
       </div>
     </>

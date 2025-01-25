@@ -6,6 +6,7 @@ import React from "react";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import UserAvatar from "@/components/UserAvatar";
+import ExportPage from "@/components/exportDocument";
 
 const DashboardNav = () => {
   const pathName = usePathname();
@@ -23,6 +24,7 @@ const DashboardNav = () => {
           <TinyText>{homeT("tanad")}</TinyText>
         </div>
       </Link>
+      <ExportPage />
       <div className="flex items-center gap-2">
         <UserAvatar />
       </div>

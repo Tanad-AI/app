@@ -14,8 +14,8 @@ export interface StoreState {
     detailId: string,
     newValue: string,
   ) => void;
-  reportImages: File[];
-  setReportImages: (newImages: File[]) => void;
+  reportImages: string[];
+  setReportImages: (newImages: string[]) => void;
 }
 
 const useReportStore = create<StoreState>((set) => ({
@@ -278,7 +278,7 @@ const useReportStore = create<StoreState>((set) => ({
     }));
   },
   reportImages: [],
-  setReportImages: (newImages: File[]) => set({ reportImages: newImages }),
+  setReportImages: (newImages: string[]) => set({ reportImages: newImages }),
 }));
 
 export default useReportStore;
