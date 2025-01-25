@@ -4,13 +4,13 @@ import { ArrowUpDown, FileIcon, Search } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Paragraph, Text } from "../../lib/TextComponents";
 import { SortDropDown } from "@/components/SortDropDown";
-import prisma from "../../../db";
+// import prisma from "../../../db";
 import CreateNewButton from "../../../../components/CreateNewButton";
 import Link from "next/link";
 
 async function page() {
   const t = await getTranslations("dashboard");
-  const documents = await prisma.set.findMany();
+  // const documents = await prisma.set.findMany();
 
   return (
     <div className="w-full">
@@ -41,7 +41,7 @@ async function page() {
           </div>
         </div>
         <div className="grid grid-cols-2 justify-items-center gap-8 gap-x-0  md:grid-cols-3 lg:grid-cols-4">
-          {documents.map((document, i) => (
+          {/* {documents.map((document: any, i: number) => (
             <>
               <Link href={`../create/${document.id}`}>
                 <div key={i} className="cursor-pointer">
@@ -56,7 +56,7 @@ async function page() {
                 </div>
               </Link>
             </>
-          ))}
+          ))} */}
         </div>
       </section>
     </div>

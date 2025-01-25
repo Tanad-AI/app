@@ -1,7 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
+/* eslint-disable */
 "use client";
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import useReportStore from "@/app/[local]/store/reportStore";
+import { createId } from "@paralleldrive/cuid2";
+import { create } from "domain";
 import React, { useEffect, useState } from "react";
 
 const PAGE_HEIGHT = 785.75;
@@ -127,7 +129,11 @@ const A4Paper = () => {
         {fields.map((field) => {
           if (field.name == "reportDetailsTable") {
             return (
-              <div dir="rtl" className="mx-auto w-full max-w-4xl">
+              <div
+                key={createId()}
+                dir="rtl"
+                className="mx-auto w-full max-w-4xl"
+              >
                 <div className="grid grid-cols-4 gap-px overflow-hidden rounded-lg border border-gray-300 bg-gray-300">
                   <div className="col-span-1 bg-gray-100 p-3 font-medium">
                     اسم المشروع
@@ -239,6 +245,7 @@ const A4Paper = () => {
         })}
         {groups.map((group) => (
           <div
+            key={createId()}
             className={`images grid h-full  w-full  gap-2`}
             style={{
               height: PAGE_HEIGHT - yPadding * 2 + "px",

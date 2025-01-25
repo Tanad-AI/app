@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "load" });
 
-    let fileBuffer: Buffer;
+    let fileBuffer: any;
 
     if (format === "pdf") {
       fileBuffer = await page.pdf({

@@ -10,10 +10,6 @@ import { DragOverlay, defaultDropAnimationSideEffects } from "@dnd-kit/core";
 import type { DropAnimation } from "@dnd-kit/core";
 import clsx from "clsx";
 
-interface Props extends LiHTMLAttributes<HTMLLIElement> {
-  id: UniqueIdentifier;
-}
-
 interface Context {
   attributes: Record<string, any>;
   listeners: DraggableSyntheticListeners;
@@ -31,7 +27,7 @@ export function SortableItem({
   id,
   className,
   ...props
-}: PropsWithChildren<Props>) {
+}: PropsWithChildren<any>) {
   const {
     attributes,
     isDragging,
@@ -103,7 +99,7 @@ const dropAnimationConfig: DropAnimation = {
   }),
 };
 
-export function SortableOverlay({ children }: PropsWithChildren<Props>) {
+export function SortableOverlay({ children }: PropsWithChildren<any>) {
   return (
     <DragOverlay dropAnimation={dropAnimationConfig}>{children}</DragOverlay>
   );
