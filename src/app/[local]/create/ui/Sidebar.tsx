@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SortableList } from "@/components/SortableList";
 import { Text } from "../../lib/TextComponents";
 import { Card, Spacer, Tab, Tabs } from "@nextui-org/react";
@@ -22,12 +22,15 @@ function Sidebar({ className }: SidebarType) {
   const [isFieldHidden, setIsFieldHidden] = useState(false);
   const [selected, setSelected] = useState("content");
 
+  useEffect(() => {
+    setActiveField(fields[0]);
+  }, []);
   return (
     <div
-      className={`h-svh min-w-[260px] flex-col space-y-2 overflow-y-scroll  pb-2  md:block lg:w-[28%] xl:h-[800px] ${className}`}
+      className={` min-w-[260px] flex-col space-y-2 overflow-y-auto  pb-20  md:block lg:w-[28%]  ${className}`}
     >
       <Text>{t("control")}</Text>
-      <Card radius="sm" className="h-full px-3 py-2  shadow-sm">
+      <Card radius="sm" className=" px-3 py-2 shadow-sm">
         <Tabs
           aria-label="Options"
           selectedKey={selected}

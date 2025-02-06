@@ -1,4 +1,3 @@
-import { AbstractPattern } from "@/assets/";
 import { Spacer } from "@nextui-org/react";
 import DashboardNav from "../ui/DashboardNav";
 
@@ -15,7 +14,6 @@ export default function CreateLayout({
           <Spacer y={3} />
           {children}
         </div>
-        <AbstractPattern className="absolute -top-14 left-0 -z-20  h-screen w-screen opacity-65 mix-blend-darken" />
       </div>
     </section>
   );

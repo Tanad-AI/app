@@ -41,7 +41,7 @@ function View({ activeField }: { activeField: Field }) {
   };
 
   return (
-    <div className="h-full ">
+    <div className="h-[400px]">
       <div className="flex items-baseline gap-1">
         <Text>التحكم</Text>
       </div>

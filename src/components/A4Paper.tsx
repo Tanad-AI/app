@@ -3,8 +3,7 @@
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import useReportStore from "@/app/[local]/store/reportStore";
 import { createId } from "@paralleldrive/cuid2";
-import { create } from "domain";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const PAGE_HEIGHT = 785.75;
 
@@ -16,6 +15,12 @@ const A4Paper = () => {
   const letterHead = useCustomizeStore((state) => state.letterHead);
   const yPadding = useCustomizeStore((state) => state.yPadding);
   const xPadding = useCustomizeStore((state) => state.xPadding);
+  const ref = useRef<HTMLDivElement>(null);
+  const setComponentRef = useReportStore((state) => state.setComponentRef);
+
+  useEffect(() => {
+    setComponentRef(ref);
+  }, [setComponentRef]);
 
   useEffect(() => {
     const parent = document.getElementById("perent");
@@ -78,7 +83,7 @@ const A4Paper = () => {
         printArea.appendChild(wrapper);
       }
     }
-  }, [childrenCount, fields, reportImages, letterHead, yPadding]);
+  }, [childrenCount, fields, reportImages, letterHead, yPadding, xPadding]);
   // Observe changes in the parent element's children
   useEffect(() => {
     const parent = document.getElementById("perent");
@@ -121,8 +126,8 @@ const A4Paper = () => {
 
   return (
     <>
-      <link href="global.css"></link>
       <div
+        ref={ref}
         id="perent"
         className={`__a4-page h-0 w-0 scroll-m-36 flex-col gap-5 bg-white opacity-0`}
       >
