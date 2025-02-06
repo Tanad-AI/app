@@ -42,11 +42,10 @@ const downloadPDF = async (fileName = "document.pdf") => {
       const scale = 6; // Reduce scale to control file size
       const element = elements[i];
 
-      let imgData = await domtoimage.toJpeg(element, {
+      let imgData: any = await domtoimage.toJpeg(element, {
         quality: 1, // Adjust JPEG quality
         width: element.scrollWidth * scale,
         height: element.scrollHeight * scale,
-        useCORS: true, // Enables cross-origin image captures
         style: {
           transform: "scale(" + scale + ")",
           transformOrigin: "top right", // Adjust origin if needed
