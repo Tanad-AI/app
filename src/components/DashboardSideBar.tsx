@@ -23,6 +23,7 @@ function DashboardSideBar() {
   const pathname = usePathname();
   const segments = pathname.split("/").filter(Boolean);
   const currentPath = segments[segments.length - 1];
+
   const SIDEBAR_ITEMS = [
     {
       title: t("home"),

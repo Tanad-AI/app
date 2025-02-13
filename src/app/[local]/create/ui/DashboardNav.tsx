@@ -5,10 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import UserAvatar from "@/components/UserAvatar";
 import downloadComponentAsPDF from "@/components/exportDocument";
 import useReportStore from "../../store/reportStore";
 import { Button } from "@nextui-org/react";
+import CustomSignUpButton from "@/components/CustomSignUpButton";
 
 const DashboardNav = () => {
   const pathName = usePathname();
@@ -30,7 +30,7 @@ const DashboardNav = () => {
         <Button color="primary" onClick={() => downloadComponentAsPDF()}>
           Download PDF
         </Button>
-        <UserAvatar />
+        <CustomSignUpButton />
       </div>
     </nav>
   );

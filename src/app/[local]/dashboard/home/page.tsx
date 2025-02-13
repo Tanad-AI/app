@@ -6,7 +6,6 @@ import { Paragraph, Text } from "../../lib/TextComponents";
 import { SortDropDown } from "@/components/SortDropDown";
 // import prisma from "../../../db";
 import CreateNewButton from "../../../../components/CreateNewButton";
-import Link from "next/link";
 
 async function page() {
   const t = await getTranslations("dashboard");

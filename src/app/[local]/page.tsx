@@ -23,8 +23,6 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import {
-  ArrowRight,
-  ArrowRightCircle,
   Check,
   ChevronRight,
   Hammer,
@@ -45,6 +43,8 @@ import WordRotate from "@/components/WordRotate";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import CustomSignUpButton from "@/components/CustomSignUpButton";
 
 function TryNowButton({
   type,
@@ -93,24 +93,6 @@ function TryNowButton({
         </Link>
       )}
     </>
-  );
-}
-
-function SignUpButton({ theme }: { theme?: "dark" | "light" }) {
-  const t = useTranslations("NavBar");
-  return (
-    <Link href="#">
-      <Button
-        className={` ${
-          theme == "dark"
-            ? " border-3 border-black/15 bg-primary-900 text-white "
-            : "border-[1px] border-black/15 bg-white text-black"
-        }`}
-        radius="sm"
-      >
-        {t("signUp")}
-      </Button>
-    </Link>
   );
 }
 
@@ -326,7 +308,7 @@ function page() {
         <SectionHeader className="text-white">{t("footer.cta")}</SectionHeader>
         <div className="space-x-6">
           <TryNowButton theme="light" />
-          <SignUpButton theme="dark" />
+          <CustomSignUpButton theme="dark" />
         </div>
       </section>
       <footer className="bg-primary-900 pb-8 pt-32 text-white">
@@ -382,10 +364,10 @@ function NavBar({ t }: { t: any }) {
           <div className="flex items-center gap-2">
             <TanadLogo />
             <Text>{t("tanad")}</Text>
-          </div>{" "}
+          </div>
         </NavbarBrand>
       </NavbarContent>
-      <SignUpButton />
+      <CustomSignUpButton />
       <TryNowButton />
       <NavbarContent
         className="hidden gap-4 sm:flex"
