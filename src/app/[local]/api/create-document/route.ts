@@ -2,7 +2,7 @@ import prisma from "@/app/db";
 import { NextRequest } from "next/server";
 import { Field, DetailItem } from "../../types/report.typs";
 
-export async function POST(request: NextRequest) {
+export default async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { fields, documentId } = body;
