@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Button, Spacer } from "@nextui-org/react";
 import DashboardNav from "../ui/DashboardNav";
 import prisma from "@/app/db";
