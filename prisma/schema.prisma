@@ -20,38 +20,37 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model Set {
-  id        String     @id @default(cuid())
-  title     String?    @default("Untitled document")
-  questions Question[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+model Document {
+  id     String  @id @default(cuid())
+  name   String
+  userId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  fields Field[]
+  
+
+  @@unique([userId, name]) // Ensures the same user can't have duplicate names
 }
 
-model Question {
-  id           String        @id @default(cuid())
-  questionText String
-  answer       String?
-  image        String[]
-  explanation  String?
-  type         QuestionTypes
-  choices      Choice[]
-  set          Set[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+model Field {
+  id              String       @id @default(uuid())
+  name            String
+  title           String
+  details         DetailItem[] // One-to-Many relationship
+  isMultipleLines Boolean?     // Optional field
+  documentId      String
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
 }
 
-model Choice {
-  id          String   @id @default(cuid())
-  choiceText  String
-  isTrue      Boolean
-  explanation String?
-  questionId  String
-  question    Question @relation(fields: [questionId], references: [id])
-}
-
-enum QuestionTypes {
-  MCQs
-  trueOrFalse
-  fillInTheBlank
+model DetailItem {
+  id          String  @id @default(uuid())
+  fieldId     String
+  field       Field   @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  detailName  String
+  title       String
+  value       String
+  placeholder String?  // Optional
+  isTextArea  Boolean? // Optional
+  content     String?  // For rich text
+  images      String[]  // Storing image URLs as an array
 }

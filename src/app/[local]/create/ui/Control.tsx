@@ -68,7 +68,7 @@ function View({ activeField }: { activeField: Field }) {
                   handleInputChange(detail.id, value)
                 }
               />
-            ) : detail.images ? (
+            ) : detail.detailName == "images" ? (
               <div
                 {...getRootProps({
                   className: `dropzone ${isDragActive ? "active" : ""}`,

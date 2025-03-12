@@ -4,12 +4,14 @@ import { ArrowUpDown, FileIcon, Search } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Paragraph, Text } from "../../lib/TextComponents";
 import { SortDropDown } from "@/components/SortDropDown";
-// import prisma from "../../../db";
+import prisma from "../../../db";
 import CreateNewButton from "../../../../components/CreateNewButton";
+import Link from "next/link";
+import { Document } from "@prisma/client";
 
 async function page() {
   const t = await getTranslations("dashboard");
-  // const documents = await prisma.set.findMany();
+  const documents: Document[] = await prisma.document.findMany();
 
   return (
     <div className="w-full">
@@ -40,22 +42,20 @@ async function page() {
           </div>
         </div>
         <div className="grid grid-cols-2 justify-items-center gap-8 gap-x-0  md:grid-cols-3 lg:grid-cols-4">
-          {/* {documents.map((document: any, i: number) => (
-            <>
-              <Link href={`../create/${document.id}`}>
-                <div key={i} className="cursor-pointer">
-                  <div className="flex h-[42.42vw] w-[30vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[21.21vw] md:w-[15vw]">
-                    <FileIcon size={24} className="stroke-slate-400" />
-                  </div>
-                  <Text>{document.title}</Text>
-                  <Paragraph>
-                    {t("createdLabel")}{" "}
-                    {new Date(document.createdAt).toLocaleDateString()}
-                  </Paragraph>
+          {documents.map((document, i: number) => (
+            <Link href={`../create/${document.id}`}>
+              <div key={i} className="cursor-pointer">
+                <div className="flex h-[42.42vw] w-[30vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[21.21vw] md:w-[15vw]">
+                  <FileIcon size={24} className="stroke-slate-400" />
                 </div>
-              </Link>
-            </>
-          ))} */}
+                <Text>{document.name}</Text>
+                <Paragraph>
+                  {t("createdLabel")}{" "}
+                  {new Date(document.createdAt).toLocaleDateString()}
+                </Paragraph>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </div>

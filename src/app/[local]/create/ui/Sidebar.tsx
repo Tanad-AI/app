@@ -21,13 +21,12 @@ function Sidebar({ className }: SidebarType) {
   const activeField = useReportStore((state) => state.activeField);
   const [isFieldHidden, setIsFieldHidden] = useState(false);
   const [selected, setSelected] = useState("content");
-
   useEffect(() => {
     setActiveField(fields[0]);
   }, []);
   return (
     <div
-      className={` min-w-[260px] flex-col space-y-2 overflow-y-auto  pb-20  md:block lg:w-[28%]  ${className}`}
+      className={`min-w-[260px] flex-col space-y-2 overflow-y-auto  pb-20  md:block lg:w-[28%]  ${className}`}
     >
       <Text>{t("control")}</Text>
       <Card radius="sm" className=" px-3 py-2 shadow-sm">

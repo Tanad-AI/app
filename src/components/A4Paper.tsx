@@ -129,78 +129,74 @@ const A4Paper = () => {
       <div
         ref={ref}
         id="perent"
-        className={`__a4-page h-0 w-0 scroll-m-36 flex-col gap-5 bg-white opacity-0`}
+        className={`__a4-page h-0 w-0 scroll-m-36 flex-col gap-5 bg-white !text-[12px] opacity-0`}
       >
         {fields.map((field) => {
           if (field.name == "reportDetailsTable") {
             return (
-              <div
-                key={createId()}
-                dir="rtl"
-                className="mx-auto w-full max-w-4xl"
-              >
-                <div className="grid grid-cols-4 gap-px overflow-hidden rounded-lg border border-gray-300 bg-gray-300">
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+              <div key={createId()} dir="rtl" className="mx-auto w-4/5 ">
+                <div className="grid grid-cols-4 gap-px overflow-hidden border  border-gray-300 bg-gray-300 text-center">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     اسم المشروع
                   </div>
-                  <div className="col-span-3 bg-white p-3">
+                  <div className="col-span-3 bg-white px-2 ">
                     {field.details[0].value}
                   </div>
 
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     المالك / المدعي
                   </div>
-                  <div className="col-span-3 bg-white p-3">
+                  <div className="col-span-3 bg-white px-2 ">
                     {field.details[1].value}
                   </div>
 
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     موضوع التقرير
                   </div>
-                  <div className="col-span-3 bg-white p-3">
+                  <div className="col-span-3 bg-white px-2 ">
                     {field.details[2].value}
                   </div>
 
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     المدينة
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {" "}
                     {field.details[3].value}
                   </div>
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     الموقع
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {" "}
                     {field.details[6].value}
                   </div>
 
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     رقم العقد
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {" "}
                     {field.details[4].value}
                   </div>
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     تاريخ العقد
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {field.details[7].value}
                   </div>
 
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     اليوم
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {" "}
                     {field.details[5].value}
                   </div>
-                  <div className="col-span-1 bg-gray-100 p-3 font-medium">
+                  <div className="col-span-1 bg-gray-200 px-2 font-medium">
                     التاريخ
                   </div>
-                  <div className="col-span-1 bg-white p-3">
+                  <div className="col-span-1 bg-white px-2 ">
                     {field.details[8].value}
                   </div>
                 </div>
@@ -227,6 +223,17 @@ const A4Paper = () => {
               </div>
             );
           }
+          if (field.name == "companyName" || field.name == "regardsLine") {
+            return (
+              <div>
+                {field.details.map((detail) => (
+                  <div key={detail.id} className="text-center">
+                    {detail.value}
+                  </div>
+                ))}
+              </div>
+            );
+          }
 
           return field.details.map((detail) => {
             const paragraphs = detail.value
@@ -248,6 +255,7 @@ const A4Paper = () => {
             );
           });
         })}
+
         {groups.map((group) => (
           <div
             key={createId()}
@@ -267,7 +275,12 @@ const A4Paper = () => {
           </div>
         ))}
       </div>
-      <div id="print-area" dir={textDirection} style={{ margin: "0px" }}>
+      <div
+        id="print-area"
+        dir={textDirection}
+        className="text-[12px]"
+        style={{ margin: "0px" }}
+      >
         {/* Content will be grouped and displayed here */}
       </div>
     </>

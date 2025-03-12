@@ -1,9 +1,6 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import React from "react";
-
-function page() {
-  return <div className="w-full"></div>;
+export default function page() {
+  redirect("/../dashboard/home");
+  return null;
 }
-
-export default page;

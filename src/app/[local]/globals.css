@@ -80,6 +80,9 @@ button {
   background-size: cover; /* Optional: covers the entire element */
   background-position: center; /* Optional: centers the image */
   background-repeat: no-repeat; /* Optional: prevents repeating the image */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 .print-page:has(.images) {
   display: flex;

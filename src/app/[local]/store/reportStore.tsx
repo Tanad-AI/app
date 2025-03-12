@@ -28,7 +28,6 @@ const useReportStore = create<StoreState>((set) => ({
       id: createId(),
       name: "cover",
       title: "الغلاف",
-      icon: (props) => <Image {...props} />,
       details: [
         {
           id: createId(),
@@ -220,7 +219,13 @@ const useReportStore = create<StoreState>((set) => ({
       name: "companyName",
       title: "إسم الشركة",
       details: [
-        { id: createId(), detailName: "value", title: "الإسم", value: "" },
+        {
+          id: createId(),
+          detailName: "value",
+          title: "الإسم",
+          value: "",
+          placeholder: "",
+        },
       ],
     },
     {
@@ -230,7 +235,7 @@ const useReportStore = create<StoreState>((set) => ({
       details: [
         {
           id: createId(),
-          detailName: "الصور",
+          detailName: "images",
           title: "الصور",
           value: "",
           images: [],

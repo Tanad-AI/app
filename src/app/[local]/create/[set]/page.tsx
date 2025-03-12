@@ -11,9 +11,6 @@ const page = () => {
   const [activeSection, setActiveSection] = useState(1);
   const pathname = usePathname();
   let locale = pathname.slice(1, 3);
-  if (locale !== "ar" && locale !== "en") {
-    throw new Error(`Unsupported locale: ${locale}`);
-  }
 
   const params = useParams();
   const setId = params.set as string;

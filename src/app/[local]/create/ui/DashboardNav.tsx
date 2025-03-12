@@ -2,30 +2,40 @@
 import { TinyText } from "@/app/[local]/lib/TextComponents";
 import { TanadLogo } from "@/assets";
 import Link from "next/link";
-import React from "react";
-import { useParams, usePathname } from "next/navigation";
+import React, { useEffect } from "react";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import downloadComponentAsPDF from "@/components/exportDocument";
-import useReportStore from "../../store/reportStore";
 import { Button } from "@nextui-org/react";
 import CustomSignUpButton from "@/components/CustomSignUpButton";
+import SaveChangesButton from "@/components/SaveChangesButton";
+import useReportStore from "../../store/reportStore";
+import { Field } from "../../types/report.typs";
 
-const DashboardNav = () => {
-  const pathName = usePathname();
+const DashboardNav = ({ document }: { document: any }) => {
   const t = useTranslations("Create");
   const homeT = useTranslations("Home");
-  let locale = pathName.slice(1, 3);
   const params = useParams();
-  const setId = params.set;
-  const componentRef = useReportStore((state) => state.componentRef);
+  const { set } = params;
+  const { fields } = document;
+
+  const setFields = useReportStore((state) => state.setFields);
+  const setActiveField = useReportStore((state) => state.setActiveField);
+  const activeField = useReportStore((state) => state.activeField);
+  useEffect(() => {
+    setActiveField(fields[0]);
+    setFields(fields as Field[]);
+  }, []);
+
   return (
     <nav className="flex items-center justify-between">
-      <Link href={`/${locale}/dashboard`}>
+      <Link href={`/../dashboard/home`}>
         <div className="flex items-center gap-2">
           <TanadLogo />
           <TinyText>{homeT("tanad")}</TinyText>
         </div>
       </Link>
+      <SaveChangesButton documentId={set as string} />
       <div className="flex items-center gap-2">
         <Button color="primary" onClick={() => downloadComponentAsPDF()}>
           Download PDF
