@@ -62,7 +62,7 @@ function TryNowButton({
   return (
     <>
       {type === "primary" ? (
-        <Link href={`${pathName}/dashboard/home`}>
+        <Link href={`/../dashboard/home`}>
           <motion.button
             initial="initial"
             animate="initial"
@@ -80,7 +80,7 @@ function TryNowButton({
           </motion.button>
         </Link>
       ) : (
-        <Link href={`${pathName}/dashboard/home`}>
+        <Link href={`/../dashboard/home`}>
           <Button
             className={`${
               theme == "light" ? "bg-white" : "bg-primary text-white"

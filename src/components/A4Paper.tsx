@@ -212,10 +212,10 @@ const A4Paper = () => {
               >
                 {field.details.map((detail) => (
                   <div
-                    className="mt-2 flex w-full justify-center"
+                    className="mt-8 flex w-full justify-center  "
                     key={detail.id}
                   >
-                    <div className="flex min-h-[48px] w-56 items-center justify-center text-pretty rounded-lg bg-gradient-to-t from-gray-700 to-gray-500 text-center font-bold text-white underline underline-offset-[7px]">
+                    <div className="flex min-h-[48px] w-64 items-center justify-center text-pretty rounded-lg bg-gradient-to-t  from-sky-700 to-sky-500 text-center font-bold text-white underline underline-offset-[7px] shadow-lg">
                       {detail.value}
                     </div>
                   </div>
