@@ -1,11 +1,10 @@
-/* eslint-disable */
-
 import { Button, Spacer } from "@nextui-org/react";
 import DashboardNav from "../ui/DashboardNav";
 import prisma from "@/app/db";
 import Link from "next/link";
 import { Header, Paragraph } from "../../lib/TextComponents";
 import { AlertCircle, Home } from "lucide-react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default async function CreateLayout({
   children,
@@ -26,6 +25,12 @@ export default async function CreateLayout({
       },
     },
   });
+
+  const { getUser } = getKindeServerSession();
+  const { isAuthenticated } = getKindeServerSession();
+  const user = await getUser();
+  const isUserAuthenticated = await isAuthenticated();
+
   if (!document) {
     return (
       <section className="relative z-0 flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]">
@@ -67,7 +72,11 @@ export default async function CreateLayout({
     <section className="  relative z-0 flex max-h-[100svh] w-full flex-col gap-3 overflow-hidden bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]  px-6 py-3">
       <div className="container mx-auto">
         <div className="-z-10 ">
-          <DashboardNav document={document} />
+          <DashboardNav
+            document={document}
+            user={user}
+            isUserAuthenticated={isUserAuthenticated}
+          />
           <Spacer y={3} />
           {children}
         </div>

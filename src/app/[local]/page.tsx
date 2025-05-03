@@ -43,7 +43,6 @@ import WordRotate from "@/components/WordRotate";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import CustomSignUpButton from "@/components/CustomSignUpButton";
 
 function TryNowButton({
@@ -161,6 +160,7 @@ function page() {
     <>
       <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-4 py-4  lg:px-20">
         <NavBar t={t} />
+
         <section className="relative h-svh pt-6">
           <section className="relative mt-20 flex h-[87%] items-center justify-center  ">
             <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
@@ -367,7 +367,7 @@ function NavBar({ t }: { t: any }) {
           </div>
         </NavbarBrand>
       </NavbarContent>
-      <CustomSignUpButton />
+      <CustomSignUpButton theme="light" />
       <TryNowButton />
       <NavbarContent
         className="hidden gap-4 sm:flex"

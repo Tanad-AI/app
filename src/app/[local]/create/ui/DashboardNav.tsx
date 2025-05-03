@@ -11,8 +11,17 @@ import CustomSignUpButton from "@/components/CustomSignUpButton";
 import SaveChangesButton from "@/components/SaveChangesButton";
 import useReportStore from "../../store/reportStore";
 import { Field } from "../../types/report.typs";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 
-const DashboardNav = ({ document }: { document: any }) => {
+const DashboardNav = ({
+  document,
+  user,
+  isUserAuthenticated,
+}: {
+  document: any;
+  user: KindeUser<Record<string, any>> | null;
+  isUserAuthenticated: boolean | null;
+}) => {
   const t = useTranslations("Create");
   const homeT = useTranslations("Home");
   const params = useParams();
@@ -40,7 +49,11 @@ const DashboardNav = ({ document }: { document: any }) => {
         <Button color="primary" onClick={() => downloadComponentAsPDF()}>
           Download PDF
         </Button>
-        <CustomSignUpButton />
+        <CustomSignUpButton
+          theme="light"
+          user={user}
+          isUserAuthenticated={isUserAuthenticated}
+        />
       </div>
     </nav>
   );
