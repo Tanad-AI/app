@@ -10,7 +10,11 @@ export function useFetchDocument(apiRoute: string, redirectUrl: RedirectUrl) {
   const [error, setError] = useState<any>(null);
   const router = useRouter();
 
-  const fetchDocument = async (fields: Field[], documentId: string) => {
+  const fetchDocument = async (
+    fields: Field[],
+    documentId: string,
+    userId: string,
+  ) => {
     setLoading(true);
     setError(null);
 
@@ -20,7 +24,7 @@ export function useFetchDocument(apiRoute: string, redirectUrl: RedirectUrl) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fields, documentId }),
+        body: JSON.stringify({ fields, documentId, userId }),
       });
 
       if (!response.ok) {

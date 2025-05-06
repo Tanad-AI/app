@@ -23,13 +23,11 @@ model User {
 model Document {
   id     String  @id @default(cuid())
   name   String
-  userId String?
+  userId String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   fields Field[]
   
-
-  @@unique([userId, name]) // Ensures the same user can't have duplicate names
 }
 
 model Field {

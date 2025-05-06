@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/[local]/context/AuthContext";
 import useReportStore from "@/app/[local]/store/reportStore";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
@@ -5,8 +6,14 @@ import React, { useState } from "react";
 const SaveChangesButton = ({ documentId }: { documentId: string }) => {
   const fields = useReportStore((state) => state.fields);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   async function fetchDocument() {
+    if (!user) {
+      alert("sign in to save document");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await fetch("/api/update-document", {
@@ -14,10 +21,9 @@ const SaveChangesButton = ({ documentId }: { documentId: string }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ fields, documentId }),
+        body: JSON.stringify({ fields, documentId, userId: user.uid }),
       });
       setLoading(false);
-      console.log(response);
       alert("Changes saved successfully!");
     } catch (error) {
       alert(error);

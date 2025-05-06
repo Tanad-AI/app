@@ -6,6 +6,7 @@ import prisma from "@/app/db";
 import Link from "next/link";
 import { Header, Paragraph } from "../../lib/TextComponents";
 import { AlertCircle, Home } from "lucide-react";
+import { getServerUser } from "../../lib/getServerUser";
 
 export default async function CreateLayout({
   children,
@@ -14,9 +15,15 @@ export default async function CreateLayout({
   children: React.ReactNode;
   params: { set: string };
 }) {
+  const user = await getServerUser();
+
+  if (!user) {
+    return <div>Not logged in</div>;
+  }
   const document = await prisma.document.findUnique({
     where: {
       id: params.set,
+      userId: user.uid,
     },
     include: {
       fields: {
@@ -26,6 +33,11 @@ export default async function CreateLayout({
       },
     },
   });
+
+  if (user.uid !== document?.userId) {
+    return <div>you don't have acess to this file </div>;
+  }
+
   if (!document) {
     return (
       <section className="relative z-0 flex min-h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#FAE9DF] to-[#FFFDF5]">

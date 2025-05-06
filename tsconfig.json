@@ -31,7 +31,8 @@
     "src/assets/index.tsz",
     "src/app/[local]/create/page.jsx",
     "src/components/PrintPreview.jsx",
-    "src/app/[local]/lib/useExamHeaderInitialState.js"
+    "src/app/[local]/lib/useExamHeaderInitialState.js",
+    "src/app/[local]/context/AuthContext.tsx"
   ],
   "exclude": ["node_modules"]
 }

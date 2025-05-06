@@ -7,12 +7,13 @@ import { Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { SubHeader } from "../../lib/TextComponents";
 import CustomSignUpButton from "@/components/CustomSignUpButton";
-import { useUser } from "@clerk/nextjs";
+import { useAuth } from "../../context/AuthContext";
 
 function DashboardNav({}) {
   const setIsSidebarOpen = useDashboardState((state) => state.setIsSidebarOpen);
-  const { isSignedIn, user, isLoaded } = useUser();
+  // const { isSignedIn, user, isLoaded } = useUser();
   const t = useTranslations("dashboard");
+  const { user } = useAuth();
 
   return (
     <section className="flex w-full  items-center justify-between border-b-[1px] border-b-slate-300 bg-white px-6 py-3 ">
@@ -28,7 +29,7 @@ function DashboardNav({}) {
         <MenuIcon className="stroke-primary" strokeWidth={1.5} size={20} />
       </Button>
       <SubHeader>
-        {t("helloUser")} {isSignedIn ? user.firstName : ""}
+        {t("helloUser")} {user ? user.displayName : ""}
       </SubHeader>
       <CustomSignUpButton />
     </section>

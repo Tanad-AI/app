@@ -5,11 +5,12 @@ import { Field, DetailItem } from "../../types/report.typs";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { fields, documentId } = body;
+    const { fields, documentId, userId } = body;
     const document = await prisma.document.create({
       data: {
         id: documentId,
         name: "how",
+        userId: userId,
         fields: {
           create: fields.map((field: Field) => ({
             id: field.id,

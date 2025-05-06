@@ -7,6 +7,7 @@ import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
+import { AuthProvider } from "./context/AuthContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,14 +34,16 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang={locale} className="light">
-        <body className={font.className}>
-          <NextIntlClientProvider messages={messages}>
-            <Providers>{children}</Providers>
-            <Analytics />
-          </NextIntlClientProvider>
-        </body>
-      </html>
+      <AuthProvider>
+        <html lang={locale} className="light">
+          <body className={font.className}>
+            <NextIntlClientProvider messages={messages}>
+              <Providers>{children}</Providers>
+              <Analytics />
+            </NextIntlClientProvider>
+          </body>
+        </html>
+      </AuthProvider>
     </ClerkProvider>
   );
 }

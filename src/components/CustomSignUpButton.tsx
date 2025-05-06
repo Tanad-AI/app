@@ -1,13 +1,21 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { Button } from "@nextui-org/react";
+import { useAuth } from "@/app/[local]/context/AuthContext";
+import { Avatar, Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
+import SignOutLink from "./SignOutLink";
 
 function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
   const t = useTranslations("NavBar");
+  const { user } = useAuth();
+
   return (
     <>
-      <SignedOut>
-        <SignInButton>
+      {user ? (
+        <>
+          <Avatar src={user.photoURL || ""} />
+          <SignOutLink />
+        </>
+      ) : (
+        <>
           <Button
             className={` ${
               theme == "dark"
@@ -18,11 +26,8 @@ function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
           >
             {t("signUp")}
           </Button>
-        </SignInButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+        </>
+      )}
     </>
   );
 }
