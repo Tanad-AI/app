@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { SortableList } from "@/components/SortableList";
-import { Text } from "../../lib/TextComponents";
-import { Card, Spacer, Tab, Tabs } from "@nextui-org/react";
+import { Paragraph, SubHeader, Text } from "../../lib/TextComponents";
+import { Button, Card, Spacer, Tab, Tabs } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import useReportStore from "@/app/[local]/store/reportStore";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Minus, Plus } from "lucide-react";
 import PaddingControls from "@/components/PaddingControls";
 import LetterHeadUploader from "@/components/LetterheadUploader";
 import TextDirectionControls from "@/components/TextDirectionControls";
+import useCustomizeStore from "../../store/pageCustomizationStore";
 
 interface SidebarType {
   className: string;
@@ -21,6 +22,12 @@ function Sidebar({ className }: SidebarType) {
   const activeField = useReportStore((state) => state.activeField);
   const [isFieldHidden, setIsFieldHidden] = useState(false);
   const [selected, setSelected] = useState("content");
+  const {
+    MainImgsNumber,
+    incrementMainImgsNumber,
+    decrementMainImgsNumber,
+    resetMainImgsNumber,
+  } = useCustomizeStore();
   useEffect(() => {
     setActiveField(fields[0]);
   }, []);
@@ -85,6 +92,28 @@ function Sidebar({ className }: SidebarType) {
             <TextDirectionControls />
             <LetterHeadUploader />
             <PaddingControls />
+            <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
+              <SubHeader className="mb-2">Main Images</SubHeader>
+              <Paragraph>Number Of Images: {MainImgsNumber}</Paragraph>
+              <div className="mt-2 flex gap-5">
+                <Button
+                  isIconOnly
+                  onClick={incrementMainImgsNumber}
+                  className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+                  aria-label="Set LTR"
+                >
+                  <Plus size={14} />
+                </Button>
+                <Button
+                  isIconOnly
+                  onClick={decrementMainImgsNumber}
+                  className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+                  aria-label="Set LTR"
+                >
+                  <Minus size={14} />
+                </Button>
+              </div>
+            </div>
           </Tab>
         </Tabs>
         <Spacer y={3} />

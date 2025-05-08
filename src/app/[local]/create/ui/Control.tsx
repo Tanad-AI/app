@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable */
 "use client";
 import React, { useCallback } from "react";
 import useReportStore from "../../store/reportStore";

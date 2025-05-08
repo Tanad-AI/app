@@ -3,7 +3,11 @@
 import { logout } from "@/app/[local]/lib/auth";
 import { useRouter } from "next/navigation";
 
-export default function SignOutLink() {
+export default function SignOutLink({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -11,9 +15,5 @@ export default function SignOutLink() {
     router.refresh();
   };
 
-  return (
-    <a onClick={handleLogout} className="bg-gray-800 px-4 py-2 text-white">
-      Logout
-    </a>
-  );
+  return <a onClick={handleLogout}>{children}</a>;
 }

@@ -17,6 +17,7 @@ const A4Paper = () => {
   const xPadding = useCustomizeStore((state) => state.xPadding);
   const ref = useRef<HTMLDivElement>(null);
   const setComponentRef = useReportStore((state) => state.setComponentRef);
+  const { MainImgsNumber } = useCustomizeStore();
 
   useEffect(() => {
     setComponentRef(ref);
@@ -83,7 +84,15 @@ const A4Paper = () => {
         printArea.appendChild(wrapper);
       }
     }
-  }, [childrenCount, fields, reportImages, letterHead, yPadding, xPadding]);
+  }, [
+    childrenCount,
+    fields,
+    reportImages,
+    letterHead,
+    yPadding,
+    xPadding,
+    MainImgsNumber,
+  ]);
   // Observe changes in the parent element's children
   useEffect(() => {
     const parent = document.getElementById("perent");
@@ -99,30 +108,37 @@ const A4Paper = () => {
     }
   }, []);
 
-  const imageCount = reportImages.length;
+  const getPageImages = (images: string[], page: number) => {
+    const defaultPerPage = 36;
 
-  // Determine the number of columns and rows dynamically
-  const calculateGridSize = () => {
-    if (imageCount === 1) return { cols: 1, rows: 1 };
-    if (imageCount === 2) return { cols: 1, rows: 2 };
-    if (imageCount <= 4) return { cols: 2, rows: 2 };
-    if (imageCount <= 6) return { cols: 3, rows: 2 };
-    if (imageCount <= 9) return { cols: 3, rows: 3 };
-    if (imageCount >= 36) return { cols: 6, rows: 6 };
+    if (MainImgsNumber > 0) {
+      if (page === 1) {
+        return images.slice(0, MainImgsNumber);
+      } else {
+        const offset = MainImgsNumber + (page - 2) * defaultPerPage;
+        return images.slice(offset, offset + defaultPerPage);
+      }
+    }
 
-    const cols = Math.ceil(Math.sqrt(imageCount)); // Square root for balanced grid
-    const rows = Math.ceil(imageCount / cols);
-    return { cols, rows };
+    return images.slice((page - 1) * defaultPerPage, page * defaultPerPage);
   };
-  const { cols, rows } = calculateGridSize();
 
-  const reportImagesPagesCounter = (images: number): number => {
-    const imagesPerGroup = 36;
-    return Math.ceil(images / imagesPerGroup);
+  const reportImagesPagesCounter = (imagesLength: number): number => {
+    const defaultPerPage = 36;
+
+    if (MainImgsNumber > 0) {
+      const remaining = imagesLength - MainImgsNumber;
+      const remainingPages = Math.ceil(remaining / defaultPerPage);
+      return 1 + remainingPages;
+    }
+
+    return Math.ceil(imagesLength / defaultPerPage);
   };
 
   const counter = reportImagesPagesCounter(reportImages.length);
   const groups = Array.from({ length: counter }, (_, index) => index + 1);
+
+  // This part goes inside your JSX
 
   return (
     <>
@@ -255,25 +271,43 @@ const A4Paper = () => {
             );
           });
         })}
+        {groups.map((group) => {
+          const pageImages = getPageImages(reportImages, group);
+          const imageCount = pageImages.length;
 
-        {groups.map((group) => (
-          <div
-            key={createId()}
-            className={`images grid h-full  w-full  gap-2`}
-            style={{
-              height: PAGE_HEIGHT - yPadding * 2 + "px",
+          const calculateGridSize = () => {
+            if (imageCount === 1) return { cols: 1, rows: 1 };
+            if (imageCount === 2) return { cols: 1, rows: 2 };
+            if (imageCount <= 4) return { cols: 2, rows: 2 };
+            if (imageCount <= 6) return { cols: 3, rows: 2 };
+            if (imageCount <= 9) return { cols: 3, rows: 3 };
+            if (imageCount >= 36) return { cols: 6, rows: 6 };
 
-              gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-              gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
-            }}
-          >
-            {reportImages.slice((group - 1) * 36, group * 36).map((img, i) => (
-              <div key={i}>
-                <img className="size-full object-cover" src={img} alt="" />
-              </div>
-            ))}
-          </div>
-        ))}
+            const cols = Math.ceil(Math.sqrt(imageCount));
+            const rows = Math.ceil(imageCount / cols);
+            return { cols, rows };
+          };
+
+          const { cols, rows } = calculateGridSize();
+
+          return (
+            <div
+              key={createId()}
+              className={`images grid h-full w-full gap-2`}
+              style={{
+                height: PAGE_HEIGHT - yPadding * 2 + "px",
+                gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+              }}
+            >
+              {pageImages.map((img, i) => (
+                <div key={i}>
+                  <img className="size-full object-cover" src={img} alt="" />
+                </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
       <div
         id="print-area"

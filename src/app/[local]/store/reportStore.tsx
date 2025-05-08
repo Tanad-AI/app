@@ -16,8 +16,6 @@ export interface StoreState {
   ) => void;
   reportImages: string[];
   setReportImages: (newImages: string[]) => void;
-  reportName: string;
-  setReportName: (newName: string) => void;
   componentRef: React.RefObject<HTMLElement> | null;
   setComponentRef: (ref: React.RefObject<HTMLElement>) => void;
 }
@@ -288,8 +286,6 @@ const useReportStore = create<StoreState>((set) => ({
   },
   reportImages: [],
   setReportImages: (newImages: string[]) => set({ reportImages: newImages }),
-  reportName: "Untitled Report",
-  setReportName: (newName: string) => set({ reportName: newName }),
   componentRef: null,
   setComponentRef: (ref) => set({ componentRef: ref }),
 }));

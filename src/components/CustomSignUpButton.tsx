@@ -1,7 +1,16 @@
 import { useAuth } from "@/app/[local]/context/AuthContext";
-import { Avatar, Button } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import SignOutLink from "./SignOutLink";
+import { LogOut } from "lucide-react";
+import Link from "next/link";
 
 function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
   const t = useTranslations("NavBar");
@@ -11,8 +20,19 @@ function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
     <>
       {user ? (
         <>
-          <Avatar src={user.photoURL || ""} />
-          <SignOutLink />
+          <Dropdown>
+            <DropdownTrigger>
+              <Avatar src={user.photoURL || ""} />
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Static Actions">
+              <DropdownItem key="Sign Out">
+                <div className="flex items-center gap-1">
+                  <LogOut size={12} />
+                  <SignOutLink>Log Out</SignOutLink>
+                </div>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </>
       ) : (
         <>
@@ -24,7 +44,7 @@ function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
             }`}
             radius="sm"
           >
-            {t("signUp")}
+            <Link href={"../sign-in"}>{t("signUp")}</Link>
           </Button>
         </>
       )}

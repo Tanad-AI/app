@@ -1,47 +1,60 @@
-import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
-import React from "react";
+import { useState } from "react";
+import { ArrowRight, ArrowLeft, RotateCw } from "lucide-react";
+import { Button } from "@nextui-org/react";
+import { Paragraph, SubHeader } from "@/app/[local]/lib/TextComponents";
 
-const TextDirectionControls = () => {
-  const { textDirection, setTextDirection, toggleTextDirection } =
-    useCustomizeStore();
+export default function TextDirectionSelector() {
+  const [textDirection, setTextDirection] = useState("rtl");
+
+  const toggleTextDirection = () => {
+    setTextDirection((prev) => (prev === "ltr" ? "rtl" : "ltr"));
+  };
 
   return (
-    <div className="mx-auto rounded-lg bg-gray-100  shadow-md">
-      <h1 className="mb-4 text-xl font-bold text-gray-800">Text Direction</h1>
-      <p className="mb-4 text-gray-700">
-        Current Direction:{" "}
-        <span className="font-semibold">{textDirection}</span>
-      </p>
-      <div className="flex gap-4">
-        <button
+    <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
+      <SubHeader className="mb-2">Text Direction</SubHeader>
+      <Paragraph className="mb-2">Current Direction: {textDirection}</Paragraph>
+
+      <div className="flex justify-between">
+        <Button
+          isIconOnly
           onClick={() => setTextDirection("ltr")}
-          className={`rounded-md  py-2 ${
+          className={`flex size-12 items-center justify-center rounded-md  text-black ${
             textDirection === "ltr"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-300 text-gray-700"
-          } hover:bg-blue-600`}
+              ? "bg-secondary  ring-2 ring-secondary-300"
+              : "bg-gray-200 "
+          }`}
+          aria-label="Set LTR"
+          aria-pressed={textDirection === "ltr"}
         >
-          Set LTR
-        </button>
-        <button
+          <ArrowRight size={14} />
+        </Button>
+
+        <Button
+          isIconOnly
           onClick={() => setTextDirection("rtl")}
-          className={`rounded-md  py-2 ${
+          className={`flex size-12 items-center justify-center rounded-md text-black ${
             textDirection === "rtl"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-300 text-gray-700"
-          } hover:bg-blue-600`}
+              ? "bg-secondary  ring-2 ring-secondary-300"
+              : "bg-gray-200 "
+          }`}
+          aria-label="Set RTL"
+          aria-pressed={textDirection === "rtl"}
         >
-          Set RTL
-        </button>
-        <button
+          <ArrowLeft size={14} />
+        </Button>
+
+        <Button
+          color="primary"
+          variant="flat"
           onClick={toggleTextDirection}
-          className="rounded-md bg-yellow-500  py-2 text-white hover:bg-yellow-600"
+          className="flex items-center justify-center rounded-md px-2 text-xs "
+          aria-label="Toggle direction"
         >
+          <RotateCw size={12} className="mr-2" />
           Toggle
-        </button>
+        </Button>
       </div>
     </div>
   );
-};
-
-export default TextDirectionControls;
+}

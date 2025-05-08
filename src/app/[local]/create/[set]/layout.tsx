@@ -34,7 +34,7 @@ export default async function CreateLayout({
     },
   });
 
-  if (user.uid !== document?.userId) {
+  if (document && user.uid !== document.userId) {
     return <div>you don't have acess to this file </div>;
   }
 

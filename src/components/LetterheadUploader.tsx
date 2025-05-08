@@ -1,4 +1,7 @@
+import { Paragraph, SubHeader } from "@/app/[local]/lib/TextComponents";
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
+import { Button } from "@nextui-org/react";
+import { UploadCloudIcon } from "lucide-react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -18,39 +21,37 @@ const LetterHeadUploader = () => {
   });
 
   return (
-    <div className="mx-auto rounded-lg bg-gray-100 shadow-md">
-      <h1 className="mb-4 text-xl font-bold text-gray-800">Image Uploader</h1>
+    <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
+      <SubHeader className="mb-2">Letterhead</SubHeader>
+      <Paragraph className="mb-2">Upload Your Letter head</Paragraph>
 
-      <div
-        {...getRootProps()}
-        className={`rounded-md border-2 border-dashed p-4 text-center ${
-          isDragActive ? "border-blue-500" : "border-gray-300"
-        }`}
-      >
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p className="text-blue-500">Drop the image here...</p>
-        ) : (
-          <p className="text-gray-500">
-            Drag & drop an image here, or click to select one.
-          </p>
-        )}
-      </div>
-
-      {letterHead && (
-        <div className="mt-4">
-          <p className="font-semibold text-gray-700">Selected letterHead:</p>
+      {!letterHead ? (
+        <div
+          {...getRootProps()}
+          className="border-peach-200 flex h-48 flex-col items-center justify-center rounded-xl border border-dashed bg-secondary/30 p-4 text-center"
+          style={{ borderColor: "#fbd0d0" }}
+        >
+          <input {...getInputProps()} />
+          <UploadCloudIcon size={24} className="mb-2 text-gray-400" />
+          <p className="font-medium text-gray-800">drag and drop</p>
+          <p className="mb-4 text-gray-500">or</p>
+          <p className="cursor-pointer text-black">Browse files</p>
+        </div>
+      ) : (
+        <div className="mt-2">
           <img
             src={letterHead}
-            alt="Uploaded preview"
-            className="mt-2 max-h-40 w-full rounded-md object-cover"
+            alt="Uploaded letterhead"
+            className="w-full rounded-md object-cover"
           />
-          <button
+          <Button
+            color="secondary"
+            size="sm"
             onClick={resetLetterHead}
-            className="mt-4 rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+            className="mt-2 text-black"
           >
-            Remove letterHead
-          </button>
+            Remove letterhead
+          </Button>
         </div>
       )}
     </div>

@@ -1,4 +1,7 @@
+import { Paragraph, SubHeader, Text } from "@/app/[local]/lib/TextComponents";
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
+import { Button } from "@nextui-org/react";
+import { Minus, Plus } from "lucide-react";
 import React from "react";
 
 const PaddingControls = () => {
@@ -14,60 +17,76 @@ const PaddingControls = () => {
   } = useCustomizeStore();
 
   return (
-    <div className=" rounded-lg bg-gray-100  shadow-md">
-      <h1 className="mb-4 text-xl font-bold text-gray-800">Padding Control</h1>
+    <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
+      <SubHeader className="mb-2 ">Padding Control</SubHeader>
 
       {/* Y Padding */}
       <div className="mb-6">
-        <p className="text-lg font-semibold text-gray-700">
-          Y Padding: {yPadding}px
-        </p>
-        <div className="mt-2 flex">
-          <button
+        <Paragraph className="text-xs">
+          Top & Bottom Margin: {yPadding}px
+        </Paragraph>
+        <div className="mt-2 flex justify-between">
+          <Button
+            isIconOnly
             onClick={incrementYPadding}
-            className="size-12 rounded-md bg-blue-500 text-white transition hover:bg-blue-600"
+            className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+            aria-label="Set LTR"
           >
-            +
-          </button>
-          <button
+            <Plus size={14} />
+          </Button>
+          <Button
+            isIconOnly
             onClick={decrementYPadding}
-            className="size-12 rounded-md bg-red-500 text-white transition hover:bg-red-600"
+            className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+            aria-label="Set LTR"
           >
-            -
-          </button>
-          <button
+            <Minus size={14} />
+          </Button>
+
+          <Button
+            color="primary"
+            variant="flat"
             onClick={resetYPadding}
-            className="rounded-md bg-gray-500  text-white transition hover:bg-gray-600"
+            className="flex items-center justify-center rounded-md px-4 text-xs "
+            aria-label="Toggle direction"
           >
             Reset
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* X Padding */}
       <div>
-        <p className="text-lg font-semibold text-gray-700">
-          X Padding: {xPadding}px
-        </p>
-        <div className="mt-2 flex">
-          <button
+        <Paragraph className="text-xs">
+          Left & Right Margin: {xPadding}px
+        </Paragraph>
+        <div className="mt-2 flex justify-between">
+          <Button
+            isIconOnly
             onClick={incrementXPadding}
-            className="size-12 rounded-md bg-blue-500 text-white transition hover:bg-blue-600"
+            className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+            aria-label="Set LTR"
           >
-            +
-          </button>
-          <button
+            <Plus size={14} />
+          </Button>
+          <Button
+            isIconOnly
             onClick={decrementXPadding}
-            className="size-12 rounded-md bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+            className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
+            aria-label="Set LTR"
           >
-            -
-          </button>
-          <button
+            <Minus size={14} />
+          </Button>
+
+          <Button
+            color="primary"
+            variant="flat"
             onClick={resetXPadding}
-            className="rounded-md bg-gray-500 px-4 py-2 text-white transition hover:bg-gray-600"
+            className="flex items-center justify-center rounded-md px-4 text-xs "
+            aria-label="Toggle direction"
           >
             Reset
-          </button>
+          </Button>
         </div>
       </div>
     </div>

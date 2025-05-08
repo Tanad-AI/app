@@ -4,10 +4,23 @@ import { Field } from "../../types/report.typs";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { fields, documentId } = body;
-
+  const { fields, documentId, userId, documentProperties } = body;
+  const { documentName, MainImgsNumber, textDirection, xPadding, yPadding } =
+    documentProperties;
   try {
     // Fetch all existing fields and details in one query
+    const updateDocumentProperties = await prisma.document.update({
+      where: {
+        id: documentId,
+      },
+      data: {
+        name: documentName,
+        MainImgsNumber: MainImgsNumber,
+        textDirection: textDirection,
+        xPadding: xPadding,
+        yPadding: yPadding,
+      },
+    });
     const existingFields = await prisma.field.findMany({
       where: {
         documentId,
