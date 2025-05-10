@@ -21,13 +21,13 @@ type LanguageSwitcherType = {
 };
 
 function LanguageSwitcher({ path }: LanguageSwitcherType) {
-  if (!path) path = "";
+  const pathName = usePathname();
+  if (!path) path = pathName;
   path = path.slice(4, path.length);
   const [value, setValue] = useState<string>("en");
   const t = useTranslations("Create");
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const pathName = usePathname();
   const locale = pathName.slice(1, 3);
   const handleSelectionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value);
@@ -35,6 +35,7 @@ function LanguageSwitcher({ path }: LanguageSwitcherType) {
       router.replace(`/${e.target.value}/${path}`, { scroll: false });
     });
   };
+  console.log(path);
   if (isPending)
     return (
       <div className="flex h-8 w-36 items-center gap-1 rounded-lg  px-3">

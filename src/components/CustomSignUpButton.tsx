@@ -6,14 +6,58 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
+  DropdownSection,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import SignOutLink from "./SignOutLink";
-import { LogOut } from "lucide-react";
+import { Globe, LogOut } from "lucide-react";
 import Link from "next/link";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { TinyText } from "@/app/[local]/lib/TextComponents";
+
+function ChangeLanguageModal({ locale }: { locale: string }) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const t = useTranslations("dashboard");
+
+  return (
+    <>
+      <div onClick={onOpen} className="flex !list-none items-center gap-1 ">
+        <Globe size={12} />
+        {locale == "ar" ? "ُالعربية" : "English"}
+      </div>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                {t("lang")}
+              </ModalHeader>
+              <ModalBody>
+                <TinyText>{t("langHint")}</TinyText>
+                <LanguageSwitcher />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  {t("close")}
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
 
 function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
-  const t = useTranslations("NavBar");
+  const t = useTranslations("dashboard");
+  const locale = useLocale();
   const { user } = useAuth();
 
   return (
@@ -24,13 +68,28 @@ function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
             <DropdownTrigger>
               <Avatar src={user.photoURL || ""} />
             </DropdownTrigger>
-            <DropdownMenu aria-label="Static Actions">
-              <DropdownItem key="Sign Out">
-                <div className="flex items-center gap-1">
-                  <LogOut size={12} />
-                  <SignOutLink>Log Out</SignOutLink>
-                </div>
-              </DropdownItem>
+            <DropdownMenu
+              aria-label="Dropdown menu with description"
+              variant="faded"
+              closeOnSelect={false}
+            >
+              <DropdownSection
+                className="!list-none"
+                showDivider
+                title={user.email as string}
+              >
+                <DropdownItem key="Locale">
+                  <ChangeLanguageModal locale={locale} />
+                </DropdownItem>
+              </DropdownSection>
+              <DropdownSection className="!list-none">
+                <DropdownItem key="Sign Out">
+                  <div className="flex !list-none items-center gap-1 text-red-500">
+                    <LogOut size={12} />
+                    <SignOutLink>{t("logout")}</SignOutLink>
+                  </div>
+                </DropdownItem>
+              </DropdownSection>
             </DropdownMenu>
           </Dropdown>
         </>
@@ -44,7 +103,7 @@ function CustomSignUpButton({ theme }: { theme?: "dark" | "light" }) {
             }`}
             radius="sm"
           >
-            <Link href={"../sign-in"}>{t("signUp")}</Link>
+            <Link href={"../sign-in"}>{t("login")}</Link>
           </Button>
         </>
       )}

@@ -259,7 +259,14 @@
     "dateCreated": "تاريخ الإنشاء",
     "dateEdited": "تاريخ التعديل",
     "titleSort": "العنوان",
-    "reverseOrder": "ترتيب عكسي"
+    "reverseOrder": "ترتيب عكسي",
+    "signUp": "تسجيل الدخول",
+    "lang": "لغة التطبيق",
+    "langHint": "غيّر لغة حسابك",
+    "close": "إغلاق",
+    "menuLabel": "قائمة منسدلة تحتوي على وصف",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول"
   },
   "Auth": {
     "welcomeBack": "مرحبًا بعودتك",

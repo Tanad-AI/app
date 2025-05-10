@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import DocumentSkeleton from "./DocumentSkeleton";
+import { useDashboardState } from "@/app/[local]/store/DashboardStore";
 
 const Documents = () => {
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -15,6 +16,24 @@ const Documents = () => {
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
   const t = useTranslations("dashboard");
+  const { sortKey, sortOrder, setSortKey, toggleSortOrder } =
+    useDashboardState();
+
+  const sortedDocuments = [...documents].sort((a, b) => {
+    let result = 0;
+
+    if (sortKey === "name") {
+      result = a.name.localeCompare(b.name);
+    } else if (sortKey === "createdAt") {
+      result =
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    } else {
+      result =
+        new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+    }
+
+    return sortOrder === "asc" ? result : -result;
+  });
 
   const fetchDocuments = async () => {
     if (!user) {
@@ -96,7 +115,7 @@ const Documents = () => {
         </div>
       ) : (
         <div className="grid grid-cols-2 justify-items-center gap-8 gap-x-0 md:grid-cols-3 lg:grid-cols-4">
-          {documents.map((document) => (
+          {sortedDocuments.map((document) => (
             <Link key={document.id} href={`../create/${document.id}`}>
               <div className="cursor-pointer">
                 <div className="flex h-[42.42vw] w-[30vw] flex-col items-center justify-center rounded-md border-[1px] border-slate-400 bg-slate-100 transition-colors hover:bg-slate-200 md:h-[21.21vw] md:w-[15vw]">
@@ -104,7 +123,7 @@ const Documents = () => {
                 </div>
                 <Text>{document.name}</Text>
                 <Paragraph>
-                  {t("createdLabel")}{" "}
+                  {t("createdLabel")}
                   {new Date(document.createdAt).toLocaleDateString()}
                 </Paragraph>
               </div>

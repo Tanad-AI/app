@@ -154,6 +154,9 @@ ol {
   color: white;
   border-color: #2563eb; /* Tailwind's 'blue-600' */
 }
+.h-divider {
+  list-style: none;
+}
 
 @page {
   size: A4;

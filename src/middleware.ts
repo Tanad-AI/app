@@ -4,7 +4,6 @@ import createMiddleware from "next-intl/middleware";
 const intlMiddleware = createMiddleware({
   locales: ["en", "ar"],
   defaultLocale: "en",
-  localePrefix: "as-needed", // Keeps URLs clean (no `/en/` for default locale)
 });
 
 export default clerkMiddleware(async (auth, req) => {

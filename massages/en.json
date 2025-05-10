@@ -255,7 +255,13 @@
     "dateCreated": "Date Created",
     "dateEdited": "Date Edited",
     "titleSort": "Title",
-    "reverseOrder": "Reverse Order"
+    "reverseOrder": "Reverse Order",
+    "lang": "App Language",
+    "langHint": "Change your account language",
+    "close": "Close",
+    "menuLabel": "Dropdown menu with description",
+    "logout": "Log Out",
+    "login": "Sign In"
   },
   "Auth": {
     "welcomeBack": "Welcome back",

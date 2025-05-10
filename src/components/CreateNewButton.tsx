@@ -5,12 +5,14 @@ import useReportStore from "@/app/[local]/store/reportStore";
 import { useFetchDocument } from "@/app/hooks/useFetchDocument";
 import { Button } from "@nextui-org/react";
 import { createId } from "@paralleldrive/cuid2";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import React from "react";
 
 function CreateNewButton() {
   const fields = useReportStore((state) => state.fields);
   const documentId = createId();
+  const t = useTranslations("dashboard");
   const { user } = useAuth();
 
   const { fetchDocument, loading, error } = useFetchDocument(
@@ -30,12 +32,12 @@ function CreateNewButton() {
           isLoading={loading}
           onClick={() => fetchDocument(fields, documentId, user.uid)}
         >
-          Create New Report
+          {t("createNew")}
         </Button>
       ) : (
         <Link href="../sign-in">
           <Button color="primary" isLoading={loading}>
-            Create New Report
+            {t("createNew")}
           </Button>
         </Link>
       )}
