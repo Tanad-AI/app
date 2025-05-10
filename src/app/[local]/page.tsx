@@ -43,7 +43,6 @@ import WordRotate from "@/components/WordRotate";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import CustomSignUpButton from "@/components/CustomSignUpButton";
 
 function TryNowButton({

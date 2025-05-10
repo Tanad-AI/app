@@ -256,5 +256,27 @@
     "dateEdited": "Date Edited",
     "titleSort": "Title",
     "reverseOrder": "Reverse Order"
+  },
+  "Auth": {
+    "welcomeBack": "Welcome back",
+    "signInToContinue": "Sign in to your account to continue",
+    "emailAddress": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot your password?",
+    "signIn": "Sign in",
+    "orContinueWith": "Or continue with",
+    "signInWithGoogle": "Sign in with Google",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up now",
+    "createAccount": "Create an account",
+    "joinUs": "Join us to get started with our service",
+    "passwordRequirements": "Password must be at least 8 characters",
+    "agreeToTerms": "I agree to the",
+    "termsOfService": "Terms of Service",
+    "signUpWithGoogle": "Sign up with Google",
+    "alreadyHaveAccount": "Already have an account?"
   }
 }
