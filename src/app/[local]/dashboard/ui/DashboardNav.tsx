@@ -5,9 +5,10 @@ import { MenuIcon } from "lucide-react";
 import { useDashboardState } from "../../store/DashboardStore";
 import { Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { SubHeader } from "../../lib/TextComponents";
+import { SubHeader, Text } from "../../lib/TextComponents";
 import CustomSignUpButton from "@/components/CustomSignUpButton";
 import { useAuth } from "../../context/AuthContext";
+import { TanadLogo } from "@/assets";
 
 function DashboardNav({}) {
   const setIsSidebarOpen = useDashboardState((state) => state.setIsSidebarOpen);
@@ -29,6 +30,8 @@ function DashboardNav({}) {
         <MenuIcon className="stroke-primary" strokeWidth={1.5} size={20} />
       </Button>
       <SubHeader>
+        <TanadLogo />
+        <Text>{t("tanad")}</Text>
         {t("helloUser")} {user ? user.displayName : ""}
       </SubHeader>
       <CustomSignUpButton />

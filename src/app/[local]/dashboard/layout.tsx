@@ -1,4 +1,3 @@
-import DashboardSideBar from "@/components/DashboardSideBar";
 import { ReactNode } from "react";
 import DashboardNav from "./ui/DashboardNav";
 
@@ -12,9 +11,6 @@ export default function DashboardLayout({
 }: DashboardPageProps) {
   return (
     <div className="flex h-svh">
-      <div>
-        <DashboardSideBar />
-      </div>
       <div className="w-full overflow-scroll">
         <DashboardNav />
         {children}
