@@ -35,7 +35,11 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <AuthProvider>
-        <html lang={locale} className="light">
+        <html
+          dir={lang === "en" ? "ltr" : "rtl"}
+          lang={locale}
+          className="light"
+        >
           <body className={font.className}>
             <NextIntlClientProvider messages={messages}>
               <Providers>{children}</Providers>

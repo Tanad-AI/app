@@ -4,6 +4,9 @@ import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import useReportStore from "@/app/[local]/store/reportStore";
 import { createId } from "@paralleldrive/cuid2";
 import React, { useEffect, useRef, useState } from "react";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const PAGE_HEIGHT = 785.75;
 
@@ -312,7 +315,7 @@ const A4Paper = () => {
       <div
         id="print-area"
         dir={textDirection}
-        className="text-[12px]"
+        className={`${inter.className} text-[12px]`}
         style={{ margin: "0px" }}
       >
         {/* Content will be grouped and displayed here */}
