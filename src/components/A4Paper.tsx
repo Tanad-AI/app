@@ -315,7 +315,10 @@ const A4Paper = () => {
       <div
         id="print-area"
         dir={textDirection}
-        className={`${inter.className} text-[12px]`}
+        className={`${inter.className} ${
+          textDirection == "rtl" ? "origin-top-right" : "origin-top-left"
+        } 
+         flex scale-75 flex-col justify-center text-[12px] sm:w-[89vw] lg:w-auto lg:scale-100`}
         style={{ margin: "0px" }}
       >
         {/* Content will be grouped and displayed here */}

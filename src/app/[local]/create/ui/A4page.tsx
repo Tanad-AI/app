@@ -25,7 +25,7 @@ const A4page = ({ className }: A4PagePropsType) => {
         />
       </div>
       <div
-        className={`flex ${
+        className={`flex flex-col justify-center ${
           textDirection == "rtl" ? "origin-top" : "origin-top-right"
         }  flex-col`}
       >

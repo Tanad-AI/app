@@ -158,6 +158,11 @@ ol {
   list-style: none;
 }
 
+@media screen and (max-width: 430px) {
+  #print-area {
+    scale: 80%;
+  }
+}
 @page {
   size: A4;
   margin-top: 10mm;
