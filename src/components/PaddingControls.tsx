@@ -2,9 +2,11 @@ import { Paragraph, SubHeader, Text } from "@/app/[local]/lib/TextComponents";
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import { Button } from "@nextui-org/react";
 import { Minus, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const PaddingControls = () => {
+  const t = useTranslations("Create");
   const {
     yPadding,
     xPadding,
@@ -18,19 +20,20 @@ const PaddingControls = () => {
 
   return (
     <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
-      <SubHeader className="mb-2 ">Padding Control</SubHeader>
+      <SubHeader className="mb-2 ">{t("paddingControl")}</SubHeader>
 
       {/* Y Padding */}
       <div className="mb-6">
         <Paragraph className="text-xs">
-          Top & Bottom Margin: {yPadding}px
+          {t("topBottomMargin")} {yPadding}
+          {t("px")}
         </Paragraph>
         <div className="mt-2 flex justify-between">
           <Button
             isIconOnly
             onClick={incrementYPadding}
             className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
-            aria-label="Set LTR"
+            aria-label={t("increment")}
           >
             <Plus size={14} />
           </Button>
@@ -38,7 +41,7 @@ const PaddingControls = () => {
             isIconOnly
             onClick={decrementYPadding}
             className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
-            aria-label="Set LTR"
+            aria-label={t("decrement")}
           >
             <Minus size={14} />
           </Button>
@@ -48,9 +51,9 @@ const PaddingControls = () => {
             variant="flat"
             onClick={resetYPadding}
             className="flex items-center justify-center rounded-md px-4 text-xs "
-            aria-label="Toggle direction"
+            aria-label={t("reset")}
           >
-            Reset
+            {t("reset")}
           </Button>
         </div>
       </div>
@@ -58,14 +61,15 @@ const PaddingControls = () => {
       {/* X Padding */}
       <div>
         <Paragraph className="text-xs">
-          Left & Right Margin: {xPadding}px
+          {t("leftRightMargin")} {xPadding}
+          {t("px")}
         </Paragraph>
         <div className="mt-2 flex justify-between">
           <Button
             isIconOnly
             onClick={incrementXPadding}
             className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
-            aria-label="Set LTR"
+            aria-label={t("increment")}
           >
             <Plus size={14} />
           </Button>
@@ -73,7 +77,7 @@ const PaddingControls = () => {
             isIconOnly
             onClick={decrementXPadding}
             className={`flex size-12 items-center justify-center  rounded-md bg-secondary  text-black ring-2 ring-secondary-300 `}
-            aria-label="Set LTR"
+            aria-label={t("decrement")}
           >
             <Minus size={14} />
           </Button>
@@ -83,9 +87,9 @@ const PaddingControls = () => {
             variant="flat"
             onClick={resetXPadding}
             className="flex items-center justify-center rounded-md px-4 text-xs "
-            aria-label="Toggle direction"
+            aria-label={t("reset")}
           >
-            Reset
+            {t("reset")}
           </Button>
         </div>
       </div>

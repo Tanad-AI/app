@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const document = await prisma.document.create({
       data: {
         id: documentId,
-        name: "how",
+        name: "Untitled document",
         userId: userId,
         fields: {
           create: fields.map((field: Field) => ({

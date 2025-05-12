@@ -22,18 +22,14 @@ function Sidebar({ className }: SidebarType) {
   const activeField = useReportStore((state) => state.activeField);
   const [isFieldHidden, setIsFieldHidden] = useState(false);
   const [selected, setSelected] = useState("content");
-  const {
-    MainImgsNumber,
-    incrementMainImgsNumber,
-    decrementMainImgsNumber,
-    resetMainImgsNumber,
-  } = useCustomizeStore();
+  const { MainImgsNumber, incrementMainImgsNumber, decrementMainImgsNumber } =
+    useCustomizeStore();
   useEffect(() => {
     setActiveField(fields[0]);
   }, []);
   return (
     <div
-      className={`min-w-[260px] flex-col space-y-2 overflow-y-auto  pb-20  md:block lg:w-[28%]  ${className}`}
+      className={`w-full min-w-[260px] flex-col space-y-2  overflow-y-auto pb-20  md:block lg:w-[28%]  ${className}`}
     >
       <Text>{t("control")}</Text>
       <Card radius="sm" className=" px-3 py-2 shadow-sm">
@@ -48,8 +44,8 @@ function Sidebar({ className }: SidebarType) {
           color="primary"
           radius="full"
         >
-          <Tab key="content" title="Content">
-            <h4>Page Content</h4>
+          <Tab key="content" title={t("content")}>
+            <h4>{t("pageContent")}</h4>
             <SortableList
               items={fields}
               onChange={setFields} // Directly passing the setFields function
@@ -88,13 +84,15 @@ function Sidebar({ className }: SidebarType) {
               )}
             />
           </Tab>
-          <Tab key="customize" title="Customize">
+          <Tab key="customize" title={t("customize")}>
             <TextDirectionControls />
             <LetterHeadUploader />
             <PaddingControls />
             <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
-              <SubHeader className="mb-2">Main Images</SubHeader>
-              <Paragraph>Number Of Images: {MainImgsNumber}</Paragraph>
+              <SubHeader className="mb-2">{t("mainImages")}</SubHeader>
+              <Paragraph>
+                {t("numberOfImages")} {MainImgsNumber}
+              </Paragraph>
               <div className="mt-2 flex gap-5">
                 <Button
                   isIconOnly

@@ -15,7 +15,7 @@ const A4page = ({ className }: A4PagePropsType) => {
   const setDocumentName = useCustomizeStore((state) => state.setDocumentName);
   return (
     <div
-      className={`hidden flex-col  space-y-2 overflow-y-auto pb-36 lg:flex ${className}`}
+      className={`flex-col  space-y-2 overflow-y-auto pb-36 lg:flex ${className}`}
     >
       <div className="flex justify-between">
         <input

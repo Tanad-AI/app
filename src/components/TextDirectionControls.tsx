@@ -2,9 +2,11 @@ import { useState } from "react";
 import { ArrowRight, ArrowLeft, RotateCw } from "lucide-react";
 import { Button } from "@nextui-org/react";
 import { Paragraph, SubHeader } from "@/app/[local]/lib/TextComponents";
+import { useTranslations } from "next-intl";
 
 export default function TextDirectionSelector() {
   const [textDirection, setTextDirection] = useState("rtl");
+  const t = useTranslations("Create");
 
   const toggleTextDirection = () => {
     setTextDirection((prev) => (prev === "ltr" ? "rtl" : "ltr"));
@@ -12,8 +14,10 @@ export default function TextDirectionSelector() {
 
   return (
     <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
-      <SubHeader className="mb-2">Text Direction</SubHeader>
-      <Paragraph className="mb-2">Current Direction: {textDirection}</Paragraph>
+      <SubHeader className="mb-2">{t("textDirection")}</SubHeader>
+      <Paragraph className="mb-2">
+        {t("currentDirection")} {textDirection}
+      </Paragraph>
 
       <div className="flex justify-between">
         <Button
@@ -24,7 +28,7 @@ export default function TextDirectionSelector() {
               ? "bg-secondary  ring-2 ring-secondary-300"
               : "bg-gray-200 "
           }`}
-          aria-label="Set LTR"
+          aria-label={t("setLTR")}
           aria-pressed={textDirection === "ltr"}
         >
           <ArrowRight size={14} />
@@ -38,7 +42,7 @@ export default function TextDirectionSelector() {
               ? "bg-secondary  ring-2 ring-secondary-300"
               : "bg-gray-200 "
           }`}
-          aria-label="Set RTL"
+          aria-label={t("setRTL")}
           aria-pressed={textDirection === "rtl"}
         >
           <ArrowLeft size={14} />
@@ -49,10 +53,10 @@ export default function TextDirectionSelector() {
           variant="flat"
           onClick={toggleTextDirection}
           className="flex items-center justify-center rounded-md px-2 text-xs "
-          aria-label="Toggle direction"
+          aria-label={t("toggleDirection")}
         >
           <RotateCw size={12} className="mr-2" />
-          Toggle
+          {t("toggle")}
         </Button>
       </div>
     </div>

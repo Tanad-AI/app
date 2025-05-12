@@ -2,11 +2,13 @@ import { Paragraph, SubHeader } from "@/app/[local]/lib/TextComponents";
 import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import { Button } from "@nextui-org/react";
 import { UploadCloudIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 
 const LetterHeadUploader = () => {
   const { letterHead, setLetterHead, resetLetterHead } = useCustomizeStore();
+  const t = useTranslations("Create");
 
   const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0) {
@@ -22,8 +24,8 @@ const LetterHeadUploader = () => {
 
   return (
     <div className=" rounded-lg border-[1px] border-gray-100 bg-white p-2 shadow-md">
-      <SubHeader className="mb-2">Letterhead</SubHeader>
-      <Paragraph className="mb-2">Upload Your Letter head</Paragraph>
+      <SubHeader className="mb-2">{t("letterhead")}</SubHeader>
+      <Paragraph className="mb-2">{t("uploadLetterhead")}</Paragraph>
 
       {!letterHead ? (
         <div
@@ -33,15 +35,15 @@ const LetterHeadUploader = () => {
         >
           <input {...getInputProps()} />
           <UploadCloudIcon size={24} className="mb-2 text-gray-400" />
-          <p className="font-medium text-gray-800">drag and drop</p>
-          <p className="mb-4 text-gray-500">or</p>
-          <p className="cursor-pointer text-black">Browse files</p>
+          <p className="font-medium text-gray-800">{t("dragAndDrop")}</p>
+          <p className="mb-4 text-gray-500">{t("or")}</p>
+          <p className="cursor-pointer text-black">{t("browseFiles")}</p>
         </div>
       ) : (
         <div className="mt-2">
           <img
             src={letterHead}
-            alt="Uploaded letterhead"
+            alt={t("uploadedLetterhead")}
             className="w-full rounded-md object-cover"
           />
           <Button
@@ -50,7 +52,7 @@ const LetterHeadUploader = () => {
             onClick={resetLetterHead}
             className="mt-2 text-black"
           >
-            Remove letterhead
+            {t("removeLetterhead")}
           </Button>
         </div>
       )}
