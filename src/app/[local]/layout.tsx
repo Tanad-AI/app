@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "./context/AuthContext";
 import ForceRefresh from "@/components/ForceRefresh";
+import Head from "next/head";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,6 +46,12 @@ export default async function RootLayout({
           lang={locale}
           className="light"
         >
+          <Head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1"
+            />
+          </Head>
           <body className={font.className}>
             <NextIntlClientProvider messages={messages}>
               <Providers>{children}</Providers>
