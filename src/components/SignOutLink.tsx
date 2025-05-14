@@ -1,6 +1,8 @@
 "use client";
 
 import { logout } from "@/app/[local]/lib/auth";
+import { handleLogout } from "@/lib/utils";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
 
 export default function SignOutLink({
@@ -10,10 +12,5 @@ export default function SignOutLink({
 }) {
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await logout();
-    router.refresh();
-  };
-
-  return <a onClick={handleLogout}>{children}</a>;
+  return <a onClick={() => handleLogout(router)}>{children}</a>;
 }

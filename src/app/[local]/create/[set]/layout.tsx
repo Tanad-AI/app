@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Header, Paragraph } from "../../lib/TextComponents";
 import { AlertCircle, Home } from "lucide-react";
 import { getServerUser } from "../../lib/getServerUser";
+import { handleLogout } from "@/lib/utils";
 
 export default async function CreateLayout({
   children,
@@ -18,6 +19,7 @@ export default async function CreateLayout({
   const user = await getServerUser();
 
   if (!user) {
+    handleLogout();
     return <div>Not logged in</div>;
   }
   const document = await prisma.document.findUnique({

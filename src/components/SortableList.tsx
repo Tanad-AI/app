@@ -66,11 +66,11 @@ export function SortableList<T extends BaseItem>({
       onDragCancel={() => setActive(null)}
     >
       <SortableContext items={items}>
-        <ul className="flex flex-col gap-2 " role="application">
+        <div className="flex flex-col gap-2 " role="application">
           {items.map((item) => (
             <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
           ))}
-        </ul>
+        </div>
       </SortableContext>
       <SortableOverlay id="">
         {activeItem ? renderItem(activeItem) : null}
