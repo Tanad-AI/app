@@ -28,7 +28,7 @@ function Sidebar({ className }: SidebarType) {
   const { MainImgsNumber, incrementMainImgsNumber, decrementMainImgsNumber } =
     useCustomizeStore();
   useEffect(() => {
-    setActiveField(fields[0]);
+    // setActiveField(fields[0]);
   }, []);
   return (
     <div

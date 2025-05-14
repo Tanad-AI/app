@@ -16,12 +16,12 @@ interface ControlProps {
   className?: string;
 }
 
-function View({ activeField }: { activeField: Field }) {
+function View({ activeField }: { activeField: Field | null }) {
   const setFields = useReportStore((state) => state.setFields);
   const fields = useReportStore((state) => state.fields);
   const setReportImages = useReportStore((state) => state.setReportImages);
   const reportImages = useReportStore((state) => state.reportImages);
-  const { setActiveSection } = useCreatePageState();
+  const { activeSection, setActiveSection } = useCreatePageState();
   const t = useTranslations("Create");
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -33,7 +33,7 @@ function View({ activeField }: { activeField: Field }) {
     const currentFields = [...fields];
 
     const currentField = currentFields.find(
-      (field) => field.id == activeField.id,
+      (field) => field.id == activeField?.id,
     );
     const currentDetail = currentField?.details.find(
       (detail) => detail.id == detailId,
@@ -50,7 +50,7 @@ function View({ activeField }: { activeField: Field }) {
         <Text>التحكم</Text>
       </div>
       <motion.div
-        key={activeField.id}
+        key={activeField?.id}
         initial={{ y: 15, opacity: 0, filter: "blur(10px)" }}
         animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.25 }}
@@ -62,9 +62,9 @@ function View({ activeField }: { activeField: Field }) {
           className="flex min-h-full flex-col gap-5 px-3 pb-40 pt-4"
         >
           <div className="flex items-center gap-1">
-            <h3>{activeField.title}</h3>
+            <h3>{activeField?.title}</h3>
           </div>
-          {activeField.details.map((detail) =>
+          {activeField?.details.map((detail) =>
             detail.isTextArea ? (
               <Tiptap
                 value={detail.value}
@@ -112,6 +112,7 @@ function View({ activeField }: { activeField: Field }) {
 
 const Control = ({ activeControlView, className }: ControlProps) => {
   const activeField = useReportStore((state) => state.activeField);
+  console.log(activeField);
   return (
     <div className={`w-full overflow-y-scroll pb-20 ${className}`}>
       <View activeField={activeField} />

@@ -25,8 +25,12 @@ import Link from "next/link";
 import {
   Check,
   ChevronRight,
+  FileText,
+  Globe,
   Hammer,
   Landmark,
+  Layout,
+  PenTool,
   PiggyBank,
   Printer,
   Sparkles,
@@ -158,119 +162,334 @@ function page() {
 
   return (
     <>
-      <main className="container relative z-0 mx-auto flex flex-col space-y-36 bg-background px-4 py-4  lg:px-20">
-        <NavBar t={t} />
-        <section className="relative h-svh pt-6">
-          <section className="relative mt-20 flex h-[87%] items-center justify-center  ">
-            <InViewAnimationBoundry className="z-50 flex  flex-col items-center gap-8 text-center">
-              <div className="flex items-center gap-3 rounded-full border-1.5 border-orange-500/20 py-1 pl-1 pr-4 text-xs">
-                <div className="flex items-center gap-1 rounded-full bg-secondary-200 px-1 py-[2px] text-[10px] text-secondary-700">
+      <main className="container relative z-0 mx-auto flex flex-col space-y-20 bg-background px-4 py-4 lg:px-20">
+        <nav className="relative flex items-center justify-between py-4">
+          <div className="flex items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-md bg-primary">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="white"
+                strokeWidth="2"
+                fill="none"
+              >
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <span className="text-xl font-semibold">Tanad AI</span>
+          </div>
+
+          <div className="hidden items-center gap-6 md:flex">
+            <a
+              href="#features"
+              className="text-sm text-foreground/80 hover:text-primary"
+            >
+              Features
+            </a>
+            <a
+              href="#templates"
+              className="text-sm text-foreground/80 hover:text-primary"
+            >
+              Templates
+            </a>
+            <a
+              href="#pricing"
+              className="text-sm text-foreground/80 hover:text-primary"
+            >
+              Pricing
+            </a>
+            <a
+              href="#support"
+              className="text-sm text-foreground/80 hover:text-primary"
+            >
+              Support
+            </a>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button className="rounded-md px-3 py-1.5 text-sm hover:bg-gray-100">
+              Log in
+            </button>
+            <button className="rounded-md bg-primary px-3 py-1.5 text-sm text-white hover:bg-primary/90">
+              Sign up
+            </button>
+            <div className="ml-2 hidden md:block">
+              <LanguageSwitcher />
+            </div>
+          </div>
+        </nav>
+
+        {/* Hero Section - Engineering Report Focus */}
+        <section className="relative min-h-[85vh] pt-12">
+          <div className="relative flex h-full flex-col-reverse items-center justify-between gap-8 px-4 py-12 lg:flex-row">
+            {/* Left Side Content */}
+            <div className="z-50 flex w-full max-w-2xl flex-col gap-6">
+              <div className="inline-flex items-center gap-3 self-start rounded-full border-1.5 border-primary/20 py-1 pl-1 pr-4 text-xs">
+                <div className="flex items-center gap-1 rounded-full bg-primary-100 px-2 py-1 text-[10px] text-primary-700">
                   <Sparkles size={12} />
                   {t("banner.title")}
                 </div>
-                <div>{t("banner.subtitle")}</div>
+                <div>Engineering Reports Made Simple</div>
               </div>
-              <div className="relative flex flex-col space-y-2">
-                <Header className="text-balance">
-                  {t("banner.description")}
-                  <WordRotate words={t.raw("banner.features")} />
+
+              <div className="space-y-4">
+                <Header className="text-balance text-4xl font-bold tracking-tight lg:text-5xl">
+                  Professional Engineering Reports
+                  <WordRotate
+                    words={["Created", "Formatted", "Managed", "Shared"]}
+                    className="text-primary"
+                  />
+                  In Minutes
                 </Header>
-                <Paragraph>{t("banner.highlight")}</Paragraph>
+                <Paragraph className="text-lg text-foreground/80">
+                  Tanad AI streamlines the engineering documentation process
+                  with smart templates, automatic formatting, and technical
+                  specification tools designed for engineers.
+                </Paragraph>
               </div>
-              <div className="gap-2">
-                <TryNowButton type="primary" />
+
+              <div className="flex flex-col gap-6 pt-2 sm:flex-row sm:items-center">
+                <TryNowButton />
+                <CustomSignUpButton />
               </div>
-              <div className="flex gap-4">
-                <span className="flex items-center gap-1">
-                  <Check size={16} className="stroke-primary" />
-                  <Paragraph>{t.raw("banner.notes")[0]}</Paragraph>
+
+              <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-3">
+                <span className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
+                    <Check size={14} className="stroke-primary" />
+                  </div>
+                  <Paragraph className="text-sm">
+                    Professional Templates
+                  </Paragraph>
                 </span>
-                <span className="flex items-center gap-1">
-                  <Check size={16} className="stroke-primary" />
-                  <Paragraph>{t.raw("banner.notes")[1]}</Paragraph>
+                <span className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
+                    <Check size={14} className="stroke-primary" />
+                  </div>
+                  <Paragraph className="text-sm">
+                    Technical Diagram Support
+                  </Paragraph>
                 </span>
-                <span className="flex items-center gap-1">
-                  <Check size={16} className="stroke-primary" />
-                  <Paragraph>{t.raw("banner.notes")[2]}</Paragraph>
+                <span className="flex items-center gap-2">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
+                    <Check size={14} className="stroke-primary" />
+                  </div>
+                  <Paragraph className="text-sm">
+                    Multi-language Support
+                  </Paragraph>
                 </span>
               </div>
-            </InViewAnimationBoundry>
-          </section>
+            </div>
+
+            {/* Right Side Image */}
+            <div className="relative w-full lg:w-2/5">
+              <div className="relative aspect-square rounded-xl bg-white p-4 shadow-lg">
+                <div className="h-8 w-full rounded bg-gray-100"></div>
+                <div className="mt-4 h-6 w-3/4 rounded bg-gray-100"></div>
+                <div className="mt-2 h-6 w-1/2 rounded bg-gray-100"></div>
+                <div className="mt-4 h-40 w-full rounded bg-gray-100"></div>
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  <div className="h-6 w-full rounded bg-gray-100"></div>
+                  <div className="h-6 w-full rounded bg-gray-100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Background Pattern */}
           <GridPattern
             width={75}
             height={75}
             x={-1}
             y={-1}
             className={cn(
-              "z-1 opacity-70 [mask-image:radial-gradient(1500px_circle_at_center,white,transparent)]",
+              "absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(1500px_circle_at_center,white,transparent)]",
             )}
           />
         </section>
-        <section className="mx-auto -mt-36 flex h-svh w-full flex-col items-center space-y-14 px-32">
-          <InViewAnimationBoundry className="flex w-full items-center justify-between">
-            <div className="w-3/5 space-y-2 ">
-              <Chip2>{t("sections.tutorial.subtitle")}</Chip2>
-              <div>
-                <SubHeader>{t("sections.tutorial.description")}</SubHeader>
-                <Paragraph>{t("sections.tutorial.content")}</Paragraph>
+
+        {/* How It Works Section */}
+        <section className="mx-auto flex w-full flex-col items-center space-y-12 px-4 lg:px-20">
+          <InViewAnimationBoundry className="flex w-full flex-col items-center text-center">
+            <Chip2>How It Works</Chip2>
+            <SubHeader className="mt-4 max-w-3xl">
+              Create Professional Engineering Reports In Three Simple Steps
+            </SubHeader>
+          </InViewAnimationBoundry>
+
+          <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-3">
+            <InViewAnimationBoundry className="flex flex-col items-center text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
+                <span className="text-2xl font-bold text-primary">1</span>
               </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <TryNowButton />
-              <TinyText className="text-foreground/80">
-                {t("sections.tutorial.cta_button.note")}{" "}
-              </TinyText>
-            </div>
-          </InViewAnimationBoundry>
-          <InViewAnimationBoundry className="w-full px-20">
-            <video className="w-full rounded-md" controls></video>
-          </InViewAnimationBoundry>
+              <SubHeader className="mt-4">Create Account</SubHeader>
+              <Paragraph className="mt-2">
+                Sign up for free and gain access to our engineering report
+                templates and tools.
+              </Paragraph>
+            </InViewAnimationBoundry>
+
+            <InViewAnimationBoundry className="flex flex-col items-center text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
+                <span className="text-2xl font-bold text-primary">2</span>
+              </div>
+              <SubHeader className="mt-4">Choose Template</SubHeader>
+              <Paragraph className="mt-2">
+                Select from industry-specific engineering templates or create
+                your custom report.
+              </Paragraph>
+            </InViewAnimationBoundry>
+
+            <InViewAnimationBoundry className="flex flex-col items-center text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
+                <span className="text-2xl font-bold text-primary">3</span>
+              </div>
+              <SubHeader className="mt-4">Edit & Export</SubHeader>
+              <Paragraph className="mt-2">
+                Fill in your data, customize as needed, and export as PDF or
+                share directly.
+              </Paragraph>
+            </InViewAnimationBoundry>
+          </div>
+          <div className="mt-8">
+            <TryNowButton />
+          </div>
         </section>
-        <section className="space-y-28">
+
+        {/* Features Section */}
+        <section className="space-y-24">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="flex w-full justify-center"
           >
-            <Chip2>{t("sections.benefits.title")}</Chip2>
+            <Chip2>Engineering Report Features</Chip2>
           </motion.div>
-          {t
-            .raw("sections.benefits.items")
-            .map((item: { title: string; description: string }, i: number) => {
-              let dir: "ltr" | "rtl" = "ltr";
-              if (i % 2 != 0) {
-                dir = "rtl";
-              } else dir = "ltr";
-              return (
-                <>
-                  <InViewAnimationBoundry
-                    dir={dir}
-                    className="ltr grid grid-cols-2 gap-36"
-                  >
-                    <InViewAnimationBoundry
-                      delay={0.4}
-                      className="h-96 w-full bg-slate-500"
-                    ></InViewAnimationBoundry>
-                    <div dir="ltr" className="flex flex-col gap-3">
-                      <SectionHeader>{item.title}</SectionHeader>
-                      <Paragraph>{item.description}</Paragraph>
-                      <TryNowButton />
-                    </div>
-                  </InViewAnimationBoundry>
-                </>
-              );
-            })}
-        </section>
-        <section>
-          <div className="relative flex  items-start justify-between ">
-            <InViewAnimationBoundry className="sticky bottom-60 flex w-[48%] flex-col gap-3 self-end">
-              <Chip2>{t("sections.features.title")}</Chip2>
 
-              <SectionHeader className="balanced sticky">
-                {t("sections.features.header")}
+          {/* Feature 1 */}
+          <InViewAnimationBoundry
+            dir="ltr"
+            className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12"
+          >
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="relative h-96 w-full overflow-hidden rounded-lg bg-white shadow-md"
+            >
+              <div className="absolute left-0 top-0 h-10 w-full bg-gray-100"></div>
+              <div className="absolute left-6 top-16 h-6 w-3/4 rounded bg-gray-200"></div>
+              <div className="absolute left-6 top-28 h-4 w-1/2 rounded bg-gray-200"></div>
+              <div className="absolute left-6 top-40 grid w-5/6 grid-cols-2 gap-4">
+                <div className="h-24 rounded bg-gray-200"></div>
+                <div className="h-24 rounded bg-gray-200"></div>
+              </div>
+              <div className="absolute left-6 top-72 h-12 w-5/6 rounded bg-gray-200"></div>
+            </InViewAnimationBoundry>
+            <div dir="ltr" className="flex flex-col gap-4">
+              <SectionHeader>Professional Templates</SectionHeader>
+              <Paragraph>
+                Access dozens of engineering-specific templates designed by
+                professionals for various disciplines, including civil,
+                mechanical, electrical, and chemical engineering. Each template
+                follows industry standards and best practices.
+              </Paragraph>
+              <TryNowButton />
+            </div>
+          </InViewAnimationBoundry>
+
+          {/* Feature 2 */}
+          <InViewAnimationBoundry
+            dir="rtl"
+            className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12"
+          >
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="relative h-96 w-full overflow-hidden rounded-lg bg-white shadow-md"
+            >
+              <div className="absolute left-0 top-0 h-10 w-full bg-gray-100"></div>
+              <div className="h-86 absolute left-0 top-10 w-full p-4">
+                <div className="grid h-full w-full grid-cols-3 gap-2">
+                  <div className="col-span-1 rounded bg-gray-100 p-2">
+                    <div className="h-4 w-full rounded bg-gray-200"></div>
+                    <div className="mt-2 h-4 w-3/4 rounded bg-gray-200"></div>
+                    <div className="mt-6 h-40 w-full rounded bg-gray-200"></div>
+                  </div>
+                  <div className="col-span-2 rounded bg-white p-4 shadow-sm">
+                    <div className="h-6 w-1/2 rounded bg-gray-200"></div>
+                    <div className="mt-4 h-4 w-full rounded bg-gray-200"></div>
+                    <div className="mt-2 h-4 w-full rounded bg-gray-200"></div>
+                    <div className="mt-2 h-4 w-3/4 rounded bg-gray-200"></div>
+                    <div className="mt-6 h-40 w-full rounded bg-gray-200"></div>
+                  </div>
+                </div>
+              </div>
+            </InViewAnimationBoundry>
+            <div dir="ltr" className="flex flex-col gap-4">
+              <SectionHeader>Smart Document Editor</SectionHeader>
+              <Paragraph>
+                Our specialized editor includes engineering-specific features
+                like formula support, technical diagram insertion, measurement
+                units, and automatic table formatting for data, making your
+                reports both professional and precise.
+              </Paragraph>
+              <TryNowButton />
+            </div>
+          </InViewAnimationBoundry>
+
+          {/* Feature 3 */}
+          <InViewAnimationBoundry
+            dir="ltr"
+            className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12"
+          >
+            <InViewAnimationBoundry
+              delay={0.4}
+              className="relative h-96 w-full overflow-hidden rounded-lg bg-white shadow-md"
+            >
+              <div className="absolute left-0 top-0 h-10 w-full bg-gray-100"></div>
+              <div className="h-86 absolute left-0 top-10 flex w-full flex-col p-6">
+                <div className="flex items-center justify-between">
+                  <div className="h-8 w-1/3 rounded bg-gray-200"></div>
+                  <div className="flex gap-2">
+                    <div className="h-8 w-8 rounded bg-primary-100"></div>
+                    <div className="h-8 w-8 rounded bg-primary-100"></div>
+                    <div className="h-8 w-8 rounded bg-primary-100"></div>
+                  </div>
+                </div>
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div className="col-span-1 h-32 rounded bg-gray-200"></div>
+                  <div className="col-span-1 h-32 rounded bg-gray-200"></div>
+                  <div className="col-span-1 h-32 rounded bg-gray-200"></div>
+                  <div className="col-span-1 h-32 rounded bg-gray-200"></div>
+                </div>
+              </div>
+            </InViewAnimationBoundry>
+            <div dir="ltr" className="flex flex-col gap-4">
+              <SectionHeader>Collaboration & Sharing</SectionHeader>
+              <Paragraph>
+                Work with team members in real-time, add comments, track
+                changes, and easily share your reports with clients or
+                stakeholders. Control permissions to decide who can view or edit
+                your engineering documentation.
+              </Paragraph>
+              <TryNowButton />
+            </div>
+          </InViewAnimationBoundry>
+        </section>
+
+        {/* Key Benefits Section */}
+        <section>
+          <div className="relative flex flex-col-reverse items-start justify-between gap-12 lg:flex-row">
+            <InViewAnimationBoundry className="sticky top-20 flex w-full flex-col gap-4 lg:w-[45%]">
+              <Chip2>Why Choose Tanad AI</Chip2>
+              <SectionHeader className="text-balance">
+                Built Specifically For Engineering Documentation Needs
               </SectionHeader>
-              <Paragraph className="balanced">
-                {t("sections.features.paragraph")}
+              <Paragraph className="text-balance">
+                Unlike general document editors, Tanad AI is designed from the
+                ground up to address the unique challenges engineers face when
+                creating technical reports, proposals, and documentation.
               </Paragraph>
               <TryNowButton />
             </InViewAnimationBoundry>
@@ -280,26 +499,144 @@ function page() {
               whileInView="visible"
               variants={scrollAnimationVarients}
               viewport={{ once: true }}
-              className="relative top-40  flex w-1/2 flex-col items-end space-y-14 "
+              className="relative flex w-full flex-col items-end space-y-6 lg:w-1/2"
             >
-              {featuresCards.map((feature, i) => (
-                <Card
-                  shadow="sm"
-                  className="w-[87%] space-y-4 border-none px-12 py-16"
-                  key={i}
-                >
-                  <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
-                    {feature.icon}
-                  </div>
-                  <SubHeader>
-                    {t.raw("sections.features.items")[i].title}
-                  </SubHeader>
-                  <Paragraph>
-                    {t.raw("sections.features.items")[i].description}
-                  </Paragraph>
-                </Card>
-              ))}
+              <Card
+                shadow="sm"
+                className="w-full space-y-4 border-none px-6 py-8 lg:w-[90%]"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <FileText size={24} className="text-primary-700" />
+                </div>
+                <SubHeader>Engineering-Specific Templates</SubHeader>
+                <Paragraph>
+                  Templates designed specifically for different engineering
+                  disciplines, following industry standards and best practices.
+                </Paragraph>
+              </Card>
+
+              <Card
+                shadow="sm"
+                className="w-full space-y-4 border-none px-6 py-8 lg:w-[90%]"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <PenTool size={24} className="text-primary-700" />
+                </div>
+                <SubHeader>Technical Drawing Integration</SubHeader>
+                <Paragraph>
+                  Easily insert and format technical diagrams, CAD drawings, and
+                  engineering schematics into your reports.
+                </Paragraph>
+              </Card>
+
+              <Card
+                shadow="sm"
+                className="w-full space-y-4 border-none px-6 py-8 lg:w-[90%]"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <Layout size={24} className="text-primary-700" />
+                </div>
+                <SubHeader>Automatic Formatting</SubHeader>
+                <Paragraph>
+                  Professional formatting happens automatically, with proper
+                  section numbering, references, and appendix organization.
+                </Paragraph>
+              </Card>
+
+              <Card
+                shadow="sm"
+                className="w-full space-y-4 border-none px-6 py-8 lg:w-[90%]"
+              >
+                <div className="flex aspect-square size-12 items-center justify-center rounded-xl border-4 border-primary/10 bg-primary-100/80">
+                  <Globe size={24} className="text-primary-700" />
+                </div>
+                <SubHeader>Multilingual Support</SubHeader>
+                <Paragraph>
+                  Create reports in multiple languages with proper technical
+                  terminology and localized formatting standards.
+                </Paragraph>
+              </Card>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Testimonial Section */}
+        <section className="mx-auto flex w-full flex-col items-center space-y-12">
+          <InViewAnimationBoundry className="text-center">
+            <Chip2>What Engineers Say</Chip2>
+            <SectionHeader className="mt-4">
+              Trusted by Engineering Professionals
+            </SectionHeader>
+          </InViewAnimationBoundry>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Card shadow="sm" className="flex flex-col gap-4 p-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-gray-200"></div>
+                <div>
+                  <SubHeader className="text-base">Ahmed Al-Farsi</SubHeader>
+                  <Paragraph className="text-xs text-foreground/70">
+                    Civil Engineer, ABC Construction
+                  </Paragraph>
+                </div>
+              </div>
+              <Paragraph className="text-sm">
+                "Tanad AI has cut my report preparation time in half. The
+                templates are exactly what I need for site assessment
+                documentation, and the ability to easily include technical
+                diagrams is fantastic."
+              </Paragraph>
+            </Card>
+
+            <Card shadow="sm" className="flex flex-col gap-4 p-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-gray-200"></div>
+                <div>
+                  <SubHeader className="text-base">Layla Mahmoud</SubHeader>
+                  <Paragraph className="text-xs text-foreground/70">
+                    Mechanical Engineer, XYZ Industries
+                  </Paragraph>
+                </div>
+              </div>
+              <Paragraph className="text-sm">
+                "The specialized formatting options save me hours of work. Being
+                able to create bilingual reports with proper technical
+                terminology in both languages is invaluable for our
+                international clients."
+              </Paragraph>
+            </Card>
+
+            <Card shadow="sm" className="flex flex-col gap-4 p-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-gray-200"></div>
+                <div>
+                  <SubHeader className="text-base">Omar Khalid</SubHeader>
+                  <Paragraph className="text-xs text-foreground/70">
+                    Electrical Engineer, Power Solutions
+                  </Paragraph>
+                </div>
+              </div>
+              <Paragraph className="text-sm">
+                "The collaboration features make it easy to work with my team on
+                complex reports. We can all contribute sections and review each
+                other's work seamlessly."
+              </Paragraph>
+            </Card>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="mx-auto flex w-full flex-col items-center space-y-8 rounded-2xl bg-primary-50 p-12">
+          <SectionHeader>
+            Ready to Create Professional Engineering Reports?
+          </SectionHeader>
+          <Paragraph className="max-w-2xl text-center">
+            Join thousands of engineers who are saving time and delivering
+            better documentation with Tanad AI's specialized report editor.
+          </Paragraph>
+          <div className="flex gap-4">
+            <TryNowButton type="primary" />
+            <CustomSignUpButton theme="light" />
           </div>
         </section>
       </main>
