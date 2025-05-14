@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 import DashboardNav from "./ui/DashboardNav";
+import { cookies } from "next/headers";
+import { logout } from "../lib/auth";
+import ForceRefresh from "@/components/ForceRefresh";
 
 interface DashboardPageProps {
   children: ReactNode;

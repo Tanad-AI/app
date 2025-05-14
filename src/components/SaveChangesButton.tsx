@@ -5,11 +5,13 @@ import useCustomizeStore from "@/app/[local]/store/pageCustomizationStore";
 import useReportStore from "@/app/[local]/store/reportStore";
 import { Button } from "@nextui-org/react";
 import { Save } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useRef, useState } from "react";
 
 const SaveChangesButton = ({ documentId }: { documentId: string }) => {
   const fields = useReportStore((state) => state.fields);
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("Create");
   const { user } = useAuth();
   // Track if there are changes (to control button state)
   const [hasChanges, setHasChanges] = useState(false);
@@ -95,7 +97,7 @@ const SaveChangesButton = ({ documentId }: { documentId: string }) => {
       className="flex items-center gap-1"
       onClick={() => fetchDocument()}
     >
-      Save Changes
+      {t("saveChanges")}
     </Button>
   );
 };

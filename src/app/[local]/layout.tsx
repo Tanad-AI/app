@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "./context/AuthContext";
+import ForceRefresh from "@/components/ForceRefresh";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,6 +32,10 @@ export default async function RootLayout({
   const messages = await getMessages();
   const lang = cookies().get("NEXT_LOCALE")?.value;
   let font = lang === "en" ? inter : AR_rubik;
+
+  const session = cookies().get("__session");
+
+  const shouldForceRefresh = !session;
 
   return (
     <ClerkProvider>

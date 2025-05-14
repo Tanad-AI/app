@@ -13,6 +13,7 @@ import useReportStore from "../../store/reportStore";
 import { Field } from "../../types/report.typs";
 import useCustomizeStore from "../../store/pageCustomizationStore";
 import { Document } from "@prisma/client";
+import { Download } from "lucide-react";
 
 const DashboardNav = ({ document }: { document: any }) => {
   const t = useTranslations("Create");
@@ -47,13 +48,26 @@ const DashboardNav = ({ document }: { document: any }) => {
       <Link href={`/../dashboard/home`}>
         <div className="flex items-center gap-2">
           <TanadLogo />
-          <TinyText>{homeT("tanad")}</TinyText>
+          <TinyText className="hidden md:block">{homeT("tanad")}</TinyText>
         </div>
       </Link>
       <SaveChangesButton documentId={set as string} />
       <div className="flex items-center gap-2">
-        <Button color="primary" onClick={() => downloadComponentAsPDF()}>
-          Download PDF
+        <Button
+          isIconOnly
+          color="primary"
+          className="flex md:hidden"
+          onClick={() => downloadComponentAsPDF()}
+        >
+          <Download />
+        </Button>
+        <Button
+          color="primary"
+          className="hidden md:flex"
+          onClick={() => downloadComponentAsPDF()}
+        >
+          <Download />
+          <span>{t("downloadPdf")}</span>
         </Button>
         <CustomSignUpButton />
       </div>

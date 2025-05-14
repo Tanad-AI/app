@@ -2,12 +2,14 @@
 "use client";
 import React, { useCallback } from "react";
 import useReportStore from "../../store/reportStore";
-import { Spacer, Card, Input } from "@nextui-org/react";
+import { Spacer, Card, Input, Button } from "@nextui-org/react";
 import { Text } from "../../lib/TextComponents";
 import { motion } from "framer-motion";
 import { Field } from "../../types/report.typs";
 import { useDropzone } from "react-dropzone";
 import Tiptap from "@/components/Tiptap";
+import { useCreatePageState } from "../../store/CreatePageStore";
+import { useTranslations } from "next-intl";
 
 interface ControlProps {
   activeControlView: number;
@@ -19,6 +21,8 @@ function View({ activeField }: { activeField: Field }) {
   const fields = useReportStore((state) => state.fields);
   const setReportImages = useReportStore((state) => state.setReportImages);
   const reportImages = useReportStore((state) => state.reportImages);
+  const { setActiveSection } = useCreatePageState();
+  const t = useTranslations("Create");
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setReportImages(acceptedFiles.map((img) => URL.createObjectURL(img)));
@@ -93,6 +97,13 @@ function View({ activeField }: { activeField: Field }) {
               />
             ),
           )}
+          <Button
+            color="secondary"
+            onClick={() => setActiveSection(0)}
+            className="capitalize text-black md:hidden"
+          >
+            {t("remainingFields")}
+          </Button>
         </Card>
       </motion.div>
     </div>

@@ -9,6 +9,7 @@ import PaddingControls from "@/components/PaddingControls";
 import LetterHeadUploader from "@/components/LetterheadUploader";
 import TextDirectionControls from "@/components/TextDirectionControls";
 import useCustomizeStore from "../../store/pageCustomizationStore";
+import { useCreatePageState } from "../../store/CreatePageStore";
 
 interface SidebarType {
   className: string;
@@ -22,6 +23,8 @@ function Sidebar({ className }: SidebarType) {
   const activeField = useReportStore((state) => state.activeField);
   const [isFieldHidden, setIsFieldHidden] = useState(false);
   const [selected, setSelected] = useState("content");
+  const { setActiveSection } = useCreatePageState();
+
   const { MainImgsNumber, incrementMainImgsNumber, decrementMainImgsNumber } =
     useCustomizeStore();
   useEffect(() => {
@@ -56,13 +59,20 @@ function Sidebar({ className }: SidebarType) {
                       ? "bg-green-500/10 text-primary"
                       : "bg-white"
                   }`}
-                  onClick={() => setActiveField(item)}
                   id={item.id}
                 >
                   <div className="flex w-full items-center justify-between ">
-                    <div className="flex items-center">
+                    <div className="flex w-[50%] items-center ">
                       <SortableList.DragHandle />
-                      <span className="cursor-pointer">{item.title}</span>
+                      <span
+                        onClick={() => {
+                          setActiveSection(1);
+                          setActiveField(item);
+                        }}
+                        className="w-full cursor-pointer"
+                      >
+                        {item.title}
+                      </span>
                     </div>
                     {isFieldHidden ? (
                       <EyeOff

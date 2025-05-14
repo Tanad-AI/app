@@ -22,10 +22,20 @@ export const loginWithGoogle = () => {
 
 export const logout = async () => {
   const auth = getAuth(app);
-  await signOut(auth);
 
-  // Clear the session on the server
-  await fetch("/api/session", {
-    method: "DELETE",
-  });
+  try {
+    await signOut(auth); // Sign out from Firebase
+  } catch (err) {
+    console.error("Error signing out from Firebase:", err);
+  }
+
+  try {
+    await fetch("/api/session", {
+      method: "DELETE",
+    }); // Remove session cookie
+  } catch (err) {
+    console.error("Error deleting session:", err);
+  }
+
+  // No redirect
 };

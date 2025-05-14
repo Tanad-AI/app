@@ -135,7 +135,10 @@
     "reset": "Reset",
     "increment": "Increment",
     "decrement": "Decrement",
-    "pageContent": "Page Content"
+    "pageContent": "Page Content",
+    "downloadPdf": "Download PDF",
+    "saveChanges": "Save Changes",
+    "remainingFields": "remaining fields"
   },
   "documentHeader": {
     "header": "Header",

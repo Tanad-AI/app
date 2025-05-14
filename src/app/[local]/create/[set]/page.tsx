@@ -6,10 +6,12 @@ import Control from "../ui/Control";
 import A4page from "../ui/A4page";
 import Sidebar from "../ui/Sidebar";
 import CreatePageDock from "@/components/CreatePageDock";
+import { useCreatePageState } from "../../store/CreatePageStore";
 
 const page = () => {
   const [activeControlView, setActiveControlView] = useState<number>(0);
-  const [activeSection, setActiveSection] = useState(1);
+  const { activeSection, setActiveSection } = useCreatePageState();
+
   const pathname = usePathname();
   let locale = pathname.slice(1, 3);
 
@@ -32,7 +34,7 @@ const page = () => {
           activeSection == 2 ? "md:block" : "hidden lg:block"
         }`}
       />
-      <div className="absolute bottom-32 left-4 lg:hidden">
+      <div className="absolute bottom-20 left-4 lg:hidden">
         <CreatePageDock
           activeSection={activeSection}
           setActiveSection={setActiveSection}

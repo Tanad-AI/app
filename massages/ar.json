@@ -141,7 +141,10 @@
     "px": "بكسل",
     "reset": "إعادة ضبط",
     "increment": "زيادة",
-    "decrement": "إنقاص"
+    "decrement": "إنقاص",
+    "downloadPdf": "تحميل PDF",
+    "saveChanges": "حفظ التغييرات",
+    "remainingFields": "بقية الحقول"
   },
   "documentHeader": {
     "header": "رأس الصفحة",
