@@ -24,9 +24,9 @@ const A4page = ({ className }: A4PagePropsType) => {
           className="box-border min-w-fit rounded-md bg-transparent p-0 text-sm focus:border-[2px] focus:border-blue-300 focus:outline-none"
         />
       </div>
-      <div className="flex w-screen justify-center lg:w-auto lg:justify-start">
+      <div className="origin-top-left scale-50 lg:scale-100">
         <div
-          className={`zoom flex flex-col justify-center ${
+          className={`flex flex-col justify-center ${
             textDirection == "rtl" ? "origin-top" : "origin-top-right"
           }  flex-col`}
         >
