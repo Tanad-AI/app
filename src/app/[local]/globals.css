@@ -158,6 +158,26 @@ ol {
   list-style: none;
 }
 
+@media screen and (max-width: 1029px) {
+  .zoom {
+    zoom: 70%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .zoom {
+    zoom: 100%;
+  }
+}
+@media screen and (max-width: 622px) {
+  .zoom {
+    zoom: 70%;
+  }
+}
+@media screen and (max-width: 472px) {
+  .zoom {
+    zoom: 60%;
+  }
+}
 @media screen and (max-width: 430px) {
   #print-area {
     scale: 80%;

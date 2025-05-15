@@ -318,7 +318,7 @@ const A4Paper = () => {
         className={`${inter.className} ${
           textDirection == "rtl" ? "origin-top-right" : "origin-top-left"
         } 
-         flex scale-75 flex-col justify-center text-[12px] sm:w-[89vw] lg:w-auto lg:scale-100`}
+         flex  flex-col justify-center text-[12px]  `}
         style={{ margin: "0px" }}
       >
         {/* Content will be grouped and displayed here */}
