@@ -160,22 +160,22 @@ ol {
 
 @media screen and (max-width: 1029px) {
   .zoom {
-    zoom: 70%;
+    scale: 70%;
   }
 }
 @media screen and (max-width: 767px) {
   .zoom {
-    zoom: 100%;
+    scale: 100%;
   }
 }
 @media screen and (max-width: 622px) {
   .zoom {
-    zoom: 70%;
+    scale: 80%;
   }
 }
 @media screen and (max-width: 472px) {
   .zoom {
-    zoom: 60%;
+    scale: 65%;
   }
 }
 @media screen and (max-width: 430px) {
