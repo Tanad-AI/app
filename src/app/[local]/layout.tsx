@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { cookies } from "next/headers";
-import { ClerkProvider } from "@clerk/nextjs";
 import { AuthProvider } from "./context/AuthContext";
 import ForceRefresh from "@/components/ForceRefresh";
 import Head from "next/head";
@@ -39,27 +38,21 @@ export default async function RootLayout({
   const shouldForceRefresh = !session;
 
   return (
-    <ClerkProvider>
-      <AuthProvider>
-        <html
-          dir={lang === "en" ? "ltr" : "rtl"}
-          lang={locale}
-          className="light"
-        >
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-            />
-          </Head>
-          <body className={font.className}>
-            <NextIntlClientProvider messages={messages}>
-              <Providers>{children}</Providers>
-              <Analytics />
-            </NextIntlClientProvider>
-          </body>
-        </html>
-      </AuthProvider>
-    </ClerkProvider>
+    <AuthProvider>
+      <html dir={lang === "en" ? "ltr" : "rtl"} lang={locale} className="light">
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          />
+        </Head>
+        <body className={font.className}>
+          <NextIntlClientProvider messages={messages}>
+            <Providers>{children}</Providers>
+            <Analytics />
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

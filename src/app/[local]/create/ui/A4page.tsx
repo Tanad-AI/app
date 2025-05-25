@@ -26,7 +26,7 @@ const A4page = ({ className }: A4PagePropsType) => {
       </div>
       <div
         className={`zoom ${
-          textDirection == "rtl" ? "origin-top-right" : "origin-top-right"
+          textDirection == "rtl" ? "origin-top-right" : "origin-top-left"
         }  `}
       >
         <div
