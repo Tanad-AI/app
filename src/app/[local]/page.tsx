@@ -326,7 +326,7 @@ function page() {
 
       {/* Footer */}
       <footer className="mt-14 bg-primary-900 pb-8 pt-32 text-white">
-        <div className="container mx-auto space-y-7 px-20">
+        <div className="container mx-auto space-y-7 px-8 lg:px-20">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <TanadLogo />
