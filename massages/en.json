@@ -4,81 +4,51 @@
     "tryNow": "Try Now"
   },
   "Home": {
-    "tanad": "Tanad AI",
-    "banner": {
-      "title": "SOON",
-      "subtitle": "AI Powered Tool",
-      "description": "The best way to write your",
-      "features": ["quizzes", "exams", "worksheets", "survey"],
-      "highlight": "Revolutionize your assessment creation process with AI: effortlessly turn screenshots into print-ready exams",
-      "cta_button": "Get Started",
-      "notes": ["Try for free", "No credit card required", "AI Powered"]
-    },
-    "sections": {
-      "tutorial": {
-        "subtitle": "TUTORIAL",
-        "description": "How does Tanad work?",
-        "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda quae inventore ipsa nemo vel. Enim odio quisquam laborum porro architecto?",
-        "cta_button": { "text": "try now", "note": "it's absolutely free" }
-      },
-      "benefits": {
-        "title": "BENEFITS",
-        "items": [
-          {
-            "title": "Convert Screenshot to Exams",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo veritatis unde officia beatae in enim temporibus expedita pariatur! Laboriosam, officiis?"
-          },
-          {
-            "title": "Edit Existing Exams",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo veritatis unde officia beatae in enim temporibus expedita pariatur! Laboriosam, officiis?"
-          },
-          {
-            "title": "Save Time",
-            "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo veritatis unde officia beatae in enim temporibus expedita pariatur! Laboriosam, officiis?"
-          }
-        ]
-      },
-      "features": {
-        "title": "FEATURES",
-        "header": "Crafting an Exam Has Never Been Easier",
-        "paragraph": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia et nisi quo libero sunt veniam praesentium modi similique voluptatibus obcaecati?",
-        "items": [
-          {
-            "title": "Time-Saving Automation",
-            "description": "By automating the most time-consuming aspects of exam creation, Tanad frees up valuable time for educators, allowing them to focus on teaching and other important tasks."
-          },
-          {
-            "title": "Simplified User Interface",
-            "description": "Tanad boasts an intuitive and user-friendly interface that makes exam creation easier than ever. Our tool is designed to be more straightforward and efficient than traditional platforms like Microsoft Office or Google Docs."
-          },
-          {
-            "title": "Ready-to-Print Exams",
-            "description": "Tanad provides ready-to-print exams that can be customized to suit individual requirements. This feature streamlines the exam preparation process, making it quicker and more efficient."
-          },
-          {
-            "title": "Standalone Tool",
-            "description": "Tanad does not require integration with other educational platforms, making it easy to adopt and use without additional setup or complexity."
-          },
-          {
-            "title": "Reusable Question",
-            "description": "Educators can store and reuse question components. This feature facilitates the creation of standardized and consistent assessments, saving educators valuable time."
-          },
-          {
-            "title": "Multi-Device Compatibility",
-            "description": "Tanad is designed to be accessible both on computers and phones, giving educators the flexibility to create and manage assessments seamlessly across different devices."
-          },
-          {
-            "title": "Cost-Effective Solution",
-            "description": "By reducing the time spent on exam creation and minimizing the need for manual corrections, Tanad offers a cost-effective solution for educational institutions looking to optimize their resources."
-          }
-        ]
-      }
-    },
-    "footer": {
-      "cta": "Craft Your Exams Pain Free Now",
-      "note": "Made with 💚",
-      "copyright": "© Copyright 2024, All Rights Reserved by Tanad AI"
-    }
+    "navHome": "Home",
+    "navFeatures": "Features",
+    "navAbout": "About",
+    "navContact": "Contact",
+    "badgeLabel": "Tanad",
+    "badgeDescription": "Report Writing Tool",
+    "heroTitle": "Your Engineering Report",
+    "heroRotatingWord1": "Created",
+    "heroRotatingWord2": "Formatted",
+    "heroRotatingWord3": "Organised",
+    "heroRotatingWord4": "Shared",
+    "heroSubtitle": "in a matter of minutes",
+    "heroDescription": "Transform your engineering data into comprehensive, professionally formatted reports with our intelligent documents writing tool",
+    "heroCta": "Try Now",
+    "heroBenefit1": "Free, No Credit Card Required",
+    "heroBenefit2": "Create Documents Easily",
+    "heroBenefit3": "Export to PDF",
+    "featuresSubtitle": "Features",
+    "featuresTitle": "Everything you need for professional reports",
+    "featuresDescription": "Streamline your engineering workflow with powerful automation and intelligent formatting",
+    "featuresCta": "Get Started Now",
+    "featuresCtaSubtext": "No credit card required",
+    "feature1Title": "Lightning Fast",
+    "feature1Description": "Generate comprehensive engineering reports in under 5 minutes. No more hours of manual formatting and organization.",
+
+    "feature2Title": "Report to PDF",
+    "feature2Description": "Export professional PDF reports instantly with a single click. Simple, clean, and efficient.",
+
+    "feature3Title": "Format Your Images",
+    "feature3Description": "Automatically align and format images into a clean, professional grid layout with zero effort.",
+
+    "feature4Title": "Add Your Letterhead",
+    "feature4Description": "Easily brand your reports by inserting your custom letterhead with just one click.",
+
+    "feature5Title": "Smart Templates",
+    "feature5Description": "Pre-built engineering report templates that automatically adapt to your data structure and industry standards.",
+
+    "feature6Title": "Works Anywhere",
+    "feature6Description": "Use the platform seamlessly on any device—desktop, tablet, or phone. No setup. Just sign in and go.",
+    "footerCta": "Ready to streamline your engineering reports?",
+    "footerTryNow": "Try Now",
+    "footerSignUp": "Sign Up",
+    "footerCompanyName": "Tanad Reports",
+    "footerNote": "made with love 💚",
+    "footerCopyright": "© 2024 Tanad Report. All rights reserved."
   },
   "Create": {
     "control": "Control",
@@ -261,7 +231,7 @@
     "removeField": "Remove Field"
   },
   "dashboard": {
-    "tanad": "Tanad AI",
+    "tanad": "Tanad Reports",
     "create": "Create",
     "home": "Home",
     "documents": "Documents",
