@@ -18,8 +18,8 @@ const AR_rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Tanad AI",
-  description: "AI exam maker",
+  title: "Tanad ",
+  description: "Engineering Reports Maker",
 };
 
 export default async function RootLayout({
