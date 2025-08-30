@@ -18,7 +18,7 @@ const AR_rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Tanad Reports",
+  title: "Tanad Engineering Reports",
   description: "Engineering Reports Maker",
 };
 
