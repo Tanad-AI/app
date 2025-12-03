@@ -1,10 +1,9 @@
 import React, {
+  useState,
   useEffect,
   useRef,
-  useState,
   ReactElement,
   ReactNode,
-  isValidElement,
 } from "react";
 
 interface PageBreakContainerProps {
@@ -12,104 +11,130 @@ interface PageBreakContainerProps {
   pageHeight?: number;
   pageClassName?: string;
   onPageChange?: (pageCount: number) => void;
+  gap?: number;
 }
 
-type ValidReactElement = ReactElement & {
-  props: {
-    style?: React.CSSProperties;
-    children?: ReactNode;
-  };
-};
+interface MeasuredElement {
+  element: ReactElement;
+  height: number;
+  canBreak: boolean;
+}
 
 const PageBreakContainer: React.FC<PageBreakContainerProps> = ({
   children,
   pageHeight = 1000,
   pageClassName = "print-page",
   onPageChange,
+  gap = 0,
 }) => {
-  const [pages, setPages] = useState<ValidReactElement[][]>([]);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const observerRef = useRef<MutationObserver | null>(null);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const [pages, setPages] = useState<ReactElement[][]>([]);
+  const measureRef = useRef<HTMLDivElement>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const calculationTimeoutRef = useRef<NodeJS.Timeout>();
 
-  const measureElement = (element: HTMLElement): number => {
-    const styles = window.getComputedStyle(element);
-    const marginTop = parseFloat(styles.marginTop);
-    const marginBottom = parseFloat(styles.marginBottom);
-    return element.offsetHeight + marginTop + marginBottom;
+  // Debounced calculation to avoid rapid recalculations
+  const scheduleCalculation = () => {
+    if (calculationTimeoutRef.current) {
+      clearTimeout(calculationTimeoutRef.current);
+    }
+    calculationTimeoutRef.current = setTimeout(() => {
+      calculatePages();
+    }, 100);
   };
 
-  const calculatePages = (): void => {
-    if (!contentRef.current) return;
+  const calculatePages = () => {
+    if (!measureRef.current || isCalculating) return;
+    setIsCalculating(true);
 
-    const content = contentRef.current;
-    const elements = React.Children.toArray(children).filter(
-      isValidElement,
-    ) as ValidReactElement[];
-    const measureContainer = document.createElement("div");
-    measureContainer.style.position = "absolute";
-    measureContainer.style.visibility = "hidden";
-    measureContainer.style.width = `${content.offsetWidth}px`;
-    document.body.appendChild(measureContainer);
-
-    const newPages: ValidReactElement[][] = [];
-    let currentPage: ValidReactElement[] = [];
-    let currentHeight = 0;
-
-    elements.forEach((element) => {
-      // Create a temporary DOM element to measure
-      const tempDiv = document.createElement("div");
-      measureContainer.appendChild(tempDiv);
-      const Component = () => element;
-      const root = document.createElement("div");
-      measureContainer.appendChild(root);
-      // @ts-ignore - React 18 createRoot API
-      const reactRoot = React.createRoot(root);
-      reactRoot.render(<Component />);
-
-      const totalHeight = measureElement(root);
-      measureContainer.removeChild(root);
-
-      if (currentHeight + totalHeight > pageHeight) {
-        if (currentPage.length > 0) {
-          newPages.push(currentPage);
-          currentPage = [];
-          currentHeight = 0;
-        }
-
-        if (totalHeight > pageHeight) {
-          newPages.push([element]);
-        } else {
-          currentPage.push(element);
-          currentHeight = totalHeight;
-        }
-      } else {
-        currentPage.push(element);
-        currentHeight += totalHeight;
+    // Use requestAnimationFrame to ensure layout is complete
+    requestAnimationFrame(() => {
+      const container = measureRef.current;
+      if (!container) {
+        setIsCalculating(false);
+        return;
       }
+
+      const childElements = Array.from(container.children) as HTMLElement[];
+      const elements = React.Children.toArray(children).filter(
+        (child): child is ReactElement => React.isValidElement(child),
+      );
+
+      if (childElements.length !== elements.length) {
+        setIsCalculating(false);
+        return;
+      }
+
+      // Measure all elements
+      const measured: MeasuredElement[] = elements.map((element, index) => {
+        const domElement = childElements[index];
+        const rect = domElement.getBoundingClientRect();
+        const styles = window.getComputedStyle(domElement);
+        const marginTop = parseFloat(styles.marginTop) || 0;
+        const marginBottom = parseFloat(styles.marginBottom) || 0;
+        const totalHeight = rect.height + marginTop + marginBottom;
+
+        // Check if element allows page breaks inside
+        const canBreak =
+          styles.pageBreakInside !== "avoid" &&
+          element.props?.["data-allow-break"] !== false;
+
+        return {
+          element,
+          height: totalHeight,
+          canBreak,
+        };
+      });
+
+      // Distribute elements across pages
+      const newPages: ReactElement[][] = [];
+      let currentPage: ReactElement[] = [];
+      let currentHeight = 0;
+
+      measured.forEach(({ element, height }) => {
+        const elementWithGap = height + gap;
+
+        // Check if element fits on current page
+        if (currentHeight + elementWithGap <= pageHeight) {
+          currentPage.push(element);
+          currentHeight += elementWithGap;
+        } else {
+          // Start new page
+          if (currentPage.length > 0) {
+            newPages.push([...currentPage]);
+            currentPage = [];
+            currentHeight = 0;
+          }
+
+          // If element is larger than page height, still add it
+          // (it will overflow but that's better than losing it)
+          currentPage.push(element);
+          currentHeight = elementWithGap;
+        }
+      });
+
+      // Add remaining elements
+      if (currentPage.length > 0) {
+        newPages.push(currentPage);
+      }
+
+      setPages(newPages);
+      onPageChange?.(newPages.length);
+      setIsCalculating(false);
     });
-
-    if (currentPage.length > 0) {
-      newPages.push(currentPage);
-    }
-
-    document.body.removeChild(measureContainer);
-    setPages(newPages);
-    onPageChange?.(newPages.length);
   };
 
   useEffect(() => {
-    resizeObserverRef.current = new ResizeObserver(() => {
-      calculatePages();
+    const observer = new ResizeObserver(() => {
+      scheduleCalculation();
     });
 
-    observerRef.current = new MutationObserver(() => {
-      calculatePages();
+    const mutationObserver = new MutationObserver(() => {
+      scheduleCalculation();
     });
 
-    if (contentRef.current) {
-      resizeObserverRef.current.observe(contentRef.current);
-      observerRef.current.observe(contentRef.current, {
+    if (measureRef.current) {
+      observer.observe(measureRef.current);
+      mutationObserver.observe(measureRef.current, {
         childList: true,
         subtree: true,
         characterData: true,
@@ -117,55 +142,58 @@ const PageBreakContainer: React.FC<PageBreakContainerProps> = ({
       });
     }
 
-    calculatePages();
+    // Initial calculation
+    scheduleCalculation();
 
     return () => {
-      resizeObserverRef.current?.disconnect();
-      observerRef.current?.disconnect();
+      observer.disconnect();
+      mutationObserver.disconnect();
+      if (calculationTimeoutRef.current) {
+        clearTimeout(calculationTimeoutRef.current);
+      }
     };
-  }, [pageHeight, children]);
-
-  const renderElement = (
-    element: ValidReactElement,
-    index: number,
-  ): ReactElement => {
-    if (!isValidElement(element)) {
-      return <React.Fragment key={index} />;
-    }
-
-    return React.cloneElement(element, {
-      key: index,
-      style: {
-        ...element.props.style,
-        pageBreakInside: "avoid" as const,
-      },
-    });
-  };
+  }, [children, pageHeight, gap]);
 
   return (
-    <div className="page-break-container">
-      {/* Hidden original content for measurements */}
+    <>
+      {/* Measurement container - rendered but hidden */}
       <div
-        ref={contentRef}
-        style={{ position: "absolute", visibility: "hidden", width: "100%" }}
+        ref={measureRef}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: 0,
+          visibility: "hidden",
+          width: "210mm", // A4 width, adjust as needed
+        }}
+        aria-hidden="true"
       >
         {children}
       </div>
 
       {/* Rendered pages */}
-      {pages.map((pageElements, pageIndex) => (
-        <div
-          key={`page-${pageIndex}`}
-          className={pageClassName}
-          data-page-number={pageIndex + 1}
-        >
-          {pageElements.map((element, elementIndex) =>
-            renderElement(element, elementIndex),
-          )}
-        </div>
-      ))}
-    </div>
+      <div className="pages-container">
+        {pages.map((pageElements, pageIndex) => (
+          <div
+            key={pageIndex}
+            className={pageClassName}
+            style={{
+              minHeight: `${pageHeight}px`,
+              maxHeight: `${pageHeight}px`,
+              overflow: "hidden",
+              pageBreakAfter: "always",
+              position: "relative",
+            }}
+            data-page-number={pageIndex + 1}
+          >
+            {pageElements.map((element, elementIndex) =>
+              React.cloneElement(element, {
+                key: `${pageIndex}-${elementIndex}`,
+              }),
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
-
-export default PageBreakContainer;

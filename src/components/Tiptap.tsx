@@ -79,6 +79,13 @@ const Tiptap: React.FC<TiptapProps> = ({ value, onChange, rtl = true }) => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      document.execCommand("insertLineBreak");
+      handleChange();
+    }
+  };
   return (
     <div className="w-full rounded-lg border bg-white">
       {/* Toolbar */}
