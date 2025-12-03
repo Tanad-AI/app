@@ -112,6 +112,9 @@
     "decrement": "إنقاص",
     "downloadPdf": "تحميل PDF",
     "saveChanges": "حفظ التغييرات",
+    "dropFilesHere": "قم بإسقاط الملفات هنا...",
+    "dragAndDropFiles": "اسحب وأفلت الملفات هنا",
+    "orClickToSelect": "أو انقر لاختيار الملفات",
     "remainingFields": "بقية الحقول"
   },
   "documentHeader": {
@@ -260,7 +263,8 @@
     "close": "إغلاق",
     "menuLabel": "قائمة منسدلة تحتوي على وصف",
     "logout": "تسجيل الخروج",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "notLoggedIn":"الرجاء تسجيل الدخول"
   },
   "Auth": {
     "welcomeBack": "مرحبًا بعودتك",

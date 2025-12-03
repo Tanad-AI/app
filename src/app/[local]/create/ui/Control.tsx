@@ -75,15 +75,45 @@ function View({ activeField }: { activeField: Field | null }) {
             ) : detail.detailName == "images" ? (
               <div
                 {...getRootProps({
-                  className: `dropzone ${isDragActive ? "active" : ""}`,
+                  className: `border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors duration-200 ${
+                    isDragActive
+                      ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
+                      : 'border-gray-300 hover:border-primary-400 dark:border-gray-600 dark:hover:border-primary-500'
+                  }`,
+                  dir: 'auto' // This will handle both RTL and LTR text
                 })}
               >
                 <input {...getInputProps()} />
-                {isDragActive ? (
-                  <p>Drop the files here ...</p>
-                ) : (
-                  <p>Drag & drop files here, or click to select files</p>
-                )}
+                <div className="flex flex-col items-center justify-center space-y-2">
+                  <svg
+                    className={`w-12 h-12 mb-3 ${
+                      isDragActive ? 'text-primary-500' : 'text-gray-400'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  {isDragActive ? (
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {t('dropFilesHere')}
+                    </p>
+                  ) : (
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      <p className="font-medium">{t('dragAndDropFiles')}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {t('orClickToSelect')}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <Input

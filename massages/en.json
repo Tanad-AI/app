@@ -108,7 +108,10 @@
     "pageContent": "Page Content",
     "downloadPdf": "Download PDF",
     "saveChanges": "Save Changes",
-    "remainingFields": "remaining fields"
+    "remainingFields": "remaining fields",
+    "dropFilesHere": "Drop the files here...",
+  "dragAndDropFiles": "Drag & drop files here",
+  "orClickToSelect": "or click to select files"
   },
   "documentHeader": {
     "header": "Header",
